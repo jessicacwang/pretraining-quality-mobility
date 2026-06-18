@@ -59,11 +59,13 @@ python -m preprocess.convert_to_jsonl.<source>
 ```
 
 The first proper step of preprocessing is to call each of these submodules and 
-unify all LEU data. By default, the script runs everything to produce 
-`leu_data.jsonl.gz` and `metadata.jsonl.gz` but can be run to 'backfill'/update 
-subsets of `leu_data.jsonl.gz` by rewriting rows corresponding to a certain 
-source with the argument `--source <source>`. Document and token counts are 
-tracked in `manifest.json`. This initial parsing + cleaning is executed as below:
+unify all LEU data. Each data point also tracks the token count percentile for 
+later analysis. By default, the script writes ther three primary fields to 
+`leu_data.jsonl.gz` and the remaining secondary fields to `metadata.jsonl.gz` 
+but can be run to 'backfill'/update subsets of `leu_data.jsonl.gz` by rewriting 
+rows corresponding to a certain source with the argument `--source <source>`. 
+Document and token counts are tracked in `manifest.json`. This initial parsing + 
+cleaning is executed as below:
 ```cmd
 sbatch preprocess/1-unify.slurm
 ```
