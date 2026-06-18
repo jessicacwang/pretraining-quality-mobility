@@ -1,6 +1,7 @@
 # CLMS Thesis
 
-This repository contains the code for the experiments composing my CLMS thesis, across 2 main experiments and 6 evaluation metrics.
+This repository contains the code for the experiments composing my CLMS thesis, 
+across 2 main experiments and 4-6 evaluation metrics.
 
 No `.jsonl.gz` is committed to the remote repository.
 
@@ -138,10 +139,10 @@ files in the following shape:
 ```
 
 For each filtering stage, the documents included after the filter are written to 
-`<filter>/<stage>_included.jsonl.gz`. The corresponding excluded documents are 
-written to `<filter>/removed/<stage>_excluded.jsonl.gz`.  The document and token 
-counts for included and excluded documents for each filtering stage are written 
-to `output/filter/manifest.json`. 
+`output/filter/<stage>_included.jsonl.gz`. The corresponding excluded documents 
+are written to `output/filter/removed/<stage>_excluded.jsonl.gz`.  The document 
+and token counts for included and excluded documents for each filtering stage 
+are written to `output/filter/manifest.json`. 
 
 ## Stage 2: Auditing Data Mixing Algorithms
 The `mix` module executes an end-to-end data mixing algorithm based on data 
