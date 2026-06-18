@@ -16,7 +16,7 @@
     "unify": {
         "_notes": "written by running 0-unify.slurm",
         "output_files": {
-            "full_data": "path/to/full_data.jsonl.gz",
+            "leu_data": "path/to/leu_data.jsonl.gz",
             "metadata": "path/to/metadata.jsonl.gz"
         },
         "corpora": {
