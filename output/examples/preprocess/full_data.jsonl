@@ -1,3 +1,0 @@
-{"source": "lince", "task": "lid_hineng", "non_english": "hin", "split": "train", "idx": 1, "cmi": 0.37, "token_count": null, "text": null}
-{"source": "glowbe", "source_filepath": "glowbe-text/path/to/file", "glowbe_doc_id": 12345678, "region": null, "genre": "general", "original": null, "token_count": null, "text": null}
-{"source": "ice", "source_filepath": "ice-sg/path/to/file", "modality": "written", "region": null, "genre": "W2A", "original": null, "token_count": null, "text": null}
