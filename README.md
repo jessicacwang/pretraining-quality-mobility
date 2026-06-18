@@ -113,20 +113,17 @@ files in the following shape:
     │   └── ...
     └── filter/
         ├── manifest.json
-        ├── 1_language_filter/
-        │   ├── 1_data.jsonl.gz
-        │   └── removed/
-        │       └── 1_data.jsonl.gz
-        ├── 2_gopher_repetition_filter/
-        │   ├── 2_data.jsonl.gz
-        │   └── removed/
-        │       └── 2_data.jsonl.gz
-        ├── 3_gopher_quality_filter/
-        │   └── ...
-        ├── 4_c4_quality_filter/
-        │   └── ...
-        └── 5_fineweb_quality_filter/
-            └── ...
+        ├── 1-langid_included.jsonl.gz
+        ├── 2-gopher-repetition_included.jsonl.gz
+        ├── 3-gopher-quality_included.jsonl.gz
+        ├── 4-c4-quality_included.jsonl.gz
+        ├── 5-fineweb-quality_included.jsonl.gz
+        └── excluded/
+            ├── 1-langid_excluded.jsonl.gz
+            ├── 2-gopher-repetition_excluded.jsonl.gz
+            ├── 3-gopher-quality_excluded.jsonl.gz
+            ├── 4-c4-quality_excluded.jsonl.gz
+            └── 5-fineweb-quality_excluded.jsonl.gz
 ```
 
 For each filtering stage, the documents included after the filter are written to 
