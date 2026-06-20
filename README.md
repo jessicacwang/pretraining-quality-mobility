@@ -184,13 +184,13 @@ The outputs of each step will be recorded in the `output/mix` folder:
 ## Stage 1
 ### Pointwise Mutual Information
 PMI values can be computed from the relevant fields of 
-`output/preprocess/manifest.json` and `output/filter.json`. 
+`output/preprocess/manifest.json` and `output/filter/manifest.json`. 
 
 They will be visualized with horizontal bar graphs with `plotly`. 
 
 ### Typological Cluster Retention
 Retention rates can be computed from the relevant fields of 
-`output/preprocess/manifest.json` and `output/filter.json`. 
+`output/preprocess/manifest.json` and `output/filter/manifest.json`. 
 
 Retention rates will be visualized with a `plotly` Sankey diagram. Additionally, 
 log-retention penalties will be computed. 
