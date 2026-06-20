@@ -34,6 +34,8 @@
             },
             "by_source": {
                 "glowbe": {
+                    "included": null,
+                    "excluded": null,
                      "components": {
                         "US": {
                             "blog": {"docs": null, "tokens": null},
@@ -118,6 +120,8 @@
                     }
                 },
                 "ice": {
+                    "included": null,
+                    "excluded": null,
                     "components": {
                         "ICE-USA": {
                             "text_categories": {
@@ -314,6 +318,8 @@
                     }
                 },
                 "lince": {
+                    "included": null,
+                    "excluded": null,
                     "components": {
                         "lid_hineng": {"docs": null, "tokens": null},
                         "lid_nepeng": {"docs": null, "tokens": null},
@@ -336,6 +342,8 @@
             },
             "by_source": {
                 "glowbe": {
+                    "included": null,
+                    "excluded": null,
                      "components": {
                         "US": {
                             "blog": {"docs": null, "tokens": null},
@@ -420,6 +428,8 @@
                     }
                 },
                 "ice": {
+                    "included": null,
+                    "excluded": null,
                     "components": {
                         "ICE-USA": {
                             "text_categories": {
@@ -616,6 +626,8 @@
                     }
                 },
                 "lince": {
+                    "included": null,
+                    "excluded": null,
                     "components": {
                         "lid_hineng": {"docs": null, "tokens": null},
                         "lid_nepeng": {"docs": null, "tokens": null},
@@ -638,6 +650,8 @@
             },
             "by_source": {
                 "glowbe": {
+                    "included": null,
+                    "excluded": null,
                      "components": {
                         "US": {
                             "blog": {"docs": null, "tokens": null},
@@ -722,6 +736,8 @@
                     }
                 },
                 "ice": {
+                    "included": null,
+                    "excluded": null,
                     "components": {
                         "ICE-USA": {
                             "text_categories": {
@@ -918,6 +934,8 @@
                     }
                 },
                 "lince": {
+                    "included": null,
+                    "excluded": null,
                     "components": {
                         "lid_hineng": {"docs": null, "tokens": null},
                         "lid_nepeng": {"docs": null, "tokens": null},
@@ -940,6 +958,8 @@
             },
             "by_source": {
                 "glowbe": {
+                    "included": null,
+                    "excluded": null,
                      "components": {
                         "US": {
                             "blog": {"docs": null, "tokens": null},
@@ -1024,6 +1044,8 @@
                     }
                 },
                 "ice": {
+                    "included": null,
+                    "excluded": null,
                     "components": {
                         "ICE-USA": {
                             "text_categories": {
@@ -1220,6 +1242,8 @@
                     }
                 },
                 "lince": {
+                    "included": null,
+                    "excluded": null,
                     "components": {
                         "lid_hineng": {"docs": null, "tokens": null},
                         "lid_nepeng": {"docs": null, "tokens": null},
@@ -1242,6 +1266,8 @@
             },
             "by_source": {
                 "glowbe": {
+                    "included": null,
+                    "excluded": null,
                      "components": {
                         "US": {
                             "blog": {"docs": null, "tokens": null},
@@ -1326,6 +1352,8 @@
                     }
                 },
                 "ice": {
+                    "included": null,
+                    "excluded": null,
                     "components": {
                         "ICE-USA": {
                             "text_categories": {
@@ -1522,6 +1550,8 @@
                     }
                 },
                 "lince": {
+                    "included": null,
+                    "excluded": null,
                     "components": {
                         "lid_hineng": {"docs": null, "tokens": null},
                         "lid_nepeng": {"docs": null, "tokens": null},
