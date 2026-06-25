@@ -2,14 +2,13 @@ import shutil
 import re
 from pathlib import Path
 from typing import Dict, Any, List
-from collections import defaultdict
 
 class ComponentReorganizer:
     """Default class for reorganizing ICE components; does not handle ICE-EA."""
 
-    ENCODINGS = ["utf-8", "latin-1", "cp1252", "iso-8859-1"]
-    GENRE_ID_GROUPS_DEFAULT = {"genre": 1, "id": 2}
-    TARGET_TEMPLATE_DEFAULT = "{target_code}/ice_{target_code}_{genre}_{id}.txt"
+    _ENCODINGS = ["utf-8", "latin-1", "cp1252", "iso-8859-1"]
+    _GENRE_ID_GROUPS_DEFAULT = {"genre": 1, "id": 2}
+    _TARGET_TEMPLATE_DEFAULT = "{target_code}/ice_{target_code}_{genre}_{id}.txt"
 
     def __init__(
         self,
@@ -27,15 +26,14 @@ class ComponentReorganizer:
         self.source_root = source_base / Path(config["source_root"])
         self.target_code = config["target_code"]
         self.target_template = config.get(
-            "target_template", self.TARGET_TEMPLATE_DEFAULT
+            "target_template", self._TARGET_TEMPLATE_DEFAULT
         )
         self.target_base = target_base
         # File/line pattern to match and parameters
-        self.extract_groups = config.get("extract", self.GENRE_ID_GROUPS_DEFAULT)
+        self.extract_groups = config.get("extract", self._GENRE_ID_GROUPS_DEFAULT)
         self.case_insensitive = config.get("case_insensitive", False)
-        self.pattern = re.compile(
-            config["pattern"], flags=re.IGNORECASE if self.case_insensitive else 0
-        )
+        self.flags = re.IGNORECASE if self.case_insensitive else 0
+        self.pattern = re.compile(config.get("pattern"), flags=self.flags)
 
         # Genre code determiners
         self.normalize_genre = config.get("normalize_genre", False)
@@ -198,8 +196,8 @@ class ComponentReorganizer:
         return self.changes, self.errors, self.warnings, self.unmatched
 
 
-class EAComponentReorganizer(ComponentReorganizer):
-    """Class for ICE-EA reorganization; handles splitting of aggregated documents"""
+class AggregatedComponentReorganizer(ComponentReorganizer):
+    """Base class for components with documents aggregated by category (genre or modality)"""
 
     def __init__(
         self,
@@ -210,9 +208,9 @@ class EAComponentReorganizer(ComponentReorganizer):
         config: Dict[str, Any],
     ):
         super().__init__(name, dry_run, source_base, target_base, config)
-        self.file_encodings = set()
-        self.first_line_pattern = re.compile(config["first_line_pattern"])
-        self.country_mapping = config.get("country_mapping")
+        self.file__ENCODINGS = set()
+        self.first_line_pattern = re.compile(config.get("first_line_pattern"), self.flags)
+        self.metadata_pattern = None # To be set by subclasses
         return
 
     def _copy_file(self, source_path: Path, target_path: Path, contents: str) -> None:
@@ -234,7 +232,7 @@ class EAComponentReorganizer(ComponentReorganizer):
             self.warnings.append(f"Duplicate resolved: {target_path.name}")
 
         # Write to a new file
-        with open(target_path, "w", encoding=list(self.file_encodings).pop()) as f:
+        with open(target_path, "w", encoding=list(self.file__ENCODINGS).pop()) as f:
             f.write(contents)
 
         # Record change
@@ -242,11 +240,11 @@ class EAComponentReorganizer(ComponentReorganizer):
         return
 
     def _extract_metadata(self, doc_name: str):
-        match = self.first_line_pattern.match(doc_name)
+        match = self.metadata_pattern.match(doc_name)
 
         if not match:
             self.warnings.append(
-                f"Document name didn't match pattern: {doc_name} (pattern: {self.first_line_pattern.pattern})"
+                f"Document name didn't match pattern: {doc_name} (pattern: {self.metadata_pattern.pattern})"
             )
             return None
 
@@ -257,7 +255,6 @@ class EAComponentReorganizer(ComponentReorganizer):
 
         if self.normalize_genre:
             metadata["genre"] = metadata["genre"].upper()
-
         return metadata
 
     def _parse_contents(self, contents: List[str]) -> Dict[str, str]:
@@ -266,44 +263,28 @@ class EAComponentReorganizer(ComponentReorganizer):
 
         # Loop over lines, collecting documents and contents
         for line in contents:
-            stripped = line.rstrip('\n')
+            stripped = line.rstrip("\n")
             match = self.first_line_pattern.match(stripped)
             if match:
                 current_doc = stripped
                 documents[current_doc] = ""
             elif current_doc is not None:
-                documents[current_doc] += line 
-        
+                documents[current_doc] += line
+
         return documents
-    
+
     def _split_file(self, file_path: Path):
         """Split the contents of a file into individual documents and codes"""
-        for encoding in ComponentReorganizer.ENCODINGS:
+        for encoding in ComponentReorganizer._ENCODINGS:
             try:
                 with open(file_path, mode="r", encoding=encoding) as f:
                     contents = f.readlines()
-                    self.file_encodings.add(encoding)
+                    self.file__ENCODINGS.add(encoding)
                     return contents
             except (UnicodeDecodeError, UnicodeError):
                 continue
         return
 
-    def _propose_change(self, metadata: Dict[str, str]) -> None:
-        target_name = self.target_template
-
-        for key, value in metadata.items():
-            placeholder = f"{{{key}}}"
-            if key == "country":
-                target_name = target_name.replace(
-                    placeholder, self.country_mapping[value]
-                )
-            else:
-                target_name = target_name.replace(placeholder, value)
-
-        target_name = target_name.replace("{target_code}", self.target_code)
-
-        return self.target_base / Path(target_name)
-    
     def _process_file(self, file_path: Path):
         """Generate a set of target paths from an original file path, containing multiple documents"""
         # Read file
@@ -323,9 +304,75 @@ class EAComponentReorganizer(ComponentReorganizer):
             # Execute and record actual change
             if not self.dry_run:
                 self._copy_file(file_path, target_path, documents[d])
-            return
+        return
 
 
+class EAComponentReorganizer(AggregatedComponentReorganizer):
+    """Class for ICE-EA reorganization; handles splitting of aggregated documents"""
+
+    def __init__(
+        self,
+        name: str,
+        dry_run: bool,
+        source_base: Path,
+        target_base: Path,
+        config: Dict[str, Any],
+    ):
+        super().__init__(name, dry_run, source_base, target_base, config)
+        self.country_mapping = config.get("country_mapping")
+        self.metadata_pattern = self.first_line_pattern
+        return
+
+    def _propose_change(self, metadata: Dict[str, str]) -> None:
+        target_name = self.target_template
+
+        for key, value in metadata.items():
+            placeholder = f"{{{key}}}"
+            if key == "country":
+                target_name = target_name.replace(
+                    placeholder, self.country_mapping[value]
+                )
+            else:
+                target_name = target_name.replace(placeholder, value)
+
+        target_name = target_name.replace("{target_code}", self.target_code)
+
+        return self.target_base / Path(target_name)
+
+
+class GBComponentReorganizer(AggregatedComponentReorganizer):
+    """Class for ICE-GB reorganization; handles splitting of exported aggregate documents"""
+
+    def __init__(
+        self,
+        name: str,
+        dry_run: bool,
+        source_base: Path,
+        target_base: Path,
+        config: Dict[str, Any],
+    ):
+        super().__init__(name, dry_run, source_base, target_base, config)
+        self.metadata_pattern = re.compile(config.get("metadata_pattern"), self.flags)
+        return
+
+    def _propose_change(self, metadata):
+        return ComponentReorganizer._propose_change(self, metadata)
+
+    def _parse_contents(self, contents: List[str]) -> Dict[str, str]:
+        documents = dict()
+        current_doc = None
+
+        for line in contents:
+            stripped = line.strip("\n")
+            match = self.first_line_pattern.match(stripped)
+            if match:
+                current_doc = match.group(1)
+                if current_doc not in documents:
+                    documents[current_doc] = ""
+            elif current_doc is not None:
+                documents[current_doc] += stripped
+        return documents
+    
 class NGComponentReorganizer(ComponentReorganizer):
     """Class for ICE-NG reorganization; handles mapping of genre descriptions to codes."""
 
@@ -364,3 +411,17 @@ class NGComponentReorganizer(ComponentReorganizer):
         metadata["genre"] = self._map_genre(metadata["modality"], metadata["genre"])
 
         return metadata
+
+if __name__ == "__main__":
+    import json
+    with open("preprocess/config/ice_reorganize.json", "r") as f:
+        mapping = json.load(f)
+    foo = GBComponentReorganizer(
+        "ICE-GB",
+        False,
+        Path(mapping.get("source_base")),
+        Path(mapping.get("target_base")),
+        mapping.get("component_configs").get("ICE-GB")
+    )
+
+    foo.run()

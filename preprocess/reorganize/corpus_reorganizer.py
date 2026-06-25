@@ -5,7 +5,11 @@ from preprocess.reorganize.component_reorganizer import *
 
 
 class CorpusReorganizer:
-
+    _REORGANIZER_MAP = {
+        "ICE-EA": EAComponentReorganizer,
+        "ICE-NG": NGComponentReorganizer,
+        "ICE-GB": GBComponentReorganizer,
+    }
     def __init__(self, mapping_file: str, dry_run: bool = True):
         """Generates proposed reorganization from components and executes changes."""
         self.dry_run = dry_run
@@ -28,21 +32,10 @@ class CorpusReorganizer:
             return json.load(f)
 
     # ============= COMPONENT PROCESSING =============
-    def _process_component(self, component_name: str, config: Dict[str, Any]):
-        if component_name == "ICE-EA":
-            component_reorganizer = EAComponentReorganizer(
-                component_name, self.dry_run, self.source_base, self.target_base, config
-            )
-        elif component_name == "ICE-NG":
-            component_reorganizer = NGComponentReorganizer(
-                component_name, self.dry_run, self.source_base, self.target_base, config
-            )
-        else:
-            component_reorganizer = ComponentReorganizer(
-                component_name, self.dry_run, self.source_base, self.target_base, config
-            )
 
-        return component_reorganizer.run()
+    def _process_component(self, component_name: str, config: Dict[str, Any]):
+        cls = self._REORGANIZER_MAP.get(component_name, ComponentReorganizer)
+        return cls(component_name, self.dry_run, self.source_base, self.target_base, config).run()
 
     def run(self) -> None:
         # Print header

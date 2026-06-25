@@ -21,20 +21,34 @@
             "source_root": "ICE-EA/corpus/text 2000",
             "target_code": "ea",
             "country_mapping": {
-                "K": "ke",
                 "T": "tz",
-                "AT": "tz",
-                "HK": "ke"
+                "AT": "tz_a",
+                "BT": "tz_b",
+                "CT": "tz_c",
+                "DT": "tz_d",
+                "TB": "tz_b",
+                "K": "ke",
+                "HK": "ke_h",
+                "AK": "ke_a",
+                "BK": "ke_b",
+                "KA": "ke_a",
+                "KB": "ke_b"
             },
             "target_template": "{country}/ice_{country}_{genre}_{id}.txt",
             "pattern": "(.+)\\.txt",
-            "extract_from_first_line": true,
             "first_line_pattern": "([SW][1-9][A-Z-])(\\d+)([A-Z]+)",
             "extract": {
                 "genre": 1,
                 "id": 2,
                 "country": 3
             }
+        },
+        "ICE-GB": {
+            "source_root": "ICE-GB/corpus",
+            "target_code": "gb",
+            "pattern": "(spoken|written)/all\\.txt",
+            "first_line_pattern": "<s id=ICE_GB_([SW][1-9][A-Z]_\\d+)_X*\\d+>",
+            "metadata_pattern": "([SW][1-9][A-Z])_(\\d+)"
         },
         "ICE-GBR": {
             "source_root": "ICE-GBR/ICE_GBR_Written_Component",
