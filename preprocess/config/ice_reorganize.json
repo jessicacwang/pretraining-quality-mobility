@@ -10,12 +10,14 @@
             "extract": {
                 "genre": 2,
                 "id": 4
-            }
+            },
+            "normalize_genre": true
         },
         "ICE-CAN": {
             "source_root": "ICE-CAN/Corpus",
             "target_code": "ca",
-            "pattern": "([SW][1-9][A-Z])-(\\d+)\\.TXT"
+            "pattern": "([SW][1-9][A-Z])-(\\d+)\\.TXT",
+            "normalize_genre": true
         },
         "ICE-EA": {
             "source_root": "ICE-EA/corpus/text 2000",
@@ -53,30 +55,35 @@
         "ICE-GBR": {
             "source_root": "ICE-GBR/ICE_GBR_Written_Component",
             "target_code": "gr",
-            "pattern": "([SW][1-9][A-Z])_(\\d+)_*\\.txt"
+            "pattern": "([SW][1-9][A-Z])_(\\d+)_*\\.txt",
+            "normalize_genre": true
         },
         "ICE-HK": {
             "source_root": "ICE-HK/CORPUS",
             "target_code": "hk",
             "pattern": "([SW][1-9][A-Z])-(\\d{3})\\.txt",
-            "case_insensitive": true
+            "case_insensitive": true,
+            "normalize_genre": true
         },
         "ICE-IN": {
            "source_root": "ICE-IN/Corpus",
            "target_code": "in",
            "pattern": "([SW][1-9][A-Z])-(\\d{3})\\.txt",
-            "case_insensitive": true
+            "case_insensitive": true,
+            "normalize_genre": true
         },
         "ICE-IRL": {
             "source_root": "ICE-IRL/ICE-Ireland version 1.2#6DAE.2/ICE-Ireland txt/ICE combined running txt",
             "target_code": "ie",
             "pattern": "([SW][1-9][A-Z])-(\\d{3}) (.+)\\.txt",
-            "case_insensitive": true
+            "case_insensitive": true,
+            "normalize_genre": true
         },
         "ICE-JA": {
             "source_root": "ICE-JA/CORPUS",
             "target_code": "jm",
-            "pattern": "([SW][1-9][A-Z])-(\\d{3})\\.TXT"
+            "pattern": "([SW][1-9][A-Z])-(\\d{3})\\.TXT",
+            "normalize_genre": true
         },
         "ICE-NG": {
             "source_root": "ICE-NG/ice-nig/txt - without speaker tags",
@@ -135,19 +142,22 @@
             "extract": {
                 "genre": 2,
                 "id": 3
-            }
+            },
+            "normalize_genre": true
         },
         "ICE-PH": {
             "source_root": "ICE-PH/Corpus",
             "target_code": "ph",
             "pattern": "([SW][1-9][A-Z])-(\\d{3})\\.txt",
-            "case_insensitive": true
+            "case_insensitive": true,
+            "normalize_genre": true
         },
         "ICE-SG": {
             "source_root": "ICE-SG/Corpus",
             "target_code": "sg",
             "pattern": "([SW][1-9][A-Z])-(\\d{3})\\.txt",
-            "case_insensitive": true
+            "case_insensitive": true,
+            "normalize_genre": true
         },
         "ICE-T&T": {
             "source_root": "ICE-T&T/TEXT FILES",
@@ -156,18 +166,21 @@
             "extract": {
                 "genre": 2,
                 "id": 3
-            }
+            },
+            "normalize_genre": true
         },
         "ICE-UG": {
            "source_root": "ICE-UG/Data/All files",
            "target_code": "ug",
            "pattern": "([SW][1-9][A-Z])-(\\d{3})\\.txt",
-           "case_insensitive": true
+           "case_insensitive": true,
+           "normalize_genre": true
         }, 
         "ICE-USA": {
             "source_root": "ICE-USA/Corpus",
             "target_code": "us",
-            "pattern": "([SW][1-9][A-Z])-(\\d{3})\\.TXT"
+            "pattern": "([SW][1-9][A-Z])-(\\d{3})\\.TXT",
+            "normalize_genre": true
         }
 
     }
