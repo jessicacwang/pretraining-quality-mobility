@@ -1,1566 +1,1564 @@
 {
     "commit": "dcba4321",
-    "_notes": "Filter audit runs on leu_data.jsonl.gz, reproducing the filtering done to create FineWeb. Filters are applied sequentially; counts reflect documents surviving all prior filters.",
-    "last_run": {
-        "filters": [],
-        "args": {},
-        "status": "success",
-        "started_at": "TIMESTAMP",
-        "completed_at": "TIMESTAMP",
-        "filter_times": {
-            "1_langid": {"started_at": "TIMESTAMP", "completed_at": "TIMESTAMP"},
-            "2_gopher_repetition": {"started_at": "TIMESTAMP", "completed_at": "TIMESTAMP"},
-            "3_gopher_quality": {"started_at": "TIMESTAMP", "completed_at": "TIMESTAMP"},
-            "4_c4_quality": {"started_at": "TIMESTAMP", "completed_at": "TIMESTAMP"},
-            "5_fineweb_quality": {"started_at": "TIMESTAMP", "completed_at": "TIMESTAMP"}
-        }
-    },
-    "input": {
-        "source_manifest": "path/to/preprocess/manifest.json",
-        "source_file": "path/to/preprocess/leu_data.jsonl.gz",
-        "total_docs_input": null
-    },
-    "filters": {
-        "1_langid": {
-            "full_name": "Language identification filter",
-            "description": "removes documents if p(english) < 0.65",
-            "output_files": {
-                "included": "path/to/filter/1_langid_included.jsonl.gz",
-                "excluded": "path/to/filter/excluded/1_langid_excluded.jsonl.gz"
+    "created_at": null,
+    "steps": {
+        "filter": {
+            "_notes": null,
+            "execution": {
+                "status": "success",
+                "started_at": "TIMESTAMP",
+                "completed_at": "TIMESTAMP",
+                "total_seconds": null,
+                "error": null,
+                "slurm_job_id": null
             },
-            "total_docs": {
-                "included": null,
-                "excluded": null
+            "args": {
+                "--input_data": "path/to/leu_data.jsonl.gz"
             },
-            "by_source": {
-                "glowbe": {
-                    "included": null,
-                    "excluded": null,
-                     "components": {
-                        "US": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
+            "output": {},
+                "filters": {
+                    "1_langid": {
+                        "full_name": "Language identification filter",
+                        "description": "removes documents if p(english) < 0.65",
+                        "output_files": {
+                            "included": "path/to/filter/1_langid_included.jsonl.gz",
+                            "excluded": "path/to/filter/excluded/1_langid_excluded.jsonl.gz"
                         },
-                        "CA": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
+                        "total_docs": {
+                            "included": null,
+                            "excluded": null
                         },
-                        "GB": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "IE": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "AU": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "NZ": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "IN": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "LK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "PK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "BD": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "SG": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "MY": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "PH": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "HK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "ZA": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "NG": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "GH": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "KE": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "TZ": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "JM": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        }
-                    }
-                },
-                "ice": {
-                    "included": null,
-                    "excluded": null,
-                    "components": {
-                        "ICE-USA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
+                        "by_source": {
+                            "glowbe": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "US": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "CA": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "GB": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "IE": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "AU": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "NZ": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "IN": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "LK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "PK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "BD": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "SG": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "MY": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "PH": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "HK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "ZA": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "NG": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "GH": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "KE": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "TZ": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "JM": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    }
                                 }
-                            }
-                        },
-                        "ICE-GB": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
+                            },
+                            "ice": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "ICE-USA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-GB": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-CAN": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-IRL": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-AUS": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-NZ": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-IN": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-SG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-PH": {
+                                        "components": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-HK": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-NG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-EA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-UG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-JA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-TT": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-GBR": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    }
                                 }
-                            }
-                        },
-                        "ICE-CAN": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-IRL": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-AUS": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-NZ": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-IN": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-SG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-PH": {
-                            "components": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-HK": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-NG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-EA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-UG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-JA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-TT": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-GBR": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        }
-                    }
-                },
-                "lince": {
-                    "included": null,
-                    "excluded": null,
-                    "components": {
-                        "lid_hineng": {"docs": null, "tokens": null},
-                        "lid_nepeng": {"docs": null, "tokens": null},
-                        "lid_spaeng": {"docs": null, "tokens": null},
-                        "ner_hineng": {"docs": null, "tokens": null}
-                        }
-                    }
-                }
-        },
-        "2_gopher_repetition": {
-            "full_name": "Gopher repetition filter",
-            "description": "removes documents if duplicate strings exceed specified thresholds according to Gopher paper",
-            "output_files": {
-                "included": "path/to/filter/2_gopher_repetition_included.jsonl.gz",
-                "excluded": "path/to/filter/excluded/2_gopher_repetition_excluded.jsonl.gz"
-            },
-            "total_docs": {
-                "included": null,
-                "excluded": null
-            },
-            "by_source": {
-                "glowbe": {
-                    "included": null,
-                    "excluded": null,
-                     "components": {
-                        "US": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "CA": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "GB": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "IE": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "AU": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "NZ": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "IN": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "LK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "PK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "BD": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "SG": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "MY": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "PH": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "HK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "ZA": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "NG": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "GH": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "KE": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "TZ": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "JM": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        }
-                    }
-                },
-                "ice": {
-                    "included": null,
-                    "excluded": null,
-                    "components": {
-                        "ICE-USA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-GB": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-CAN": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-IRL": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-AUS": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-NZ": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-IN": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-SG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-PH": {
-                            "components": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-HK": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-NG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-EA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-UG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-JA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-TT": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-GBR": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
+                            },
+                            "lince": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "lid_hineng": {"docs": null, "tokens": null},
+                                    "lid_nepeng": {"docs": null, "tokens": null},
+                                    "lid_spaeng": {"docs": null, "tokens": null},
+                                    "ner_hineng": {"docs": null, "tokens": null}
                                 }
                             }
                         }
+                    },
+                    "2_gopher_repetition": {
+                        "full_name": "Gopher repetition filter",
+                        "description": "removes documents if duplicate strings exceed specified thresholds according to Gopher paper",
+                        "output_files": {
+                            "included": "path/to/filter/2_gopher_repetition_included.jsonl.gz",
+                            "excluded": "path/to/filter/excluded/2_gopher_repetition_excluded.jsonl.gz"
+                        },
+                        "total_docs": {
+                            "included": null,
+                            "excluded": null
+                        },
+                        "by_source": {
+                            "glowbe": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "US": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "CA": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "GB": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "IE": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "AU": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "NZ": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "IN": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "LK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "PK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "BD": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "SG": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "MY": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "PH": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "HK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "ZA": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "NG": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "GH": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "KE": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "TZ": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "JM": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    }
+                                }
+                            },
+                            "ice": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "ICE-USA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-GB": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-CAN": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-IRL": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-AUS": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-NZ": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-IN": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-SG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-PH": {
+                                        "components": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-HK": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-NG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-EA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-UG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-JA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-TT": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-GBR": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "lince": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "lid_hineng": {"docs": null, "tokens": null},
+                                    "lid_nepeng": {"docs": null, "tokens": null},
+                                    "lid_spaeng": {"docs": null, "tokens": null},
+                                    "ner_hineng": {"docs": null, "tokens": null}
+                                    }
+                                }
+                            }
+                    },
+                    "3_gopher_quality": {
+                        "full_name": "Gopher quality filter",
+                        "description": "removes documents if Gopher text heuristics are not met",
+                        "output_files": {
+                            "included": "path/to/filter/3_gopher_quality_included.jsonl.gz",
+                            "excluded": "path/to/filter/excluded/3_gopher_quality_excluded.jsonl.gz"
+                        },
+                        "total_docs": {
+                            "included": null,
+                            "excluded": null
+                        },
+                        "by_source": {
+                            "glowbe": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "US": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "CA": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "GB": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "IE": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "AU": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "NZ": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "IN": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "LK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "PK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "BD": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "SG": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "MY": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "PH": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "HK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "ZA": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "NG": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "GH": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "KE": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "TZ": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "JM": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    }
+                                }
+                            },
+                            "ice": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "ICE-USA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-GB": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-CAN": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-IRL": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-AUS": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-NZ": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-IN": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-SG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-PH": {
+                                        "components": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-HK": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-NG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-EA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-UG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-JA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-TT": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-GBR": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "lince": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "lid_hineng": {"docs": null, "tokens": null},
+                                    "lid_nepeng": {"docs": null, "tokens": null},
+                                    "lid_spaeng": {"docs": null, "tokens": null},
+                                    "ner_hineng": {"docs": null, "tokens": null}
+                                    }
+                                }
+                            }
+                    },
+                    "4_c4_quality": {
+                        "full_name": "C4 quality filter",
+                        "description": "removes documents if C4 text heuristics are not met",
+                        "output_files": {
+                            "included": "path/to/filter/4_c4_quality_included.jsonl.gz",
+                            "excluded": "path/to/filter/excluded/4_c4_quality_excluded.jsonl.gz"
+                        },
+                        "total_docs": {
+                            "included": null,
+                            "excluded": null
+                        },
+                        "by_source": {
+                            "glowbe": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "US": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "CA": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "GB": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "IE": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "AU": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "NZ": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "IN": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "LK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "PK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "BD": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "SG": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "MY": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "PH": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "HK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "ZA": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "NG": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "GH": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "KE": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "TZ": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "JM": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    }
+                                }
+                            },
+                            "ice": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "ICE-USA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-GB": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-CAN": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-IRL": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-AUS": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-NZ": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-IN": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-SG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-PH": {
+                                        "components": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-HK": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-NG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-EA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-UG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-JA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-TT": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-GBR": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "lince": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "lid_hineng": {"docs": null, "tokens": null},
+                                    "lid_nepeng": {"docs": null, "tokens": null},
+                                    "lid_spaeng": {"docs": null, "tokens": null},
+                                    "ner_hineng": {"docs": null, "tokens": null}
+                                    }
+                                }
+                            }
+                    },
+                    "5_fineweb_quality": {
+                        "full_name": "FineWeb quality filter",
+                        "description": "removes documents if FineWeb text heuristics are not met",
+                        "output_files": {
+                            "included": "path/to/filter/5_fineweb_quality_included.jsonl.gz",
+                            "excluded": "path/to/filter/excluded/5_fineweb_quality_excluded.jsonl.gz"
+                        },
+                        "total_docs": {
+                            "included": null,
+                            "excluded": null
+                        },
+                        "by_source": {
+                            "glowbe": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "US": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "CA": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "GB": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "IE": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "AU": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "NZ": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "IN": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "LK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "PK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "BD": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "SG": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "MY": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "PH": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "HK": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "ZA": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "NG": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "GH": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "KE": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "TZ": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    },
+                                    "JM": {
+                                        "blog": {"docs": null, "tokens": null},
+                                        "general": {"docs": null, "tokens": null}
+                                    }
+                                }
+                            },
+                            "ice": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "ICE-USA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-GB": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-CAN": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-IRL": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-AUS": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-NZ": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-IN": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-SG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-PH": {
+                                        "components": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-HK": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-NG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-EA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-UG": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-JA": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-TT": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    },
+                                    "ICE-GBR": {
+                                        "text_categories": {
+                                            "spoken": {
+                                                "S1A": {"docs": null, "tokens": null},
+                                                "S1B": {"docs": null, "tokens": null}
+                                            },
+                                            "written": {
+                                                "W1A": {"docs": null, "tokens": null},
+                                                "W1B": {"docs": null, "tokens": null}
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "lince": {
+                                "included": null,
+                                "excluded": null,
+                                "components": {
+                                    "lid_hineng": {"docs": null, "tokens": null},
+                                    "lid_nepeng": {"docs": null, "tokens": null},
+                                    "lid_spaeng": {"docs": null, "tokens": null},
+                                    "ner_hineng": {"docs": null, "tokens": null}
+                                    }
+                                }
+                            }
                     }
-                },
-                "lince": {
-                    "included": null,
-                    "excluded": null,
-                    "components": {
-                        "lid_hineng": {"docs": null, "tokens": null},
-                        "lid_nepeng": {"docs": null, "tokens": null},
-                        "lid_spaeng": {"docs": null, "tokens": null},
-                        "ner_hineng": {"docs": null, "tokens": null}
-                        }
-                    }
-                }
-        },
-        "3_gopher_quality": {
-            "full_name": "Gopher quality filter",
-            "description": "removes documents if Gopher text heuristics are not met",
-            "output_files": {
-                "included": "path/to/filter/3_gopher_quality_included.jsonl.gz",
-                "excluded": "path/to/filter/excluded/3_gopher_quality_excluded.jsonl.gz"
-            },
-            "total_docs": {
-                "included": null,
-                "excluded": null
-            },
-            "by_source": {
-                "glowbe": {
-                    "included": null,
-                    "excluded": null,
-                     "components": {
-                        "US": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "CA": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "GB": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "IE": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "AU": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "NZ": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "IN": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "LK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "PK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "BD": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "SG": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "MY": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "PH": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "HK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "ZA": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "NG": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "GH": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "KE": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "TZ": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "JM": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        }
-                    }
-                },
-                "ice": {
-                    "included": null,
-                    "excluded": null,
-                    "components": {
-                        "ICE-USA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-GB": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-CAN": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-IRL": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-AUS": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-NZ": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-IN": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-SG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-PH": {
-                            "components": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-HK": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-NG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-EA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-UG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-JA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-TT": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-GBR": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        }
-                    }
-                },
-                "lince": {
-                    "included": null,
-                    "excluded": null,
-                    "components": {
-                        "lid_hineng": {"docs": null, "tokens": null},
-                        "lid_nepeng": {"docs": null, "tokens": null},
-                        "lid_spaeng": {"docs": null, "tokens": null},
-                        "ner_hineng": {"docs": null, "tokens": null}
-                        }
-                    }
-                }
-        },
-        "4_c4_quality": {
-            "full_name": "C4 quality filter",
-            "description": "removes documents if C4 text heuristics are not met",
-            "output_files": {
-                "included": "path/to/filter/4_c4_quality_included.jsonl.gz",
-                "excluded": "path/to/filter/excluded/4_c4_quality_excluded.jsonl.gz"
-            },
-            "total_docs": {
-                "included": null,
-                "excluded": null
-            },
-            "by_source": {
-                "glowbe": {
-                    "included": null,
-                    "excluded": null,
-                     "components": {
-                        "US": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "CA": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "GB": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "IE": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "AU": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "NZ": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "IN": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "LK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "PK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "BD": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "SG": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "MY": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "PH": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "HK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "ZA": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "NG": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "GH": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "KE": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "TZ": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "JM": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        }
-                    }
-                },
-                "ice": {
-                    "included": null,
-                    "excluded": null,
-                    "components": {
-                        "ICE-USA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-GB": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-CAN": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-IRL": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-AUS": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-NZ": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-IN": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-SG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-PH": {
-                            "components": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-HK": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-NG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-EA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-UG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-JA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-TT": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-GBR": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        }
-                    }
-                },
-                "lince": {
-                    "included": null,
-                    "excluded": null,
-                    "components": {
-                        "lid_hineng": {"docs": null, "tokens": null},
-                        "lid_nepeng": {"docs": null, "tokens": null},
-                        "lid_spaeng": {"docs": null, "tokens": null},
-                        "ner_hineng": {"docs": null, "tokens": null}
-                        }
-                    }
-                }
-        },
-        "5_fineweb_quality": {
-            "full_name": "FineWeb quality filter",
-            "description": "removes documents if FineWeb text heuristics are not met",
-            "output_files": {
-                "included": "path/to/filter/5_fineweb_quality_included.jsonl.gz",
-                "excluded": "path/to/filter/excluded/5_fineweb_quality_excluded.jsonl.gz"
-            },
-            "total_docs": {
-                "included": null,
-                "excluded": null
-            },
-            "by_source": {
-                "glowbe": {
-                    "included": null,
-                    "excluded": null,
-                     "components": {
-                        "US": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "CA": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "GB": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "IE": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "AU": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "NZ": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "IN": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "LK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "PK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "BD": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "SG": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "MY": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "PH": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "HK": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "ZA": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "NG": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "GH": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "KE": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "TZ": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        },
-                        "JM": {
-                            "blog": {"docs": null, "tokens": null},
-                            "general": {"docs": null, "tokens": null}
-                        }
-                    }
-                },
-                "ice": {
-                    "included": null,
-                    "excluded": null,
-                    "components": {
-                        "ICE-USA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-GB": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-CAN": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-IRL": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-AUS": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-NZ": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-IN": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-SG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-PH": {
-                            "components": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-HK": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-NG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-EA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-UG": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-JA": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-TT": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        },
-                        "ICE-GBR": {
-                            "text_categories": {
-                                "spoken": {
-                                    "S1A": {"docs": null, "tokens": null},
-                                    "S1B": {"docs": null, "tokens": null}
-                                },
-                                "written": {
-                                    "W1A": {"docs": null, "tokens": null},
-                                    "W1B": {"docs": null, "tokens": null}
-                                }
-                            }
-                        }
-                    }
-                },
-                "lince": {
-                    "included": null,
-                    "excluded": null,
-                    "components": {
-                        "lid_hineng": {"docs": null, "tokens": null},
-                        "lid_nepeng": {"docs": null, "tokens": null},
-                        "lid_spaeng": {"docs": null, "tokens": null},
-                        "ner_hineng": {"docs": null, "tokens": null}
-                        }
-                    }
-                }
-        }
 
+                }
+        }
     }
 }

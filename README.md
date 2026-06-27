@@ -6,10 +6,12 @@ across 2 main experiments and 4-6 evaluation metrics.
 No `.jsonl.gz` is committed to the remote repository.
 
 # Prerequisites
-This code is designed to run on the UW Hyak computing cluster. 
+This code is designed to run on the UW Hyak computing cluster.
 
 # Experiments
-## Stage 0: Unifying, Clustering, and Balancing Data
+All experiments are run from the repository root since all code is written 
+using absolute package imports. 
+## Stage 0: Unifying, Enriching, and Balancing Data
 
 The `preprocess` module handles the unification, clustering and re-balancing of 
 existing datasets for the following stages. Directory structure is as follows:
@@ -17,77 +19,77 @@ existing datasets for the following stages. Directory structure is as follows:
 .
 └── preprocess/
     ├── config/
-    │   ├── cluster_config.json
-    │   └── ice_config.json
-    ├── 0-reorganize.slurm
+    │   ├── enrich.json
+    │   ├── ice_reorganize.json
+    │   └── ice_tag.json
+    ├── adapters/
+    │   ├── __init__.py
+    │   ├── glowbe.py
+    │   ├── ice.py
+    │   ├── lince.py
+    │   └── utils.py
+    ├── reorganize/
+    │   ├── __init__.py
+    │   ├── __main__.py
+    │   ├── component_reorganizer.py
+    │   └── corpus_reorganizer.py
     ├── 1-unify.slurm
-    ├── 2-cluster.slurm
+    ├── 2-enrich.slurm
     ├── 3-balance.slurm
     ├── balance.py
-    ├── cluster.py
-    ├── unify.py
-    └── convert_to_jsonl/
-        ├── utils.py
-        ├── glowbe/
-        │   └── main.py
-        ├── ice/
-        │   ├── main.py
-        │   └── reorganize.py
-        └── lince/
-            └── main.py
+    ├── enrich.py
+    ├── manifest.py
+    └── unify.py
 ```
 
 This stage requires filepaths for ICE and GloWbe corpora to be configured in the 
-environment. First, ICE data has differing directory structure depending on the 
-regional component; these are reorganized using a Python script in the interest 
+config JSON. First, ICE data has differing directory structure depending on the 
+regional component; these are reorganized using a Python class in the interest 
 of reproducibility:
 
 ```cmd
-sbatch preprocess/0-reorganize.slurm
+python -m preprocess.reorganize --execute
 ```
-Once ICE components are uniformly organized, all source corpora can be unified. 
-To do so, the `convert_to_jsonl` submodules are written to convert each source 
-corpus into JSONL data. Three primary fields are shared by all submodules, along 
-with relevant secondary fields (not listed):
+Once ICE components are uniformly organized, all source LEU corpora can be unified 
+as JSONL data. To do so, the `adapters` submodules are written to adapt each source 
+corpus to JSON-like formats. Three primary fields are shared by all submodules, along 
+with source-specific secondary fields (not listed):
 - `id`: `"<corpus>_<source_hash>"` to be unambiguous
 - `text`: plain text without annotations or markup tags
-- `token_count`: the number of tokens in `text` using `AutoTokenizer`
 
-Each of the `convert_to_jsonl` submodules can be tested individually by running:
+Each of the `adapters` submodules can be tested individually by running:
 ```cmd
-python -m preprocess.convert_to_jsonl.<source>
+python -m preprocess.adapters.<source>
 ```
 
-The first proper step of preprocessing is to call each of these submodules and 
-unify all LEU data. Each data point also tracks the token count percentile for 
-later analysis. By default, the script writes ther three primary fields to 
-`leu_data.jsonl.gz` and the remaining secondary fields to `metadata.jsonl.gz` 
-but can be run to 'backfill'/update subsets of `leu_data.jsonl.gz` by rewriting 
-rows corresponding to a certain source with the argument `--source <source>`. 
+The first proper step of preprocessing is unify the results of each LEU adapter 
+and write the results. By default, the script writes the three primary fields to 
+`leu_data.jsonl.gz` and the source-specific secondary fields to `metadata.jsonl.gz`. 
 Document and token counts are tracked in `manifest.json`. This initial parsing + 
 cleaning is executed as below:
 ```cmd
-sbatch preprocess/1-unify.slurm
+sbatch 1-unify.slurm
 ```
 
-Next, the unified data is clustered by `cluster.py`. The `metadata.jsonl.gz` is 
-updated by populating `cluster` field, using `cluster_config.json` to map 
-relevant metadata fields to cluster IDs. `manifest.json` is similarly updated to 
-include document and token counts per cluster, aggregating by source and by genre. 
+Next, the unified data is enriched; the `metadata.jsonl.gz` is updated by populating 
+a `cluster` field, using `cluster_config.json` to map relevant secondary fields 
+to cluster IDs, calculating token counts/percentiles, and tracking the occurrences 
+of penalized text features (ex: non-alphanumeric characters, repetitions). 
+`manifest.json` is similarly updated to include average counts per cluster/source/component/genre. 
 ```cmd
-sbatch preprocess/2-cluster.slurm
+sbatch 2-enrich.slurm
 ```
 
-Finally, the clustered data for Clusters 1-4 (ICE and GloWbe data) is rebalanced 
-by `balance.py`, which samples from the full data to produce a uniform initial 
-distribution between clusters as well as enforcing a uniform ratio of ICE and 
-GloWbe tokens for the Data Mixing Audit. To do so, the script accesses 
-`manifest.json` to compute exact token targets and samples from 
-`leu_data.jsonl.gz` until the targets are met for each cluster as well as a 
-held-out validation set, approximately 2% of the total volume. The balanced 
-results are written as separate `jsonl.gz` files, and `manifest.json` is updated.
+Finally, the enriched data for Clusters 1-4 (ICE and GloWbe data) is rebalanced 
+such that the full data is sampled to produce a uniform initial distribution 
+between clusters and to enforce a uniform ratio of ICE and GloWbe tokens 
+for the Data Mixing Audit. To do so, the script accesses `manifest.json` to 
+compute exact token targets and samples from `leu_data.jsonl.gz` until the targets 
+are met for each cluster as well as a held-out validation set, approximately 2% 
+of the total volume. The balanced results are written as separate `jsonl.gz` files
+for each cluster, and `manifest.json` is updated.
 ```cmd
-sbatch preprocess/3-balance.slurm
+sbatch 3-balance.slurm
 ```
 
 Note that the output will be written to the `output/preprocess` folder, of 

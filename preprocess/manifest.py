@@ -1,0 +1,1 @@
+"""Defines a Manifest object class to track run state + data provenance"""

@@ -1,705 +1,775 @@
 {
     "commit": "abcd123",
-    "_notes": "Token count uses AutoTokenizer.",
-    "last_run": {
-        "steps": ["unify", "cluster", "balance"],
-        "args": {"source": null},
-        "status": "success",
-        "started_at": "TIMESTAMP",
-        "completed_at": "TIMESTAMP",
-        "step_times": {
-            "unify": {"started_at": "TIMESTAMP", "completed_at": "TIMESTAMP"},
-            "cluster": {"started_at": "TIMESTAMP", "completed_at": "TIMESTAMP"},
-            "balance": {"started_at": "TIMESTAMP", "completed_at": "TIMESTAMP"}
-        }
-    },
-    "unify": {
-        "_notes": "written by running 0-unify.slurm",
-        "output_files": {
-            "leu_data": "path/to/leu_data.jsonl.gz",
-            "metadata": "path/to/metadata.jsonl.gz"
-        },
-        "corpora": {
-            "glowbe": {
-                "full_name": "Global Corpus of Web-based English",
-                "total_docs": null,
-                "total_tokens": null,
-                "dropped_docs": null,
-                "drop_reasons": {
-                    "encoding_error": null,
-                    "empty_after_strip": null
-                },
-                "components": {
-                    "US": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "CA": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "GB": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "IE": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "AU": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "NZ": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "IN": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "LK": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "PK": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "BD": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "SG": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "MY": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "PH": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "HK": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "ZA": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "NG": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "GH": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "KE": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "TZ": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    },
-                    "JM": {
-                        "blog": {"docs": null, "tokens": null},
-                        "general": {"docs": null, "tokens": null}
-                    }
-                },
-                "validation": {
-                    "empty_text_count": null
-                }
+    "created_at": null,
+    "steps": {
+        "unify": {
+            "_notes": "written by running 1-unify.slurm",
+            "execution": {
+                "status": "success",
+                "started_at": "TIMESTAMP",
+                "completed_at": "TIMESTAMP",
+                "total_seconds": null,
+                "error": null,
+                "slurm_job_id": null
             },
-            "ice": {
-                "full_name": "International Corpus of English",
-                "total_docs": null,
-                "total_tokens": null,
-                "dropped_docs": null,
-                "drop_reasons": {
-                    "tag_parse_failure": null,
-                    "empty_after_strip": null
-                },
-                "tag_edge_cases": {
-                    "overlapping_speech": "newline",
-                    "unclear_speech": "dropped",
-                    "pauses": "whitespace"
-                },
-                "components": {
-                    "ICE-USA": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
+            "args": {
+                "--leu_data": "path/to/leu_data.jsonl.gz",
+                "--metadata": "path/to/metadata_source.jsonl.gz"
+            },
+            "output": {
+                "leu_data": "path/to/leu_data.jsonl.gz",
+                "metadata": "path/to/metadata_source.jsonl.gz"
+            },
+            "corpora": {
+                "glowbe": {
+                    "full_name": "Global Corpus of Web-based English",
+                    "total_docs": null,
+                    "total_tokens": null,
+                    "dropped_docs": null,
+                    "drop_reasons": {
+                        "encoding_error": null,
+                        "empty_after_strip": null
+                    },
+                    "components": {
+                        "US": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
                         },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
+                        "CA": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "GB": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "IE": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "AU": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "NZ": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "IN": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "LK": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "PK": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "BD": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "SG": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "MY": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "PH": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "HK": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "ZA": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "NG": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "GH": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "KE": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "TZ": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
+                        },
+                        "JM": {
+                            "blog": {"docs": null, "tokens": null},
+                            "general": {"docs": null, "tokens": null}
                         }
                     },
-                    "ICE-GB": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-CAN": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-IRL": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-AUS": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-NZ": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-IN": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-SG": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-PH": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-HK": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-NG": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-EA": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-UG": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-JA": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-TT": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
-                    },
-                    "ICE-GBR": {
-                        "docs": null,
-                        "tokens": null,
-                        "text_categories": {
-                            "spoken": {
-                                "S1A": {"docs": null, "tokens": null},
-                                "S1B": {"docs": null, "tokens": null}
-                            },
-                            "written": {
-                                "W1A": {"docs": null, "tokens": null},
-                                "W1B": {"docs": null, "tokens": null}
-                            }
-                        },
-                        "validation": {
-                            "empty_text_count": null,
-                            "residual_bracket_count": null,
-                            "expected_docs": 500,
-                            "actual_docs": null,
-                            "tags_observed": {
-                                "X": null,
-                                "&": null,
-                                "foreign": null
-                            }
-                        }
+                    "validation": {
+                        "empty_text_count": null
                     }
+                },
+                "ice": {
+                    "full_name": "International Corpus of English",
+                    "total_docs": null,
+                    "total_tokens": null,
+                    "dropped_docs": null,
+                    "drop_reasons": {
+                        "tag_parse_failure": null,
+                        "empty_after_strip": null
+                    },
+                    "tag_edge_cases": {
+                        "overlapping_speech": "newline",
+                        "unclear_speech": "dropped",
+                        "pauses": "whitespace"
+                    },
+                    "components": {
+                        "ICE-USA": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-GB": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-CAN": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-IRL": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-AUS": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-NZ": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-IN": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-SG": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-PH": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-HK": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-NG": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-EA": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-UG": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-JA": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-TT": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        },
+                        "ICE-GBR": {
+                            "docs": null,
+                            "tokens": null,
+                            "text_categories": {
+                                "spoken": {
+                                    "S1A": {"docs": null, "tokens": null},
+                                    "S1B": {"docs": null, "tokens": null}
+                                },
+                                "written": {
+                                    "W1A": {"docs": null, "tokens": null},
+                                    "W1B": {"docs": null, "tokens": null}
+                                }
+                            },
+                            "validation": {
+                                "empty_text_count": null,
+                                "residual_bracket_count": null,
+                                "expected_docs": 500,
+                                "actual_docs": null,
+                                "tags_observed": {
+                                    "X": null,
+                                    "&": null,
+                                    "foreign": null
+                                }
+                            }
+                        }
 
-                }
-            },
-            "lince": {
-                "full_name": "Linguistic Code-switching Evaluation Benchmark",
-                "total_docs": null,
-                "total_tokens": null,
-                "annotation_layers_stripped": ["lid", "ner"],
-                "components": {
-                    "lid_hineng": {
-                        "train": {"docs": null, "tokens": null, "cmi": 0.12},
-                        "dev": {"docs": null, "tokens": null, "cmi": 0.12},
-                        "test": {"docs": null, "tokens": null, "cmi": 0.12}
-                    },
-                    "lid_nepeng": {
-                        "train": {"docs": null, "tokens": null, "cmi": 0.12},
-                        "dev": {"docs": null, "tokens": null, "cmi": 0.12},
-                        "test": {"docs": null, "tokens": null, "cmi": 0.12}
-                    },
-                    "lid_spaeng": {
-                        "train": {"docs": null, "tokens": null, "cmi": 0.12},
-                        "dev": {"docs": null, "tokens": null, "cmi": 0.12},
-                        "test": {"docs": null, "tokens": null, "cmi": 0.12}
-                    },
-                    "ner_hineng": {
-                        "train": {"docs": null, "tokens": null, "cmi": 0.12},
-                        "dev": {"docs": null, "tokens": null, "cmi": 0.12},
-                        "test": {"docs": null, "tokens": null, "cmi": 0.12}
                     }
                 },
-                "validation": {
-                    "ids_unique": null,
-                    "empty_doc_count": null,
-                    "labels_observed": {
-                        "lid": ["lang1", "lang2", "other"]
+                "lince": {
+                    "full_name": "Linguistic Code-switching Evaluation Benchmark",
+                    "total_docs": null,
+                    "total_tokens": null,
+                    "annotation_layers_stripped": ["lid", "ner"],
+                    "components": {
+                        "lid_hineng": {
+                            "train": {"docs": null, "tokens": null, "cmi": 0.12},
+                            "dev": {"docs": null, "tokens": null, "cmi": 0.12},
+                            "test": {"docs": null, "tokens": null, "cmi": 0.12}
+                        },
+                        "lid_nepeng": {
+                            "train": {"docs": null, "tokens": null, "cmi": 0.12},
+                            "dev": {"docs": null, "tokens": null, "cmi": 0.12},
+                            "test": {"docs": null, "tokens": null, "cmi": 0.12}
+                        },
+                        "lid_spaeng": {
+                            "train": {"docs": null, "tokens": null, "cmi": 0.12},
+                            "dev": {"docs": null, "tokens": null, "cmi": 0.12},
+                            "test": {"docs": null, "tokens": null, "cmi": 0.12}
+                        },
+                        "ner_hineng": {
+                            "train": {"docs": null, "tokens": null, "cmi": 0.12},
+                            "dev": {"docs": null, "tokens": null, "cmi": 0.12},
+                            "test": {"docs": null, "tokens": null, "cmi": 0.12}
+                        }
+                    },
+                    "validation": {
+                        "ids_unique": null,
+                        "empty_doc_count": null,
+                        "labels_observed": {
+                            "lid": ["lang1", "lang2", "other"]
+                        }
+                    }
+                }
+
+            }
+        },
+        "enrich": {
+            "_notes": "written by running 2-enrich.slurm",
+            "execution": {
+                "status": "success",
+                "started_at": "TIMESTAMP",
+                "completed_at": "TIMESTAMP",
+                "total_seconds": null,
+                "error": null,
+                "slurm_job_id": null
+            },
+            "args": {
+                "--leu_data": "path/to/leu_data.jsonl.gz",
+                "--config": "path/to/enrich.json"
+            },
+            "output": {
+                "metadata": "path/to/metadata_enriched.jsonl.gz"
+            },
+            "clusters": {
+                "1": {
+                    "description": "Traditional L1 varieties",
+                    "sources": ["ice", "glowbe"],
+                    "total_docs": null,
+                    "total_tokens": null,
+                    "components":{
+                        "ice": {
+                            "ICE-USA": {"docs": null, "tokens": null},
+                            "ICE-GB": {"docs": null, "tokens": null}
+                        },
+                        "glowbe": {
+                            "US": {"docs": null, "tokens": null},
+                            "GB": {"docs": null, "tokens": null}
+                        }
+                    }
+                },
+                "2": {
+                    "description": "High-contact L1 varieties",
+                    "sources": ["ice", "glowbe"],
+                    "total_docs": null,
+                    "total_tokens": null,
+                    "components":{
+                        "ice": {
+                            "ICE-CAN": {"docs": null, "tokens": null},
+                            "ICE-IRL": {"docs": null, "tokens": null},
+                            "ICE-AUS": {"docs": null, "tokens": null},
+                            "ICE-NZ": {"docs": null, "tokens": null}
+                        },
+                        "glowbe": {
+                            "CA": {"docs": null, "tokens": null},
+                            "IE": {"docs": null, "tokens": null},
+                            "AU": {"docs": null, "tokens": null},
+                            "NZ": {"docs": null, "tokens": null}
+                        }
+                    }
+                },
+                "3": {
+                    "description": "Indigenized L2 varieties",
+                    "sources": ["ice", "glowbe"],
+                    "total_docs": null,
+                    "total_tokens": null,
+                    "components":{
+                        "ice": {
+                            "ICE-IN": {"docs": null, "tokens": null},
+                            "ICE-SG": {"docs": null, "tokens": null},
+                            "ICE-PH": {"docs": null, "tokens": null},
+                            "ICE-HK": {"docs": null, "tokens": null}
+                        },
+                        "glowbe": {
+                            "IN": {"docs": null, "tokens": null},
+                            "LK": {"docs": null, "tokens": null},
+                            "PK": {"docs": null, "tokens": null},
+                            "BD": {"docs": null, "tokens": null},
+                            "SG": {"docs": null, "tokens": null},
+                            "MY": {"docs": null, "tokens": null},
+                            "PH": {"docs": null, "tokens": null},
+                            "HK": {"docs": null, "tokens": null}
+                        }
+                    }
+                },
+                "4": {
+                    "description": "English-based Pidgins and Creoles",
+                    "sources": ["ice", "glowbe"],
+                    "total_docs": null,
+                    "total_tokens": null,
+                    "components":{
+                        "ice": {
+                            "ICE-NG": {"docs": null, "tokens": null},
+                            "ICE-EA": {"docs": null, "tokens": null},
+                            "ICE-UG": {"docs": null, "tokens": null},
+                            "ICE-JA": {"docs": null, "tokens": null},
+                            "ICE-TT": {"docs": null, "tokens": null},
+                            "ICE-GBR": {"docs": null, "tokens": null}
+                        },
+                        "glowbe": {
+                            "ZA": {"docs": null, "tokens": null},
+                            "NG": {"docs": null, "tokens": null},
+                            "KE": {"docs": null, "tokens": null},
+                            "GH": {"docs": null, "tokens": null},
+                            "TZ": {"docs": null, "tokens": null},
+                            "JM": {"docs": null, "tokens": null}
+                        }
+                    }
+                },
+                "5": {
+                    "description": "English code-switching",
+                    "sources": ["lince"],
+                    "total_docs": null,
+                    "total_tokens": null,
+                    "components":{
+                        "lince": {
+                            "lid_hineng": {"docs": null, "tokens": null},
+                            "lid_nepeng": {"docs": null, "tokens": null},
+                            "lid_spaeng": {"docs": null, "tokens": null},
+                            "ner_hineng": {"docs": null, "tokens": null}
+                        }
                     }
                 }
             }
-
-        }
-    },
-    "cluster": {
-        "_notes": "written by running 1-cluster.slurm",
-        "config": "path/to/cluster_config.json",
-        "clusters": {
-            "1": {
-                "description": "Traditional L1 varieties",
-                "sources": ["ice", "glowbe"],
-                "total_docs": null,
-                "total_tokens": null,
-                "components":{
-                    "ice": {
-                        "ICE-USA": {"docs": null, "tokens": null},
-                        "ICE-GB": {"docs": null, "tokens": null}
-                    },
-                    "glowbe": {
-                        "US": {"docs": null, "tokens": null},
-                        "GB": {"docs": null, "tokens": null}
-                    }
-                }
-            },
-            "2": {
-                "description": "High-contact L1 varieties",
-                "sources": ["ice", "glowbe"],
-                "total_docs": null,
-                "total_tokens": null,
-                "components":{
-                    "ice": {
-                        "ICE-CAN": {"docs": null, "tokens": null},
-                        "ICE-IRL": {"docs": null, "tokens": null},
-                        "ICE-AUS": {"docs": null, "tokens": null},
-                        "ICE-NZ": {"docs": null, "tokens": null}
-                    },
-                    "glowbe": {
-                        "CA": {"docs": null, "tokens": null},
-                        "IE": {"docs": null, "tokens": null},
-                        "AU": {"docs": null, "tokens": null},
-                        "NZ": {"docs": null, "tokens": null}
-                    }
-                }
-            },
-            "3": {
-                "description": "Indigenized L2 varieties",
-                "sources": ["ice", "glowbe"],
-                "total_docs": null,
-                "total_tokens": null,
-                "components":{
-                    "ice": {
-                        "ICE-IN": {"docs": null, "tokens": null},
-                        "ICE-SG": {"docs": null, "tokens": null},
-                        "ICE-PH": {"docs": null, "tokens": null},
-                        "ICE-HK": {"docs": null, "tokens": null}
-                    },
-                    "glowbe": {
-                        "IN": {"docs": null, "tokens": null},
-                        "LK": {"docs": null, "tokens": null},
-                        "PK": {"docs": null, "tokens": null},
-                        "BD": {"docs": null, "tokens": null},
-                        "SG": {"docs": null, "tokens": null},
-                        "MY": {"docs": null, "tokens": null},
-                        "PH": {"docs": null, "tokens": null},
-                        "HK": {"docs": null, "tokens": null}
-                    }
-                }
-            },
-            "4": {
-                "description": "English-based Pidgins and Creoles",
-                "sources": ["ice", "glowbe"],
-                "total_docs": null,
-                "total_tokens": null,
-                "components":{
-                    "ice": {
-                        "ICE-NG": {"docs": null, "tokens": null},
-                        "ICE-EA": {"docs": null, "tokens": null},
-                        "ICE-UG": {"docs": null, "tokens": null},
-                        "ICE-JA": {"docs": null, "tokens": null},
-                        "ICE-TT": {"docs": null, "tokens": null},
-                        "ICE-GBR": {"docs": null, "tokens": null}
-                    },
-                    "glowbe": {
-                        "ZA": {"docs": null, "tokens": null},
-                        "NG": {"docs": null, "tokens": null},
-                        "KE": {"docs": null, "tokens": null},
-                        "GH": {"docs": null, "tokens": null},
-                        "TZ": {"docs": null, "tokens": null},
-                        "JM": {"docs": null, "tokens": null}
-                    }
-                }
-            },
-            "5": {
-                "description": "English code-switching",
-                "sources": ["lince"],
-                "total_docs": null,
-                "total_tokens": null,
-                "components":{
-                    "lince": {
-                        "lid_hineng": {"docs": null, "tokens": null},
-                        "lid_nepeng": {"docs": null, "tokens": null},
-                        "lid_spaeng": {"docs": null, "tokens": null},
-                        "ner_hineng": {"docs": null, "tokens": null}
-                    }
-                }
-            }
-        }
-    },
-    "balance": {
-        "_notes": "written by running 2-balance.slurm",
-        "method": "uniform_cluster_distribution_with_ice_glowbe_ratio",
-        "validation_split_pct": 0.02,
-        "output_files":{
-            "cluster_1": "path/to/cluster_1_balanced.jsonl.gz",
-            "cluster_2": "path/to/cluster_1_balanced.jsonl.gz",
-            "cluster_3": "path/to/cluster_1_balanced.jsonl.gz",
-            "cluster_4": "path/to/cluster_1_balanced.jsonl.gz",
-            "validation": "path/to/validation.jsonl.gz"
         },
-        "token_targets": null,
-        "token_counts_actual": {
-            "cluster_1": null, 
-            "cluster_2": null, 
-            "cluster_3": null, 
-            "cluster_4": null 
-        },
-        "ice_glowbe_token_ratio": {
-            "target_pct": 0.05,
-            "actual": {
-                "cluster_1": null,
-                "cluster_2": null,
-                "cluster_3": null,
-                "cluster_4": null
+        "balance": {
+            "_notes": "written by running 3-balance.slurm",
+            "execution": {
+                "status": "success",
+                "started_at": "TIMESTAMP",
+                "completed_at": "TIMESTAMP",
+                "total_seconds": null,
+                "error": null,
+                "slurm_job_id": null
+            },
+            "args": {
+                "--leu_data": "path/to/leu_data.jsonl.gz",
+                "--metadata_enriched": "path/to/metadata_enriched.jsonl.gz",
+                "--strategy": null
+            },
+            "output": {
+                "leu_data": "path/to/leu_data.jsonl.gz",
+                "metadata": "path/to/metadata_source.jsonl.gz"
+            },
+            "token_budget": {
+                "total": null,
+                "per_cluster": null
+            },
+            "token_ratio": {
+                "glowbe": 0.95,
+                "ice": 0.05
+            },
+            "validation_split_pct": 0.02,
+            "output_files":{
+                "cluster_1": "path/to/cluster_1_balanced.jsonl.gz",
+                "cluster_2": "path/to/cluster_2_balanced.jsonl.gz",
+                "cluster_3": "path/to/cluster_3_balanced.jsonl.gz",
+                "cluster_4": "path/to/cluster_4_balanced.jsonl.gz",
+                "validation": "path/to/validation.jsonl.gz"
+            },
+            "clusters": {
+                "1": {
+                    "actual_token_count": {
+                        "total": null,
+                        "glowbe": null,
+                        "ice": null
+                    },
+                    "actual_token_ratio": {
+                        "glowbe": null,
+                        "ice": null
+                    }
+                },
+                "2": {
+                    "actual_token_count": {
+                        "total": null,
+                        "glowbe": null,
+                        "ice": null
+                    },
+                    "actual_token_ratio": {
+                        "glowbe": null,
+                        "ice": null
+                    }
+                },
+                "3": {
+                    "actual_token_count": {
+                        "total": null,
+                        "glowbe": null,
+                        "ice": null
+                    },
+                    "actual_token_ratio": {
+                        "glowbe": null,
+                        "ice": null
+                    }
+                },
+                "4": {
+                    "actual_token_count": {
+                        "total": null,
+                        "glowbe": null,
+                        "ice": null
+                    },
+                    "actual_token_ratio": {
+                        "glowbe": null,
+                        "ice": null
+                    }
+                }
             }
         }
     }
