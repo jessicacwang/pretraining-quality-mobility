@@ -2,7 +2,6 @@
 import csv
 from ast import literal_eval
 from typing import Iterator, Dict, List
-from data import UnifiedText
 from preprocess.adapters.base import BaseAdapter
 from collections import Counter
 
@@ -97,9 +96,7 @@ class LinCEAdapter(BaseAdapter):
         }
 
     def make_id(self, source_doc):
-        # Make ID
-        super().make_id(source_doc)
-        return
+        return super().make_id(source_doc)
     
     def validate(self):
         return {
@@ -111,24 +108,10 @@ class LinCEAdapter(BaseAdapter):
     
     def clean_text(self, text):
         return super().clean_text(text)
-    
-    # ====================== ENTRY POINT ======================
-    
-    def iter_documents(self):
-        for source_doc in self._iter_source_documents():
-            # join words to new text field
-            text = self.extract_text(source_doc)
-            text = self.clean_text(text)
-            metadata = self.extract_metadata(source_doc)
-    
-            yield UnifiedText(
-                id=self.make_id(metadata),
-                text=text,
-                metadata=metadata
-            )
+
     
 def main():
-    foo = LinCEAdapter("../data/lince-kaggle", "*_*eng_*.csv")
+    foo = LinCEAdapter("../toy-data/lince-kaggle", "*_*eng_*.csv")
     
     try:
         docs = list(foo.iter_documents())

@@ -1,7 +1,7 @@
 """Base class for CorpusAdapter objects: disover documents, construct IDs, extract metadata and prepare text"""
 from pathlib import Path
-import hashlib
 from typing import Dict
+from data import UnifiedText
 
 class BaseAdapter:
     TARGET_ID_KEYS = []    
@@ -24,8 +24,8 @@ class BaseAdapter:
 
     def make_id(self, metadata: Dict):
         target_values = [metadata[k] for k in self.TARGET_ID_KEYS]
-        payload = f"{':'.join(target_values)}".encode()
-        result = f"{self.name}_{hashlib.sha256(payload).hexdigest()}"
+        payload = f"{':'.join(target_values)}"
+        result = f"{self.name}_{payload}"
         # Add ID to the list seen
         self.ids_observed.append(result)
         return result
@@ -35,3 +35,23 @@ class BaseAdapter:
 
     def validate(self):
         raise NotImplementedError()
+    
+    def prepare(self):
+        pass
+
+    def cleanup(self):
+        pass
+
+    # ====================== ENTRY POINT ======================
+    def iter_documents(self):
+        for source_doc in self._iter_source_documents():
+            # join words to new text field
+            text = self.extract_text(source_doc)
+            metadata = self.extract_metadata(source_doc)
+            text = self.clean_text(text)
+    
+            yield UnifiedText(
+                id=self.make_id(metadata),
+                text=text,
+                metadata=metadata
+            )
