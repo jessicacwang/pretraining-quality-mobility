@@ -13,10 +13,10 @@ class LinCEAdapter(BaseAdapter):
 
     def __init__(self, root_path, file_pattern):
         super().__init__(root_path, file_pattern)
+        self.name = "lince"
         self.labels_observed = set()
         self.ids_observed = list()
         self.docs_dropped = 0
-        self.empty_doc_count = 0
         
     def _iter_source_documents(self) -> Iterator[Dict]:
         # loop over eng train and validation docs
@@ -80,7 +80,7 @@ class LinCEAdapter(BaseAdapter):
         result = ' '.join(source_doc["words"])
 
         # Increment if empty
-        self.empty_doc_count += len(result) == 0
+        self.empty_text_count += len(result) == 0
         return result
     
     def extract_metadata(self, source_doc):
@@ -96,15 +96,15 @@ class LinCEAdapter(BaseAdapter):
             "idx": source_doc["idx"]
         }
 
-    def make_id(self, source, source_doc):
+    def make_id(self, source_doc):
         # Make ID
-        super().make_id(source, source_doc)
+        super().make_id(source_doc)
         return
     
     def validate(self):
         return {
             "ids_unique": len(self.ids_observed) == len(set(self.ids_observed)),
-            "empty_doc_count": self.empty_doc_count,
+            "empty_text_count": self.empty_text_count,
             "docs_dropped": self.docs_dropped,
             "labels_observed": list(self.labels_observed)
         }
@@ -122,7 +122,7 @@ class LinCEAdapter(BaseAdapter):
             metadata = self.extract_metadata(source_doc)
     
             yield UnifiedText(
-                id=self.make_id("lince", metadata),
+                id=self.make_id(metadata),
                 text=text,
                 metadata=metadata
             )

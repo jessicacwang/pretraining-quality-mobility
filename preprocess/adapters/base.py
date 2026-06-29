@@ -6,9 +6,11 @@ from typing import Dict
 class BaseAdapter:
     TARGET_ID_KEYS = []    
     def __init__(self, root_path: str, file_pattern: str):
+        self.name = ""
         self.path = Path(root_path)
         self.file_pattern = file_pattern
         self.ids_observed = list()
+        self.empty_text_count = 0
         return
     
     def _iter_source_documents(self):
@@ -20,10 +22,10 @@ class BaseAdapter:
     def extract_metadata(self):
         return {}
 
-    def make_id(self, source: str, metadata: Dict):
+    def make_id(self, metadata: Dict):
         target_values = [metadata[k] for k in self.TARGET_ID_KEYS]
         payload = f"{':'.join(target_values)}".encode()
-        result = f"{source}_{hashlib.sha256(payload).hexdigest()}"
+        result = f"{self.name}_{hashlib.sha256(payload).hexdigest()}"
         # Add ID to the list seen
         self.ids_observed.append(result)
         return result
