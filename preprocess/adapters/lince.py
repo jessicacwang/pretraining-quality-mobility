@@ -1,20 +1,20 @@
 """CorpusAdapter for LinCE"""
 import csv
 from ast import literal_eval
-from typing import Iterator, Dict, List, Any
+from typing import Iterator, Dict, List
+from data import UnifiedText
 from preprocess.adapters.base import BaseAdapter
 from collections import Counter
 
 class LinCEAdapter(BaseAdapter):
     OTHER_LABELS = ["other", "eng&spa", "rest", "mixed"]
     SOURCE_KEYS = ["idx", "words", "lid", "component", "non_english", "split"]
-    TARGET_ID_KEYS = ["component", "split", "idx"]
+    TARGET_ID_KEYS = ["component", "non_english", "split", "idx"]
 
     def __init__(self, root_path, file_pattern):
         super().__init__(root_path, file_pattern)
         self.labels_observed = set()
         self.ids_observed = list()
-        self.total_docs = 0
         self.docs_dropped = 0
         self.empty_doc_count = 0
         
@@ -46,11 +46,14 @@ class LinCEAdapter(BaseAdapter):
                         self.docs_dropped += 1
                         continue
                     else:
+                        # Update global labels observed
+                        self.labels_observed |= set(row["lid"])
+
                         # add file-level properties to row
                         row |= file_info
-                        # yield row
+
+                        # yield result
                         yield {key: row[key] for key in self.SOURCE_KEYS if key in row}
-        return
     
     def _compute_cmi(self, lid: List[str]) -> int:
         lid_counts = Counter(lid)
@@ -72,67 +75,71 @@ class LinCEAdapter(BaseAdapter):
             return 1 - (max_w_i/(n - u))
     
     def extract_text(self, source_doc):
-        """Create whitespace joined text and drop words field"""
+        """Create whitespace joined text"""
         # Create new field
-        source_doc["text"] = ' '.join(source_doc["words"])
+        result = ' '.join(source_doc["words"])
 
         # Increment if empty
-        self.empty_doc_count += len(source_doc["words"]) == 0
-
-        # Drop field
-        del source_doc["words"]
-        return
+        self.empty_doc_count += len(result) == 0
+        return result
     
     def extract_metadata(self, source_doc):
-        """Compute CMI and drop lid field"""
+        """Compute CMI"""
         # Compute score
-        source_doc["cmi"] = self._compute_cmi(source_doc["lid"])
+        score = self._compute_cmi(source_doc["lid"])
         
-        # Update global labels observed
-        self.labels_observed |= set(source_doc["lid"])
-
-        # Drop field
-        del source_doc["lid"]
-        return
+        return {
+            "cmi": score,
+            "component": source_doc["component"],
+            "non_english": source_doc["non_english"],
+            "split": source_doc["split"],
+            "idx": source_doc["idx"]
+        }
 
     def make_id(self, source, source_doc):
         # Make ID
         super().make_id(source, source_doc)
-
-        # Add ID to the list seen
-        self.ids_observed.append(source_doc["id"])
         return
     
     def validate(self):
         return {
             "ids_unique": len(self.ids_observed) == len(set(self.ids_observed)),
-            "total_docs": self.total_docs,
             "empty_doc_count": self.empty_doc_count,
             "docs_dropped": self.docs_dropped,
             "labels_observed": list(self.labels_observed)
         }
     
+    def clean_text(self, text):
+        return super().clean_text(text)
+    
     # ====================== ENTRY POINT ======================
     
     def iter_documents(self):
         for source_doc in self._iter_source_documents():
-            # Compute CMI on original LID labels
-            self.extract_metadata(source_doc)
-
             # join words to new text field
-            self.extract_text(source_doc)
-
-            # make ID
-            self.make_id("lince", source_doc)
-
-            self.total_docs += 1
-            yield source_doc
+            text = self.extract_text(source_doc)
+            text = self.clean_text(text)
+            metadata = self.extract_metadata(source_doc)
+    
+            yield UnifiedText(
+                id=self.make_id("lince", metadata),
+                text=text,
+                metadata=metadata
+            )
     
 def main():
-    foo = LinCEAdapter("data/lince-kaggle", "*_*eng_*.csv")
-    list(foo.iter_documents())
+    foo = LinCEAdapter("../data/lince-kaggle", "*_*eng_*.csv")
+    
+    try:
+        docs = list(foo.iter_documents())
+        print(f"Successfully processed {len(docs)} documents")
+        if docs:
+            print(f"Sample doc: {docs[0]}")
+    except Exception as e:
+        print(f"Failed at document {len(foo.ids_observed)}: {e}")
+        raise  # re-raise so you get the full traceback
+    
     print(foo.validate())
-    return
 
 if __name__ == "__main__":
     main()
