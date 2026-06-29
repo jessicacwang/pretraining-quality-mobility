@@ -1,3 +1,3 @@
 {"id": "lince_<component:split:idx>", "source": "lince", "component": "lid", "non_english": "hin", "split": "train", "idx": 1, "cmi": 0.37, "cluster": 5, "token_percentile": null}
-{"id": "glowbe_<component:source_filename:glowbe_doc_id>", "source": "glowbe", "source_filename": "glowbe-text/filename", "glowbe_doc_id": 12345678, "component": null, "genre": "general", "original": null, "cluster": 1, "token_percentile": null}
-{"id": "ice_<component:source_filename>", "source": "ice", "source_filename": "ice-sg/path/to/file", "modality": "written", "component": null, "genre": "W2A", "original": null, "cluster": 2, "token_percentile": null}
+{"id": "glowbe_<component:source_filename:glowbe_doc_id>", "source": "glowbe", "source_filename": "glowbe-text/filename", "glowbe_doc_id": 12345678, "component": null, "genre": "general", "cluster": 1, "token_percentile": null}
+{"id": "ice_<component:source_filename>", "source": "ice", "source_filename": "ice-sg/path/to/file", "modality": "written", "component": null, "genre": "W2A", "cluster": 2, "token_percentile": null}
