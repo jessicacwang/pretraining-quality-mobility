@@ -8,6 +8,7 @@ class BaseAdapter:
     def __init__(self, root_path: str, file_pattern: str):
         self.path = Path(root_path)
         self.file_pattern = file_pattern
+        self.ids_observed = list()
         return
     
     def _iter_source_documents(self):
@@ -19,11 +20,13 @@ class BaseAdapter:
     def extract_metadata(self):
         return {}
 
-    def make_id(self, source: str, source_doc: Dict):
-        target_values = [source_doc[k] for k in self.TARGET_ID_KEYS]
+    def make_id(self, source: str, metadata: Dict):
+        target_values = [metadata[k] for k in self.TARGET_ID_KEYS]
         payload = f"{':'.join(target_values)}".encode()
-        source_doc["id"] = f"{source}_{hashlib.sha256(payload).hexdigest()}"
-        return
+        result = f"{source}_{hashlib.sha256(payload).hexdigest()}"
+        # Add ID to the list seen
+        self.ids_observed.append(result)
+        return result
 
     def clean_text(self, text):
         return text
