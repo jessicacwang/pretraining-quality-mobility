@@ -564,9 +564,7 @@
                     "validation": {
                         "ids_unique": null,
                         "empty_doc_count": null,
-                        "labels_observed": {
-                            "lid": ["lang1", "lang2", "other"]
-                        }
+                        "labels_observed": ["lang1", "lang2", "other"]
                     }
                 }
 
