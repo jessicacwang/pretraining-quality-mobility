@@ -5,6 +5,8 @@ from pathlib import Path
 import zipfile
 import trafilatura
 import tempfile
+from typing import Dict
+from nltk.tokenize import PunktSentenceTokenizer
 
 class GloWbeAdapter(BaseAdapter):
     TARGET_ID_KEYS = ["component", "source_filename", "glowbe_doc_id"]
@@ -13,18 +15,21 @@ class GloWbeAdapter(BaseAdapter):
         self.name = "glowbe"
         self.temp_dir = tempfile.TemporaryDirectory()
         self.extract_dir = Path(self.temp_dir.name)
+        self.obfuscated_count = 0
+        self.tokenizer = PunktSentenceTokenizer()
 
+    # ====================== BEFORE ITERATING ========================
     def prepare(self):
         for path in self.path.glob(self.file_pattern):
             # unzip .zip
             with zipfile.ZipFile(path, "r") as archive:
                 archive.extractall(self.extract_dir)
-
     
     def cleanup(self):
         if self.temp_dir is not None:
             self.temp_dir.cleanup()
 
+    # ====================== HELPERS ========================
     def _parse_line(self, line: str) -> tuple[str, str]:
         try:
             glowbe_doc_id, glowbe_text = line[2:].split(" ", maxsplit=1)
@@ -63,13 +68,14 @@ class GloWbeAdapter(BaseAdapter):
                         "genre": file_genre
                     }
     
-    def extract_metadata(self, source_doc):
+    def extract_metadata(self, source_doc: Dict, source_text: str):
         # attrs: source_filename, glowbe_doc_id, genre (general or blog)
         return {
             "component": source_doc["component"],
             "source_filename": source_doc["source_filename"],
             "glowbe_doc_id": source_doc["glowbe_doc_id"],
-            "genre": source_doc["genre"]
+            "genre": source_doc["genre"],
+            "original": source_text
         }
     
     def extract_text(self, source_doc):
@@ -77,14 +83,22 @@ class GloWbeAdapter(BaseAdapter):
         return source_doc["glowbe_text"]
     
     def clean_text(self, text):
-        # remove any HTML tags 
-        text = text.replace("@ @ @ @ @ @ @ @ @ @ ", "")
-        return trafilatura.extract(text, favor_recall=True)
+        result = ""
+        # remove garbled content surrounding '@' symbols
+        for start, end in self.tokenizer.span_tokenize(text):
+            if "@ @ @ @ @ @ @ @ @ @" in text[start:end]:
+                self.obfuscated_count += 1
+                continue
+            else:
+                result += text[start:end]
+        return trafilatura.extract(result, favor_recall=True)
     
+    # ====================== FINAL VALIDATION ========================
     def validate(self):
         return {
             "ids_unique": len(self.ids_observed) == len(set(self.ids_observed)),
             "empty_text_count": self.empty_text_count,
+            "obfuscated_count": self.obfuscated_count
         }
 
 def main():

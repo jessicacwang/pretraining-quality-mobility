@@ -45,9 +45,8 @@ class BaseAdapter:
     # ====================== ENTRY POINT ======================
     def iter_documents(self):
         for source_doc in self._iter_source_documents():
-            # join words to new text field
             text = self.extract_text(source_doc)
-            metadata = self.extract_metadata(source_doc)
+            metadata = self.extract_metadata(source_doc, text)
             text = self.clean_text(text)
     
             yield UnifiedText(
