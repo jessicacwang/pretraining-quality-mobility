@@ -82,7 +82,7 @@ class LinCEAdapter(BaseAdapter):
         self.empty_text_count += len(result) == 0
         return result
     
-    def extract_metadata(self, source_doc):
+    def extract_metadata(self, source_doc: Dict, source_text: str = None):
         """Compute CMI"""
         # Compute score
         score = self._compute_cmi(source_doc["lid"])
