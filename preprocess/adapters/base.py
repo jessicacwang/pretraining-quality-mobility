@@ -1,10 +1,13 @@
 """Base class for CorpusAdapter objects: disover documents, construct IDs, extract metadata and prepare text"""
+
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Iterator
 from data import UnifiedText
 
+
 class BaseAdapter:
-    TARGET_ID_KEYS = []    
+    TARGET_ID_KEYS = []
+
     def __init__(self, root_path: str, file_pattern: str):
         self.name = ""
         self.path = Path(root_path)
@@ -12,7 +15,7 @@ class BaseAdapter:
         self.ids_observed = list()
         self.empty_text_count = 0
         return
-    
+
     def _iter_source_documents(self):
         raise NotImplementedError()
 
@@ -35,7 +38,7 @@ class BaseAdapter:
 
     def validate(self):
         raise NotImplementedError()
-    
+
     def prepare(self):
         pass
 
@@ -43,14 +46,10 @@ class BaseAdapter:
         pass
 
     # ====================== ENTRY POINT ======================
-    def iter_documents(self):
+    def iter_documents(self) -> Iterator[UnifiedText]:
         for source_doc in self._iter_source_documents():
             text = self.extract_text(source_doc)
             metadata = self.extract_metadata(source_doc, text)
             text = self.clean_text(text)
-    
-            yield UnifiedText(
-                id=self.make_id(metadata),
-                text=text,
-                metadata=metadata
-            )
+
+            yield UnifiedText(id=self.make_id(metadata), text=text, metadata=metadata)
