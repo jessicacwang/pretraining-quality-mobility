@@ -1,9 +1,11 @@
 """CorpusAdapter for LinCE"""
+
 import csv
 from ast import literal_eval
 from typing import Iterator, Dict, List
 from preprocess.adapters.base import BaseAdapter
 from collections import Counter
+
 
 class LinCEAdapter(BaseAdapter):
     OTHER_LABELS = ["other", "eng&spa", "rest", "mixed"]
@@ -16,11 +18,11 @@ class LinCEAdapter(BaseAdapter):
         self.labels_observed = set()
         self.ids_observed = list()
         self.docs_dropped = 0
-        
+
     def _iter_source_documents(self) -> Iterator[Dict]:
         # loop over eng train and validation docs
         for file_path in self.path.glob(self.file_pattern):
-        #     # parse filename into source, task, non_english, split fields
+            #     # parse filename into source, task, non_english, split fields
             file_parts = str(file_path).split("_")
             component = file_parts[0].split("/")[-1]
             non_english = file_parts[1].replace("eng", "")
@@ -29,7 +31,7 @@ class LinCEAdapter(BaseAdapter):
             file_info = {
                 "component": component,
                 "non_english": non_english,
-                "split": split
+                "split": split,
             }
             with open(file_path, "r", encoding="utf-8") as f:
                 file_reader = csv.DictReader(f)
@@ -41,7 +43,7 @@ class LinCEAdapter(BaseAdapter):
                     row["lid"] = literal_eval(row["lid"])
 
                     # Skip rows if they don't have LID labels
-                    if ''.join(row["lid"]) == "":
+                    if "".join(row["lid"]) == "":
                         self.docs_dropped += 1
                         continue
                     else:
@@ -53,7 +55,7 @@ class LinCEAdapter(BaseAdapter):
 
                         # yield result
                         yield {key: row[key] for key in self.SOURCE_KEYS if key in row}
-    
+
     def _compute_cmi(self, lid: List[str]) -> int:
         lid_counts = Counter(lid)
 
@@ -62,57 +64,59 @@ class LinCEAdapter(BaseAdapter):
 
         # u = tokens with non-language labels
         u = sum([v for k, v in lid_counts.items() if k in self.OTHER_LABELS])
-        
+
         # Base case from Das & Gambäck 2014
         if n == u:
             return 0
-        elif n < u: # Safeguard
+        elif n < u:  # Safeguard
             return None
         else:
             # most common label used = max(w_i)
-            max_w_i = [c for c in lid_counts.most_common() if c[0] not in self.OTHER_LABELS][0][1]
-            return 1 - (max_w_i/(n - u))
-    
+            max_w_i = [
+                c for c in lid_counts.most_common() if c[0] not in self.OTHER_LABELS
+            ][0][1]
+            return 1 - (max_w_i / (n - u))
+
     def extract_text(self, source_doc):
         """Create whitespace joined text"""
         # Create new field
-        result = ' '.join(source_doc["words"])
+        result = " ".join(source_doc["words"])
 
         # Increment if empty
         self.empty_text_count += len(result) == 0
         return result
-    
+
     def extract_metadata(self, source_doc: Dict, source_text: str = None):
         """Compute CMI"""
         # Compute score
         score = self._compute_cmi(source_doc["lid"])
-        
+
         return {
             "cmi": score,
             "component": source_doc["component"],
             "non_english": source_doc["non_english"],
             "split": source_doc["split"],
-            "idx": source_doc["idx"]
+            "idx": source_doc["idx"],
         }
 
     def make_id(self, source_doc):
         return super().make_id(source_doc)
-    
+
     def validate(self):
         return {
             "ids_unique": len(self.ids_observed) == len(set(self.ids_observed)),
             "empty_text_count": self.empty_text_count,
             "docs_dropped": self.docs_dropped,
-            "labels_observed": list(self.labels_observed)
+            "labels_observed": list(self.labels_observed),
         }
-    
+
     def clean_text(self, text):
         return super().clean_text(text)
 
-    
+
 def main():
     foo = LinCEAdapter("../toy-data/lince-kaggle", "*_*eng_*.csv")
-    
+
     try:
         docs = list(foo.iter_documents())
         print(f"Successfully processed {len(docs)} documents")
@@ -121,8 +125,9 @@ def main():
     except Exception as e:
         print(f"Failed at document {len(foo.ids_observed)}: {e}")
         raise  # re-raise so you get the full traceback
-    
+
     print(foo.validate())
+
 
 if __name__ == "__main__":
     main()
