@@ -9,8 +9,8 @@ from collections import Counter
 
 class LinCEAdapter(BaseAdapter):
     OTHER_LABELS = ["other", "eng&spa", "rest", "mixed"]
-    SOURCE_KEYS = ["idx", "words", "lid", "component", "non_english", "split"]
-    TARGET_ID_KEYS = ["component", "non_english", "split", "idx"]
+    SOURCE_KEYS = ["idx", "words", "lid"]
+    TARGET_ID_KEYS = ["component", "non_english", "source_filename", "idx"]
 
     def __init__(self, root_path, file_pattern):
         super().__init__(root_path, file_pattern)
@@ -32,6 +32,7 @@ class LinCEAdapter(BaseAdapter):
                 "component": component,
                 "non_english": non_english,
                 "split": split,
+                "source_filename": file_path.stem
             }
             with open(file_path, "r", encoding="utf-8") as f:
                 file_reader = csv.DictReader(f)
@@ -50,11 +51,13 @@ class LinCEAdapter(BaseAdapter):
                         # Update global labels observed
                         self.labels_observed |= set(row["lid"])
 
+                        # filter keys
+                        row = {key: row[key] for key in self.SOURCE_KEYS if key in row}
+
                         # add file-level properties to row
                         row |= file_info
 
-                        # yield result
-                        yield {key: row[key] for key in self.SOURCE_KEYS if key in row}
+                        yield row
 
     def _compute_cmi(self, lid: List[str]) -> int:
         lid_counts = Counter(lid)
@@ -92,11 +95,12 @@ class LinCEAdapter(BaseAdapter):
         score = self._compute_cmi(source_doc["lid"])
 
         return {
-            "cmi": score,
             "component": source_doc["component"],
+            "source_filename": source_doc["source_filename"],
             "non_english": source_doc["non_english"],
             "split": source_doc["split"],
             "idx": source_doc["idx"],
+            "cmi": score,
         }
 
     def make_id(self, source_doc):
