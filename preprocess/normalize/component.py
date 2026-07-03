@@ -3,7 +3,8 @@ import re
 from pathlib import Path
 from typing import Dict, Any, List
 
-class ComponentReorganizer:
+
+class ComponentNormalizer:
     """Default class for reorganizing ICE components; does not handle ICE-EA."""
 
     _ENCODINGS = ["utf-8", "latin-1", "cp1252", "iso-8859-1"]
@@ -196,7 +197,7 @@ class ComponentReorganizer:
         return self.changes, self.errors, self.warnings, self.unmatched
 
 
-class AggregatedComponentReorganizer(ComponentReorganizer):
+class AggregatedComponentNormalizer(ComponentNormalizer):
     """Base class for components with documents aggregated by category (genre or modality)"""
 
     def __init__(
@@ -209,8 +210,10 @@ class AggregatedComponentReorganizer(ComponentReorganizer):
     ):
         super().__init__(name, dry_run, source_base, target_base, config)
         self.file__ENCODINGS = set()
-        self.first_line_pattern = re.compile(config.get("first_line_pattern"), self.flags)
-        self.metadata_pattern = None # To be set by subclasses
+        self.first_line_pattern = re.compile(
+            config.get("first_line_pattern"), self.flags
+        )
+        self.metadata_pattern = None  # To be set by subclasses
         return
 
     def _copy_file(self, source_path: Path, target_path: Path, contents: str) -> None:
@@ -275,7 +278,7 @@ class AggregatedComponentReorganizer(ComponentReorganizer):
 
     def _split_file(self, file_path: Path):
         """Split the contents of a file into individual documents and codes"""
-        for encoding in ComponentReorganizer._ENCODINGS:
+        for encoding in ComponentNormalizer._ENCODINGS:
             try:
                 with open(file_path, mode="r", encoding=encoding) as f:
                     contents = f.readlines()
@@ -307,7 +310,7 @@ class AggregatedComponentReorganizer(ComponentReorganizer):
         return
 
 
-class EAComponentReorganizer(AggregatedComponentReorganizer):
+class EAComponentNormalizer(AggregatedComponentNormalizer):
     """Class for ICE-EA reorganization; handles splitting of aggregated documents"""
 
     def __init__(
@@ -340,7 +343,7 @@ class EAComponentReorganizer(AggregatedComponentReorganizer):
         return self.target_base / Path(target_name)
 
 
-class GBComponentReorganizer(AggregatedComponentReorganizer):
+class GBComponentNormalizer(AggregatedComponentNormalizer):
     """Class for ICE-GB reorganization; handles splitting of exported aggregate documents"""
 
     def __init__(
@@ -356,12 +359,13 @@ class GBComponentReorganizer(AggregatedComponentReorganizer):
         return
 
     def _propose_change(self, metadata):
-        return ComponentReorganizer._propose_change(self, metadata)
+        return ComponentNormalizer._propose_change(self, metadata)
 
     def _parse_contents(self, contents: List[str]) -> Dict[str, str]:
         documents = dict()
         current_doc = None
 
+        # TODO: use ICE style line anno, not SGML
         for line in contents:
             stripped = line.strip("\n")
             match = self.first_line_pattern.match(stripped)
@@ -372,8 +376,9 @@ class GBComponentReorganizer(AggregatedComponentReorganizer):
             elif current_doc is not None:
                 documents[current_doc] += stripped
         return documents
-    
-class NGComponentReorganizer(ComponentReorganizer):
+
+
+class NGComponentNormalizer(ComponentNormalizer):
     """Class for ICE-NG reorganization; handles mapping of genre descriptions to codes."""
 
     def __init__(
@@ -412,16 +417,18 @@ class NGComponentReorganizer(ComponentReorganizer):
 
         return metadata
 
+
 if __name__ == "__main__":
     import json
+
     with open("preprocess/config/ice_reorganize.json", "r") as f:
         mapping = json.load(f)
-    foo = GBComponentReorganizer(
+    foo = GBComponentNormalizer(
         "ICE-GB",
         False,
         Path(mapping.get("source_base")),
         Path(mapping.get("target_base")),
-        mapping.get("component_configs").get("ICE-GB")
+        mapping.get("component_configs").get("ICE-GB"),
     )
 
     foo.run()

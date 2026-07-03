@@ -12,7 +12,8 @@ def main():
     # open metadata writer
 
     # initialize adapters
-    adapters = [GloWbeAdapter(), ICEAdapter(), LinCEAdapter]
+    #TODO: add root_path and file pattern params
+    adapters = [GloWbeAdapter(), ICEAdapter(), LinCEAdapter()]
 
     # loop through source adapters
         # register corpus in manifest
@@ -29,4 +30,5 @@ def main():
     return
 
 if __name__ == "__main__":
+    #TODO: load unify.json 
     main()
