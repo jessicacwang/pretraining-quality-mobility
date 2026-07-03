@@ -365,14 +365,13 @@ class GBComponentNormalizer(AggregatedComponentNormalizer):
         documents = dict()
         current_doc = None
 
-        # TODO: use ICE style line anno, not SGML
         for line in contents:
             stripped = line.strip("\n")
             match = self.first_line_pattern.match(stripped)
             if match:
                 current_doc = match.group(1)
                 if current_doc not in documents:
-                    documents[current_doc] = ""
+                    documents[current_doc] = stripped
             elif current_doc is not None:
                 documents[current_doc] += stripped
         return documents
@@ -421,7 +420,7 @@ class NGComponentNormalizer(ComponentNormalizer):
 if __name__ == "__main__":
     import json
 
-    with open("preprocess/config/ice_reorganize.json", "r") as f:
+    with open("preprocess/config/ice_dir_normalize.json", "r") as f:
         mapping = json.load(f)
     foo = GBComponentNormalizer(
         "ICE-GB",

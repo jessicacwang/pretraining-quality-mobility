@@ -49,8 +49,8 @@
             "source_root": "ICE-GB/corpus",
             "target_code": "gb",
             "pattern": "(spoken|written)/all\\.txt",
-            "first_line_pattern": "<s id=ICE_GB_([SW][1-9][A-Z]_\\d+)_X*\\d+>",
-            "metadata_pattern": "([SW][1-9][A-Z])_(\\d+)"
+            "first_line_pattern": "<ICE-GB:([SW][1-9][A-Z]-\\d+) #X?001:\\d+(:[A-Z])?>",
+            "metadata_pattern": "([SW][1-9][A-Z])-(\\d+)"
         },
         "ICE-GBR": {
             "source_root": "ICE-GBR/ICE_GBR_Written_Component",
