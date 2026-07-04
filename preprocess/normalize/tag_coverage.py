@@ -18,6 +18,7 @@ def parse_regex_targets(regex_file_path: str) -> Dict[int, Any]:
                 raise
     return result
 
+
 def parse_inventory(tag_file_path: str) -> Dict[str, int]:
     result = dict()
     _LINE_RE = re.compile(r"^\s*(\d+) (.+)$")
@@ -31,10 +32,9 @@ def parse_inventory(tag_file_path: str) -> Dict[str, int]:
                 print(f"!! LINE {idx}: No match")
     return result
 
+
 def track_hits(inventory: Dict[str, int], regex_targets: Dict[int, Any]):
-    report = defaultdict(
-        lambda: {"total_count": 0, "distinct": 0}
-    )
+    report = defaultdict(lambda: {"total_count": 0, "distinct": 0})
     pattern_hits = defaultdict(lambda: [])
     missing = []
 
@@ -45,7 +45,7 @@ def track_hits(inventory: Dict[str, int], regex_targets: Dict[int, Any]):
             if regex.match(tag):
                 if not found_match:
                     found_match = True
-                
+
                 pattern_hits[tag].append(regex.pattern)
                 report[line_num]["distinct"] += 1
                 report[line_num]["total_count"] += count
@@ -53,6 +53,7 @@ def track_hits(inventory: Dict[str, int], regex_targets: Dict[int, Any]):
         if not found_match:
             missing.append(tag)
     return report, missing, pattern_hits
+
 
 def main(regex_file_path: str, tag_file_path: str):
     # Parse regex file
@@ -63,17 +64,15 @@ def main(regex_file_path: str, tag_file_path: str):
 
     # Track regex hits against inventory
     reports, missing, hits = track_hits(inventory, regex_targets)
-    
+
     ranked_reports = sorted(
-        reports.items(),
-        key=lambda t: t[1]["total_count"],
-        reverse=True
+        reports.items(), key=lambda t: t[1]["total_count"], reverse=True
     )
 
     total_occurrences = sum([count for count in inventory.values()])
     # Report
     print(f"{total_occurrences} matches for {len(regex_targets)} regular expressions")
-    
+
     duplicates = []
     total_dups = 0
     for tag, pat_lst in hits.items():
@@ -83,12 +82,11 @@ def main(regex_file_path: str, tag_file_path: str):
             total_dups += inventory[tag] * (len(pat_lst) - 1)
 
     print(f"{len(duplicates)} tags match >1 regex pattern. Examples:")
-    
 
     for tag, pat_lst in duplicates[0:10]:
         print(f"{tag:30} {", ".join(pat_lst[0:5]):40}")
     # print(f"{'regex':30} {'distinct hits':>9} {'total hits':>12}")
-    
+
     total_missing = sum([inventory[tag] for tag in missing])
     print(f"\n{len(missing)} missed tags. Preview:")
     for tag in missing[0:10]:
@@ -98,9 +96,12 @@ def main(regex_file_path: str, tag_file_path: str):
     running = 0
     for _, report in ranked_reports:
         running += report["total_count"]
-    
-    print(f"\nCOVERAGE: {(running - total_dups) / total_occurrences * 100:.4f}% OF ALL OCCURRENCES")
+
+    print(
+        f"\nCOVERAGE: {(running - total_dups) / total_occurrences * 100:.4f}% OF ALL OCCURRENCES"
+    )
     return
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

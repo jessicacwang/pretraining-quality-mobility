@@ -209,8 +209,8 @@ class AggregatedComponentNormalizer(ComponentNormalizer):
         config: Dict[str, Any],
     ):
         super().__init__(name, dry_run, source_base, target_base, config)
-        self.file__ENCODINGS = set()
-        self.first_line_pattern = re.compile(
+        self._FILE_ENCODINGS = set()
+        self._FIRST_LINE_PATTERN = re.compile(
             config.get("first_line_pattern"), self.flags
         )
         self.metadata_pattern = None  # To be set by subclasses
@@ -235,7 +235,7 @@ class AggregatedComponentNormalizer(ComponentNormalizer):
             self.warnings.append(f"Duplicate resolved: {target_path.name}")
 
         # Write to a new file
-        with open(target_path, "w", encoding=list(self.file__ENCODINGS).pop()) as f:
+        with open(target_path, "w", encoding=list(self._FILE_ENCODINGS).pop()) as f:
             f.write(contents)
 
         # Record change
@@ -267,7 +267,7 @@ class AggregatedComponentNormalizer(ComponentNormalizer):
         # Loop over lines, collecting documents and contents
         for line in contents:
             stripped = line.rstrip("\n")
-            match = self.first_line_pattern.match(stripped)
+            match = self._FIRST_LINE_PATTERN.match(stripped)
             if match:
                 current_doc = stripped
                 documents[current_doc] = ""
@@ -282,7 +282,7 @@ class AggregatedComponentNormalizer(ComponentNormalizer):
             try:
                 with open(file_path, mode="r", encoding=encoding) as f:
                     contents = f.readlines()
-                    self.file__ENCODINGS.add(encoding)
+                    self._FILE_ENCODINGS.add(encoding)
                     return contents
             except (UnicodeDecodeError, UnicodeError):
                 continue
@@ -323,7 +323,7 @@ class EAComponentNormalizer(AggregatedComponentNormalizer):
     ):
         super().__init__(name, dry_run, source_base, target_base, config)
         self.country_mapping = config.get("country_mapping")
-        self.metadata_pattern = self.first_line_pattern
+        self.metadata_pattern = self._FIRST_LINE_PATTERN
         return
 
     def _propose_change(self, metadata: Dict[str, str]) -> None:
@@ -367,7 +367,7 @@ class GBComponentNormalizer(AggregatedComponentNormalizer):
 
         for line in contents:
             stripped = line.strip("\n")
-            match = self.first_line_pattern.match(stripped)
+            match = self._FIRST_LINE_PATTERN.match(stripped)
             if match:
                 current_doc = match.group(1)
                 if current_doc not in documents:
