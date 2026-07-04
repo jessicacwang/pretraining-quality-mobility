@@ -32,7 +32,7 @@ class LinCEAdapter(BaseAdapter):
                 "component": component,
                 "non_english": non_english,
                 "split": split,
-                "source_filename": file_path.stem
+                "source_filename": file_path.stem,
             }
             with open(file_path, "r", encoding="utf-8") as f:
                 file_reader = csv.DictReader(f)
