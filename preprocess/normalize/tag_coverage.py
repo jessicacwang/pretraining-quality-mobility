@@ -11,7 +11,7 @@ def parse_regex_targets(regex_file_path: str) -> Dict[int, Any]:
         for idx, line in enumerate(lines, start=1):
             pattern = line.strip()
             try:
-                result[idx] = re.compile(pattern)
+                result[idx] = re.compile(pattern, flags=re.IGNORECASE)
             except re.error as e:
                 print(idx, line)
                 print(e)
@@ -42,7 +42,7 @@ def track_hits(inventory: Dict[str, int], regex_targets: Dict[int, Any]):
     for tag, count in inventory.items():
         found_match = False
         for line_num, regex in regex_targets.items():
-            if regex.match(tag.lower()):
+            if regex.match(tag):
                 if not found_match:
                     found_match = True
                 
