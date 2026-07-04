@@ -24,11 +24,11 @@ def cluster_tags(tag_counts: list) -> defaultdict:
         lambda: {"examples": [], "distinct": 0, "total_count": 0}
     )
 
-    _DIGIT_RE = re.compile(r"\d+")
-    _WHITESPACE_RE = re.compile(r"\s+")
+    _DIGIT_RE = re.compile(r"\d")
+    _WHITESPACE_RE = re.compile(r"\s")
     for tag, count in tag_counts:
         normalized_tag = tag.lower() # convert everything to lower case
-        normalized_tag = _DIGIT_RE.sub("#", normalized_tag) # substitute digits with placeholder
+        normalized_tag = _DIGIT_RE.sub("0", normalized_tag) # substitute digits with placeholder
         normalized_tag = _WHITESPACE_RE.sub(" ", normalized_tag) # normalize all whitespace
 
         # Accumulate reduced form tag and counts

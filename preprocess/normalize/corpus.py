@@ -12,7 +12,7 @@ class CorpusNormalizer:
     }
 
     def __init__(self, mapping_file: str, dry_run: bool = True):
-        """Generates proposed reorganization from components and executes changes."""
+        """Generates proposed normalization from components and executes changes."""
         self.dry_run = dry_run
         self.mapping = self._load_mapping(mapping_file)
         self.source_base = Path(self.mapping.get("source_base"))

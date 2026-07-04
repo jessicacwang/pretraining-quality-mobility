@@ -5,7 +5,7 @@ from typing import Dict, Any, List
 
 
 class ComponentNormalizer:
-    """Default class for reorganizing ICE components; does not handle ICE-EA."""
+    """Default class for normalizing ICE components; does not handle ICE-EA."""
 
     _ENCODINGS = ["utf-8", "latin-1", "cp1252", "iso-8859-1"]
     _GENRE_ID_GROUPS_DEFAULT = {"genre": 1, "id": 2}
@@ -311,7 +311,7 @@ class AggregatedComponentNormalizer(ComponentNormalizer):
 
 
 class EAComponentNormalizer(AggregatedComponentNormalizer):
-    """Class for ICE-EA reorganization; handles splitting of aggregated documents"""
+    """Class for ICE-EA normalization; handles splitting of aggregated documents"""
 
     def __init__(
         self,
@@ -371,9 +371,9 @@ class GBComponentNormalizer(AggregatedComponentNormalizer):
             if match:
                 current_doc = match.group(1)
                 if current_doc not in documents:
-                    documents[current_doc] = stripped
+                    documents[current_doc] = line
             elif current_doc is not None:
-                documents[current_doc] += stripped
+                documents[current_doc] += line
         return documents
 
 
