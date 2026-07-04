@@ -79,7 +79,7 @@ class GloWbeAdapter(BaseAdapter):
             "glowbe_doc_id": source_doc["glowbe_doc_id"],
             "genre": source_doc["genre"],
             "original": source_text,
-            "obfuscated": source_text.count("@ @ @ @ @ @ @ @ @ @")
+            "obfuscated": source_text.count("@ @ @ @ @ @ @ @ @ @"),
         }
 
     def extract_text(self, source_doc):
