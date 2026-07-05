@@ -34,6 +34,8 @@ class BaseAdapter:
         return result
 
     def clean_text(self, text):
+        # Increment if empty
+        self.empty_text_count += len(text) == 0
         return text
 
     def validate(self):

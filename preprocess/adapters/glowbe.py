@@ -4,6 +4,7 @@ from preprocess.adapters.base import BaseAdapter
 from typing import Iterator
 from pathlib import Path
 import zipfile
+import re
 import trafilatura
 import tempfile
 from typing import Dict
@@ -12,6 +13,8 @@ from nltk.tokenize import PunktSentenceTokenizer
 
 class GloWbeAdapter(BaseAdapter):
     TARGET_ID_KEYS = ["component", "source_filename", "glowbe_doc_id"]
+    _ANGLE_BRACKET_RE = re.compile("<.*?>", flags=re.DOTALL)
+    _CRLF = re.compile(r"\r")
 
     def __init__(self, root_path, file_pattern):
         super().__init__(root_path, file_pattern)
@@ -20,6 +23,8 @@ class GloWbeAdapter(BaseAdapter):
         self.extract_dir = Path(self.temp_dir.name)
         self.obfuscated_count = 0
         self.tokenizer = PunktSentenceTokenizer()
+        self.current_doc = None
+        self.empty_doc_ids = []
 
     # ====================== BEFORE ITERATING ========================
     def prepare(self):
@@ -73,6 +78,7 @@ class GloWbeAdapter(BaseAdapter):
 
     def extract_metadata(self, source_doc: Dict, source_text: str):
         # attrs: source_filename, glowbe_doc_id, genre (general or blog)
+        self.current_doc = source_doc["glowbe_doc_id"]
         return {
             "component": source_doc["component"],
             "source_filename": source_doc["source_filename"],
@@ -85,25 +91,31 @@ class GloWbeAdapter(BaseAdapter):
     def extract_text(self, source_doc):
         # return text after ##<doc_id>
         result = source_doc["glowbe_text"]
-        self.empty_text_count += len(result) == 0
         return result
 
     def clean_text(self, text):
-        result = ""
+        clean = ""
         # remove garbled content surrounding '@' symbols
         for start, end in self.tokenizer.span_tokenize(text):
             if "@ @ @ @ @ @ @ @ @ @" in text[start:end]:
                 self.obfuscated_count += 1
                 continue
             else:
-                result += text[start:end]
-        return trafilatura.extract(result, favor_recall=True)
+                clean += text[start:end]
+        result = self._CRLF.sub("", clean)
+        # result = self._ANGLE_BRACKET_RE.sub("", result)
+        result = trafilatura.extract(clean, favor_recall=True)
+        if not bool(result):
+            self.empty_doc_ids.append(self.current_doc)
+            self.empty_text_count += 1
+        return result
 
     # ====================== FINAL VALIDATION ========================
     def validate(self):
         return {
             "ids_unique": len(self.ids_observed) == len(set(self.ids_observed)),
             "empty_text_count": self.empty_text_count,
+            "empty_doc_ids": self.empty_doc_ids,
             "obfuscated_count": self.obfuscated_count,
         }
 

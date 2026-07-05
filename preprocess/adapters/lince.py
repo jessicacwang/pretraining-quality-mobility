@@ -84,9 +84,6 @@ class LinCEAdapter(BaseAdapter):
         """Create whitespace joined text"""
         # Create new field
         result = " ".join(source_doc["words"])
-
-        # Increment if empty
-        self.empty_text_count += len(result) == 0
         return result
 
     def extract_metadata(self, source_doc: Dict, source_text: str = None):
