@@ -1,5 +1,5 @@
 import argparse
-from preprocess.reorganize.corpus_reorganizer import CorpusReorganizer
+from preprocess.normalize.corpus import CorpusNormalizer
 
 
 def main():
@@ -10,7 +10,7 @@ def main():
     parser.add_argument(
         "--mapping",
         help="Path to mapping JSON file",
-        default="preprocess/config/ice_reorganize.json",
+        default="preprocess/config/ice_dir_normalize.json",
     )
     parser.add_argument(
         "--execute", action="store_true", help="Execute changes (default is dry run)"
@@ -18,10 +18,10 @@ def main():
 
     args = parser.parse_args()
 
-    # define a CorpusReorganizer
-    reorganizer = CorpusReorganizer(mapping_file=args.mapping, dry_run=not args.execute)
+    # define a CorpusNormalizer
+    reorganizer = CorpusNormalizer(mapping_file=args.mapping, dry_run=not args.execute)
 
-    # Run the CorpusReorganizer
+    # Run the CorpusNormalizer
     reorganizer.run()
     return
 

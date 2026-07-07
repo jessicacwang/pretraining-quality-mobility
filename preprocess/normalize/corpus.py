@@ -1,17 +1,18 @@
 import json
 from pathlib import Path
 from typing import Dict, Any
-from preprocess.reorganize.component_reorganizer import *
+from preprocess.normalize.component import *
 
 
-class CorpusReorganizer:
+class CorpusNormalizer:
     _REORGANIZER_MAP = {
-        "ICE-EA": EAComponentReorganizer,
-        "ICE-NG": NGComponentReorganizer,
-        "ICE-GB": GBComponentReorganizer,
+        "ICE-EA": EAComponentNormalizer,
+        "ICE-NG": NGComponentNormalizer,
+        "ICE-GB": GBComponentNormalizer,
     }
+
     def __init__(self, mapping_file: str, dry_run: bool = True):
-        """Generates proposed reorganization from components and executes changes."""
+        """Generates proposed normalization from components and executes changes."""
         self.dry_run = dry_run
         self.mapping = self._load_mapping(mapping_file)
         self.source_base = Path(self.mapping.get("source_base"))
@@ -34,8 +35,10 @@ class CorpusReorganizer:
     # ============= COMPONENT PROCESSING =============
 
     def _process_component(self, component_name: str, config: Dict[str, Any]):
-        cls = self._REORGANIZER_MAP.get(component_name, ComponentReorganizer)
-        return cls(component_name, self.dry_run, self.source_base, self.target_base, config).run()
+        cls = self._REORGANIZER_MAP.get(component_name, ComponentNormalizer)
+        return cls(
+            component_name, self.dry_run, self.source_base, self.target_base, config
+        ).run()
 
     def run(self) -> None:
         # Print header
