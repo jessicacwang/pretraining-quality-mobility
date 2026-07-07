@@ -15,6 +15,9 @@ class PreprocessManifest(BaseManifest):
         step = self.data["steps"].setdefault("unify", {})
         step.setdefault("corpora", {})[corpus_name] = stats
         return
+    # ==========================================================================
+    # Enrich step methods
+    # ==========================================================================
 
     # ==========================================================================
     # Enrich step methods
