@@ -3,7 +3,8 @@
 This library defines Python classes to adapt LEU sources to JSONL format with basic metadata from the source material. Some attributes are inferred from the source data file names; others are inferred from the document material itself. Metadata like `token_count`, `token_percentile` are populated by `preprocess.enrich` module.
 
 The `BaseAdapter` class defines the main entry point, `iter_documents()` and 
-basic attributes for source-level validation: `self.ids_observed` and `self.empty_text_count`. 
+a nested dictionary `self._stats` to store corpus and component stats as the 
+`UnifiedText` objects are yielded. 
 
 ## GloWbe
 The `GloWbeAdapter` class is responsible for adapting GloWbe texts. Each input 
@@ -19,7 +20,7 @@ metadata = {
     ## Inferred from document material
     "glowbe_doc_id": <doc ID from first 11 characters of each line>,
     "original": <original text>
-    "obfuscated": <number of obfuscation strings>
+    "obfuscated_spans": <number of obfuscation strings>
 }
 ```
 
@@ -28,7 +29,9 @@ every 200 words. For this study, the sentences affected by obfuscation are
 removed by `clean_text()`. 
 
 ## ICE
-The `ICEAdapter` class is repsonsible for adapting ICE texts. Each input ICE file corresponds to a single document. The adapter yields `UnifiedDocument` objects with the following metadata dictionary:
+The `ICEAdapter` class is repsonsible for adapting ICE texts. Each input ICE file 
+corresponds to a single document. The adapter yields `UnifiedDocument` objects 
+with the following metadata dictionary:
 ```python
 metadata = {
     ## Inferred from file name
@@ -79,10 +82,9 @@ DROP TAG ONLY:
         ==> 'word'
 ```
 
-There are 3 edge cases:
+There are 2 edge cases:
 - the normative deletion tag form where the original text is included between angle brackets: `<-_{original_text}>` - in this case, the original text needs to be captured and preserved.
-- the named entity marker `<@>` as used for the ICE-AUS component, where but the tag surrounds an anonymized name, e.g., `<@>constituencyname5</@>` or `<@>secondname2</@>`
-- the standalone anonymized name tag `<name>`, as used exclusively in ICE-EA. It presents the same function as the `<@>` tag. 
+- the standalone anonymized name tag `<name>`, as used exclusively in ICE-EA. The angle brackets are removed but the placeholder word 'name(s)' is preserved. 
 
 The `ICEAdapter` class differs from its siblings in that it accepts an attribute `tag_registry` which provides 5 fields:
 ```json
@@ -102,7 +104,10 @@ The `ICEAdapter` class differs from its siblings in that it accepts an attribute
 ```
 
 ## LinCE
-The `LinCEAdapter` class is responsible for adapting LinCE data. Each input LinCE file coresponds to a data split (train/validation/test), but for the purpose of this study, any document with language identification labels is eligible to be selected (as a CMI score can be evaluated). Metadata looks like
+The `LinCEAdapter` class is responsible for adapting LinCE data. Each input LinCE 
+file coresponds to a data split (train/validation/test), but for the purpose of 
+this study, any document with language identification labels is eligible to be 
+selected (as a CMI score can be evaluated). Metadata looks like:
 ```python
 metadata = {
     ## Inferred from file name
