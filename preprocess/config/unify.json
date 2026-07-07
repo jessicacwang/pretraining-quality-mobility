@@ -28,6 +28,14 @@
                     "transcriber_deletion": {
                         "pat": "<-[/_](?P<original_text>[a-z'.]+)>",
                         "sub": "\\g<original_text>"
+                    },
+                    "horizontal_whitespace": {
+                        "pat": "[^\\S+\\r\\n]+",
+                        "sub": " "
+                    },
+                    "name_placeholder": {
+                        "pat": "</?(?P<placeholder>name[s]?)/?>/?",
+                        "sub": "\\g<placeholder>"
                     }
                 },
                 "drop_full_span": [
@@ -55,6 +63,7 @@
                 ],
                 "drop_tag_only": [
                     "<-/>",
+                    "</?@[a-z]*>",
                     "<[?]xml version=[\"']\\d\\.\\d[\"']( encoding=[\"']utf-8[\"'])?[?]?>",
                     "<[#]\\\\?>",
                     "<[$][ a-z?]+\\d*>",
