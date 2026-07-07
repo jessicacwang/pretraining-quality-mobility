@@ -12,7 +12,7 @@ from nltk.tokenize import PunktSentenceTokenizer
 
 
 class GloWbeAdapter(BaseAdapter):
-    TARGET_ID_KEYS = ["component", "source_filename", "glowbe_doc_id"]
+    TARGET_ID_KEYS = ("component", "source_filename", "glowbe_doc_id")
     _ANGLE_BRACKET_RE = re.compile("<.*?>", flags=re.DOTALL)
     _CRLF = re.compile(r"\r")
 
