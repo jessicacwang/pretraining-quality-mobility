@@ -19,14 +19,15 @@ class GloWbeAdapter(BaseAdapter):
     def __init__(self, root_path, file_pattern):
         super().__init__(root_path, file_pattern)
         self.name = "glowbe"
+        self.full_name = "Global Corpus of Web-based English"
         self.temp_dir = tempfile.TemporaryDirectory()
         self.extract_dir = Path(self.temp_dir.name)
-        self.obfuscated_count = 0
         self.tokenizer = PunktSentenceTokenizer()
-        self.current_doc = None
-        self.empty_doc_ids = []
+        self.add_stat("obfuscated_spans")
 
-    # ====================== BEFORE ITERATING ========================
+    # ==========================================================================
+    # Resource lifecycle
+    # ==========================================================================
     def prepare(self):
         for path in self.path.glob(self.file_pattern):
             # unzip .zip
@@ -37,7 +38,9 @@ class GloWbeAdapter(BaseAdapter):
         if self.temp_dir is not None:
             self.temp_dir.cleanup()
 
-    # ====================== HELPERS ========================
+    # ==========================================================================
+    # Subclass interface
+    # ==========================================================================
     def _parse_line(self, line: str) -> tuple[str, str]:
         try:
             glowbe_doc_id, glowbe_text = line[2:].split(" ", maxsplit=1)
@@ -85,40 +88,54 @@ class GloWbeAdapter(BaseAdapter):
             "glowbe_doc_id": source_doc["glowbe_doc_id"],
             "genre": source_doc["genre"],
             "original": source_text,
-            "obfuscated": source_text.count("@ @ @ @ @ @ @ @ @ @"),
+            "obfuscated_spans": source_text.count("@ @ @ @ @ @ @ @ @ @"),
         }
 
     def extract_text(self, source_doc):
         # return text after ##<doc_id>
         result = source_doc["glowbe_text"]
-        return result
-
+        return result if len(result) else None
+    
     def clean_text(self, text):
         clean = ""
         # remove garbled content surrounding '@' symbols
         for start, end in self.tokenizer.span_tokenize(text):
             if "@ @ @ @ @ @ @ @ @ @" in text[start:end]:
-                self.obfuscated_count += 1
                 continue
             else:
                 clean += text[start:end]
         result = self._CRLF.sub("", clean)
-        # result = self._ANGLE_BRACKET_RE.sub("", result)
-        result = trafilatura.extract(clean, favor_recall=True)
-        if not bool(result):
-            self.empty_doc_ids.append(self.current_doc)
-            self.empty_text_count += 1
+        result = self._ANGLE_BRACKET_RE.sub("", result)
+        # result = trafilatura.extract(clean, favor_recall=True)
         return result
 
-    # ====================== FINAL VALIDATION ========================
-    def validate(self):
-        return {
-            "ids_unique": len(self.ids_observed) == len(set(self.ids_observed)),
-            "empty_text_count": self.empty_text_count,
-            "empty_doc_ids": self.empty_doc_ids,
-            "obfuscated_count": self.obfuscated_count,
-        }
+    def validate(self, text, metadata):
+        if len(text) == len(metadata["original"]):
+            return False, "residual_tags_or_obfuscation"
+        return True, None
 
+    # ==========================================================================
+    # Corpus stats
+    # ==========================================================================
+    def update_stats(self, metadata):
+        component = metadata["component"]
+
+        comp_stats = self._stats["components"].setdefault(
+            component,
+            {
+                "documents_written": 0,
+                "extras": {
+                    "obfuscated_spans": 0
+                }
+            }
+        )
+
+        self._stats["extras"]["obfuscated_spans"] += metadata["obfuscated_spans"]
+        comp_stats["extras"]["obfuscated_spans"] += metadata["obfuscated_spans"]
+
+        # Update component level documents written
+        comp_stats["documents_written"] += 1
+        return
 
 def main():
     foo = GloWbeAdapter("../toy-data/glowbe/glowbe-text", "*.zip")
@@ -130,11 +147,11 @@ def main():
         if docs:
             print(f"Sample doc: {docs[0]}")
     except Exception as e:
-        print(f"Failed at document {len(foo.ids_observed)}: {e}")
+        print(f"Failed at document {foo.get_stats()["documents_seen"]}: {e}")
         raise  # re-raise so you get the full traceback
     finally:
         foo.cleanup()
-    print(foo.validate())
+    print(foo.get_stats())
 
 
 if __name__ == "__main__":

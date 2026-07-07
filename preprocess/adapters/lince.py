@@ -165,6 +165,9 @@ class LinCEAdapter(BaseAdapter):
 
         # Clear temp labels
         self._temp_labels = []
+
+        # Update component level documents written
+        comp_stats["documents_written"] += 1
         return
     
     def _compute_average_cmi(self, cmi_sum: int, cmi_count: int) -> int:
