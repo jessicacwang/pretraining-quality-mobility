@@ -61,7 +61,6 @@ class BaseManifest:
         if isinstance(obj, (Counter, defaultdict)):
             return dict(obj)
         raise TypeError(f"Type {type(obj)} not serializable")
-
     # ==========================================================================
     # Step execution
     # ==========================================================================
