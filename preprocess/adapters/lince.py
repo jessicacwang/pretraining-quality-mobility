@@ -4,21 +4,44 @@ import csv
 from ast import literal_eval
 from typing import Iterator, Dict, List
 from preprocess.adapters.base import BaseAdapter
-from collections import Counter
+from collections import Counter, defaultdict
 
 
 class LinCEAdapter(BaseAdapter):
-    OTHER_LABELS = ["other", "eng&spa", "rest", "mixed"]
-    SOURCE_KEYS = ["idx", "words", "lid"]
-    TARGET_ID_KEYS = ["component", "non_english", "source_filename", "idx"]
+    OTHER_LABELS = ("other", "eng&spa", "rest", "mixed")
+    SOURCE_KEYS = ("idx", "words", "lid")
+    TARGET_ID_KEYS = ("component", "non_english", "source_filename", "idx")
 
     def __init__(self, root_path, file_pattern):
         super().__init__(root_path, file_pattern)
         self.name = "lince"
-        self.labels_observed = set()
-        self.ids_observed = list()
-        self.docs_dropped = 0
+        self.full_name = "Linguistic Code-switching Evaluation Benchmark"
+        self.add_stat("labels_observed", set())
+        self.add_stat("cmi_sum")
+        self.add_stat("cmi_count")
+        self._temp_labels = [] # to track LID labels outside of stats/metadata
 
+    # ==========================================================================
+    # Subclass interface
+    # ==========================================================================
+    def _parse_row(self, row: Dict, file_info: Dict) -> Dict:
+        row["words"] = row["words"].replace(" ", ", ")
+        row["lid"] = row["lid"].replace(" ", ", ")
+        row["words"] = literal_eval(row["words"])
+        row["lid"] = literal_eval(row["lid"])
+
+        # Skip rows if they don't have LID labels
+        if "".join(row["lid"]) == "":
+            return None
+        else:
+            # filter keys
+            row = {key: row[key] for key in self.SOURCE_KEYS if key in row}
+
+            # add file-level properties to row
+            row |= file_info
+
+        return row
+    
     def _iter_source_documents(self) -> Iterator[Dict]:
         # loop over eng train and validation docs
         for file_path in self.path.glob(self.file_pattern):
@@ -38,26 +61,10 @@ class LinCEAdapter(BaseAdapter):
                 file_reader = csv.DictReader(f)
                 # loop over rows
                 for row in file_reader:
-                    row["words"] = row["words"].replace(" ", ", ")
-                    row["lid"] = row["lid"].replace(" ", ", ")
-                    row["words"] = literal_eval(row["words"])
-                    row["lid"] = literal_eval(row["lid"])
+                    doc = self._parse_row(row, file_info)
 
-                    # Skip rows if they don't have LID labels
-                    if "".join(row["lid"]) == "":
-                        self.docs_dropped += 1
-                        continue
-                    else:
-                        # Update global labels observed
-                        self.labels_observed |= set(row["lid"])
-
-                        # filter keys
-                        row = {key: row[key] for key in self.SOURCE_KEYS if key in row}
-
-                        # add file-level properties to row
-                        row |= file_info
-
-                        yield row
+                    if doc:
+                        yield doc
 
     def _compute_cmi(self, lid: List[str]) -> int:
         lid_counts = Counter(lid)
@@ -70,26 +77,36 @@ class LinCEAdapter(BaseAdapter):
 
         # Base case from Das & Gambäck 2014
         if n == u:
-            return 0
+            return 0.0
         elif n < u:  # Safeguard
             return None
         else:
-            # most common label used = max(w_i)
-            max_w_i = [
+            # find non-other labels
+            non_other_counts = [
                 c for c in lid_counts.most_common() if c[0] not in self.OTHER_LABELS
-            ][0][1]
+            ]
+            if not non_other_counts:
+                return 0.0
+            
+            # most common non-other label is max_w_i
+            max_w_i = non_other_counts[0][1]
+
             return 1 - (max_w_i / (n - u))
 
     def extract_text(self, source_doc):
         """Create whitespace joined text"""
         # Create new field
-        result = " ".join(source_doc["words"])
-        return result
+        if "".join(source_doc["words"]) == "":
+            return None
+        return " ".join(source_doc["words"])
 
     def extract_metadata(self, source_doc: Dict, source_text: str = None):
-        """Compute CMI"""
+        """Provenance metadata and CMI"""
         # Compute score
         score = self._compute_cmi(source_doc["lid"])
+
+        # Store labels temporarily
+        self._temp_labels = source_doc["lid"]
 
         return {
             "component": source_doc["component"],
@@ -100,23 +117,80 @@ class LinCEAdapter(BaseAdapter):
             "cmi": score,
         }
 
-    def make_id(self, source_doc):
-        return super().make_id(source_doc)
+    def validate(self, text, metadata):
+        cmi = metadata["cmi"]
 
-    def validate(self):
-        return {
-            "ids_unique": len(self.ids_observed) == len(set(self.ids_observed)),
-            "empty_text_count": self.empty_text_count,
-            "docs_dropped": self.docs_dropped,
-            "labels_observed": list(self.labels_observed),
-        }
+        if cmi is None:
+            return False, "missing_cmi"
+        
+        # CMI should be between 0 and 1
+        if not (0 <= cmi <= 1):
+            return False, "invalid_cmi_score"
+        
+        return True, None
+    # ==========================================================================
+    # Corpus stats
+    # ==========================================================================
+    def update_stats(self, metadata):
+        """Record CMI and labels observed and component documents written"""
+        component = metadata["component"]
+        labels = self._temp_labels
+        cmi = metadata["cmi"]
 
-    def clean_text(self, text):
-        return super().clean_text(text)
+        # Track labels at corpus level
+        self._stats["extras"]["labels_observed"] |= set(labels)
 
+        # Track labels at component level
+        comp_stats = self._stats["components"].setdefault(
+            component,
+            {
+                "documents_written": 0,
+                "extras": {
+                    "labels_observed": set(),
+                    "cmi_sum": 0,
+                    "cmi_count": 0
+                }
+            }
+        )
+
+        comp_stats["extras"]["labels_observed"] |= set(labels)
+
+        # Track CMI: corpus level
+        self._stats["extras"]["cmi_sum"] += cmi 
+        self._stats["extras"]["cmi_count"] += 1
+
+        # Track CMI: component level
+        comp_stats["extras"]["cmi_sum"] += cmi 
+        comp_stats["extras"]["cmi_count"] += 1
+
+        # Clear temp labels
+        self._temp_labels = []
+        return
+    
+    def _compute_average_cmi(self, cmi_sum: int, cmi_count: int) -> int:
+        """Compute average CMI score"""
+        return cmi_sum / cmi_count
+    
+    def get_stats(self):
+        """Override to compute averages from sums/counts"""
+        stats = super().get_stats()
+
+        if stats["extras"]["cmi_count"] > 0:
+            stats["extras"]["average_cmi"] = self._compute_average_cmi(
+                stats["extras"]["cmi_sum"], stats["extras"]["cmi_count"]
+            )
+
+        for comp_stats in stats["components"].values():
+            if comp_stats["extras"]["cmi_count"] > 0:
+                comp_stats["extras"]["average_cmi"] = self._compute_average_cmi(
+                    comp_stats["extras"]["cmi_sum"],
+                    comp_stats["extras"]["cmi_count"]
+                )
+        
+        return stats
 
 def main():
-    foo = LinCEAdapter("../toy-data/lince-kaggle", "*_*eng_*.csv")
+    foo = LinCEAdapter("../data/lince-kaggle", "*_*eng_*.csv")
 
     try:
         docs = list(foo.iter_documents())
@@ -124,10 +198,17 @@ def main():
         if docs:
             print(f"Sample doc: {docs[0]}")
     except Exception as e:
-        print(f"Failed at document {len(foo.ids_observed)}: {e}")
+        print(f"Failed at document {foo.get_stats()["documents_seen"]}: {e}")
         raise  # re-raise so you get the full traceback
 
-    print(foo.validate())
+    stats = foo.get_stats()
+    print(f"\nStats:")
+    print(f"  Seen: {stats['documents_seen']}")
+    print(f"  Written: {stats['documents_written']}")
+    print(f"  Dropped: {stats['documents_dropped']}")
+    print(f"  Avg CMI: {stats['extras'].get('average_cmi')}")
+    print(f"  Labels observed: {len(stats['extras'].get('labels_observed', set()))}")
+    print(f"  Components: {list(stats['components'].keys())}")
 
 
 if __name__ == "__main__":
