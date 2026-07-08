@@ -5,8 +5,11 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Optional
+from collections import Counter, defaultdict
 
-# ======================== HELPERS ========================
+    # ==========================================================================
+    # Helpers
+    # ==========================================================================
 def now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -22,7 +25,9 @@ def get_git_commit() -> Optional[str]:
 def get_slurm_job() -> Optional[str]:
     return os.environ.get("SLURM_JOB_ID")
 
-# ======================== SUPERCLASS ========================
+    # ==========================================================================
+    # Superclass
+    # ==========================================================================
 class BaseManifest:
     def __init__(self, path: str):
         self.path = Path(path)
@@ -41,10 +46,20 @@ class BaseManifest:
     def save(self) -> None:
         """Save to a temp file, then rename to ensure safe completion"""
         tmp = self.path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(self.data, indent=2))
+        tmp.write_text(json.dumps(self.data, indent=2, default=self._json_serializer))
         tmp.replace(self.path)
         return
-    # ======================== STEP EXECUTION ========================
+    
+    def _json_serializer(self, obj):
+        if isinstance(obj, set):
+            return sorted(list(obj))
+        if isinstance(obj, (Counter, defaultdict)):
+            return dict(obj)
+        raise TypeError(f"Type {type(obj)} not serializable")
+
+    # ==========================================================================
+    # Step execution
+    # ==========================================================================
     def start_step(self, step: str, notes: Optional[str] = None) -> None:
         # initialize the current step field
         self.data["steps"].setdefault(step, {})
@@ -76,7 +91,9 @@ class BaseManifest:
         s["status"] = "failed"
         s["error"] = error
 
-    # ======================== STEP CONFIG ========================
+    # ==========================================================================
+    # Step configuration
+    # ==========================================================================
 
     def set_args(self, step: str, args: Dict[str, Any]):
         self.data["steps"].setdefault(step, {})
