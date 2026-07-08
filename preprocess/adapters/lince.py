@@ -182,6 +182,8 @@ class LinCEAdapter(BaseAdapter):
             stats["extras"]["average_cmi"] = self._compute_average_cmi(
                 stats["extras"]["cmi_sum"], stats["extras"]["cmi_count"]
             )
+            del stats["extras"]["cmi_sum"]
+            del stats["extras"]["cmi_count"]
 
         for comp_stats in stats["components"].values():
             if comp_stats["extras"]["cmi_count"] > 0:
@@ -189,6 +191,8 @@ class LinCEAdapter(BaseAdapter):
                     comp_stats["extras"]["cmi_sum"],
                     comp_stats["extras"]["cmi_count"]
                 )
+            del comp_stats["extras"]["cmi_sum"]
+            del comp_stats["extras"]["cmi_count"]
         
         return stats
 
