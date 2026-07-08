@@ -46,7 +46,7 @@ class BaseManifest:
     def save(self) -> None:
         """Save to a temp file, then rename to ensure safe completion"""
         tmp = self.path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(self.data, indent=2, default=self._json_serializer))
+        tmp.write_text(json.dumps(self.data, indent=2, default=self._json_serializer, sort_keys=True))
         tmp.replace(self.path)
         return
     
