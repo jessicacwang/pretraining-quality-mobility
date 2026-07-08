@@ -72,14 +72,14 @@ class ICEAdapter(BaseAdapter):
         for encoding in self._ENCODINGS:
             try:
                 result = open(path, mode="r", encoding=encoding).read()
-                
+
                 # Remove BOM
                 if result.startswith("\ufeff"):
                     result = result[1:]
 
                 # Remove any remaining null bytes
-                result = result.replace('\x00', '')
-                
+                result = result.replace("\x00", "")
+
                 result = result.strip()
 
                 return result
@@ -152,17 +152,21 @@ class ICEAdapter(BaseAdapter):
                     "substitutions": defaultdict(int),
                     "residual_tags": 0,
                 },
-                "genres": {}
+                "genres": {},
             },
         )
 
         genre_stats = comp_stats["genres"].setdefault(
-            genre, {"documents_written": 0, "extras": {
+            genre,
+            {
+                "documents_written": 0,
+                "extras": {
                     "foreign": 0,
                     "indigenous": 0,
                     "substitutions": defaultdict(int),
                     "residual_tags": 0,
-                }}
+                },
+            },
         )
 
         # Track LEU tags
