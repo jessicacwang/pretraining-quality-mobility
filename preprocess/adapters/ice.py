@@ -124,6 +124,8 @@ class ICEAdapter(BaseAdapter):
             result, pat_n = d["pat"].subn(d["sub"], result)
             self._temp_cleaning_stats[f"alter_{alt}"] = pat_n
 
+        # Finally, strip enclosing whitespace
+        result = result.strip()
         return result if len(result) else None
 
     def validate(self, text, metadata):
