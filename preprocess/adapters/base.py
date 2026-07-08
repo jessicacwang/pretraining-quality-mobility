@@ -9,7 +9,7 @@ import re
 
 class BaseAdapter:
     TARGET_ID_KEYS = tuple()
-    _ENCODINGS = ("utf-8", "latin-1", "cp1252", "iso-8859-1")
+    _ENCODINGS = ("utf-8", "latin-1", "cp1252", "iso-8859-1", "utf-16", "utf-16le", "utf-16be")
     _CRLF = re.compile(r"\r")
     _ANGLE_BRACKET_RE = re.compile("<.*?>", flags=re.DOTALL)
 

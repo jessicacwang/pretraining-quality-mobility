@@ -5,7 +5,7 @@ from typing import Iterator
 from pathlib import Path
 import zipfile
 import tempfile
-from typing import Dict
+from typing import Dict, Tuple
 from nltk.tokenize import PunktSentenceTokenizer
 
 
@@ -56,7 +56,7 @@ class GloWbeAdapter(BaseAdapter):
 
         return glowbe_doc_id, glowbe_text
 
-    def _parse_file(self, txt_file: str) -> Iterator[str, str]:
+    def _parse_file(self, txt_file: str) -> Iterator[Tuple[str, str]]:
         for encoding in self._ENCODINGS:
             try:
                 with open(
@@ -111,6 +111,7 @@ class GloWbeAdapter(BaseAdapter):
             "glowbe_doc_id": source_doc["glowbe_doc_id"],
             "glowbe_line_num": source_doc["glowbe_line_num"],
             "genre": source_doc["genre"],
+            "original": source_text,
             "obfuscated_spans": source_text.count("@ @ @ @ @ @ @ @ @ @"),
         }
 
@@ -132,7 +133,7 @@ class GloWbeAdapter(BaseAdapter):
         return result
 
     def validate(self, text, metadata):
-        if len(text) == len(metadata["original"]):
+        if text == metadata["original"]:
             return False, "cleaning_no_effect"
         return True, None
 
@@ -141,16 +142,25 @@ class GloWbeAdapter(BaseAdapter):
     # ==========================================================================
     def update_stats(self, metadata):
         component = metadata["component"]
+        genre = metadata["genre"]
 
         comp_stats = self._stats["components"].setdefault(
-            component, {"documents_written": 0, "extras": {"obfuscated_spans": 0}}
+            component,
+            {"documents_written": 0, "extras": {"obfuscated_spans": 0}, "genres": {}},
         )
 
+        genre_stats = comp_stats["genres"].setdefault(
+            genre, {"documents_written": 0, "extras": {"obfuscated_spans": 0}}
+        )
+
+        # Update extras
         self._stats["extras"]["obfuscated_spans"] += metadata["obfuscated_spans"]
         comp_stats["extras"]["obfuscated_spans"] += metadata["obfuscated_spans"]
+        genre_stats["extras"]["obfuscated_spans"] += metadata["obfuscated_spans"]
 
-        # Update component level documents written
+        # Update documents written
         comp_stats["documents_written"] += 1
+        genre_stats["documents_written"] += 1
         return
 
 
@@ -168,7 +178,12 @@ def main():
         raise  # re-raise so you get the full traceback
     finally:
         foo.cleanup()
-    print(foo.get_stats())
+    stats = foo.get_stats()
+    print(f"\nStats:")
+    print(f"  Seen: {stats['documents_seen']}")
+    print(f"  Written: {stats['documents_written']}")
+    print(f"  Dropped: {stats['documents_dropped']}")
+    print(f"  Components: {list(stats['components'].keys())}")
 
 
 if __name__ == "__main__":
