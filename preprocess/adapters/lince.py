@@ -47,7 +47,7 @@ class LinCEAdapter(BaseAdapter):
         for file_path in self.path.glob(self.file_pattern):
             #     # parse filename into source, task, non_english, split fields
             file_parts = str(file_path).split("_")
-            component = file_parts[0].split("/")[-1]
+            component = file_parts[0].split("/")[-1] + "_" + file_parts[1]
             non_english = file_parts[1].replace("eng", "")
             split = file_parts[2].replace(".csv", "")
 

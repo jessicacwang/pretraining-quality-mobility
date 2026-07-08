@@ -111,7 +111,7 @@ class GloWbeAdapter(BaseAdapter):
 
     def validate(self, text, metadata):
         if len(text) == len(metadata["original"]):
-            return False, "residual_tags_or_obfuscation"
+            return False, "cleaning_no_effect"
         return True, None
 
     # ==========================================================================
