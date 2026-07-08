@@ -9,9 +9,6 @@ import re
 
 class ICEAdapter(BaseAdapter):
     TARGET_ID_KEYS = ("component", "source_filename")
-    _ENCODINGS = ("utf-8", "latin-1", "cp1252", "iso-8859-1")
-    _CRLF = re.compile(r"\r")
-    _ANGLE_BRACKET_RE = re.compile("<.*?>", flags=re.DOTALL)
 
     def __init__(self, root_path, file_pattern, tag_registry: Dict):
         super().__init__(root_path, file_pattern)
@@ -50,6 +47,7 @@ class ICEAdapter(BaseAdapter):
         self._temp_leu_tags = 0
         self._temp_cleaning_stats = {}
         self._temp_residual = 0
+
     # ==========================================================================
     # Subclass interface
     # ==========================================================================
@@ -74,11 +72,21 @@ class ICEAdapter(BaseAdapter):
         for encoding in self._ENCODINGS:
             try:
                 result = open(path, mode="r", encoding=encoding).read()
+
+                # Remove BOM
+                if result.startswith("\ufeff"):
+                    result = result[1:]
+
+                # Remove any remaining null bytes
+                result = result.replace("\x00", "")
+
+                result = result.strip()
+
                 return result
             except UnicodeDecodeError:
                 continue
 
-        raise UnicodeDecodeError(f"No encodings could decode the file: {str(path)}")
+        raise ValueError(f"No encodings could decode the file: {str(path)}")
 
     def extract_metadata(self, file_path: Path, source_text: str):
         self.current_doc = str(file_path)
@@ -105,7 +113,7 @@ class ICEAdapter(BaseAdapter):
     def clean_text(self, text):
         result, crlf_n = self._CRLF.subn("", text)
         self._temp_cleaning_stats["crlf_removed"] = crlf_n
-        
+
         result, drop_tag_n = self._DROP_TAGS_ONLY.subn("", result)
         self._temp_cleaning_stats["tags_dropped"] = drop_tag_n
 
@@ -122,13 +130,17 @@ class ICEAdapter(BaseAdapter):
         residual = self._ANGLE_BRACKET_RE.findall(text)
         self._temp_residual = len(residual)
 
+        if self._temp_residual and text == metadata["original"]:
+            return False, "cleaning_no_effect"
         return True, None
-    
+
     # ==========================================================================
     # Corpus stats
     # ==========================================================================
     def update_stats(self, metadata):
         component = metadata["component"]
+        genre = metadata["genre"]
+
         # TODO: update documents written at component level
         comp_stats = self._stats["components"].setdefault(
             component,
@@ -138,32 +150,54 @@ class ICEAdapter(BaseAdapter):
                     "foreign": 0,
                     "indigenous": 0,
                     "substitutions": defaultdict(int),
-                    "residual_tags": 0
-                }
-            }
+                    "residual_tags": 0,
+                },
+                "genres": {},
+            },
         )
 
-        # Track LEU tags and reset the temp storage
+        genre_stats = comp_stats["genres"].setdefault(
+            genre,
+            {
+                "documents_written": 0,
+                "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "substitutions": defaultdict(int),
+                    "residual_tags": 0,
+                },
+            },
+        )
+
+        # Track LEU tags
         self._stats["extras"]["foreign"] += metadata["foreign"]
-        self._stats["extras"]["indigenous"] += metadata["indigenous"]
         comp_stats["extras"]["foreign"] += metadata["foreign"]
+        genre_stats["extras"]["foreign"] += metadata["foreign"]
+
+        self._stats["extras"]["indigenous"] += metadata["indigenous"]
         comp_stats["extras"]["indigenous"] += metadata["indigenous"]
+        genre_stats["extras"]["indigenous"] += metadata["indigenous"]
 
         # Track tag cleaning and reset temp storage
         for key, count in self._temp_cleaning_stats.items():
             self._stats["extras"]["substitutions"][key] += count
             comp_stats["extras"]["substitutions"][key] += count
+            genre_stats["extras"]["substitutions"][key] += count
 
         self._temp_cleaning_stats = {}
 
         # Track residual tags and reset temp storage
         self._stats["extras"]["residual_tags"] += self._temp_residual
         comp_stats["extras"]["residual_tags"] += self._temp_residual
+        genre_stats["extras"]["residual_tags"] += self._temp_residual
+
         self._temp_residual = 0
 
-        # Update component level documents written
+        # Update documents written
         comp_stats["documents_written"] += 1
+        genre_stats["documents_written"] += 1
         return
+
 
 def main():
     import json

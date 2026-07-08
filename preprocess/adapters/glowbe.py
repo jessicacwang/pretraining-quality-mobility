@@ -4,17 +4,18 @@ from preprocess.adapters.base import BaseAdapter
 from typing import Iterator
 from pathlib import Path
 import zipfile
-import re
-import trafilatura
 import tempfile
-from typing import Dict
+from typing import Dict, Tuple
 from nltk.tokenize import PunktSentenceTokenizer
 
 
 class GloWbeAdapter(BaseAdapter):
-    TARGET_ID_KEYS = ("component", "source_filename", "glowbe_doc_id")
-    _ANGLE_BRACKET_RE = re.compile("<.*?>", flags=re.DOTALL)
-    _CRLF = re.compile(r"\r")
+    TARGET_ID_KEYS = (
+        "component",
+        "source_filename",
+        "glowbe_line_num",
+        "glowbe_doc_id",
+    )
 
     def __init__(self, root_path, file_pattern):
         super().__init__(root_path, file_pattern)
@@ -55,6 +56,32 @@ class GloWbeAdapter(BaseAdapter):
 
         return glowbe_doc_id, glowbe_text
 
+    def _parse_file(self, txt_file: str) -> Iterator[Tuple[str, str]]:
+        for encoding in self._ENCODINGS:
+            try:
+                with open(
+                    txt_file, "r", encoding=encoding, errors="replace", newline=""
+                ) as f:
+                    for line in f:
+                        line = line.rstrip("\r\n")
+
+                        if not line.startswith("##"):  # First line case
+                            continue
+
+                        try:
+                            glowbe_doc_id, glowbe_text = self._parse_line(line)
+                            yield glowbe_doc_id, glowbe_text
+                        except ValueError as e:
+                            print(
+                                f"Warning: skipping malformed line in {txt_file}: {e}"
+                            )
+                            continue
+                return
+            except UnicodeDecodeError:
+                continue
+
+        raise ValueError(f"No encoding could decode the file {txt_file}")
+
     def _iter_source_documents(self) -> Iterator[Path]:
         for txt_file in self.extract_dir.glob("*.txt"):
             file_name = txt_file.name
@@ -62,22 +89,18 @@ class GloWbeAdapter(BaseAdapter):
                 "blog" if file_name.split("_")[-1].startswith("b") else "general"
             )
             file_component = file_name.split("_")[1]
-            with open(txt_file, "r", encoding="ascii", newline="") as f:
-                for line in f:
-                    line = line.rstrip("\r\n")
 
-                    if not line.startswith("##"):  # First line case
-                        continue
-
-                    glowbe_doc_id, glowbe_text = self._parse_line(line)
-
-                    yield {
-                        "component": file_component,
-                        "source_filename": file_name,
-                        "glowbe_doc_id": glowbe_doc_id,
-                        "glowbe_text": glowbe_text,
-                        "genre": file_genre,
-                    }
+            for line_num, (glowbe_doc_id, glowbe_text) in enumerate(
+                self._parse_file(txt_file), start=1
+            ):
+                yield {
+                    "component": file_component,
+                    "source_filename": file_name,
+                    "glowbe_doc_id": glowbe_doc_id,
+                    "glowbe_line_num": str(line_num),
+                    "glowbe_text": glowbe_text,
+                    "genre": file_genre,
+                }
 
     def extract_metadata(self, source_doc: Dict, source_text: str):
         # attrs: source_filename, glowbe_doc_id, genre (general or blog)
@@ -86,6 +109,7 @@ class GloWbeAdapter(BaseAdapter):
             "component": source_doc["component"],
             "source_filename": source_doc["source_filename"],
             "glowbe_doc_id": source_doc["glowbe_doc_id"],
+            "glowbe_line_num": source_doc["glowbe_line_num"],
             "genre": source_doc["genre"],
             "original": source_text,
             "obfuscated_spans": source_text.count("@ @ @ @ @ @ @ @ @ @"),
@@ -95,7 +119,7 @@ class GloWbeAdapter(BaseAdapter):
         # return text after ##<doc_id>
         result = source_doc["glowbe_text"]
         return result if len(result) else None
-    
+
     def clean_text(self, text):
         clean = ""
         # remove garbled content surrounding '@' symbols
@@ -106,12 +130,11 @@ class GloWbeAdapter(BaseAdapter):
                 clean += text[start:end]
         result = self._CRLF.sub("", clean)
         result = self._ANGLE_BRACKET_RE.sub("", result)
-        # result = trafilatura.extract(clean, favor_recall=True)
         return result
 
     def validate(self, text, metadata):
-        if len(text) == len(metadata["original"]):
-            return False, "residual_tags_or_obfuscation"
+        if text == metadata["original"]:
+            return False, "cleaning_no_effect"
         return True, None
 
     # ==========================================================================
@@ -119,23 +142,27 @@ class GloWbeAdapter(BaseAdapter):
     # ==========================================================================
     def update_stats(self, metadata):
         component = metadata["component"]
+        genre = metadata["genre"]
 
         comp_stats = self._stats["components"].setdefault(
             component,
-            {
-                "documents_written": 0,
-                "extras": {
-                    "obfuscated_spans": 0
-                }
-            }
+            {"documents_written": 0, "extras": {"obfuscated_spans": 0}, "genres": {}},
         )
 
+        genre_stats = comp_stats["genres"].setdefault(
+            genre, {"documents_written": 0, "extras": {"obfuscated_spans": 0}}
+        )
+
+        # Update extras
         self._stats["extras"]["obfuscated_spans"] += metadata["obfuscated_spans"]
         comp_stats["extras"]["obfuscated_spans"] += metadata["obfuscated_spans"]
+        genre_stats["extras"]["obfuscated_spans"] += metadata["obfuscated_spans"]
 
-        # Update component level documents written
+        # Update documents written
         comp_stats["documents_written"] += 1
+        genre_stats["documents_written"] += 1
         return
+
 
 def main():
     foo = GloWbeAdapter("../toy-data/glowbe/glowbe-text", "*.zip")
@@ -151,7 +178,12 @@ def main():
         raise  # re-raise so you get the full traceback
     finally:
         foo.cleanup()
-    print(foo.get_stats())
+    stats = foo.get_stats()
+    print(f"\nStats:")
+    print(f"  Seen: {stats['documents_seen']}")
+    print(f"  Written: {stats['documents_written']}")
+    print(f"  Dropped: {stats['documents_dropped']}")
+    print(f"  Components: {list(stats['components'].keys())}")
 
 
 if __name__ == "__main__":

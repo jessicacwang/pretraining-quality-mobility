@@ -19,7 +19,7 @@ class LinCEAdapter(BaseAdapter):
         self.add_stat("labels_observed", set())
         self.add_stat("cmi_sum")
         self.add_stat("cmi_count")
-        self._temp_labels = [] # to track LID labels outside of stats/metadata
+        self._temp_labels = []  # to track LID labels outside of stats/metadata
 
     # ==========================================================================
     # Subclass interface
@@ -41,13 +41,13 @@ class LinCEAdapter(BaseAdapter):
             row |= file_info
 
         return row
-    
+
     def _iter_source_documents(self) -> Iterator[Dict]:
         # loop over eng train and validation docs
         for file_path in self.path.glob(self.file_pattern):
             #     # parse filename into source, task, non_english, split fields
             file_parts = str(file_path).split("_")
-            component = file_parts[0].split("/")[-1]
+            component = file_parts[0].split("/")[-1] + "_" + file_parts[1]
             non_english = file_parts[1].replace("eng", "")
             split = file_parts[2].replace(".csv", "")
 
@@ -87,7 +87,7 @@ class LinCEAdapter(BaseAdapter):
             ]
             if not non_other_counts:
                 return 0.0
-            
+
             # most common non-other label is max_w_i
             max_w_i = non_other_counts[0][1]
 
@@ -122,12 +122,13 @@ class LinCEAdapter(BaseAdapter):
 
         if cmi is None:
             return False, "missing_cmi"
-        
+
         # CMI should be between 0 and 1
         if not (0 <= cmi <= 1):
             return False, "invalid_cmi_score"
-        
+
         return True, None
+
     # ==========================================================================
     # Corpus stats
     # ==========================================================================
@@ -145,22 +146,18 @@ class LinCEAdapter(BaseAdapter):
             component,
             {
                 "documents_written": 0,
-                "extras": {
-                    "labels_observed": set(),
-                    "cmi_sum": 0,
-                    "cmi_count": 0
-                }
-            }
+                "extras": {"labels_observed": set(), "cmi_sum": 0, "cmi_count": 0},
+            },
         )
 
         comp_stats["extras"]["labels_observed"] |= set(labels)
 
         # Track CMI: corpus level
-        self._stats["extras"]["cmi_sum"] += cmi 
+        self._stats["extras"]["cmi_sum"] += cmi
         self._stats["extras"]["cmi_count"] += 1
 
         # Track CMI: component level
-        comp_stats["extras"]["cmi_sum"] += cmi 
+        comp_stats["extras"]["cmi_sum"] += cmi
         comp_stats["extras"]["cmi_count"] += 1
 
         # Clear temp labels
@@ -169,11 +166,11 @@ class LinCEAdapter(BaseAdapter):
         # Update component level documents written
         comp_stats["documents_written"] += 1
         return
-    
+
     def _compute_average_cmi(self, cmi_sum: int, cmi_count: int) -> int:
         """Compute average CMI score"""
         return cmi_sum / cmi_count
-    
+
     def get_stats(self):
         """Override to compute averages from sums/counts"""
         stats = super().get_stats()
@@ -182,15 +179,19 @@ class LinCEAdapter(BaseAdapter):
             stats["extras"]["average_cmi"] = self._compute_average_cmi(
                 stats["extras"]["cmi_sum"], stats["extras"]["cmi_count"]
             )
+            del stats["extras"]["cmi_sum"]
+            del stats["extras"]["cmi_count"]
 
         for comp_stats in stats["components"].values():
             if comp_stats["extras"]["cmi_count"] > 0:
                 comp_stats["extras"]["average_cmi"] = self._compute_average_cmi(
-                    comp_stats["extras"]["cmi_sum"],
-                    comp_stats["extras"]["cmi_count"]
+                    comp_stats["extras"]["cmi_sum"], comp_stats["extras"]["cmi_count"]
                 )
-        
+            del comp_stats["extras"]["cmi_sum"]
+            del comp_stats["extras"]["cmi_count"]
+
         return stats
+
 
 def main():
     foo = LinCEAdapter("../data/lince-kaggle", "*_*eng_*.csv")

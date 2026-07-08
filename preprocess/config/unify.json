@@ -1,11 +1,11 @@
 {
     "corpora": {
         "glowbe": {
-            "root_path": "/gscratch/scrubbed/data/glowbe/glowbe-text",
+            "root_path": "/gscratch/stf/jcmw614/data/glowbe/glowbe-text",
             "file_pattern": "*.zip"
         },
         "ice": {
-            "root_path": "/gscratch/scrubbed/data/ice",
+            "root_path": "/gscratch/stf/jcmw614/data/ice",
             "file_pattern": "**/*.txt",
             "tag_registry": {
                 "treat_as_foreign": [
@@ -26,7 +26,7 @@
                 ],
                 "alter": {
                     "transcriber_deletion": {
-                        "pat": "<-[/_](?P<original_text>[a-z'.]+)>",
+                        "pat": "<-[/_](?P<original_text>[a-z'. ]+)>",
                         "sub": "\\g<original_text>"
                     },
                     "horizontal_whitespace": {
@@ -151,7 +151,7 @@
             }
         },
         "lince": {
-            "root_path": "/gscratch/scrubbed/data/lince-kaggle",
+            "root_path": "/gscratch/stf/jcmw614/data/lince-kaggle",
             "file_pattern": "*_*eng_*.csv"
         }
     }

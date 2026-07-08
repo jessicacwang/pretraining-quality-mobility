@@ -23,483 +23,1005 @@
             "corpora": {
                 "glowbe": {
                     "full_name": "Global Corpus of Web-based English",
+                    "documents_seen": null,
                     "documents_written": null,
                     "documents_dropped": null,
                     "drop_reasons": {
-                        "encoding_error": null,
-                        "empty_after_strip": null
+                        "empty_after_cleaning": null,
+                        "cleaning_no_effect": null
+                    },
+                    "duplicate_ids": 0,
+                    "extras": {
+                        "obfuscated_spans": null
                     },
                     "components": {
                         "US": {
                             "documents_written": null,
+                            "extras": {
+                                "obfuscated_spans": null
+                            },
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "CA": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "GB": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "IE": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "AU": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "NZ": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "IN": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "LK": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "PK": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "BD": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "SG": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "MY": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "PH": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "HK": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "ZA": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "NG": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "GH": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "KE": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "TZ": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         },
                         "JM": {
                             "documents_written": null,
                             "genre": {
-                                "blog": {"documents_written": null},
-                                "general": {"documents_written": null}
+                                "blog": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                },
+                                "general": {
+                                    "documents_written": null,
+                                "extras": {
+                                        "obfuscated_spans": null
+                                    }
+                                }
                             }
                         }
-                    },
-                    "validation": {
-                        "empty_text_count": null,
-                        "obfuscated_count": null
                     }
                 },
                 "ice": {
                     "full_name": "International Corpus of English",
+                    "documents_seen": null,
                     "documents_written": null,
                     "documents_dropped": null,
                     "drop_reasons": {
-                        "tag_parse_failure": null,
-                        "empty_after_strip": null
+                        "no_text": null,
+                        "empty_after_cleaning": null
                     },
-                    "tag_edge_cases": {
-                        "overlapping_speech": "newline",
-                        "unclear_speech": "dropped",
-                        "pauses": "whitespace"
+                    "extras": {
+                        "foreign": null,
+                        "indigenous": null,
+                        "residual_tags": null,
+                        "substitutions": {
+                            "crlf_removed": null,
+                            "tags_dropped": null,
+                            "spans_dropped": null,
+                            "alter_transcriber_deletion": null,
+                            "alter_name_placeholder": null, 
+                            "alter_horizontal_whitespace": null
+                        }
                     },
                     "components": {
-                        "ICE-USA": {
+                        "us": {
                             "documents_written": null,
-                            "modality": {
-                                "spoken": {
-                                    "genre": {
-                                        "S1A": {"documents_written": null},
-                                        "S1B": {"documents_written": null}
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
+                            "genre": {
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
                                     } 
-                                },
-                                "written": {
-                                    "genre": {
-                                        "W1A": {"documents_written": null},
-                                        "W1B": {"documents_written": null}
+                                }
+                            }
+                        },
+                        "gb": {
+                            "documents_written": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
+                            "genre": {
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
                                     } 
                                 }
                             }
                         },
-                        "ICE-GB": {
+                        "ca": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-CAN": {
+                        "ie": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-IRL": {
+                        "au": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-AUS": {
+                        "nz": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-NZ": {
+                        "in": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-IN": {
+                        "sg": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-SG": {
+                        "ph": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-PH": {
+                        "hk": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-HK": {
+                        "ng": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-NG": {
+                        "ke": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-EA": {
+                        "tz": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-UG": {
+                        "ug": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-JA": {
+                        "jm": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-TT": {
+                        "tt": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
                         },
-                        "ICE-GBR": {
+                        "gr": {
                             "documents_written": null,
-                            "tokens": null,
+                            "extras": {
+                                "foreign": null,
+                                "indigenous": null,
+                                "residual_tags": null,
+                                "substitutions": {
+                                    "crlf_removed": null,
+                                    "tags_dropped": null,
+                                    "spans_dropped": null,
+                                    "alter_transcriber_deletion": null,
+                                    "alter_name_placeholder": null, 
+                                    "alter_horizontal_whitespace": null
+                                }
+                            },
                             "genre": {
-                                "spoken": {
-                                    "S1A": {"documents_written": null},
-                                    "S1B": {"documents_written": null}
-                                },
-                                "written": {
-                                    "W1A": {"documents_written": null},
-                                    "W1B": {"documents_written": null}
+                                "S1A": {
+                                    "documents_written": null,
+                                    "extras": {
+                                        "foreign": null,
+                                        "indigenous": null,
+                                        "residual_tags": null,
+                                        "substitutions": {
+                                            "crlf_removed": null,
+                                            "tags_dropped": null,
+                                            "spans_dropped": null,
+                                            "alter_transcriber_deletion": null,
+                                            "alter_name_placeholder": null, 
+                                            "alter_horizontal_whitespace": null
+                                        }
+                                    } 
                                 }
                             }
-                        }
-
-                    },
-                    "validation": {
-                        "empty_text_count": null,
-                        "residual_bracket_count": null,
-                        "tags_observed": {
-                            "X": null,
-                            "&": null,
-                            "foreign": null
                         }
                     }
                 },
                 "lince": {
                     "full_name": "Linguistic Code-switching Evaluation Benchmark",
+                    "documents_seen": null,
                     "documents_written": null,
                     "total_tokens": null,
                     "annotation_layers_stripped": ["lid", "ner"],
                     "components": {
-                        "lid": {
-                            "documents_ written": null,
-                            "non_english": {
-                                "hin": {
-                                    "train": {"documents_written": null, "cmi": 0.12},
-                                    "dev": {"documents_written": null, "cmi": 0.12},
-                                    "test": {"documents_written": null, "cmi": 0.12}
-                                },
-                                "nep": {
-                                    "train": {"documents_written": null, "cmi": 0.12},
-                                    "dev": {"documents_written": null, "cmi": 0.12},
-                                    "test": {"documents_written": null, "cmi": 0.12}
-                                },
-                                "spa": {
-                                    "train": {"documents_written": null, "cmi": 0.12},
-                                    "dev": {"documents_written": null, "cmi": 0.12},
-                                    "test": {"documents_written": null, "cmi": 0.12}
-                                }
-                            }
+                        "lid_hineng": {
+                            "documents_written": null, 
+                            "cmi": 0.12
                         },
-                        "ner": {
-                            "documents_ written": null,
-                            "non_english": {
-                                "hin": {
-                                    "train": {"documents_written": null, "cmi": 0.12},
-                                    "dev": {"documents_written": null, "cmi": 0.12},
-                                    "test": {"documents_written": null, "cmi": 0.12}
-                                },
-                                "spa": {
-                                    "train": {"documents_written": null, "cmi": 0.12},
-                                    "dev": {"documents_written": null, "cmi": 0.12},
-                                    "test": {"documents_written": null, "cmi": 0.12}
-                                }
-                            }
+                        "lid_nepeng": {
+                            "documents_written": null, 
+                            "cmi": 0.12
                         },
-                        "pos": {
-                            "documents_ written": null,
-                            "non_english": {
-                                "hin": {
-                                    "train": {"documents_written": null, "cmi": 0.12},
-                                    "dev": {"documents_written": null, "cmi": 0.12},
-                                    "test": {"documents_written": null, "cmi": 0.12}
-                                },
-                                "spa": {
-                                    "train": {"documents_written": null, "cmi": 0.12},
-                                    "dev": {"documents_written": null, "cmi": 0.12},
-                                    "test": {"documents_written": null, "cmi": 0.12}
-                                }
-                            }
+                        "lid_spaeng": {
+                            "documents_written": null, 
+                            "cmi": 0.12
                         },
-                        "sa": {
-                            "documents_ written": null,
-                            "non_english": {
-                                "spa": {
-                                    "train": {"documents_written": null, "cmi": 0.12},
-                                    "dev": {"documents_written": null, "cmi": 0.12},
-                                    "test": {"documents_written": null, "cmi": 0.12}
-                                }
-                            }
+                        "ner_hineng": {
+                            "documents_written": null,
+                            "cmi": 0.12
+                        },
+                        "ner_spaeng": {
+                            "documents_written": null,
+                            "cmi": 0.12
+                        },
+                        "pos_hineng": {
+                            "documents_written": null,
+                            "cmi": 0.12
+                        },
+                        "pos_spaeng": {
+                            "documents_written": null,
+                            "cmi": 0.12
+                        },
+                        "sa_spaeng": {
+                            "documents_written": null,
+                            "cmi": 0.12
                         }
-                    },
-                    "validation": {
-                        "ids_unique": null,
-                        "empty_doc_count": null,
-                        "labels_observed": ["lang1", "lang2", "other"]
                     }
                 }
 
