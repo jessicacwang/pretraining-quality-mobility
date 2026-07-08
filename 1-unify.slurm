@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #SBATCH --job-name=unify_job
-#SBATCH --partition=ckpt
+#SBATCH --account=stf
+#SBATCH --partition=compute-hugemem
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem=12G
