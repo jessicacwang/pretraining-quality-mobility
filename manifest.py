@@ -66,7 +66,7 @@ class BaseManifest:
     # ==========================================================================
     def start_step(self, step: str, notes: Optional[str] = None) -> None:
         # initialize the current step field
-        self.data["steps"].setdefault(step, {})
+        self.data["steps"][step] = {}
 
         self.data["steps"][step].update(
             {
