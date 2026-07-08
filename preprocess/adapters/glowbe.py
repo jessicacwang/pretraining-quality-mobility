@@ -10,7 +10,12 @@ from nltk.tokenize import PunktSentenceTokenizer
 
 
 class GloWbeAdapter(BaseAdapter):
-    TARGET_ID_KEYS = ("component", "source_filename", "glowbe_line_num", "glowbe_doc_id")
+    TARGET_ID_KEYS = (
+        "component",
+        "source_filename",
+        "glowbe_line_num",
+        "glowbe_doc_id",
+    )
 
     def __init__(self, root_path, file_pattern):
         super().__init__(root_path, file_pattern)
@@ -54,7 +59,9 @@ class GloWbeAdapter(BaseAdapter):
     def _parse_file(self, txt_file: str) -> Iterator[str, str]:
         for encoding in self._ENCODINGS:
             try:
-                with open(txt_file, "r", encoding=encoding, errors="replace", newline="") as f:
+                with open(
+                    txt_file, "r", encoding=encoding, errors="replace", newline=""
+                ) as f:
                     for line in f:
                         line = line.rstrip("\r\n")
 
@@ -65,7 +72,9 @@ class GloWbeAdapter(BaseAdapter):
                             glowbe_doc_id, glowbe_text = self._parse_line(line)
                             yield glowbe_doc_id, glowbe_text
                         except ValueError as e:
-                            print(f"Warning: skipping malformed line in {txt_file}: {e}")
+                            print(
+                                f"Warning: skipping malformed line in {txt_file}: {e}"
+                            )
                             continue
                 return
             except UnicodeDecodeError:
@@ -80,8 +89,10 @@ class GloWbeAdapter(BaseAdapter):
                 "blog" if file_name.split("_")[-1].startswith("b") else "general"
             )
             file_component = file_name.split("_")[1]
-            
-            for line_num, (glowbe_doc_id, glowbe_text) in enumerate(self._parse_file(txt_file), start=1):
+
+            for line_num, (glowbe_doc_id, glowbe_text) in enumerate(
+                self._parse_file(txt_file), start=1
+            ):
                 yield {
                     "component": file_component,
                     "source_filename": file_name,
@@ -107,7 +118,7 @@ class GloWbeAdapter(BaseAdapter):
         # return text after ##<doc_id>
         result = source_doc["glowbe_text"]
         return result if len(result) else None
-    
+
     def clean_text(self, text):
         clean = ""
         # remove garbled content surrounding '@' symbols
@@ -132,13 +143,7 @@ class GloWbeAdapter(BaseAdapter):
         component = metadata["component"]
 
         comp_stats = self._stats["components"].setdefault(
-            component,
-            {
-                "documents_written": 0,
-                "extras": {
-                    "obfuscated_spans": 0
-                }
-            }
+            component, {"documents_written": 0, "extras": {"obfuscated_spans": 0}}
         )
 
         self._stats["extras"]["obfuscated_spans"] += metadata["obfuscated_spans"]
@@ -147,6 +152,7 @@ class GloWbeAdapter(BaseAdapter):
         # Update component level documents written
         comp_stats["documents_written"] += 1
         return
+
 
 def main():
     foo = GloWbeAdapter("../toy-data/glowbe/glowbe-text", "*.zip")

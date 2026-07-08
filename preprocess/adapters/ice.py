@@ -47,6 +47,7 @@ class ICEAdapter(BaseAdapter):
         self._temp_leu_tags = 0
         self._temp_cleaning_stats = {}
         self._temp_residual = 0
+
     # ==========================================================================
     # Subclass interface
     # ==========================================================================
@@ -104,7 +105,7 @@ class ICEAdapter(BaseAdapter):
     def clean_text(self, text):
         result, crlf_n = self._CRLF.subn("", text)
         self._temp_cleaning_stats["crlf_removed"] = crlf_n
-        
+
         result, drop_tag_n = self._DROP_TAGS_ONLY.subn("", result)
         self._temp_cleaning_stats["tags_dropped"] = drop_tag_n
 
@@ -122,7 +123,7 @@ class ICEAdapter(BaseAdapter):
         self._temp_residual = len(residual)
 
         return True, None
-    
+
     # ==========================================================================
     # Corpus stats
     # ==========================================================================
@@ -137,9 +138,9 @@ class ICEAdapter(BaseAdapter):
                     "foreign": 0,
                     "indigenous": 0,
                     "substitutions": defaultdict(int),
-                    "residual_tags": 0
-                }
-            }
+                    "residual_tags": 0,
+                },
+            },
         )
 
         # Track LEU tags and reset the temp storage
@@ -163,6 +164,7 @@ class ICEAdapter(BaseAdapter):
         # Update component level documents written
         comp_stats["documents_written"] += 1
         return
+
 
 def main():
     import json
