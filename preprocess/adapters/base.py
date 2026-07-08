@@ -1,13 +1,17 @@
 """Base class for CorpusAdapter objects: disover documents, construct IDs, extract metadata and prepare text"""
 
 from pathlib import Path
-from typing import Dict, Iterator, Tuple
+from typing import Dict, Iterator
 from data import UnifiedText
 from copy import deepcopy
+import re
 
 class BaseAdapter:
     TARGET_ID_KEYS = tuple()
-
+    _ENCODINGS = ("utf-8", "latin-1", "cp1252", "iso-8859-1")
+    _CRLF = re.compile(r"\r")
+    _ANGLE_BRACKET_RE = re.compile("<.*?>", flags=re.DOTALL)
+    
     def __init__(self, root_path: str, file_pattern: str):
         self.name = ""
         self.path = Path(root_path)

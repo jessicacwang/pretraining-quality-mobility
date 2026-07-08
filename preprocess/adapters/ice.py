@@ -9,9 +9,6 @@ import re
 
 class ICEAdapter(BaseAdapter):
     TARGET_ID_KEYS = ("component", "source_filename")
-    _ENCODINGS = ("utf-8", "latin-1", "cp1252", "iso-8859-1")
-    _CRLF = re.compile(r"\r")
-    _ANGLE_BRACKET_RE = re.compile("<.*?>", flags=re.DOTALL)
 
     def __init__(self, root_path, file_pattern, tag_registry: Dict):
         super().__init__(root_path, file_pattern)
@@ -74,11 +71,13 @@ class ICEAdapter(BaseAdapter):
         for encoding in self._ENCODINGS:
             try:
                 result = open(path, mode="r", encoding=encoding).read()
+                if result.startswith("\ufeff"):
+                    result = result[1:]
                 return result
             except UnicodeDecodeError:
                 continue
 
-        raise UnicodeDecodeError(f"No encodings could decode the file: {str(path)}")
+        raise ValueError(f"No encodings could decode the file: {str(path)}")
 
     def extract_metadata(self, file_path: Path, source_text: str):
         self.current_doc = str(file_path)
