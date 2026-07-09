@@ -6,12 +6,8 @@ from preprocess.manifest import PreprocessManifest
 import gzip
 import json
 import argparse
-from typing import Dict
 from pathlib import Path
-
-def load_config(config_path: str) -> Dict:
-    with open(config_path, "r") as cf:
-        return json.load(cf)
+from utils import load_config
     
 def main(args):
     # Prepare output dir
