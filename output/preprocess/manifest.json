@@ -1,0 +1,4602 @@
+{
+  "commit": "6cad3c1",
+  "created_at": "2026-07-08T23:49:25.959757+00:00",
+  "steps": {
+    "unify": {
+      "_notes": "",
+      "args": {
+        "config_path": "preprocess/config/unify.json",
+        "notes": "",
+        "output_dir": "output/preprocess"
+      },
+      "completed_at": "2026-07-09T00:39:28.461262+00:00",
+      "corpora": {
+        "glowbe": {
+          "components": {
+            "au": {
+              "documents_written": 128360,
+              "extras": {
+                "obfuscated_spans": 778736
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 46751,
+                  "extras": {
+                    "obfuscated_spans": 224222
+                  }
+                },
+                "general": {
+                  "documents_written": 81609,
+                  "extras": {
+                    "obfuscated_spans": 554514
+                  }
+                }
+              }
+            },
+            "bd": {
+              "documents_written": 44984,
+              "extras": {
+                "obfuscated_spans": 199651
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 14194,
+                  "extras": {
+                    "obfuscated_spans": 53194
+                  }
+                },
+                "general": {
+                  "documents_written": 30790,
+                  "extras": {
+                    "obfuscated_spans": 146457
+                  }
+                }
+              }
+            },
+            "ca": {
+              "documents_written": 135604,
+              "extras": {
+                "obfuscated_spans": 698844
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 54038,
+                  "extras": {
+                    "obfuscated_spans": 220953
+                  }
+                },
+                "general": {
+                  "documents_written": 81566,
+                  "extras": {
+                    "obfuscated_spans": 477891
+                  }
+                }
+              }
+            },
+            "gb": {
+              "documents_written": 381483,
+              "extras": {
+                "obfuscated_spans": 1995078
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 149341,
+                  "extras": {
+                    "obfuscated_spans": 664263
+                  }
+                },
+                "general": {
+                  "documents_written": 232142,
+                  "extras": {
+                    "obfuscated_spans": 1330815
+                  }
+                }
+              }
+            },
+            "gh": {
+              "documents_written": 47329,
+              "extras": {
+                "obfuscated_spans": 194050
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 15156,
+                  "extras": {
+                    "obfuscated_spans": 54580
+                  }
+                },
+                "general": {
+                  "documents_written": 32173,
+                  "extras": {
+                    "obfuscated_spans": 139470
+                  }
+                }
+              }
+            },
+            "hk": {
+              "documents_written": 43875,
+              "extras": {
+                "obfuscated_spans": 206820
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 16007,
+                  "extras": {
+                    "obfuscated_spans": 62217
+                  }
+                },
+                "general": {
+                  "documents_written": 27868,
+                  "extras": {
+                    "obfuscated_spans": 144603
+                  }
+                }
+              }
+            },
+            "ie": {
+              "documents_written": 101985,
+              "extras": {
+                "obfuscated_spans": 516979
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 26709,
+                  "extras": {
+                    "obfuscated_spans": 100585
+                  }
+                },
+                "general": {
+                  "documents_written": 75276,
+                  "extras": {
+                    "obfuscated_spans": 416394
+                  }
+                }
+              }
+            },
+            "in": {
+              "documents_written": 113636,
+              "extras": {
+                "obfuscated_spans": 487597
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 37109,
+                  "extras": {
+                    "obfuscated_spans": 140148
+                  }
+                },
+                "general": {
+                  "documents_written": 76527,
+                  "extras": {
+                    "obfuscated_spans": 347449
+                  }
+                }
+              }
+            },
+            "jm": {
+              "documents_written": 46707,
+              "extras": {
+                "obfuscated_spans": 200557
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 15800,
+                  "extras": {
+                    "obfuscated_spans": 54818
+                  }
+                },
+                "general": {
+                  "documents_written": 30907,
+                  "extras": {
+                    "obfuscated_spans": 145739
+                  }
+                }
+              }
+            },
+            "ke": {
+              "documents_written": 45912,
+              "extras": {
+                "obfuscated_spans": 207756
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 14788,
+                  "extras": {
+                    "obfuscated_spans": 62616
+                  }
+                },
+                "general": {
+                  "documents_written": 31124,
+                  "extras": {
+                    "obfuscated_spans": 145140
+                  }
+                }
+              }
+            },
+            "lk": {
+              "documents_written": 38371,
+              "extras": {
+                "obfuscated_spans": 242803
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 13075,
+                  "extras": {
+                    "obfuscated_spans": 64897
+                  }
+                },
+                "general": {
+                  "documents_written": 25296,
+                  "extras": {
+                    "obfuscated_spans": 177906
+                  }
+                }
+              }
+            },
+            "my": {
+              "documents_written": 44969,
+              "extras": {
+                "obfuscated_spans": 213556
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 16260,
+                  "extras": {
+                    "obfuscated_spans": 67116
+                  }
+                },
+                "general": {
+                  "documents_written": 28709,
+                  "extras": {
+                    "obfuscated_spans": 146440
+                  }
+                }
+              }
+            },
+            "ng": {
+              "documents_written": 37265,
+              "extras": {
+                "obfuscated_spans": 221129
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 13949,
+                  "extras": {
+                    "obfuscated_spans": 60312
+                  }
+                },
+                "general": {
+                  "documents_written": 23316,
+                  "extras": {
+                    "obfuscated_spans": 160817
+                  }
+                }
+              }
+            },
+            "nz": {
+              "documents_written": 82651,
+              "extras": {
+                "obfuscated_spans": 418924
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 27804,
+                  "extras": {
+                    "obfuscated_spans": 113577
+                  }
+                },
+                "general": {
+                  "documents_written": 54847,
+                  "extras": {
+                    "obfuscated_spans": 305347
+                  }
+                }
+              }
+            },
+            "ph": {
+              "documents_written": 45951,
+              "extras": {
+                "obfuscated_spans": 222843
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 17905,
+                  "extras": {
+                    "obfuscated_spans": 66869
+                  }
+                },
+                "general": {
+                  "documents_written": 28046,
+                  "extras": {
+                    "obfuscated_spans": 155974
+                  }
+                }
+              }
+            },
+            "pk": {
+              "documents_written": 42734,
+              "extras": {
+                "obfuscated_spans": 269382
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 16898,
+                  "extras": {
+                    "obfuscated_spans": 66201
+                  }
+                },
+                "general": {
+                  "documents_written": 25836,
+                  "extras": {
+                    "obfuscated_spans": 203181
+                  }
+                }
+              }
+            },
+            "sg": {
+              "documents_written": 45303,
+              "extras": {
+                "obfuscated_spans": 221101
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 17086,
+                  "extras": {
+                    "obfuscated_spans": 69067
+                  }
+                },
+                "general": {
+                  "documents_written": 28217,
+                  "extras": {
+                    "obfuscated_spans": 152034
+                  }
+                }
+              }
+            },
+            "tz": {
+              "documents_written": 41316,
+              "extras": {
+                "obfuscated_spans": 177328
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 13798,
+                  "extras": {
+                    "obfuscated_spans": 50561
+                  }
+                },
+                "general": {
+                  "documents_written": 27518,
+                  "extras": {
+                    "obfuscated_spans": 126767
+                  }
+                }
+              }
+            },
+            "us": {
+              "documents_written": 273061,
+              "extras": {
+                "obfuscated_spans": 2073966
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 106133,
+                  "extras": {
+                    "obfuscated_spans": 705560
+                  }
+                },
+                "general": {
+                  "documents_written": 166928,
+                  "extras": {
+                    "obfuscated_spans": 1368406
+                  }
+                }
+              }
+            },
+            "za": {
+              "documents_written": 44106,
+              "extras": {
+                "obfuscated_spans": 227912
+              },
+              "genres": {
+                "blog": {
+                  "documents_written": 16984,
+                  "extras": {
+                    "obfuscated_spans": 68103
+                  }
+                },
+                "general": {
+                  "documents_written": 27122,
+                  "extras": {
+                    "obfuscated_spans": 159809
+                  }
+                }
+              }
+            }
+          },
+          "documents_dropped": {
+            "cleaning_no_effect": 5,
+            "empty_after_cleaning": 3877
+          },
+          "documents_seen": 1789484,
+          "documents_written": 1785602,
+          "duplicate_ids": 0,
+          "extras": {
+            "obfuscated_spans": 9775012
+          }
+        },
+        "ice": {
+          "components": {
+            "au": {
+              "documents_written": 499,
+              "extras": {
+                "foreign": 259,
+                "indigenous": 0,
+                "residual_tags": 518,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 967595,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 9150,
+                  "tags_dropped": 222678
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 64,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 196225,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 3871,
+                      "tags_dropped": 96645
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 80,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 0,
+                    "residual_tags": 224,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 153792,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2310,
+                      "tags_dropped": 38876
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 8,
+                    "indigenous": 0,
+                    "residual_tags": 60,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 130041,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 1049,
+                      "tags_dropped": 19974
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 22,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 92122,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 385,
+                      "tags_dropped": 12262
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 4,
+                    "indigenous": 0,
+                    "residual_tags": 78,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 40368,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 354,
+                      "tags_dropped": 4612
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 29,
+                  "extras": {
+                    "foreign": 20,
+                    "indigenous": 0,
+                    "residual_tags": 38,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 56691,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 210,
+                      "tags_dropped": 7559
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 213,
+                    "indigenous": 0,
+                    "residual_tags": 30,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 82293,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 197,
+                      "tags_dropped": 8321
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 12,
+                    "indigenous": 0,
+                    "residual_tags": 2,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 79535,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 362,
+                      "tags_dropped": 11119
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 38722,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 61,
+                      "tags_dropped": 8284
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 38976,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 280,
+                      "tags_dropped": 6225
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 19694,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2,
+                      "tags_dropped": 2559
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39136,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 69,
+                      "tags_dropped": 6242
+                    }
+                  }
+                }
+              }
+            },
+            "ca": {
+              "documents_written": 500,
+              "extras": {
+                "foreign": 426,
+                "indigenous": 1000,
+                "residual_tags": 648,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 1027415,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 15179,
+                  "tags_dropped": 347713
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 6,
+                    "indigenous": 50,
+                    "residual_tags": 49,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 208530,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 6081,
+                      "tags_dropped": 137274
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 80,
+                  "extras": {
+                    "foreign": 8,
+                    "indigenous": 374,
+                    "residual_tags": 49,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 166470,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2836,
+                      "tags_dropped": 82699
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 38,
+                    "indigenous": 220,
+                    "residual_tags": 223,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 145195,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 3146,
+                      "tags_dropped": 48213
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 28,
+                    "indigenous": 106,
+                    "residual_tags": 11,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 98879,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 778,
+                      "tags_dropped": 18173
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 20,
+                    "indigenous": 0,
+                    "residual_tags": 250,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39430,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 574,
+                      "tags_dropped": 4597
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 38,
+                    "indigenous": 24,
+                    "residual_tags": 14,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 60689,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 330,
+                      "tags_dropped": 11098
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 194,
+                    "indigenous": 140,
+                    "residual_tags": 14,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 86603,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 768,
+                      "tags_dropped": 12626
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 34,
+                    "residual_tags": 12,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 79820,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 295,
+                      "tags_dropped": 10711
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 16,
+                    "residual_tags": 1,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 40651,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 85,
+                      "tags_dropped": 6763
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 32,
+                    "residual_tags": 21,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 40401,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 115,
+                      "tags_dropped": 6542
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 19894,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 11,
+                      "tags_dropped": 2692
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 90,
+                    "indigenous": 4,
+                    "residual_tags": 4,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 40853,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 160,
+                      "tags_dropped": 6325
+                    }
+                  }
+                }
+              }
+            },
+            "gb": {
+              "documents_written": 500,
+              "extras": {
+                "foreign": 0,
+                "indigenous": 0,
+                "residual_tags": 3359,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 1021753,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 1,
+                  "tags_dropped": 119293
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 1967,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 193777,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 40354
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 80,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 850,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 157058,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 20217
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 232,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 140046,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 18700
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 45,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 98168,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 9926
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 145,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 43046,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 2488
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 120,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 62481,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 1,
+                      "tags_dropped": 4765
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 86952,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 5022
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 88678,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 6220
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 41826,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 3202
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 42934,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 3123
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 20633,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 1459
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 46154,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 3817
+                    }
+                  }
+                }
+              }
+            },
+            "gr": {
+              "documents_written": 377,
+              "extras": {
+                "foreign": 394,
+                "indigenous": 658,
+                "residual_tags": 807,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 361542,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 3558,
+                  "tags_dropped": 33625
+                }
+              },
+              "genres": {
+                "W1B": {
+                  "documents_written": 72,
+                  "extras": {
+                    "foreign": 24,
+                    "indigenous": 60,
+                    "residual_tags": 170,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 60535,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 579,
+                      "tags_dropped": 8742
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 69,
+                  "extras": {
+                    "foreign": 336,
+                    "indigenous": 272,
+                    "residual_tags": 148,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 80329,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 861,
+                      "tags_dropped": 7867
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 87,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 44,
+                    "residual_tags": 184,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 79545,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 687,
+                      "tags_dropped": 5105
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 52,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 126,
+                    "residual_tags": 108,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 40821,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 598,
+                      "tags_dropped": 4543
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 28,
+                  "extras": {
+                    "foreign": 4,
+                    "indigenous": 96,
+                    "residual_tags": 58,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39159,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 220,
+                      "tags_dropped": 2441
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 49,
+                  "extras": {
+                    "foreign": 6,
+                    "indigenous": 30,
+                    "residual_tags": 98,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 20222,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 380,
+                      "tags_dropped": 1993
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 22,
+                    "indigenous": 30,
+                    "residual_tags": 41,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 40931,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 233,
+                      "tags_dropped": 2934
+                    }
+                  }
+                }
+              }
+            },
+            "hk": {
+              "documents_written": 500,
+              "extras": {
+                "foreign": 488,
+                "indigenous": 1446,
+                "residual_tags": 4944,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 1287741,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 26678,
+                  "tags_dropped": 369307
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 208,
+                    "indigenous": 742,
+                    "residual_tags": 3833,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 311827,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 16451,
+                      "tags_dropped": 212325
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 80,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 100,
+                    "residual_tags": 895,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 202546,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 6883,
+                      "tags_dropped": 60904
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 20,
+                    "indigenous": 188,
+                    "residual_tags": 18,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 153789,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 535,
+                      "tags_dropped": 21177
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 16,
+                    "indigenous": 10,
+                    "residual_tags": 13,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 107897,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 620,
+                      "tags_dropped": 11988
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 4,
+                    "indigenous": 134,
+                    "residual_tags": 159,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 49367,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 901,
+                      "tags_dropped": 6385
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 8,
+                    "indigenous": 20,
+                    "residual_tags": 10,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 73485,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 766,
+                      "tags_dropped": 11570
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 132,
+                    "indigenous": 84,
+                    "residual_tags": 8,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 108906,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 168,
+                      "tags_dropped": 11204
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 72,
+                    "indigenous": 14,
+                    "residual_tags": 4,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 105908,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 257,
+                      "tags_dropped": 12407
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 12,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 50756,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 6,
+                      "tags_dropped": 7244
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 26,
+                    "indigenous": 22,
+                    "residual_tags": 2,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 50082,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 81,
+                      "tags_dropped": 5773
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 23473,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 2438
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 120,
+                    "residual_tags": 2,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 49705,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 10,
+                      "tags_dropped": 5892
+                    }
+                  }
+                }
+              }
+            },
+            "ie": {
+              "documents_written": 500,
+              "extras": {
+                "foreign": 80,
+                "indigenous": 137,
+                "residual_tags": 242,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 1053506,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 6583,
+                  "tags_dropped": 195056
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 6,
+                    "indigenous": 12,
+                    "residual_tags": 58,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 207512,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2915,
+                      "tags_dropped": 81859
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 80,
+                  "extras": {
+                    "foreign": 18,
+                    "indigenous": 32,
+                    "residual_tags": 51,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 167076,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 857,
+                      "tags_dropped": 31624
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 8,
+                    "indigenous": 16,
+                    "residual_tags": 42,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 146773,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 576,
+                      "tags_dropped": 18074
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 40,
+                    "residual_tags": 19,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 100671,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 361,
+                      "tags_dropped": 10835
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 5,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 42223,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 160,
+                      "tags_dropped": 4431
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 22,
+                    "indigenous": 10,
+                    "residual_tags": 29,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 61972,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 850,
+                      "tags_dropped": 9813
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 10,
+                    "indigenous": 16,
+                    "residual_tags": 19,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 85129,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 305,
+                      "tags_dropped": 8113
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 4,
+                    "residual_tags": 4,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 85699,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 245,
+                      "tags_dropped": 8822
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 3,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 44642,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 122,
+                      "tags_dropped": 6883
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 12,
+                    "indigenous": 1,
+                    "residual_tags": 5,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 44943,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 151,
+                      "tags_dropped": 5912
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 2,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21085,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 23,
+                      "tags_dropped": 2446
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 6,
+                    "residual_tags": 5,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 45781,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 18,
+                      "tags_dropped": 6244
+                    }
+                  }
+                }
+              }
+            },
+            "in": {
+              "documents_written": 500,
+              "extras": {
+                "foreign": 435,
+                "indigenous": 11404,
+                "residual_tags": 1422,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 1090384,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 13062,
+                  "tags_dropped": 334272
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 10,
+                    "indigenous": 3338,
+                    "residual_tags": 54,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 224086,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2345,
+                      "tags_dropped": 114272
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 80,
+                  "extras": {
+                    "foreign": 10,
+                    "indigenous": 1897,
+                    "residual_tags": 33,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 181598,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2022,
+                      "tags_dropped": 69764
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 6,
+                    "indigenous": 1532,
+                    "residual_tags": 1,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 156426,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 849,
+                      "tags_dropped": 48656
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 56,
+                    "indigenous": 932,
+                    "residual_tags": 123,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 114658,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 291,
+                      "tags_dropped": 29740
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 12,
+                    "indigenous": 118,
+                    "residual_tags": 80,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 38137,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 1961,
+                      "tags_dropped": 10519
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 12,
+                    "indigenous": 591,
+                    "residual_tags": 109,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 66293,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2817,
+                      "tags_dropped": 11668
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 130,
+                    "indigenous": 340,
+                    "residual_tags": 419,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 83758,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 894,
+                      "tags_dropped": 13379
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 96,
+                    "indigenous": 452,
+                    "residual_tags": 242,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 78777,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 754,
+                      "tags_dropped": 10382
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 77,
+                    "indigenous": 614,
+                    "residual_tags": 23,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 37865,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 245,
+                      "tags_dropped": 6410
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 10,
+                    "indigenous": 1082,
+                    "residual_tags": 211,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 43710,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 412,
+                      "tags_dropped": 8177
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 6,
+                    "indigenous": 106,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 20293,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 18,
+                      "tags_dropped": 1900
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 10,
+                    "indigenous": 402,
+                    "residual_tags": 127,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 44783,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 454,
+                      "tags_dropped": 9405
+                    }
+                  }
+                }
+              }
+            },
+            "jm": {
+              "documents_written": 499,
+              "extras": {
+                "foreign": 312,
+                "indigenous": 1361,
+                "residual_tags": 587,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 1002368,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 10543,
+                  "tags_dropped": 324487
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 10,
+                    "indigenous": 340,
+                    "residual_tags": 98,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 201139,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 3438,
+                      "tags_dropped": 120531
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 79,
+                  "extras": {
+                    "foreign": 112,
+                    "indigenous": 619,
+                    "residual_tags": 109,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 159707,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2105,
+                      "tags_dropped": 71139
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 16,
+                    "indigenous": 138,
+                    "residual_tags": 162,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 140603,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 1625,
+                      "tags_dropped": 39013
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 14,
+                    "indigenous": 86,
+                    "residual_tags": 16,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 97720,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 430,
+                      "tags_dropped": 17213
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 2,
+                    "residual_tags": 82,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39228,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 835,
+                      "tags_dropped": 6023
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 18,
+                    "indigenous": 140,
+                    "residual_tags": 60,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 58838,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 1517,
+                      "tags_dropped": 19763
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 106,
+                    "indigenous": 22,
+                    "residual_tags": 11,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 83528,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 301,
+                      "tags_dropped": 13298
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 2,
+                    "residual_tags": 9,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 79450,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 160,
+                      "tags_dropped": 11646
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 6,
+                    "indigenous": 6,
+                    "residual_tags": 4,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39319,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 38,
+                      "tags_dropped": 5791
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 22,
+                    "indigenous": 0,
+                    "residual_tags": 5,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 42918,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 64,
+                      "tags_dropped": 11746
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 8,
+                    "indigenous": 0,
+                    "residual_tags": 3,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 19443,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 20,
+                      "tags_dropped": 2098
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 6,
+                    "residual_tags": 28,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 40475,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 10,
+                      "tags_dropped": 6226
+                    }
+                  }
+                }
+              }
+            },
+            "ke": {
+              "documents_written": 304,
+              "extras": {
+                "foreign": 149,
+                "indigenous": 1064,
+                "residual_tags": 1555,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 658347,
+                  "alter_name_placeholder": 1449,
+                  "alter_transcriber_deletion": 1839,
+                  "crlf_removed": 0,
+                  "spans_dropped": 0,
+                  "tags_dropped": 11422
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 27,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 290,
+                    "residual_tags": 585,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 57386,
+                      "alter_name_placeholder": 66,
+                      "alter_transcriber_deletion": 41,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 5204
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 53,
+                  "extras": {
+                    "foreign": 23,
+                    "indigenous": 111,
+                    "residual_tags": 439,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 164214,
+                      "alter_name_placeholder": 835,
+                      "alter_transcriber_deletion": 686,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 3895
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 43,
+                  "extras": {
+                    "foreign": 27,
+                    "indigenous": 205,
+                    "residual_tags": 166,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 84390,
+                      "alter_name_placeholder": 300,
+                      "alter_transcriber_deletion": 67,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 1545
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 21,
+                  "extras": {
+                    "foreign": 9,
+                    "indigenous": 10,
+                    "residual_tags": 104,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39334,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 283,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 118
+                    }
+                  }
+                },
+                "W1C": {
+                  "documents_written": 11,
+                  "extras": {
+                    "foreign": 3,
+                    "indigenous": 3,
+                    "residual_tags": 20,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 19750,
+                      "alter_name_placeholder": 246,
+                      "alter_transcriber_deletion": 95,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 10
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 61,
+                    "indigenous": 189,
+                    "residual_tags": 50,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 79407,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 168,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 331
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 5,
+                    "indigenous": 81,
+                    "residual_tags": 92,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 78137,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 273,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 97
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 15,
+                    "indigenous": 30,
+                    "residual_tags": 46,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 38974,
+                      "alter_name_placeholder": 1,
+                      "alter_transcriber_deletion": 101,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 50
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 9,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 2,
+                    "residual_tags": 6,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 18155,
+                      "alter_name_placeholder": 1,
+                      "alter_transcriber_deletion": 36,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 6
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 3,
+                    "indigenous": 68,
+                    "residual_tags": 31,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39322,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 60,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 86
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 1,
+                    "indigenous": 75,
+                    "residual_tags": 16,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39278,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 29,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 80
+                    }
+                  }
+                }
+              }
+            },
+            "ke-a": {
+              "documents_written": 17,
+              "extras": {
+                "foreign": 0,
+                "indigenous": 62,
+                "residual_tags": 28,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 20655,
+                  "alter_name_placeholder": 154,
+                  "alter_transcriber_deletion": 27,
+                  "crlf_removed": 0,
+                  "spans_dropped": 0,
+                  "tags_dropped": 258
+                }
+              },
+              "genres": {
+                "S2B": {
+                  "documents_written": 17,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 62,
+                    "residual_tags": 28,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 20655,
+                      "alter_name_placeholder": 154,
+                      "alter_transcriber_deletion": 27,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 258
+                    }
+                  }
+                }
+              }
+            },
+            "ke-b": {
+              "documents_written": 17,
+              "extras": {
+                "foreign": 1,
+                "indigenous": 22,
+                "residual_tags": 54,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 21943,
+                  "alter_name_placeholder": 153,
+                  "alter_transcriber_deletion": 13,
+                  "crlf_removed": 0,
+                  "spans_dropped": 0,
+                  "tags_dropped": 234
+                }
+              },
+              "genres": {
+                "S2B": {
+                  "documents_written": 17,
+                  "extras": {
+                    "foreign": 1,
+                    "indigenous": 22,
+                    "residual_tags": 54,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21943,
+                      "alter_name_placeholder": 153,
+                      "alter_transcriber_deletion": 13,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 234
+                    }
+                  }
+                }
+              }
+            },
+            "ke-h": {
+              "documents_written": 10,
+              "extras": {
+                "foreign": 0,
+                "indigenous": 44,
+                "residual_tags": 31,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 49070,
+                  "alter_name_placeholder": 1,
+                  "alter_transcriber_deletion": 37,
+                  "crlf_removed": 0,
+                  "spans_dropped": 0,
+                  "tags_dropped": 53
+                }
+              },
+              "genres": {
+                "S1B": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 44,
+                    "residual_tags": 31,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 49070,
+                      "alter_name_placeholder": 1,
+                      "alter_transcriber_deletion": 37,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 53
+                    }
+                  }
+                }
+              }
+            },
+            "ng": {
+              "documents_written": 896,
+              "extras": {
+                "foreign": 0,
+                "indigenous": 0,
+                "residual_tags": 47,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 965914,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 0,
+                  "tags_dropped": 0
+                }
+              },
+              "genres": {
+                "S1A-con": {
+                  "documents_written": 67,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 145162,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S1A-ph": {
+                  "documents_written": 7,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 15982,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S1B-bdis": {
+                  "documents_written": 26,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 32610,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S1B-bint": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 16457,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S1B-btr": {
+                  "documents_written": 11,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 17181,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S1B-cr": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 16170,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S1B-les": {
+                  "documents_written": 14,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 41379,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S1B-parl": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 16085,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S2A-com": {
+                  "documents_written": 56,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 37888,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S2A-dem": {
+                  "documents_written": 14,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 20580,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S2A-leg": {
+                  "documents_written": 14,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 16835,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S2A-unsp": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 61657,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S2B-bnews": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 40910,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S2B-btal": {
+                  "documents_written": 43,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 40097,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "S2B-nbtal": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 20146,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W1A-ess": {
+                  "documents_written": 12,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21522,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W1A-ex": {
+                  "documents_written": 54,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21520,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W1B-bl": {
+                  "documents_written": 93,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 31638,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W1B-sl": {
+                  "documents_written": 45,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 43,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 31601,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2A-AHum": {
+                  "documents_written": 11,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21659,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2A-ANsc": {
+                  "documents_written": 11,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 2,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21825,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2A-ASsc": {
+                  "documents_written": 11,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21668,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2A-ATec": {
+                  "documents_written": 11,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 2,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21607,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2B-PHum": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21490,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2B-PNsc": {
+                  "documents_written": 19,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21460,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2B-PSsc": {
+                  "documents_written": 15,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21506,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2B-PTec": {
+                  "documents_written": 33,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21290,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2C-Pr": {
+                  "documents_written": 69,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 42319,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2D-SkHo": {
+                  "documents_written": 25,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21146,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2D-adm": {
+                  "documents_written": 27,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 20553,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2E-ed": {
+                  "documents_written": 28,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 21478,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                },
+                "W2F-nov": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 42493,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                }
+              }
+            },
+            "nz": {
+              "documents_written": 500,
+              "extras": {
+                "foreign": 452,
+                "indigenous": 1454,
+                "residual_tags": 1314,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 1226258,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 22284,
+                  "tags_dropped": 260649
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 96,
+                    "indigenous": 712,
+                    "residual_tags": 158,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 259168,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 7743,
+                      "tags_dropped": 94730
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 80,
+                  "extras": {
+                    "foreign": 94,
+                    "indigenous": 202,
+                    "residual_tags": 392,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 202421,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 4987,
+                      "tags_dropped": 48407
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 28,
+                    "indigenous": 234,
+                    "residual_tags": 270,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 182354,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 3910,
+                      "tags_dropped": 24658
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 18,
+                    "indigenous": 306,
+                    "residual_tags": 116,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 120401,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2666,
+                      "tags_dropped": 10826
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 64,
+                    "indigenous": 0,
+                    "residual_tags": 62,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 41799,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 641,
+                      "tags_dropped": 7326
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 12,
+                    "indigenous": 0,
+                    "residual_tags": 22,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 65819,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 614,
+                      "tags_dropped": 11587
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 14,
+                    "indigenous": 0,
+                    "residual_tags": 66,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 103284,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 511,
+                      "tags_dropped": 15576
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 122,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 99719,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 634,
+                      "tags_dropped": 14420
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 56,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 36831,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 254,
+                      "tags_dropped": 8767
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 24,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 44054,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 189,
+                      "tags_dropped": 8704
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 2,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 18846,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 17,
+                      "tags_dropped": 2543
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 126,
+                    "indigenous": 0,
+                    "residual_tags": 24,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 51562,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 118,
+                      "tags_dropped": 13105
+                    }
+                  }
+                }
+              }
+            },
+            "ph": {
+              "documents_written": 500,
+              "extras": {
+                "foreign": 4027,
+                "indigenous": 13196,
+                "residual_tags": 202,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 1102007,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 4633,
+                  "tags_dropped": 194005
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 102,
+                    "indigenous": 3946,
+                    "residual_tags": 41,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 228512,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2350,
+                      "tags_dropped": 74842
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 80,
+                  "extras": {
+                    "foreign": 431,
+                    "indigenous": 2765,
+                    "residual_tags": 75,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 184310,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 807,
+                      "tags_dropped": 31379
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 362,
+                    "indigenous": 3653,
+                    "residual_tags": 18,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 157398,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 593,
+                      "tags_dropped": 17935
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 216,
+                    "indigenous": 346,
+                    "residual_tags": 17,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 108612,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 506,
+                      "tags_dropped": 7236
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 154,
+                    "indigenous": 124,
+                    "residual_tags": 3,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 41224,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 105,
+                      "tags_dropped": 5148
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 288,
+                    "indigenous": 546,
+                    "residual_tags": 42,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 58865,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 70,
+                      "tags_dropped": 9176
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 1036,
+                    "indigenous": 457,
+                    "residual_tags": 3,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 84327,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 88,
+                      "tags_dropped": 11938
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 672,
+                    "indigenous": 455,
+                    "residual_tags": 2,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 86251,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 48,
+                      "tags_dropped": 13183
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 136,
+                    "indigenous": 252,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 44760,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 8,
+                      "tags_dropped": 7106
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 410,
+                    "indigenous": 216,
+                    "residual_tags": 1,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 41481,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 12,
+                      "tags_dropped": 6924
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 50,
+                    "indigenous": 46,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 20878,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 12,
+                      "tags_dropped": 2504
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 170,
+                    "indigenous": 390,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 45389,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 34,
+                      "tags_dropped": 6634
+                    }
+                  }
+                }
+              }
+            },
+            "sg": {
+              "documents_written": 500,
+              "extras": {
+                "foreign": 12,
+                "indigenous": 0,
+                "residual_tags": 311,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 941568,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 4056,
+                  "tags_dropped": 114325
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 143,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 198342,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2165,
+                      "tags_dropped": 51992
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 80,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 65,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 155195,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 800,
+                      "tags_dropped": 15157
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 26,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 128133,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 539,
+                      "tags_dropped": 9073
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 72,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 95438,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 322,
+                      "tags_dropped": 6611
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 37851,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 34,
+                      "tags_dropped": 2528
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 3,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 53738,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 34,
+                      "tags_dropped": 6608
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 2,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 72806,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 52,
+                      "tags_dropped": 5314
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 72679,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 38,
+                      "tags_dropped": 5687
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 36467,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 20,
+                      "tags_dropped": 2516
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 36366,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 20,
+                      "tags_dropped": 3826
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 10,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 18426,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 13,
+                      "tags_dropped": 1766
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 36127,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 19,
+                      "tags_dropped": 3247
+                    }
+                  }
+                }
+              }
+            },
+            "tt": {
+              "documents_written": 500,
+              "extras": {
+                "foreign": 695,
+                "indigenous": 182,
+                "residual_tags": 1530,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 995910,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 9998,
+                  "tags_dropped": 296031
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 60,
+                    "indigenous": 24,
+                    "residual_tags": 187,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 192417,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 3439,
+                      "tags_dropped": 116689
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 80,
+                  "extras": {
+                    "foreign": 437,
+                    "indigenous": 22,
+                    "residual_tags": 965,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 160633,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 2319,
+                      "tags_dropped": 68304
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 30,
+                    "indigenous": 26,
+                    "residual_tags": 101,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 143653,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 953,
+                      "tags_dropped": 35343
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 24,
+                    "indigenous": 26,
+                    "residual_tags": 4,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 101698,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 431,
+                      "tags_dropped": 13252
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 36,
+                    "indigenous": 0,
+                    "residual_tags": 217,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39682,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 714,
+                      "tags_dropped": 6171
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 24,
+                    "indigenous": 6,
+                    "residual_tags": 20,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 58182,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 931,
+                      "tags_dropped": 13470
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 24,
+                    "indigenous": 16,
+                    "residual_tags": 14,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 79928,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 308,
+                      "tags_dropped": 10810
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 40,
+                    "indigenous": 16,
+                    "residual_tags": 10,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 79776,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 297,
+                      "tags_dropped": 10151
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 2,
+                    "residual_tags": 5,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 41757,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 140,
+                      "tags_dropped": 6039
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 6,
+                    "indigenous": 0,
+                    "residual_tags": 6,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 38534,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 393,
+                      "tags_dropped": 7719
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 2,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 20012,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 38,
+                      "tags_dropped": 1995
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 12,
+                    "indigenous": 42,
+                    "residual_tags": 1,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39638,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 35,
+                      "tags_dropped": 6088
+                    }
+                  }
+                }
+              }
+            },
+            "tz": {
+              "documents_written": 245,
+              "extras": {
+                "foreign": 94,
+                "indigenous": 932,
+                "residual_tags": 1645,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 536767,
+                  "alter_name_placeholder": 520,
+                  "alter_transcriber_deletion": 2718,
+                  "crlf_removed": 0,
+                  "spans_dropped": 3,
+                  "tags_dropped": 5402
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 3,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 33,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 6591,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 30,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 389
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 29,
+                  "extras": {
+                    "foreign": 1,
+                    "indigenous": 59,
+                    "residual_tags": 407,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 92838,
+                      "alter_name_placeholder": 96,
+                      "alter_transcriber_deletion": 277,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 2999
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 39,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 56,
+                    "residual_tags": 312,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 76489,
+                      "alter_name_placeholder": 151,
+                      "alter_transcriber_deletion": 170,
+                      "crlf_removed": 0,
+                      "spans_dropped": 3,
+                      "tags_dropped": 1064
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 15,
+                    "indigenous": 66,
+                    "residual_tags": 359,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 59609,
+                      "alter_name_placeholder": 4,
+                      "alter_transcriber_deletion": 825,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 95
+                    }
+                  }
+                },
+                "W1C": {
+                  "documents_written": 11,
+                  "extras": {
+                    "foreign": 3,
+                    "indigenous": 3,
+                    "residual_tags": 20,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 19750,
+                      "alter_name_placeholder": 246,
+                      "alter_transcriber_deletion": 95,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 10
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 35,
+                  "extras": {
+                    "foreign": 53,
+                    "indigenous": 27,
+                    "residual_tags": 69,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 79399,
+                      "alter_name_placeholder": 1,
+                      "alter_transcriber_deletion": 196,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 82
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 34,
+                  "extras": {
+                    "foreign": 8,
+                    "indigenous": 209,
+                    "residual_tags": 135,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 65132,
+                      "alter_name_placeholder": 8,
+                      "alter_transcriber_deletion": 350,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 218
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 19,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 219,
+                    "residual_tags": 53,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 38987,
+                      "alter_name_placeholder": 8,
+                      "alter_transcriber_deletion": 171,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 223
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 9,
+                  "extras": {
+                    "foreign": 4,
+                    "indigenous": 0,
+                    "residual_tags": 13,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 19501,
+                      "alter_name_placeholder": 6,
+                      "alter_transcriber_deletion": 26,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 4
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 190,
+                    "residual_tags": 58,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39240,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 151,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 194
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 26,
+                  "extras": {
+                    "foreign": 10,
+                    "indigenous": 103,
+                    "residual_tags": 186,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39231,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 427,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 124
+                    }
+                  }
+                }
+              }
+            },
+            "tz-a": {
+              "documents_written": 19,
+              "extras": {
+                "foreign": 0,
+                "indigenous": 18,
+                "residual_tags": 45,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 19806,
+                  "alter_name_placeholder": 129,
+                  "alter_transcriber_deletion": 37,
+                  "crlf_removed": 0,
+                  "spans_dropped": 1,
+                  "tags_dropped": 127
+                }
+              },
+              "genres": {
+                "S2B": {
+                  "documents_written": 19,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 18,
+                    "residual_tags": 45,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 19806,
+                      "alter_name_placeholder": 129,
+                      "alter_transcriber_deletion": 37,
+                      "crlf_removed": 0,
+                      "spans_dropped": 1,
+                      "tags_dropped": 127
+                    }
+                  }
+                }
+              }
+            },
+            "tz-b": {
+              "documents_written": 21,
+              "extras": {
+                "foreign": 0,
+                "indigenous": 11,
+                "residual_tags": 68,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 18273,
+                  "alter_name_placeholder": 104,
+                  "alter_transcriber_deletion": 48,
+                  "crlf_removed": 0,
+                  "spans_dropped": 0,
+                  "tags_dropped": 116
+                }
+              },
+              "genres": {
+                "S1B": {
+                  "documents_written": 1,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 17,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 883,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 15,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 26
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 19,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 11,
+                    "residual_tags": 46,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 16056,
+                      "alter_name_placeholder": 89,
+                      "alter_transcriber_deletion": 28,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 79
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 1,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 5,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 1334,
+                      "alter_name_placeholder": 15,
+                      "alter_transcriber_deletion": 5,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 11
+                    }
+                  }
+                }
+              }
+            },
+            "tz-c": {
+              "documents_written": 4,
+              "extras": {
+                "foreign": 0,
+                "indigenous": 0,
+                "residual_tags": 10,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 2984,
+                  "alter_name_placeholder": 17,
+                  "alter_transcriber_deletion": 4,
+                  "crlf_removed": 0,
+                  "spans_dropped": 0,
+                  "tags_dropped": 35
+                }
+              },
+              "genres": {
+                "S1B": {
+                  "documents_written": 1,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 587,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 1
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 3,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 10,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 2397,
+                      "alter_name_placeholder": 17,
+                      "alter_transcriber_deletion": 4,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 34
+                    }
+                  }
+                }
+              }
+            },
+            "tz-d": {
+              "documents_written": 1,
+              "extras": {
+                "foreign": 0,
+                "indigenous": 0,
+                "residual_tags": 1,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 550,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 1,
+                  "crlf_removed": 0,
+                  "spans_dropped": 0,
+                  "tags_dropped": 0
+                }
+              },
+              "genres": {
+                "S2B": {
+                  "documents_written": 1,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 1,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 550,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 1,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 0
+                    }
+                  }
+                }
+              }
+            },
+            "ug": {
+              "documents_written": 480,
+              "extras": {
+                "foreign": 428,
+                "indigenous": 3112,
+                "residual_tags": 1115,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 1015087,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 14465,
+                  "tags_dropped": 363821
+                }
+              },
+              "genres": {
+                "S1A": {
+                  "documents_written": 100,
+                  "extras": {
+                    "foreign": 18,
+                    "indigenous": 522,
+                    "residual_tags": 821,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 221623,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 5935,
+                      "tags_dropped": 173306
+                    }
+                  }
+                },
+                "S1B": {
+                  "documents_written": 70,
+                  "extras": {
+                    "foreign": 30,
+                    "indigenous": 82,
+                    "residual_tags": 30,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 147056,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 1364,
+                      "tags_dropped": 61348
+                    }
+                  }
+                },
+                "S2A": {
+                  "documents_written": 60,
+                  "extras": {
+                    "foreign": 38,
+                    "indigenous": 256,
+                    "residual_tags": 7,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 121997,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 859,
+                      "tags_dropped": 27817
+                    }
+                  }
+                },
+                "S2B": {
+                  "documents_written": 50,
+                  "extras": {
+                    "foreign": 6,
+                    "indigenous": 384,
+                    "residual_tags": 34,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 102189,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 959,
+                      "tags_dropped": 18070
+                    }
+                  }
+                },
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 24,
+                    "indigenous": 36,
+                    "residual_tags": 124,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 42997,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 1244,
+                      "tags_dropped": 9526
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 436,
+                    "residual_tags": 32,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 66934,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 1743,
+                      "tags_dropped": 24513
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 224,
+                    "indigenous": 414,
+                    "residual_tags": 17,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 83951,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 730,
+                      "tags_dropped": 11604
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 56,
+                    "indigenous": 558,
+                    "residual_tags": 40,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 83430,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 694,
+                      "tags_dropped": 13111
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 28,
+                    "indigenous": 0,
+                    "residual_tags": 4,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 41109,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 194,
+                      "tags_dropped": 6249
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 50,
+                    "residual_tags": 6,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 41875,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 585,
+                      "tags_dropped": 8661
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 2,
+                    "indigenous": 32,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 20585,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 76,
+                      "tags_dropped": 2742
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 342,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 41341,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 82,
+                      "tags_dropped": 6874
+                    }
+                  }
+                }
+              }
+            },
+            "us": {
+              "documents_written": 200,
+              "extras": {
+                "foreign": 122,
+                "indigenous": 0,
+                "residual_tags": 74,
+                "substitutions": {
+                  "alter_horizontal_whitespace": 410214,
+                  "alter_name_placeholder": 0,
+                  "alter_transcriber_deletion": 0,
+                  "crlf_removed": 0,
+                  "spans_dropped": 55,
+                  "tags_dropped": 38442
+                }
+              },
+              "genres": {
+                "W1A": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 5,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 41226,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 2594
+                    }
+                  }
+                },
+                "W1B": {
+                  "documents_written": 30,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 30,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 60967,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 1,
+                      "tags_dropped": 5725
+                    }
+                  }
+                },
+                "W2A": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 98,
+                    "indigenous": 0,
+                    "residual_tags": 9,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 81467,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 48,
+                      "tags_dropped": 7219
+                    }
+                  }
+                },
+                "W2B": {
+                  "documents_written": 40,
+                  "extras": {
+                    "foreign": 24,
+                    "indigenous": 0,
+                    "residual_tags": 12,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 85200,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 1,
+                      "tags_dropped": 7896
+                    }
+                  }
+                },
+                "W2C": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 6,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 40098,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 5004
+                    }
+                  }
+                },
+                "W2D": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 2,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 39955,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 3826
+                    }
+                  }
+                },
+                "W2E": {
+                  "documents_written": 10,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 0,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 19580,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 0,
+                      "tags_dropped": 2025
+                    }
+                  }
+                },
+                "W2F": {
+                  "documents_written": 20,
+                  "extras": {
+                    "foreign": 0,
+                    "indigenous": 0,
+                    "residual_tags": 10,
+                    "substitutions": {
+                      "alter_horizontal_whitespace": 41721,
+                      "alter_name_placeholder": 0,
+                      "alter_transcriber_deletion": 0,
+                      "crlf_removed": 0,
+                      "spans_dropped": 5,
+                      "tags_dropped": 4153
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "documents_dropped": {},
+          "documents_seen": 8089,
+          "documents_written": 8089,
+          "duplicate_ids": 0,
+          "extras": {
+            "foreign": 8374,
+            "indigenous": 36103,
+            "residual_tags": 20557,
+            "substitutions": {
+              "alter_horizontal_whitespace": 15797657,
+              "alter_name_placeholder": 2527,
+              "alter_transcriber_deletion": 4724,
+              "crlf_removed": 0,
+              "spans_dropped": 140249,
+              "tags_dropped": 3231351
+            }
+          }
+        },
+        "lince": {
+          "components": {
+            "lid_hineng": {
+              "documents_written": 5567,
+              "extras": {
+                "average_cmi": 0.17613391155525102,
+                "labels_observed": [
+                  "ambiguous",
+                  "fw",
+                  "lang1",
+                  "lang2",
+                  "mixed",
+                  "ne",
+                  "other",
+                  "unk"
+                ]
+              }
+            },
+            "lid_nepeng": {
+              "documents_written": 9783,
+              "extras": {
+                "average_cmi": 0.22828246096177165,
+                "labels_observed": [
+                  "ambiguous",
+                  "lang1",
+                  "lang2",
+                  "mixed",
+                  "ne",
+                  "other"
+                ]
+              }
+            },
+            "lid_spaeng": {
+              "documents_written": 24362,
+              "extras": {
+                "average_cmi": 0.11009043581385228,
+                "labels_observed": [
+                  "ambiguous",
+                  "fw",
+                  "lang1",
+                  "lang2",
+                  "mixed",
+                  "ne",
+                  "other",
+                  "unk"
+                ]
+              }
+            },
+            "ner_hineng": {
+              "documents_written": 2079,
+              "extras": {
+                "average_cmi": 0.19989851535728423,
+                "labels_observed": [
+                  "en",
+                  "hi",
+                  "rest"
+                ]
+              }
+            },
+            "ner_spaeng": {
+              "documents_written": 67223,
+              "extras": {
+                "average_cmi": 0.08568172580892282,
+                "labels_observed": [
+                  "ambiguous",
+                  "fw",
+                  "lang1",
+                  "lang2",
+                  "mixed",
+                  "ne",
+                  "other",
+                  "unk"
+                ]
+              }
+            },
+            "pos_hineng": {
+              "documents_written": 1489,
+              "extras": {
+                "average_cmi": 0.20277662214714867,
+                "labels_observed": [
+                  "en",
+                  "hi",
+                  "rest"
+                ]
+              }
+            },
+            "pos_spaeng": {
+              "documents_written": 42911,
+              "extras": {
+                "average_cmi": 0.028611231204152668,
+                "labels_observed": [
+                  "UNK",
+                  "eng",
+                  "eng&spa",
+                  "spa"
+                ]
+              }
+            },
+            "sa_spaeng": {
+              "documents_written": 18789,
+              "extras": {
+                "average_cmi": 0.2349251452901678,
+                "labels_observed": [
+                  "ambiguous",
+                  "fw",
+                  "lang1",
+                  "lang2",
+                  "mixed",
+                  "ne",
+                  "other",
+                  "unk"
+                ]
+              }
+            }
+          },
+          "documents_dropped": {},
+          "documents_seen": 172203,
+          "documents_written": 172203,
+          "duplicate_ids": 0,
+          "extras": {
+            "average_cmi": 0.10461431655333836,
+            "labels_observed": [
+              "UNK",
+              "ambiguous",
+              "en",
+              "eng",
+              "eng&spa",
+              "fw",
+              "hi",
+              "lang1",
+              "lang2",
+              "mixed",
+              "ne",
+              "other",
+              "rest",
+              "spa",
+              "unk"
+            ]
+          }
+        }
+      },
+      "execution": {
+        "slurm_job_id": "36952108"
+      },
+      "output_files": {
+        "leu_data": "output/preprocess/leu_data.jsonl.gz",
+        "metadata": "output/preprocess/metadata_source.jsonl.gz"
+      },
+      "started_at": "2026-07-08T23:49:25.959876+00:00",
+      "status": "success",
+      "total_seconds": 3002.501386
+    }
+  }
+}
