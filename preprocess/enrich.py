@@ -31,7 +31,7 @@ def main():
     # ================ Derive fields local to the document itself ================
     # for document, source_metadata in zip(leu_data, metadata_source)
         # ==== Clustering
-        # Assign cluster ID using preprocess/enrich.json
+        # Assign cluster ID using preprocess/config/enrich.json
         # ==== Tokens
         # tokenize
         # record token count and accumulate
