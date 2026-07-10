@@ -2,6 +2,327 @@
   "commit": "6cad3c1",
   "created_at": "2026-07-08T23:49:25.959757+00:00",
   "steps": {
+    "enrich": {
+      "_notes": "",
+      "args": {
+        "config_path": "preprocess/config/enrich.json",
+        "leu_data": "output/preprocess/leu_data.jsonl.gz",
+        "metadata_source": "output/preprocess/metadata_source.jsonl.gz",
+        "notes": "",
+        "output_dir": "output/preprocess"
+      },
+      "clusters": {
+        "1": {
+          "description": "Traditional L1 varieties",
+          "documents_written": 655044,
+          "sources": {
+            "glowbe": {
+              "components": {
+                "gb": {
+                  "documents_written": 381483,
+                  "tokens": 353679205
+                },
+                "us": {
+                  "documents_written": 273061,
+                  "tokens": 314680116
+                }
+              },
+              "documents_written": 654544,
+              "tokens": 668359321
+            },
+            "ice": {
+              "components": {
+                "gb": {
+                  "documents_written": 500,
+                  "tokens": 1464202
+                }
+              },
+              "documents_written": 500,
+              "tokens": 1464202
+            }
+          },
+          "tokens": 669823523
+        },
+        "2": {
+          "description": "High-contact L1 varieties",
+          "documents_written": 450799,
+          "sources": {
+            "glowbe": {
+              "components": {
+                "au": {
+                  "documents_written": 128360,
+                  "tokens": 128586023
+                },
+                "ca": {
+                  "documents_written": 135604,
+                  "tokens": 125201119
+                },
+                "ie": {
+                  "documents_written": 101985,
+                  "tokens": 92458297
+                },
+                "nz": {
+                  "documents_written": 82651,
+                  "tokens": 74383023
+                }
+              },
+              "documents_written": 448600,
+              "tokens": 420628462
+            },
+            "ice": {
+              "components": {
+                "au": {
+                  "documents_written": 499,
+                  "tokens": 1271646
+                },
+                "ca": {
+                  "documents_written": 500,
+                  "tokens": 1349967
+                },
+                "ie": {
+                  "documents_written": 500,
+                  "tokens": 1230584
+                },
+                "nz": {
+                  "documents_written": 500,
+                  "tokens": 1638362
+                },
+                "us": {
+                  "documents_written": 200,
+                  "tokens": 578900
+                }
+              },
+              "documents_written": 2199,
+              "tokens": 6069459
+            }
+          },
+          "tokens": 426697921
+        },
+        "3": {
+          "description": "Indigenized L2 varieties",
+          "documents_written": 421823,
+          "sources": {
+            "glowbe": {
+              "components": {
+                "bd": {
+                  "documents_written": 44984,
+                  "tokens": 37523027
+                },
+                "hk": {
+                  "documents_written": 43875,
+                  "tokens": 38070031
+                },
+                "in": {
+                  "documents_written": 113636,
+                  "tokens": 90389790
+                },
+                "lk": {
+                  "documents_written": 38371,
+                  "tokens": 41725080
+                },
+                "my": {
+                  "documents_written": 44969,
+                  "tokens": 39480272
+                },
+                "ph": {
+                  "documents_written": 45951,
+                  "tokens": 40652273
+                },
+                "pk": {
+                  "documents_written": 42734,
+                  "tokens": 47566651
+                },
+                "sg": {
+                  "documents_written": 45303,
+                  "tokens": 41444339
+                }
+              },
+              "documents_written": 419823,
+              "tokens": 376851463
+            },
+            "ice": {
+              "components": {
+                "hk": {
+                  "documents_written": 500,
+                  "tokens": 1724303
+                },
+                "in": {
+                  "documents_written": 500,
+                  "tokens": 1496994
+                },
+                "ph": {
+                  "documents_written": 500,
+                  "tokens": 1502628
+                },
+                "sg": {
+                  "documents_written": 500,
+                  "tokens": 1340716
+                }
+              },
+              "documents_written": 2000,
+              "tokens": 6064641
+            }
+          },
+          "tokens": 382916104
+        },
+        "4": {
+          "description": "English-based Pidgins and Creoles",
+          "documents_written": 266025,
+          "sources": {
+            "glowbe": {
+              "components": {
+                "gh": {
+                  "documents_written": 47329,
+                  "tokens": 37232150
+                },
+                "jm": {
+                  "documents_written": 46707,
+                  "tokens": 37117807
+                },
+                "ke": {
+                  "documents_written": 45912,
+                  "tokens": 38591873
+                },
+                "ng": {
+                  "documents_written": 37265,
+                  "tokens": 39122290
+                },
+                "tz": {
+                  "documents_written": 41316,
+                  "tokens": 33444319
+                },
+                "za": {
+                  "documents_written": 44106,
+                  "tokens": 40547279
+                }
+              },
+              "documents_written": 262635,
+              "tokens": 226055718
+            },
+            "ice": {
+              "components": {
+                "gr": {
+                  "documents_written": 377,
+                  "tokens": 464177
+                },
+                "jm": {
+                  "documents_written": 499,
+                  "tokens": 1340701
+                },
+                "ke": {
+                  "documents_written": 304,
+                  "tokens": 741448
+                },
+                "ke-a": {
+                  "documents_written": 17,
+                  "tokens": 23364
+                },
+                "ke-b": {
+                  "documents_written": 17,
+                  "tokens": 24244
+                },
+                "ke-h": {
+                  "documents_written": 10,
+                  "tokens": 29967
+                },
+                "ng": {
+                  "documents_written": 896,
+                  "tokens": 1279408
+                },
+                "tt": {
+                  "documents_written": 500,
+                  "tokens": 1213372
+                },
+                "tz": {
+                  "documents_written": 245,
+                  "tokens": 605731
+                },
+                "tz-a": {
+                  "documents_written": 19,
+                  "tokens": 22195
+                },
+                "tz-b": {
+                  "documents_written": 21,
+                  "tokens": 20487
+                },
+                "tz-c": {
+                  "documents_written": 4,
+                  "tokens": 3210
+                },
+                "tz-d": {
+                  "documents_written": 1,
+                  "tokens": 626
+                },
+                "ug": {
+                  "documents_written": 480,
+                  "tokens": 1184034
+                }
+              },
+              "documents_written": 3390,
+              "tokens": 6952964
+            }
+          },
+          "tokens": 233008682
+        },
+        "5": {
+          "description": "English code-switching",
+          "documents_written": 172203,
+          "sources": {
+            "lince": {
+              "components": {
+                "lid_hineng": {
+                  "documents_written": 5567,
+                  "tokens": 156841
+                },
+                "lid_nepeng": {
+                  "documents_written": 9783,
+                  "tokens": 262955
+                },
+                "lid_spaeng": {
+                  "documents_written": 24362,
+                  "tokens": 535421
+                },
+                "ner_hineng": {
+                  "documents_written": 2079,
+                  "tokens": 74554
+                },
+                "ner_spaeng": {
+                  "documents_written": 67223,
+                  "tokens": 1586500
+                },
+                "pos_hineng": {
+                  "documents_written": 1489,
+                  "tokens": 57994
+                },
+                "pos_spaeng": {
+                  "documents_written": 42911,
+                  "tokens": 394374
+                },
+                "sa_spaeng": {
+                  "documents_written": 18789,
+                  "tokens": 535061
+                }
+              },
+              "documents_written": 172203,
+              "tokens": 3603700
+            }
+          },
+          "tokens": 3603700
+        }
+      },
+      "completed_at": "2026-07-10T06:10:49.167615+00:00",
+      "documents_truncated": 19200,
+      "enrich_errors": {},
+      "execution": {
+        "slurm_job_id": "36981296"
+      },
+      "output_files": {
+        "metadata": "output/preprocess/metadata_enriched.jsonl.gz"
+      },
+      "started_at": "2026-07-10T04:25:10.235287+00:00",
+      "status": "success",
+      "total_seconds": 6338.932328
+    },
     "unify": {
       "_notes": "",
       "args": {
