@@ -133,8 +133,11 @@ def main(args):
                 component_stats["documents_written"] += 1
                 component_stats["tokens"] += token_count
 
-        print("Debug")
-        print(json.dumps(stats, indent=2, default=str))
+                # Log to console
+                if line_num % 10000 == 0:
+                    print(f"Processed {line_num} documents")
+                    manifest.save()
+                    
         # ========================== PASS 2: Global fields =========================
         # Pre-compute percentile lookups
         token_percentiles = percentiles.compute_lookups(all_token_counts)
