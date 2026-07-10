@@ -14,7 +14,7 @@
       "clusters": {
         "1": {
           "description": "Traditional L1 varieties",
-          "documents_written": 655044,
+          "documents_written": 655244,
           "sources": {
             "glowbe": {
               "components": {
@@ -35,17 +35,21 @@
                 "gb": {
                   "documents_written": 500,
                   "tokens": 1464202
+                },
+                "us": {
+                  "documents_written": 200,
+                  "tokens": 578900
                 }
               },
-              "documents_written": 500,
-              "tokens": 1464202
+              "documents_written": 700,
+              "tokens": 2043102
             }
           },
-          "tokens": 669823523
+          "tokens": 670402423
         },
         "2": {
           "description": "High-contact L1 varieties",
-          "documents_written": 450799,
+          "documents_written": 450599,
           "sources": {
             "glowbe": {
               "components": {
@@ -86,17 +90,13 @@
                 "nz": {
                   "documents_written": 500,
                   "tokens": 1638362
-                },
-                "us": {
-                  "documents_written": 200,
-                  "tokens": 578900
                 }
               },
-              "documents_written": 2199,
-              "tokens": 6069459
+              "documents_written": 1999,
+              "tokens": 5490559
             }
           },
-          "tokens": 426697921
+          "tokens": 426119021
         },
         "3": {
           "description": "Indigenized L2 varieties",
@@ -310,18 +310,18 @@
           "tokens": 3603700
         }
       },
-      "completed_at": "2026-07-10T06:10:49.167615+00:00",
+      "completed_at": "2026-07-10T08:38:40.737763+00:00",
       "documents_truncated": 19200,
       "enrich_errors": {},
       "execution": {
-        "slurm_job_id": "36981296"
+        "slurm_job_id": "36982413"
       },
       "output_files": {
         "metadata": "output/preprocess/metadata_enriched.jsonl.gz"
       },
-      "started_at": "2026-07-10T04:25:10.235287+00:00",
+      "started_at": "2026-07-10T06:54:22.682569+00:00",
       "status": "success",
-      "total_seconds": 6338.932328
+      "total_seconds": 6258.055194
     },
     "unify": {
       "_notes": "",
