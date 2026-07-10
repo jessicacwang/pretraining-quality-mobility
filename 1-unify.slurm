@@ -11,4 +11,4 @@
 
 
 # command:
-/gscratch/scrubbed/jcmw614/conda/envs/thesis-env/bin/python -m preprocess.unify
+/gscratch/stf/jcmw614/conda/envs/thesis-env/bin/python -m preprocess.unify
