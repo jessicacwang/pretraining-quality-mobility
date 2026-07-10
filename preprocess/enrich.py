@@ -137,7 +137,7 @@ def main(args):
                 if line_num % 10000 == 0:
                     print(f"Processed {line_num} documents")
                     manifest.save()
-                    
+
         # ========================== PASS 2: Global fields =========================
         # Pre-compute percentile lookups
         token_percentiles = percentiles.compute_lookups(all_token_counts)
@@ -166,6 +166,7 @@ def main(args):
         manifest.fail_step("enrich", str(e))
         raise
     finally:
+        Path("metadata_enriched_tmp").unlink(missing_ok=True)
         manifest.save()
 
     return
