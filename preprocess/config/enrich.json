@@ -1,9 +1,68 @@
 {
-    "cluster_mapping": {
-        "1": {},
-        "2": {},
-        "3": {},
-        "4": {},
-        "5": {}
+    "descriptions": {
+        "1":"Traditional L1 varieties",
+        "2": "High-contact L1 varieties",
+        "3": "Indigenized L2 varieties",
+        "4": "English-based Pidgins and Creoles",
+        "5": "English code-switching"
+    },
+    "corpora": {
+        "glowbe": {
+            "default": null,
+            "components": {
+                "au": "2",
+                "bd": "3",
+                "ca": "2",
+                "gb": "1",
+                "gh": "4",
+                "hk": "3",
+                "ie": "2",
+                "in": "3",
+                "jm": "4",
+                "ke": "4",
+                "lk": "3",
+                "my": "3",
+                "ng": "4",
+                "nz": "2",
+                "ph": "3",
+                "pk": "3",
+                "sg": "3",
+                "tz": "4",
+                "us": "1",
+                "za": "4"
+            }
+        },
+        "ice": {
+            "default":null,
+            "components": {
+                "au": "2",
+                "ca": "2",
+                "gb": "1",
+                "gr": "4",
+                "hk": "3",
+                "ie": "2",
+                "in": "3",
+                "jm": "4",
+                "ke": "4",
+                "ke-a": "4",
+                "ke-b": "4",
+                "ke-h": "4",
+                "ng": "4",
+                "nz": "2",
+                "ph": "3",
+                "sg": "3",
+                "tt": "4",
+                "tz": "4",
+                "tz-a": "4",
+                "tz-b": "4",
+                "tz-c": "4",
+                "tz-d": "4",
+                "ug": "4",
+                "us": "1"
+            }
+        },
+        "lince": {
+            "default": "5"
+        }
     }
 }

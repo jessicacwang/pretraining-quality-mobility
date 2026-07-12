@@ -1038,7 +1038,6 @@
                 "slurm_job_id": null
             },
             "args": {
-                "--leu_data": "path/to/leu_data.jsonl.gz",
                 "--config": "path/to/enrich.json"
             },
             "output": {
@@ -1047,99 +1046,113 @@
             "clusters": {
                 "1": {
                     "description": "Traditional L1 varieties",
-                    "sources": ["ice", "glowbe"],
                     "documents_written": null,
                     "total_tokens": null,
-                    "components":{
+                    "sources":{
                         "ice": {
-                            "ICE-USA": {"documents_written": null, "tokens": null},
-                            "ICE-GB": {"documents_written": null, "tokens": null}
-                        },
+                            "components": {
+                                "us": {"documents_written": null, "tokens": null},
+                                "gb": {"documents_written": null, "tokens": null}
+                                }
+                            },
                         "glowbe": {
-                            "US": {"documents_written": null, "tokens": null},
-                            "GB": {"documents_written": null, "tokens": null}
+                            "components": {
+                                "US": {"documents_written": null, "tokens": null},
+                                "GB": {"documents_written": null, "tokens": null}
+                            }
                         }
                     }
                 },
                 "2": {
                     "description": "High-contact L1 varieties",
-                    "sources": ["ice", "glowbe"],
                     "documents_written": null,
                     "total_tokens": null,
-                    "components":{
+                    "sources":{
                         "ice": {
-                            "ICE-CAN": {"documents_written": null, "tokens": null},
-                            "ICE-IRL": {"documents_written": null, "tokens": null},
-                            "ICE-AUS": {"documents_written": null, "tokens": null},
-                            "ICE-NZ": {"documents_written": null, "tokens": null}
+                            "components": {
+                                "ca": {"documents_written": null, "tokens": null},
+                                "ie": {"documents_written": null, "tokens": null},
+                                "au": {"documents_written": null, "tokens": null},
+                                "nz": {"documents_written": null, "tokens": null}
+                            }
                         },
                         "glowbe": {
-                            "CA": {"documents_written": null, "tokens": null},
-                            "IE": {"documents_written": null, "tokens": null},
-                            "AU": {"documents_written": null, "tokens": null},
-                            "NZ": {"documents_written": null, "tokens": null}
+                            "components": {
+                                "ca": {"documents_written": null, "tokens": null},
+                                "ie": {"documents_written": null, "tokens": null},
+                                "au": {"documents_written": null, "tokens": null},
+                                "nz": {"documents_written": null, "tokens": null}
+                            }
                         }
                     }
                 },
                 "3": {
                     "description": "Indigenized L2 varieties",
-                    "sources": ["ice", "glowbe"],
                     "documents_written": null,
                     "total_tokens": null,
-                    "components":{
+                    "sources":{
                         "ice": {
-                            "ICE-IN": {"documents_written": null, "tokens": null},
-                            "ICE-SG": {"documents_written": null, "tokens": null},
-                            "ICE-PH": {"documents_written": null, "tokens": null},
-                            "ICE-HK": {"documents_written": null, "tokens": null}
+                            "components": {
+                                "in": {"documents_written": null, "tokens": null},
+                                "sg": {"documents_written": null, "tokens": null},
+                                "ph": {"documents_written": null, "tokens": null},
+                                "hk": {"documents_written": null, "tokens": null}
+                            }
                         },
                         "glowbe": {
-                            "IN": {"documents_written": null, "tokens": null},
-                            "LK": {"documents_written": null, "tokens": null},
-                            "PK": {"documents_written": null, "tokens": null},
-                            "BD": {"documents_written": null, "tokens": null},
-                            "SG": {"documents_written": null, "tokens": null},
-                            "MY": {"documents_written": null, "tokens": null},
-                            "PH": {"documents_written": null, "tokens": null},
-                            "HK": {"documents_written": null, "tokens": null}
+                            "components": {
+                                "in": {"documents_written": null, "tokens": null},
+                                "lk": {"documents_written": null, "tokens": null},
+                                "pk": {"documents_written": null, "tokens": null},
+                                "bd": {"documents_written": null, "tokens": null},
+                                "sg": {"documents_written": null, "tokens": null},
+                                "my": {"documents_written": null, "tokens": null},
+                                "ph": {"documents_written": null, "tokens": null},
+                                "hk": {"documents_written": null, "tokens": null}
+                            }
                         }
                     }
                 },
                 "4": {
                     "description": "English-based Pidgins and Creoles",
-                    "sources": ["ice", "glowbe"],
                     "documents_written": null,
                     "total_tokens": null,
-                    "components":{
+                    "sources":{
                         "ice": {
-                            "ICE-NG": {"documents_written": null, "tokens": null},
-                            "ICE-EA": {"documents_written": null, "tokens": null},
-                            "ICE-UG": {"documents_written": null, "tokens": null},
-                            "ICE-JA": {"documents_written": null, "tokens": null},
-                            "ICE-TT": {"documents_written": null, "tokens": null},
-                            "ICE-GBR": {"documents_written": null, "tokens": null}
+                            "components": {
+                                "ng": {"documents_written": null, "tokens": null},
+                                "ke": {"documents_written": null, "tokens": null},
+                                "tz": {"documents_written": null, "tokens": null},
+                                "ug": {"documents_written": null, "tokens": null},
+                                "jm": {"documents_written": null, "tokens": null},
+                                "tt": {"documents_written": null, "tokens": null},
+                                "gr": {"documents_written": null, "tokens": null}
+                            }
                         },
                         "glowbe": {
-                            "ZA": {"documents_written": null, "tokens": null},
-                            "NG": {"documents_written": null, "tokens": null},
-                            "KE": {"documents_written": null, "tokens": null},
-                            "GH": {"documents_written": null, "tokens": null},
-                            "TZ": {"documents_written": null, "tokens": null},
-                            "JM": {"documents_written": null, "tokens": null}
+                            "components": {
+                                "za": {"documents_written": null, "tokens": null},
+                                "ng": {"documents_written": null, "tokens": null},
+                                "ke": {"documents_written": null, "tokens": null},
+                                "gh": {"documents_written": null, "tokens": null},
+                                "tz": {"documents_written": null, "tokens": null},
+                                "jm": {"documents_written": null, "tokens": null}
+                            }
                         }
                     }
                 },
                 "5": {
                     "description": "English code-switching",
-                    "sources": ["lince"],
                     "documents_written": null,
                     "total_tokens": null,
-                    "components":{
+                    "sources":{
                         "lince": {
-                            "lid_hineng": {"documents_written": null, "tokens": null},
-                            "lid_nepeng": {"documents_written": null, "tokens": null},
-                            "lid_spaeng": {"documents_written": null, "tokens": null},
-                            "ner_hineng": {"documents_written": null, "tokens": null}
+                            "components": {
+                                "lid_hineng": {"documents_written": null, "tokens": null},
+                                "lid_nepeng": {"documents_written": null, "tokens": null},
+                                "lid_spaeng": {"documents_written": null, "tokens": null},
+                                "ner_hineng": {"documents_written": null, "tokens": null}
+                            }
                         }
                     }
                 }

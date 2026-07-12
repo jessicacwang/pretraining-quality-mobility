@@ -62,12 +62,16 @@ class BaseManifest:
             return dict(obj)
         raise TypeError(f"Type {type(obj)} not serializable")
 
+    def __getitem__(self, key):
+        """Allow subscript access: manifest['steps']['enrich']"""
+        return self.data.get(key)
+
     # ==========================================================================
     # Step execution
     # ==========================================================================
     def start_step(self, step: str, notes: Optional[str] = None) -> None:
         # initialize the current step field
-        self.data["steps"].setdefault(step, {})
+        self.data["steps"][step] = {}
 
         self.data["steps"][step].update(
             {
