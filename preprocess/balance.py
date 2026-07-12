@@ -174,9 +174,6 @@ def main(args):
                 output_key = id_to_output_key.get(doc_id)
 
                 if output_key is None:
-                    print(
-                        f"Warning: no valid output file for LEU doc at line {line_num}"
-                    )
                     continue
 
                 writers[output_key].write(json.dumps(doc) + "\n")
