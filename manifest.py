@@ -61,6 +61,11 @@ class BaseManifest:
         if isinstance(obj, (Counter, defaultdict)):
             return dict(obj)
         raise TypeError(f"Type {type(obj)} not serializable")
+
+    def __getitem__(self, key):
+        """Allow subscript access: manifest['steps']['enrich']"""
+        return self.data.get(key)
+
     # ==========================================================================
     # Step execution
     # ==========================================================================

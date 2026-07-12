@@ -1,4 +1,5 @@
 """Loads extracted and adapted LEU documents, activate Manifest tracking and writes to output/preprocess"""
+
 from preprocess.adapters.glowbe import GloWbeAdapter
 from preprocess.adapters.ice import ICEAdapter
 from preprocess.adapters.lince import LinCEAdapter
@@ -8,7 +9,8 @@ import json
 import argparse
 from pathlib import Path
 from utils import load_config
-    
+
+
 def main(args):
     # Prepare output dir
     output_dir = Path(args.output_dir)
@@ -16,16 +18,16 @@ def main(args):
 
     # load Manifest, initializing if it doesn't exist
     manifest = PreprocessManifest(f"{args.output_dir}/manifest.json")
-    
+
     manifest.start_step("unify", args.notes)
     manifest.set_args("unify", vars(args))
 
     output_files = {
         "leu_data": f"{args.output_dir}/leu_data.jsonl.gz",
-        "metadata": f"{args.output_dir}/metadata_source.jsonl.gz"
+        "metadata": f"{args.output_dir}/metadata_source.jsonl.gz",
     }
     manifest.set_output_files("unify", output_files)
-    
+
     # load unify config
     config = load_config(args.config_path)
     # open metadata writer
@@ -34,24 +36,25 @@ def main(args):
     adapters = [
         LinCEAdapter(
             config["corpora"]["lince"]["root_path"],
-            config["corpora"]["lince"]["file_pattern"]
-        ), 
+            config["corpora"]["lince"]["file_pattern"],
+        ),
         ICEAdapter(
             config["corpora"]["ice"]["root_path"],
             config["corpora"]["ice"]["file_pattern"],
-            config["corpora"]["ice"]["tag_registry"]
-        ), 
+            config["corpora"]["ice"]["tag_registry"],
+        ),
         GloWbeAdapter(
             config["corpora"]["glowbe"]["root_path"],
-            config["corpora"]["glowbe"]["file_pattern"]
+            config["corpora"]["glowbe"]["file_pattern"],
         ),
-        ]
+    ]
     try:
         # open leu_data writer, open metadata writer
-        with gzip.open(output_files["leu_data"], "wt") as leu_gz, \
-            gzip.open(output_files["metadata"], "wt") as meta_gz:
+        with gzip.open(output_files["leu_data"], "wt") as leu_gz, gzip.open(
+            output_files["metadata"], "wt"
+        ) as meta_gz:
 
-            for corpus_adapter in adapters:            
+            for corpus_adapter in adapters:
                 # Prepare adapter
                 print(f"\nProcessing {corpus_adapter.name}")
                 corpus_adapter.prepare()
@@ -62,26 +65,27 @@ def main(args):
                     for d in corpus_adapter.iter_documents():
                         # write text record
                         leu_gz.write(json.dumps({"id": d.id, "text": d.text}) + "\n")
-                        
+
                         # write metdata record
                         meta_gz.write(json.dumps({"id": d.id} | d.metadata) + "\n")
-                        
+
                         doc_count += 1
                         if doc_count % 10000 == 0:
                             print(f"    Processed {doc_count} documents...")
-                        
+
                     stats = corpus_adapter.get_stats()
                     manifest.set_unify_stats(corpus_adapter.name, stats)
-                    print(f"    Completed: {stats['documents_written']} written, "
-                        f"    {sum(stats['documents_dropped'].values())} dropped")
+                    print(
+                        f"    Completed: {stats['documents_written']} written, "
+                        f"    {sum(stats['documents_dropped'].values())} dropped"
+                    )
                 except Exception as e:
                     print(f"    [!!] Error processing {corpus_adapter.name}: {e}")
                     try:
                         stats = corpus_adapter.get_stats()
-                        manifest.set_unify_stats(corpus_adapter.name, {
-                            "error": str(e),
-                            **stats
-                        })
+                        manifest.set_unify_stats(
+                            corpus_adapter.name, {"error": str(e), **stats}
+                        )
                     except:
                         pass
                     raise
@@ -94,12 +98,13 @@ def main(args):
     except Exception as e:
         manifest.fail_step("unify", str(e))
         print(f"\n**UNIFY FAILED:** {e}")
-        raise 
+        raise
     finally:
         # save manifest
         manifest.save()
-        
+
         return
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
