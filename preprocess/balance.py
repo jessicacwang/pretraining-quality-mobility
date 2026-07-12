@@ -41,6 +41,11 @@ def main(args):
 
     manifest.set_output_files("balance", output_files)
 
+     # Create all output file handles
+    writers = {}
+    for key, path in output_files.items():
+        writers[key] = gzip.open(path, "wt")
+
     # compute token budget and update manifest with targets
     if strategy == "balanced":
         budget = compute_token_budget(manifest, validation_pct, source_allocation)
@@ -75,7 +80,7 @@ def main(args):
                 # Skip all LinCE documents
                 if doc_id.startswith("lince"):
                     continue
-                
+
                 id_to_tokens[doc_id] = doc_tokens
                 all_cluster_ids[doc_cluster][doc_source].append(doc_id)
         # =========================== ACCUMULATE IDs ===========================
@@ -147,16 +152,10 @@ def main(args):
             for source, ids in sources.items():
                 for doc_id in ids:
                     id_to_output_key[doc_id] = cluster_id
-
         for cluster_id, sources in validation_ids.items():
             for source, ids in sources.items():
                 for doc_id in ids:
                     id_to_output_key[doc_id] = "validation"
-
-        # Create all output file handles
-        writers = {}
-        for key, path in output_files.items():
-            writers[key] = gzip.open(path, "wt")
 
         # Load LEU data and use map to write records
         with gzip.open(config["leu_data"], "rt") as leu_data:
@@ -165,6 +164,7 @@ def main(args):
                     doc = json.loads(leu_line)
                 except json.JSONDecodeError as e:
                     print(f"Warning: JSON decode error at line {line_num}: {e}")
+                    continue
 
                 doc_id = doc.get("id")
 
@@ -180,9 +180,6 @@ def main(args):
                     continue
 
                 writers[output_key].write(json.dumps(doc) + "\n")
-        # Close output writers
-        for writer in writers.values():
-            writer.close()
 
         # Register completed step in manifest
         manifest.end_step("balance")
@@ -191,6 +188,9 @@ def main(args):
         manifest.fail_step("balance", str(e))
         raise
     finally:
+        # Close output writers
+        for writer in writers.values():
+            writer.close()
         manifest.save()
     return
 
