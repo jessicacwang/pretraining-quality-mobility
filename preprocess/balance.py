@@ -16,6 +16,7 @@ def main(args):
     random.seed(args.random_seed)
 
     # Load config
+    # TODO: restructure config to toggle between sampling strategies - update all config access below
     config = load_config(args.config_path)
     strategy = config["strategy"]
     validation_pct = config["validation_pct"]
@@ -47,6 +48,7 @@ def main(args):
         writers[key] = gzip.open(path, "wt")
 
     # compute token budget and update manifest with targets
+    # TODO: implement a function for the full sampling strategy
     if strategy == "balanced":
         budget = compute_token_budget(manifest, validation_pct, source_allocation)
         manifest.set_balance_targets(budget, source_allocation, validation_pct)
@@ -113,6 +115,7 @@ def main(args):
                 "ice": ice_subtotal,
             }
         # Accumulate doc IDs for each key in per_cluster_ids, for each source in budget["per_cluster"]
+        # TODO: when strategy == 'full', just update the stored IDs directly 
         for cluster_id, records in all_cluster_ids.items():
             sampled_glowbe, glowbe_subtotal = accumulate_until_budget(
                 records["glowbe"], id_to_tokens, budget["per_cluster"]["glowbe"]
@@ -198,5 +201,6 @@ if __name__ == "__main__":
     parser.add_argument("--output_dir", default="output/preprocess")
     parser.add_argument("--notes", default="")
     parser.add_argument("--random_seed", default=42)
+    # TODO: add argument --strategy to toggle between sampling strategies (balanced, full)
     args = parser.parse_args()
     main(args)
