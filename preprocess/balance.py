@@ -72,6 +72,10 @@ def main(args):
                 doc_tokens = int(doc_metadata.get("token_count"))
                 doc_cluster = str(doc_metadata.get("cluster_id"))
 
+                # Skip all LinCE documents
+                if doc_id.startswith("lince"):
+                    continue
+                
                 id_to_tokens[doc_id] = doc_tokens
                 all_cluster_ids[doc_cluster][doc_source].append(doc_id)
         # =========================== ACCUMULATE IDs ===========================
@@ -163,6 +167,10 @@ def main(args):
                     print(f"Warning: JSON decode error at line {line_num}: {e}")
 
                 doc_id = doc.get("id")
+
+                if doc_id.startswith("lince"):
+                    continue
+
                 output_key = id_to_output_key.get(doc_id)
 
                 if output_key is None:
