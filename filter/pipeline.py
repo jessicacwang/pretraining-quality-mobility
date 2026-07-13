@@ -1,120 +1,149 @@
 from utils import load_config
 from filter.manifest import FilterManifest
-from datatrove.executor.slurm import SlurmPipelineExecutor
-from datatrove.executor.local import LocalPipelineExecutor
-from datatrove.pipeline.filters import (
-    C4QualityFilter,
-    FineWebQualityFilter,
-    GopherQualityFilter,
-    GopherRepetitionFilter,
-    LanguageFilter,
-)
-from datatrove.pipeline.readers import JsonlReader
-from datatrove.pipeline.writers.jsonl import JsonlWriter
+import filter.trove as trove
 import argparse
-import os
-import socket
-from typing import Dict, Union, Any, Tuple, List
+import json
 from pathlib import Path
-from datatrove.pipeline.base import PipelineStep
+import gzip
+from collections import defaultdict
+from typing import Dict, Any, Tuple, List
 
-def detect_environment() -> str:
-    hostname = socket.gethostname()
-    if 'klone' in hostname.lower() or 'hyak' in hostname.lower():
-        return 'hyak'
-    return 'local'
+FILTERS = {
+    1: "1_langid",
+    2: "2_gopher_repetition",
+    3: "3_gopher_quality",
+    4: "4_c4_quality",
+    5: "5_fineweb_quality",
+}
 
-def get_env_config(config, env):
-    return config[env]
 
-def build_pipline(config: Dict[str, Any], env_config: Dict[str, Any], output_dir: str) -> Tuple[List[PipelineStep], Path, Path]:
-    output_path = f"{env_config["base_dir"]}/{output_dir}"
-    excluded_path = f"{output_path}/excluded"
-    log_path = f"{env_config["base_dir"]}/log/{config["job_name"]}"
-    pipeline=[
-            JsonlReader(
-                data_folder=env_config["data_folder"],
-                glob_pattern=env_config["glob_pattern"]
-            ),
-            LanguageFilter(
-                exclusion_writer=JsonlWriter(
-                    f"{excluded_path}/1_langid"
-                )
-            ),
-            GopherRepetitionFilter(
-                exclusion_writer=JsonlWriter(
-                    f"{excluded_path}/2_gopher_repetition"
-                )
-            ),
-            GopherQualityFilter(
-                exclusion_writer=JsonlWriter(
-                    f"{excluded_path}/3_gopher_quality"
-                )
-            ),
-            C4QualityFilter(
-                exclusion_writer=JsonlWriter(
-                    f"{excluded_path}/4_c4_quality"
-                )
-            ),
-            FineWebQualityFilter(
-                exclusion_writer=JsonlWriter(
-                    f"{excluded_path}/5_fineweb_quality"
-                )
-            ),
-            JsonlWriter(
-                output_path
-            )
-        ]
-    return pipeline, output_path, log_path
-
-def get_executor(env: str, config: Dict[str, Any], env_config: Dict[str, Any], pipeline: PipelineStep, log_path: str) -> Union[LocalPipelineExecutor, SlurmPipelineExecutor]:
-    if env == "hyak":
-        return SlurmPipelineExecutor(
-            job_name=config["job_name"],
-            pipeline=pipeline,
-            env_command=env_config["env_command"],
-            workers=env_config["workers"],
-            time=env_config["time"],
-            logging_dir=log_path,
-            slurm_logs_folder=f"{log_path}/slurm_logs",
-            mem_per_cpu_gb=env_config["mem_per_cpu_gb"],
-            sbatch_args=env_config["sbatch_args"],
-            partition=env_config["partition"]
+def register_counts(
+    filter_stage: str,
+    stats: Dict[str, Any],
+    count_key: str,
+    id_records: List[str],
+    id_to_enriched_metadata: Dict[str, Tuple],
+):
+    curr_stats = stats["filters"][filter_stage]
+    for doc_id in id_records:
+        doc_cluster, doc_source, doc_component = id_to_enriched_metadata[doc_id]
+        cluster_stats = curr_stats["by_cluster"].setdefault(
+            doc_cluster, {"dropped": 0, "forwarded": 0, "by_source": {}}
         )
-    
-    return LocalPipelineExecutor(
-        pipeline=pipeline,
-        workers=env_config["workers"],
-        logging_dir=log_path
-    )
+        source_stats = cluster_stats["by_source"].setdefault(
+            doc_source, {"dropped": 0, "forwarded": 0, "by_component": {}}
+        )
+        comp_stats = source_stats["by_component"].setdefault(
+            doc_component,
+            {
+                "dropped": 0,
+                "forwarded": 0,
+            },
+        )
+        cluster_stats[count_key] += 1
+        source_stats[count_key] += 1
+        comp_stats[count_key] += 1
+    return
+
 
 def main(args):
-    # Load config
-    config = load_config(args.config_path)
-
-    # Detect environment
-    env = detect_environment()
-    print(f" Detected environment: {env.upper()}")
-
-    # Get environment configuration for executor
-    env_config = get_env_config(config, env)
-
-    # Build pipeline
-    pipeline, output_path, log_path = build_pipline(config, env_config, args.output_dir)
-
-    # Get executor
-    executor = get_executor(env, config, env_config, pipeline, log_path)
-    
     try:
-        executor.run()
-    except Exception as e:
-        print(f"Failed: {e}")
-        raise
+        # ========================== EXECUTE PIPELINE ==========================
+        # Load config
+        config = load_config(args.config_path)
 
-    # TODO: review logging_dir/stats for filter-level totals
-    # TODO: stream metadata_enriched to store id -> (cluster, source, component) details
-    # TODO: stream metadata_source to store id -> (genre, modality, non_english) wherever exists
-    # TODO: update manifest stats: filter -> cluster -> source -> component -> genre
+        # Prepare output dir
+        output_dir = Path(f"{args.output_dir}")
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        # Load manifest
+        manifest = FilterManifest(f"{args.output_dir}/manifest.json")
+        manifest.start_step("filter")
+        manifest.set_args("filter", vars(args))
+
+        try:
+            print("Running datatrove...")
+            output_path, log_path = trove.run(config, output_dir, manifest)
+        except Exception as e:
+            print(f"Failed: {e}")
+            raise
+        # ====================== ACCUMULATE PIPELINE STATS =====================
+        print("Collecting datatrove results...")
+        stats = {"filters": {}}
+
+        trove_results = json.load(open(f"{log_path}/stats.json", "r"))
+        # TODO: figure out how to get all dropped_* stats
+        for stage_num, trove_stats in enumerate(trove_results[1:-1:2], start=1):
+            target_stats = {k: v for k,v in trove_stats['stats'].items() if k.startswith('dropped') or k == 'total' or k=='forwarded'}
+            stats["filters"][FILTERS[stage_num]] = {
+                "full_name": trove_stats["name"],
+                "by_cluster": {}
+            }
+            stats["filters"][FILTERS[stage_num]] |= target_stats
+
+        # ======================= ACCUMULATE MORE STATS ========================
+        print("Accumulating LEU results...")
+
+        # Map each filter stage to a list of excluded ids
+        excluded = defaultdict(list)
+        for stage in FILTERS.values():
+            with gzip.open(
+                f"{output_path}/excluded/{stage}/00000.jsonl.gz", "rt"
+            ) as excluded_data:
+                for excluded_line in excluded_data:
+                    doc = json.loads(excluded_line)
+                    doc_id = doc.get("id")
+                    excluded[stage].append(doc_id)
+
+        # Stream metadata_enriched to store id -> (cluster, source, component) details
+        id_to_enriched_metadata = dict()
+
+        with gzip.open(config["enriched_metadata"], "rt") as e_metadata:
+            for e_meta_line in e_metadata:
+                doc = json.loads(e_meta_line)
+                doc_id = doc.get("id")
+                doc_cluster = doc.get("cluster_id")
+                doc_source, doc_component = doc_id.split(":")[0].split("_", maxsplit=1)
+
+                id_to_enriched_metadata[doc_id] = (
+                    doc_cluster,
+                    doc_source,
+                    doc_component,
+                )
+
+        # Update stats[filter_stage] with counts by source and by component
+        for filter_stage in FILTERS.values():
+            excluded_ids = excluded[filter_stage]
+            forwarded_ids = [
+                i.strip()
+                for i in open(
+                    f"{output_path}/id_logs/after_{filter_stage}_ids.txt"
+                ).readlines()
+            ]
+            register_counts(
+                filter_stage=filter_stage,
+                stats=stats,
+                count_key="dropped",
+                id_records=excluded_ids,
+                id_to_enriched_metadata=id_to_enriched_metadata,
+            )
+            register_counts(
+                filter_stage=filter_stage,
+                stats=stats,
+                count_key="forwarded",
+                id_records=forwarded_ids,
+                id_to_enriched_metadata=id_to_enriched_metadata,
+            )
+
+        # Register completed step
+        manifest.end_step("filter")
+        manifest.set_audit_stats(stats)
+    except Exception as e:
+        manifest.fail_step("filter", str(e))
+        raise
+    finally:
+        manifest.save()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
