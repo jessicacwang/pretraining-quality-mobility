@@ -1,0 +1,9 @@
+{
+    "job_name": "fineweb_filter",
+    "data_folder": "output/preprocess",
+    "glob_pattern": "toy_leu_data.jsonl.gz",
+    "env_command": "module load conda && conda activate /gscratch/stf/jcmw614/conda/envs/thesis-env",
+    "sbatch_args": {
+        "account": "stf"
+    }
+}
