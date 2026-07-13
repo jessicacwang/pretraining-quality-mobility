@@ -2,10 +2,10 @@
     "job_name": "fineweb_filter",
     "hyak": {
         "data_folder": "/gscratch/stf/jcmw614/thesis/output/preprocess",
-        "glob_pattern": "leu_data.jsonl.gz",
+        "glob_pattern": "toy_leu_data.jsonl.gz",
         "env_command": "module load conda && conda activate /gscratch/stf/jcmw614/conda/envs/thesis-env",
         "sbatch_args": {
-            "--account": "stf"
+            "account": "stf"
         },
         "workers": 40,
         "time": "10:00:00",
