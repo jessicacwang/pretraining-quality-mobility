@@ -14,10 +14,12 @@
         "base_dir": "/gscratch/stf/jcmw614/thesis"
     },
     "local": {
-        "data_folder": "output/preprocess/toy_leu_data.jsonl.gz",
-        "glob_pattern": "leu_data.jsonl.gz",
+        "data_folder": "output/preprocess",
+        "glob_pattern": "toy_leu_data.jsonl.gz",
         "env_command": "conda activate thesis-env",
         "workers": 4,
-        "base_dir": "~/Desktop/thesis"
-    }
+        "base_dir": "/Users/jessicawang/Desktop/thesis"
+    },
+    "enriched_metadata": "output/preprocess/metadata_enriched.jsonl.gz", 
+    "source_metadata": "output/preprocess/metadata_source.jsonl.gz"
 }
