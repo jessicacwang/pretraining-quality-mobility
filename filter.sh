@@ -1,1 +1,1 @@
-/gscratch/stf/jcmw614/conda/envs/thesis-env/bin/python -m filter.pipeline
+/gscratch/stf/jcmw614/conda/envs/thesis-env/bin/python -m filter.pipeline $@
