@@ -3,7 +3,7 @@
     "hyak": {
         "data_folder": "/gscratch/stf/jcmw614/thesis/output/preprocess",
         "glob_pattern": "toy_leu_data.jsonl.gz",
-        "env_command": "export PATH=/gscratch/stf/$USER/conda/envs/thesis-env/bin:$PATH",
+        "env_command": "module load conda && activate /gscratch/stf/jcmw614/conda/envs/thesis-env/bin/python",
         "sbatch_args": {
             "account": "stf"
         },
