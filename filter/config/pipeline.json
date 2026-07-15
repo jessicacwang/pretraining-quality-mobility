@@ -5,7 +5,8 @@
         "glob_pattern": "toy_leu_data.jsonl.gz",
         "env_command": "module load conda && conda activate /gscratch/stf/jcmw614/conda/envs/thesis-env/",
         "sbatch_args": {
-            "account": "stf"
+            "account": "stf",
+            "chdir": "/gscratch/stf/jcmw614/thesis/"
         },
         "workers": 40,
         "time": "10:00:00",
