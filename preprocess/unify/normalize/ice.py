@@ -1,5 +1,5 @@
 import argparse
-from preprocess.normalize.corpus import CorpusNormalizer
+from preprocess.unify.normalize.corpus import CorpusNormalizer
 
 
 def main():
@@ -10,7 +10,7 @@ def main():
     parser.add_argument(
         "--mapping",
         help="Path to mapping JSON file",
-        default="preprocess/config/ice_dir_normalize.json",
+        default="config/preprocess/ice_dir_normalize.json",
     )
     parser.add_argument(
         "--execute", action="store_true", help="Execute changes (default is dry run)"

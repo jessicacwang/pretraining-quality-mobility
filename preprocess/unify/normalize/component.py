@@ -420,7 +420,7 @@ class NGComponentNormalizer(ComponentNormalizer):
 if __name__ == "__main__":
     import json
 
-    with open("preprocess/config/ice_dir_normalize.json", "r") as f:
+    with open("config/preprocess/ice_dir_normalize.json", "r") as f:
         mapping = json.load(f)
     foo = GBComponentNormalizer(
         "ICE-GB",

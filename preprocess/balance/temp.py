@@ -3,7 +3,7 @@
 from collections import defaultdict
 from preprocess.manifest import PreprocessManifest
 import argparse
-from preprocess.utils import load_config
+from utils import load_config
 from pathlib import Path
 import gzip
 import json
@@ -60,36 +60,9 @@ def main(args):
     validation_ids = defaultdict(lambda: {"glowbe": set(), "ice": set()})
     per_cluster_ids = defaultdict(lambda: {"glowbe": set(), "ice": set()})
     try:
-        # ========================== PASS 1: Metadata ==========================
-        # Load metadata enriched
-        with gzip.open(config["enriched_metadata"], "rt") as meta_enriched:
-            for line_num, meta_line in enumerate(meta_enriched, 1):
-                try:
-                    doc_metadata = json.loads(meta_line)
-                except json.JSONDecodeError as e:
-                    print(f"Warning: JSON decode error at line {line_num}: {e}")
-                    continue
 
-                # Extract metadata attributes
-                doc_id = doc_metadata.get("id")
-                if doc_id is None:
-                    print(f"Warning: malformed line has no doc ID: {line_num}")
-                    continue
-                doc_source = doc_id.split("_")[0]
-                doc_tokens = int(doc_metadata.get("token_count"))
-                doc_cluster = str(doc_metadata.get("cluster_id"))
-
-                # Skip all LinCE documents
-                if doc_id.startswith("lince"):
-                    continue
-
-                id_to_tokens[doc_id] = doc_tokens
-                all_cluster_ids[doc_cluster][doc_source].append(doc_id)
         # =========================== ACCUMULATE IDs ===========================
-        # Shuffle all_cluster_ids values
-        for _, cluster_records in all_cluster_ids.items():
-            random.shuffle(cluster_records["glowbe"])
-            random.shuffle(cluster_records["ice"])
+        
 
         # Set aside validation set using budget["validation_size_per_source"] and each key in cluster_source_id_tokens
         for cluster_id, records in all_cluster_ids.items():
@@ -148,38 +121,9 @@ def main(args):
             curr_stats["actual_token_pct"] |= {"glowbe": glowbe_pct, "ice": ice_pct}
 
         # ========== PASS 2: Write LEU samples from accumulated IDs ============
-        # Map doc ID to output file
-        id_to_output_key = {}
+        
 
-        for cluster_id, sources in per_cluster_ids.items():
-            for source, ids in sources.items():
-                for doc_id in ids:
-                    id_to_output_key[doc_id] = cluster_id
-        for cluster_id, sources in validation_ids.items():
-            for source, ids in sources.items():
-                for doc_id in ids:
-                    id_to_output_key[doc_id] = "validation"
-
-        # Load LEU data and use map to write records
-        with gzip.open(config["leu_data"], "rt") as leu_data:
-            for line_num, leu_line in enumerate(leu_data, 1):
-                try:
-                    doc = json.loads(leu_line)
-                except json.JSONDecodeError as e:
-                    print(f"Warning: JSON decode error at line {line_num}: {e}")
-                    continue
-
-                doc_id = doc.get("id")
-
-                if doc_id.startswith("lince"):
-                    continue
-
-                output_key = id_to_output_key.get(doc_id)
-
-                if output_key is None:
-                    continue
-
-                writers[output_key].write(json.dumps(doc) + "\n")
+        
 
         # Register completed step in manifest
         manifest.end_step("balance")
@@ -197,7 +141,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_path", default="preprocess/config/balance.json")
+    parser.add_argument("--config_path", default="config/preprocess/balance.json")
     parser.add_argument("--output_dir", default="output/preprocess")
     parser.add_argument("--notes", default="")
     parser.add_argument("--random_seed", default=42)

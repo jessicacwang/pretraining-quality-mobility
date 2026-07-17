@@ -3,7 +3,7 @@
 import csv
 from ast import literal_eval
 from typing import Iterator, Dict, List
-from preprocess.adapters.base import BaseAdapter
+from preprocess.unify.adapters.base import BaseAdapter
 from collections import Counter, defaultdict
 
 

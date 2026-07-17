@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 from typing import Dict, Any
-from preprocess.normalize.component import *
+from preprocess.unify.normalize.component import *
 
 
 class CorpusNormalizer:

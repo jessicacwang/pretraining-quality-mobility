@@ -1,6 +1,6 @@
 """CorpusAdapter for GloWbe"""
 
-from preprocess.adapters.base import BaseAdapter
+from preprocess.unify.adapters.base import BaseAdapter
 from typing import Iterator
 from pathlib import Path
 import zipfile

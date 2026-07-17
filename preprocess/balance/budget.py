@@ -1,13 +1,11 @@
-from preprocess.manifest import PreprocessManifest
 from typing import Dict, List, Tuple
 
 
-def compute_token_budget(
-    manifest: PreprocessManifest,
+def compute(
+    enrich_stats: Dict,
     validation_pct: int,
     source_allocation_pct: Dict[str, int],
 ) -> Dict:
-    enrich_stats = manifest["steps"]["enrich"]
 
     # Record limiting factor: Cluster 1's ICE tokens
     limiting_factor = enrich_stats["clusters"]["1"]["sources"]["ice"]["tokens"]
@@ -30,7 +28,7 @@ def compute_token_budget(
     }
 
 
-def accumulate_until_budget(
+def accumulate(
     records: List[str], id_to_tokens: Dict[str, int], token_budget: int
 ) -> Tuple[List, int]:
     accumulated_ids = []
