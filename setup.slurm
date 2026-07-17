@@ -12,5 +12,7 @@
 # command:
 module load conda
 conda create --name thesis-env python=3.12
-conda activate
+conda activate thesis-env
 pip install -r requirements.txt
+pipx install dolma
+pipx ensurepath
