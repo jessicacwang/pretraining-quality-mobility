@@ -8,7 +8,7 @@ import gzip
 from collections import defaultdict
 from typing import Dict, Any, Tuple, List
 
-FILTERS = {
+ALGORITHMS = {
     1: "1_langid",
     2: "2_gopher_repetition",
     3: "3_gopher_quality",
@@ -18,31 +18,42 @@ FILTERS = {
 
 
 def register_counts(
-    filter_stage: str,
+    algo_name: str,
     stats: Dict[str, Any],
     count_key: str,
     id_records: List[str],
     id_to_enriched_metadata: Dict[str, Tuple],
+    id_to_source_metadata: Dict[str, str],
 ):
-    curr_stats = stats["filters"][filter_stage]
+    algo_stats = stats["algorithms"][algo_name]
+
     for doc_id in id_records:
         doc_cluster, doc_source, doc_component = id_to_enriched_metadata[doc_id]
-        cluster_stats = curr_stats["by_cluster"].setdefault(
-            doc_cluster, {"dropped": 0, "forwarded": 0, "by_source": {}}
+        doc_genre = id_to_source_metadata.get(doc_id, None)
+
+        # Update algo_stats[algo_name] at all nested levels
+        algo_cluster_stats = algo_stats["by_cluster"].setdefault(
+            doc_cluster, {"dropped": 0, "forwarded": 0, "total": 0, "by_source": {}}
         )
-        source_stats = cluster_stats["by_source"].setdefault(
-            doc_source, {"dropped": 0, "forwarded": 0, "by_component": {}}
+        algo_source_stats = algo_cluster_stats["by_source"].setdefault(
+            doc_source, {"dropped": 0, "forwarded": 0, "total": 0, "by_component": {}}
         )
-        comp_stats = source_stats["by_component"].setdefault(
-            doc_component,
-            {
-                "dropped": 0,
-                "forwarded": 0,
-            },
+        algo_comp_stats = algo_source_stats["by_component"].setdefault(
+            doc_component, {"dropped": 0, "forwarded": 0, "total": 0, "by_genre": {}}
         )
-        cluster_stats[count_key] += 1
-        source_stats[count_key] += 1
-        comp_stats[count_key] += 1
+        algo_cluster_stats[count_key] += 1
+        algo_cluster_stats["total"] += 1
+        algo_source_stats[count_key] += 1
+        algo_source_stats["total"] += 1
+        algo_comp_stats[count_key] += 1
+        algo_comp_stats["total"] += 1
+
+        if doc_genre:
+            algo_genre_stats = algo_comp_stats["by_genre"].setdefault(
+                doc_genre, {"dropped": 0, "forwarded": 0, "total": 0}
+            )
+            algo_genre_stats[count_key] += 1
+            algo_genre_stats["total"] += 1
     return
 
 
@@ -69,24 +80,24 @@ def main(args):
             raise
         # ====================== ACCUMULATE PIPELINE STATS =====================
         print("Collecting datatrove results...")
-        stats = {"filters": {}}
+        stats = {"algorithms": {}}
 
         trove_results = json.load(open(f"{log_path}/stats.json", "r"))
         # TODO: figure out how to get all dropped_* stats
         for stage_num, trove_stats in enumerate(trove_results[1:-1:2], start=1):
             target_stats = {k: v for k,v in trove_stats['stats'].items() if k.startswith('dropped') or k == 'total' or k=='forwarded'}
-            stats["filters"][FILTERS[stage_num]] = {
+            stats["algorithms"][ALGORITHMS[stage_num]] = {
                 "full_name": trove_stats["name"],
                 "by_cluster": {}
             }
-            stats["filters"][FILTERS[stage_num]] |= target_stats
+            stats["algorithms"][ALGORITHMS[stage_num]] |= target_stats
 
         # ======================= ACCUMULATE MORE STATS ========================
         print("Accumulating LEU results...")
 
         # Map each filter stage to a list of excluded ids
         excluded = defaultdict(list)
-        for stage in FILTERS.values():
+        for stage in ALGORITHMS.values():
             with gzip.open(
                 f"{output_path}/excluded/{stage}/00000.jsonl.gz", "rt"
             ) as excluded_data:
@@ -111,8 +122,18 @@ def main(args):
                     doc_component,
                 )
 
+        # Stream metadata_source to store id -> genre if it exists
+        id_to_source_metadata = dict()
+
+        with gzip.open(config["source_metadata"], "rt") as s_metadata:
+            for s_meta_line in s_metadata:
+                doc = json.loads(s_meta_line)
+                doc_id = doc.get("id")
+                doc_genre = doc.get("genre", None)
+                id_to_source_metadata[doc_id] = doc_genre
+
         # Update stats[filter_stage] with counts by source and by component
-        for filter_stage in FILTERS.values():
+        for filter_stage in ALGORITHMS.values():
             excluded_ids = excluded[filter_stage]
             forwarded_ids = [
                 i.strip()
@@ -121,18 +142,20 @@ def main(args):
                 ).readlines()
             ]
             register_counts(
-                filter_stage=filter_stage,
+                algo_name=filter_stage,
                 stats=stats,
                 count_key="dropped",
                 id_records=excluded_ids,
                 id_to_enriched_metadata=id_to_enriched_metadata,
+                id_to_source_metadata=id_to_source_metadata,
             )
             register_counts(
-                filter_stage=filter_stage,
+                algo_name=filter_stage,
                 stats=stats,
                 count_key="forwarded",
                 id_records=forwarded_ids,
                 id_to_enriched_metadata=id_to_enriched_metadata,
+                id_to_source_metadata=id_to_source_metadata,
             )
 
         # Register completed step

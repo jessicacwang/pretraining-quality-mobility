@@ -109,3 +109,7 @@ def run(config: Dict[str, Any], output_dir: str, manifest: FilterManifest):
     executor = get_executor(env, config, env_config, pipeline, log_path)
     executor.run()
     return output_path, log_path
+
+if __name__ == "__main__":
+    # TODO: this script will be run directly from login node
+    pass
