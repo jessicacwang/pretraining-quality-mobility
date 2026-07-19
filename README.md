@@ -3,197 +3,273 @@
 This repository contains the code for the experiments composing my CLMS thesis, 
 across 2 main experiments and 4-6 evaluation metrics.
 
-No `.jsonl.gz` is committed to the remote repository.
+No output `.jsonl.gz` is committed to the remote repository.
 
 # Prerequisites
-This code is designed to run on the UW Hyak computing cluster.
+This code is designed to run on the UW Hyak computing cluster. The virtual 
+environment is managed with Conda, and can be set up by running `setup.slurm` or 
+`setup.sh` locally. 
 
 # Experiments
 All experiments are run from the repository root since all code is written 
 using absolute package imports. 
-## Stage 0: Unifying, Enriching, and Balancing Data
 
-The `preprocess` module handles the unification, clustering and re-balancing of 
-existing datasets for the following stages. Directory structure is as follows:
+## Data Manifests
+To track the data volumes manipulated by each package in this repository, the 
+Python class `BaseManifest` is defined. Package-specific stats are defined in 
+subclasses `PreprocessManifest` and `FilterManifest`. These classes primarily 
+handle the writing of `manifest.json` files and basic file reading. 
+
+## Preprocessing: Unifying, Enriching, and Balancing Data
+The `preprocess` package contains 3 main sub-packages: `unify`, `enrich`, and 
+`balance`. The package structure is as follows:
 ```
 .
-└── preprocess/
-    ├── config/
-    │   ├── enrich.json
-    │   ├── ice_reorganize.json
-    │   └── ice_tag.json
-    ├── adapters/
-    │   ├── __init__.py
-    │   ├── glowbe.py
-    │   ├── ice.py
-    │   ├── lince.py
-    │   └── utils.py
-    ├── reorganize/
-    │   ├── __init__.py
-    │   ├── __main__.py
-    │   ├── component_reorganizer.py
-    │   └── corpus_reorganizer.py
-    ├── 1-unify.slurm
-    ├── 2-enrich.slurm
-    ├── 3-balance.slurm
-    ├── balance.py
-    ├── enrich.py
-    ├── manifest.py
-    └── unify.py
+├── preprocess
+│   ├── __init__.py
+│   ├── balance/
+│   │   ├── __init__.py
+│   │   ├── __main__.py
+│   │   ├── budget.py
+│   │   ├── index.py
+│   │   ├── materialize.py
+│   │   ├── partition.py
+│   │   ├── pretokenize.py
+│   │   └── README.md
+│   ├── enrich/
+│   │   ├── __init__.py
+│   │   ├── __main__.py
+│   │   ├── features/
+│   │   │   ├── __init__.py
+│   │   │   ├── buckets.py
+│   │   │   ├── clustering.py
+│   │   │   ├── percentiles.py
+│   │   │   ├── tokens.py
+│   │   │   └── README.md
+│   │   └── metadata.py
+│   ├── manifest.py
+│   ├── unify/
+│   │   ├── __init__.py
+│   │   ├── __main__.py
+│   │   ├── adapters/
+│   │   │   ├── __init__.py
+│   │   │   ├── base.py
+│   │   │   ├── glowbe.py
+│   │   │   ├── ice.py
+│   │   │   ├── lince.py
+│   │   │   └── README.md
+│   │   └── normalize/
+│   │       ├── __init__.py
+│   │       ├── component.py
+│   │       ├── corpus.py
+│   │       ├── ice.py
+│   │       ├── tag_coverage.py
+│   │       ├── tag_shapes.py
+│   │       └── README.md
+│   └── utils.py
+├── 1-unify.slurm
+├── 2-enrich.slurm
+└── 3-balance.slurm
 ```
+### Unify (`preprocess.unify`)
+This step handles unification of LEU sources to JSONL data. Exact details on 
+ICE normalization is described in `preprocess/unify/normalize/README.md`, as are 
+details for LEU source adaptation to JSONL in `preporcess/unify/adapters/README.md`. 
 
-This stage requires filepaths for ICE and GloWbe corpora to be configured in the 
-config JSON. First, ICE data has differing directory structure depending on the 
-regional component; these are reorganized using a Python class in the interest 
-of reproducibility:
-
-```cmd
-python -m preprocess.reorganize --execute
-```
-Once ICE components are uniformly organized, all source LEU corpora can be unified 
-as JSONL data. To do so, the `adapters` submodules are written to adapt each source 
-corpus to JSON-like formats. Three primary fields are shared by all submodules, along 
-with source-specific secondary fields (not listed):
-- `id`: `"<corpus>_<source_hash>"` to be unambiguous
-- `text`: plain text without annotations or markup tags
-
-Each of the `adapters` submodules can be tested individually by running:
-```cmd
-python -m preprocess.adapters.<source>
-```
-
-The first proper step of preprocessing is unify the results of each LEU adapter 
-and write the results. By default, the script writes the three primary fields to 
-`leu_data.jsonl.gz` and the source-specific secondary fields to `metadata.jsonl.gz`. 
-Document and token counts are tracked in `manifest.json`. This initial parsing + 
-cleaning is executed as below:
+This step is submitted a SLURM job as Hyak:
 ```cmd
 sbatch 1-unify.slurm
 ```
 
-Next, the unified data is enriched; the `metadata.jsonl.gz` is updated by populating 
-a `cluster` field, using `cluster_config.json` to map relevant secondary fields 
-to cluster IDs, calculating token counts/percentiles, and tracking the occurrences 
-of penalized text features (ex: non-alphanumeric characters, repetitions). 
-`manifest.json` is similarly updated to include average counts per cluster/source/component/genre. 
+Under `output/preprocess`, this results in:
+- the initial `manifest.json`
+- `leu_data.jsonl.gz`; each line contains fields `id` and `text`
+- `metadata_sources.jsonl.gz` which maps `id` to source-derived metadata (ex: CMI scores, genre, modality...)
+
+### Enrich (`preprocess.enrich`)
+This step handles enrichment of the data with features relevant to both audit experiments: the localized English typological cluster ID and token properties 
+(e.g., counts and percentiles). Documents are tokenized using the `allenai/dolma2` 
+tokenizer. More details on features can be found in `preprocess/enrich/features/README.md`. 
+
+The job is submitted as below:
 ```cmd
 sbatch 2-enrich.slurm
 ```
 
-Finally, the enriched data for Clusters 1-4 (ICE and GloWbe data) is rebalanced 
-such that the full data is sampled to produce a uniform initial distribution 
-between clusters and to enforce a uniform ratio of ICE and GloWbe tokens 
-for the Data Mixing Audit. To do so, the script accesses `manifest.json` to 
-compute exact token targets and samples from `leu_data.jsonl.gz` until the targets 
-are met for each cluster as well as a held-out validation set, approximately 2% 
-of the total volume. The balanced results are written as separate `jsonl.gz` files
-for each cluster, and `manifest.json` is updated.
+Under `output/preprocess`, 
+- the existing `manifest.json` is updated with `steps.enrich` 
+- `metadata_enriched.jsonl.gz` is materialized to map `id` to cluster and token metadata.
+
+### Balance (`preprocess.balance`)
+This step handles the cluster "balancing" relevant to Audit 2a specifically by creating data samples, stratified by typological cluster ID, with equal 
+token volume allocation between clusters, as well as proportional token volume allocation of ICE and GloWbe data *within* cluster samples. 
+
+For exact details on the modules defined in the `preprocess.balance` sub-package, see `preprocess/balance/README.md`. At a high level:
+1. Token budget targets are computed using the provided configuration and sampling strategy under `config/preprocess/balance.json` 
+2. Documents are shuffled using `random.shuffle` and a random seed
+3. Document IDs, partitioned by cluster, are accumulated until token budgets are met
+4. Sampled document IDs are materialized under `output/preprocess/<strategy>`
+5. The `dolma tokens` CLI is used to pre-tokenize outputs for Audit 2.  
+
+The following job is submitted to Hyak:
 ```cmd
 sbatch 3-balance.slurm
 ```
 
-Note that the output will be written to the `output/preprocess` folder, of 
-the following shape:
+By default, the `balanced` strategy is used (as described). The alternative 
+strategy is `full` which document IDs are partitioned but no strict sampling 
+budget is set. 
+
+Under `output/preprocess`
+- the existing `manifest.json` is updated with `steps.balance` 
+- a `<strategy>` folder containining `cluster_<ID>.jsonl.gz` 
+- `<strategy>/tokens/cluster_<ID>` folders containing sharded `*.npy` pre-tokenized data
+### Outputs
+In summary:
 ```
 .
-└── output/
-    └── preprocess/
-        ├── manifest.json       
-        ├── metadata.jsonl.gz                   # secondary JSON fields
-        ├── leu_data.jsonl.gz                  # Created by 2-cluster.slurm
-        └── balanced/                           # Created by 3-balance.slurm
-            ├── cluster_1_balanced.jsonl.gz
-            ├── cluster_2_balanced.jsonl.gz
-            ├── cluster_3_balanced.jsonl.gz
-            ├── cluster_4_balanced.jsonl.gz
-            └── validation.jsonl.gz
+└── output
+    └── preprocess
+        ├── manifest.json               # updated at each step
+        ├── leu_data.jsonl.gz           # created by unify
+        ├── metadata_source.jsonl.gz    # created by unify
+        ├── metadata_enriched.jsonl.gz  # created by enrich
+        └── balanced                    # created by balance
+            ├── cluster_1.jsonl.gz
+            ├── cluster_2.jsonl.gz
+            ├── cluster_3.jsonl.gz
+            ├── cluster_4.jsonl.gz
+            └── tokens
+                ├── cluster_1
+                │   ├── part-00.npy
+                │   └── ...
+                ├── cluster_2
+                ├── cluster_3
+                └── cluster_4
 ```
-More specifically, this stage results in 2 metadata files, and 6 data files 
-(1 full, 5 balanced).
 
-## Stage 1: Auditing Algorithmic Data Filters
-
-The `filter` module executes the algorithmic data filters used to create FineWeb 
-and tracks the inclusion and exclusion of every document after each of the five 
-filters. This stage is executed as SLURM batch jobs, one for each cluster:
-```cmd
-sbatch filter/run.slurm
-```
-The output will be written to the `output/filter` directory. Full output filepaths 
-are abbreviated below since this stage will result in 5 x 2 + 1 = 11 distinct 
-files in the following shape:
+## Audit 1: Algorithmic Data Filters
+This experiment is to audit the sensitivity of algorithmic data filters to localized English usage. It is executed with `4-filter.sh`. The directory structure relevant to `filter` package is as follows:
 ```
 .
-└── output/
+├── filter/
+│   ├── trove/
+│   │   ├── id_logger.py
+│   │   └── pipeline.py
+│   ├── audit/
+│   │   └── stats.py
+│   ├── __main__.py
+│   └── manifest.py 
+└── 4-filter.sh
+```
+### Pipeline (`filter.trove`)
+This sub-package provides the logic to instantiate and execute a `datatrove` pipeline executor according to `config/filter/pipeline.json` that reproduces all the filters used to create FineWeb. It also defines a class `DocumentIdLogger` as a subclass of `datatrove`'s `PipelineStep` to log all the document IDs that are forwarded by an algorithm in the filter pipeline. 
+
+Tracking document IDs allows us to compute progressive retention metrics (see [Evaluation](#evaluation) below). The excluded documents and included document IDs are stored under `output/filter` (see below).
+
+### Audit (`filter.audit`)
+This subpackage provides the logic to accumulate two types of statistics as data for a `FilterManifest` object:
+1. **progressive**: document volumes tracked as the pipeline progresses, w.r.t. cluster/source/component or genre
+2. **cumulative**: document volumes tracked after the entire pipeline completes, w.r.t. cluster/source/component or genre. These results are directly compared to `steps.unify` document volumes from `output/preprocess/manifest.json`
+
+The output of this subpackage is materialized as `output/filter/manifest.json`.
+
+### Shell (`4-filter.sh`)
+This script consists of 5 main steps:
+
+1. Splits `leu_data.jsonl.gz` into `N` shards based on `config/filter/pipeline.json` 
+2. Executes `filter.trove.pipeline`; on Hyak this instantiates a `SlurmPipelineExecutor` object which schedules its own array of jobs
+3. Polls the slurm queue until no more jobs are running
+3. Validates that all pipeline jobs succeeded 
+4. Validates that `stats.json` exists
+5. Execute `filter.audit.stats` to collect results
+
+### Outputs
+```
+.
+└── output
     ├── preprocess/
-    │   └── ...
+    ├── ...
     └── filter/
         ├── manifest.json
-        ├── 1-langid_included.jsonl.gz
-        ├── 2-gopher-repetition_included.jsonl.gz
-        ├── 3-gopher-quality_included.jsonl.gz
-        ├── 4-c4-quality_included.jsonl.gz
-        ├── 5-fineweb-quality_included.jsonl.gz
-        └── excluded/
-            ├── 1-langid_excluded.jsonl.gz
-            ├── 2-gopher-repetition_excluded.jsonl.gz
-            ├── 3-gopher-quality_excluded.jsonl.gz
-            ├── 4-c4-quality_excluded.jsonl.gz
-            └── 5-fineweb-quality_excluded.jsonl.gz
+        ├── excluded/ 
+        │   ├── 1_lang_id/
+        │   │   └── 0000.jsonl.gz
+        │   ├── 2_gopher_repetition/
+        │   │   └── 0000.jsonl.gz
+        │   ├── 3_gopher_quality/
+        │   │   └── 0000.jsonl.gz
+        │   ├── 4_c4_quality/
+        │   │   └── 0000.jsonl.gz
+        │   └── 5_fineweb_quality/
+        │       └── 0000.jsonl.gz
+        └── included/
+            ├── after_1_langid.txt
+            ├── after_2_gopher_repetition.txt
+            ├── after_3_gopher_quality.txt
+            ├── after_4_c4_quality.txt
+            └── after_5_fineweb_quality.txt
 ```
+## Audit 2: Data Mixing Algorithms
+This experiment is to audit the sensitivity of data mixing algorithms to localized English usage by measuring the change in cluster/domain token volumes when optimizing data mixtures for HellaSwag.
 
-For each filtering stage, the documents included after the filter are written to 
-`output/filter/<stage>_included.jsonl.gz`. The corresponding excluded documents 
-are written to `output/filter/removed/<stage>_excluded.jsonl.gz`.  The document 
-and token counts for included and excluded documents for each filtering stage 
-are written to `output/filter/manifest.json`. 
+To do so, the `mix` package is designed based on data mixing laws and other recommendations published for Olmix. It is responsible for the following:
 
-## Stage 2: Auditing Data Mixing Algorithms
-The `mix` module executes an end-to-end data mixing algorithm based on data 
-mixing laws and other recommendations published for Olmix. 
-
-As of now, I plan to use `olmix` to
 1. Compute Dirichlet distribution priors
-2. Generate data mixtures
+2. Generate candidate data mixtures
 3. Launch a proxy swarm
-4. Train a regression model
-5. Report an optimized mix
+4. Collect BPB loss for mixing targets
+5. Fit a log-linear regression model
+6. Report an optimized mix
 
-The outputs of each step will be recorded in the `output/mix` folder:
-```
-.
-└── output/
-    ├── preprocess/
-    │   └── ...
-    ├── filter/
-    │   └── ...
-    └── mix/
-        ├── leu_priors.yaml
-        ├── leu_variants/
-        │   └── ...
-        ├── leu_swarm/
-        │   ├── ratios.csv
-        │   └── metrics.csv
-        └── leu_optimization/
-            ├── config.json
-            ├── interaction_matrix.png
-            ├── <metric>_optimal.json
-            ├── opt_avg_all_metrics_*_optimal.json
-            └── ...
-```
+All steps besides step 3 (launching a proxy swarm) and step 4 (collecting BPB loss metrics on mixing targets) will leverage the `olmix` CLI by defining YAML configs for data sources ([example](https://github.com/allenai/olmix/blob/main/configs/examples/generate/example.yaml)) and baseline launch mixtures ([example](https://github.com/allenai/olmix/blob/main/configs/examples/launch/data_proportions/mix_baseline.yaml)). 
+
+### \[WIP\] Launching a Proxy Model Swarm
+
+### \[WIP\] Collecting BPB Loss
+There are 4 data mixing target "tasks" to be pursued jointly and independently:
+1. LEU validation set (next token prediction)
+2. HellaSwag
+3. Trans-EnV HellaSwag (New Zealand English as proxy for Cluster 2)
+4. Trans-EnV HellaSwag (Bahamian English as proxy for Cluster 4)
+
+<!-- TODO: compute BPB: https://medium.com/@dip.patel.ict/bits-per-byte-bpb-a-tokenizer-agnostic-way-to-measure-llms-25dfed3f41af -->
+
+### \[WIP\] Outputs
+
 # Evaluation
+<!-- Separate responsibilities: eval modules should compute metric results, jupyter notebooks will visualize only  -->
+Python modules within `eval` package will transform `manifest.json` results into `plotly` friendly shapes. Finally, `eval/filter_audit.ipynb` and `eval/mix_audit.ipynb` will visualize graphs and transform data into LaTeX tables as needed.
 
-## Stage 1
+| Audit | Metric | Visualization | Description |
+| --- | --- | --- | --- |
+| 1 |  PMI | bar graph | pointwise mutual information |
+| 1 | RR | Sankey | retention rate |
+| 1 | LRP | table | log-retention penalty |
+| 1 | PR | table | Pearson's *r* |
+| 2 | KSD | table | Kolmogorov-Smirnov Distance |
+| 2 | SE | table | Shannon entropy 
+## Audit 1
 ### Pointwise Mutual Information
+<!-- TODO: specify relevant section of FilterManifest object -->
 PMI values can be computed from the relevant fields of 
 `output/preprocess/manifest.json` and `output/filter/manifest.json`. 
 
+```
+PMI(x, y) = log_2 P(x, y) / (P(x) * P(y))
+```
+where `y` is always the probability that a document is dropped, and `x` is the probability of a document feature (dialect cluster, source, or genre).
+
 They will be visualized with horizontal bar graphs with `plotly`. 
 
-### Typological Cluster Retention
+### Retention Rates
+<!-- TODO: specify relevant section of FilterManifest object -->
 Retention rates can be computed from the relevant fields of 
 `output/preprocess/manifest.json` and `output/filter/manifest.json`. 
-
+```
+RR(i) = D_i / D_{i-1}
+```
+Where `D_i` is the number of document after step `i` in the filtering pipeline. 
 Retention rates will be visualized with a `plotly` Sankey diagram. Additionally, 
 log-retention penalties will be computed. 
 
@@ -203,13 +279,13 @@ coefficient of determination `R_2` using `scipy`. The the rows of
 `metadata.jsonl.gz` that correspond to Cluster 5 will be compared to the final 
 results of `output/filter/5-fineweb_quality_filter/5-data.jsonl.gz` (tentatively) 
 to produce pairs of (CMI, exclude/include) values. 
-## Stage 2
-### Change in Token Distribution
-The initial token distribution as recorded in `output/preprocess/manifest.json` 
-for the balanced cluster data is accessed, as well as the relevant `.json` 
-files under `output/mix/leu_optimization`. Shannon entropy of each token 
-distribution is computed with `scipy`, as will the KS test between each pair of 
-token distributions.
-## Qualitative Analysis (TBD)
-### Corpus Statistics
-### Source/Genre Retention
+## Audit 2
+<!-- TODO: leave hook for KS distance and Shannon entropy calculation -->
+### Kolgomorov-Smirnov Distance
+This measure will be computed by using the `scipy` KS test metric against the initial domain weights and the 4 resultant optimized domain weights. 
+
+### Shannon entropy
+This measure will be computed using `scipy` against all 5 domain weights as a qualitative metric for the amount of change caused by data mixing. 
+
+<!-- TODO: leave hooks for non-essential eval metrics -->
+### Corpus Statistics (TBD)

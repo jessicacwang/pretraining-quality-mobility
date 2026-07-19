@@ -1,8 +1,8 @@
 """Loads extracted and adapted LEU documents, activate Manifest tracking and writes to output/preprocess"""
 
-from preprocess.adapters.glowbe import GloWbeAdapter
-from preprocess.adapters.ice import ICEAdapter
-from preprocess.adapters.lince import LinCEAdapter
+from preprocess.unify.adapters.glowbe import GloWbeAdapter
+from preprocess.unify.adapters.ice import ICEAdapter
+from preprocess.unify.adapters.lince import LinCEAdapter
 from preprocess.manifest import PreprocessManifest
 import gzip
 import json
@@ -108,7 +108,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_path", default="preprocess/config/unify.json")
+    parser.add_argument("--config_path", default="config/preprocess/unify.json")
     parser.add_argument("--output_dir", default="output/preprocess")
     parser.add_argument("--notes", default="")
     args = parser.parse_args()

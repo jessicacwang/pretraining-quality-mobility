@@ -29,8 +29,8 @@ jusText==3.0.2
 kagglehub==1.0.2
 kagglesdk==0.1.30
 loguru==0.7.3
-lxml==6.1.1
 lxml_html_clean==0.4.5
+lxml==6.1.1
 markdown-it-py==4.2.0
 mdurl==0.1.2
 multidict==6.7.1
@@ -38,13 +38,15 @@ multiprocess==0.70.16
 mypy_extensions==1.1.0
 nltk==3.9.4
 numpy==2.5.0
+olmix @ git+https://github.com/jessiclassy/olmix.git
 packaging==26.0
 pandas==3.0.3
 pathspec==1.1.1
+pipx
 platformdirs==4.10.0
 propcache==0.5.2
 protobuf==7.35.1
-pyarrow==24.0.0
+pyarrow
 Pygments==2.20.0
 python-dateutil==2.9.0.post0
 pytokens==0.4.1
@@ -52,7 +54,7 @@ pytz==2026.2
 PyYAML==6.0.3
 regex==2026.5.9
 requests==2.34.2
-rich==15.0.0
+rich
 safetensors==0.8.0
 setuptools==82.0.1
 shellingham==1.5.4

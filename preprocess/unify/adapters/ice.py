@@ -1,6 +1,6 @@
 """CorpusAdapter for ICE"""
 
-from preprocess.adapters.base import BaseAdapter
+from preprocess.unify.adapters.base import BaseAdapter
 from typing import Iterator, Tuple, Dict, List, Any
 from pathlib import Path
 from collections import Counter, defaultdict
@@ -205,7 +205,7 @@ def main():
     import json
 
     registry = None
-    with open("preprocess/config/unify.json", "r") as f:
+    with open("config/preprocess/unify.json", "r") as f:
         temp = json.load(f)
         registry = temp["corpora"]["ice"]["tag_registry"]
 
