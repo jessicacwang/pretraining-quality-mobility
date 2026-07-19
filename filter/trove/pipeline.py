@@ -1,5 +1,5 @@
 from filter.manifest import FilterManifest
-from filter.id_logger import DocumentIdLogger
+from filter.trove.id_logger import DocumentIdLogger
 from datatrove.executor.slurm import SlurmPipelineExecutor
 from datatrove.executor.local import LocalPipelineExecutor
 from datatrove.pipeline.filters import (
