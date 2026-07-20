@@ -11,7 +11,7 @@ class DocumentIdLogger(PipelineStep):
     def __init__(self, stage_name: str, output_path: str):
         super().__init__()
         self.stage_name = stage_name
-        self.log_file = Path(f"{output_path}/id_logs/after_{stage_name}_ids.txt")
+        self.log_file = Path(f"{output_path}/included/{stage_name}.txt")
         self.log_file.parent.mkdir(parents=True, exist_ok=True)
 
     def run(
