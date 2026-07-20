@@ -1,8 +1,8 @@
 {
     "job_name": "fineweb_filter",
-    "hyak": {
-        "data_folder": "/gscratch/stf/jcmw614/thesis/output/preprocess",
-        "glob_pattern": "toy_leu_data.jsonl.gz",
+    "slurm": {
+        "data_folder": "/gscratch/stf/jcmw614/thesis/output/preprocess/shards",
+        "glob_pattern": "shard_*.gz",
         "env_command": "module load conda && conda activate /gscratch/stf/jcmw614/conda/envs/thesis-env/ && export PYTHONPATH=/gscratch/stf/jcmw614/thesis:$PYTHONPATH",
         "sbatch_args": {
             "account": "stf",
@@ -10,16 +10,19 @@
         },
         "workers": 40,
         "time": "10:00:00",
-        "mem_per_cpu_gb": 2,
+        "mem_per_cpu_gb": 4,
         "partition": "compute",
-        "base_dir": "/gscratch/stf/jcmw614/thesis"
+        "output_dir": "/gscratch/stf/jcmw614/thesis/output/filter",
+        "log_dir": "/gscratch/stf/jcmw614/thesis/log/filter"
     },
     "local": {
-        "data_folder": "output/preprocess",
-        "glob_pattern": "toy_leu_data.jsonl.gz",
+        "data_folder": "output/preprocess/shards",
+        "glob_pattern": "shard_*.gz",
         "env_command": "conda activate thesis-env",
         "workers": 4,
-        "base_dir": "/Users/jessicawang/Desktop/thesis"
+        "mem_per_cpu_gb": 3,
+        "output_dir": "/Users/jessicawang/Desktop/thesis/output/filter",
+        "log_dir": "/Users/jessicawang/Desktop/thesis/log/filter"
     },
     "enriched_metadata": "output/preprocess/metadata_enriched.jsonl.gz", 
     "source_metadata": "output/preprocess/metadata_source.jsonl.gz"

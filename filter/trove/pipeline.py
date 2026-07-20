@@ -1,4 +1,5 @@
-from filter.manifest import FilterManifest
+import argparse
+from utils import load_config
 from filter.trove.id_logger import DocumentIdLogger
 from datatrove.executor.slurm import SlurmPipelineExecutor
 from datatrove.executor.local import LocalPipelineExecutor
@@ -11,29 +12,18 @@ from datatrove.pipeline.filters import (
 )
 from datatrove.pipeline.readers import JsonlReader
 from datatrove.pipeline.writers.jsonl import JsonlWriter
-import socket
-from typing import Dict, Union, Any, Tuple, List
-from pathlib import Path
+from typing import Dict, Union, Any, List
 from datatrove.pipeline.base import PipelineStep
 
 
-def detect_environment() -> str:
-    hostname = socket.gethostname()
-    if "klone" in hostname.lower() or "hyak" in hostname.lower():
-        return "hyak"
-    return "local"
+def get_env_config(config, executor):
+    return config[executor]
 
 
-def get_env_config(config, env):
-    return config[env]
-
-
-def build_pipline(
-    config: Dict[str, Any], env_config: Dict[str, Any], output_dir: str
-) -> Tuple[List[PipelineStep], Path, Path]:
-    output_path = f"{env_config["base_dir"]}/{output_dir}"
-    excluded_path = f"{output_path}/excluded"
-    log_path = f"{env_config["base_dir"]}/log/{config["job_name"]}"
+def build_pipline(env_config: Dict[str, Any]) -> List[PipelineStep]:
+    
+    excluded_path = f"{env_config["output_dir"]}/excluded"
+    output_path = env_config["output_dir"]
     pipeline = [
         JsonlReader(
             data_folder=env_config["data_folder"],
@@ -57,25 +47,24 @@ def build_pipline(
         DocumentIdLogger("5_fineweb_quality", output_path),
         JsonlWriter(output_path),
     ]
-    return pipeline, output_path, log_path
+    return pipeline
 
 
 def get_executor(
-    env: str,
+    executor: str,
     config: Dict[str, Any],
     env_config: Dict[str, Any],
     pipeline: PipelineStep,
-    log_path: str,
 ) -> Union[LocalPipelineExecutor, SlurmPipelineExecutor]:
-    if env == "hyak":
+    if executor == "slurm":
         return SlurmPipelineExecutor(
             job_name=config["job_name"],
             pipeline=pipeline,
             env_command=env_config["env_command"],
             workers=env_config["workers"],
             time=env_config["time"],
-            logging_dir=log_path,
-            slurm_logs_folder=f"{log_path}/slurm_logs",
+            logging_dir=env_config["log_dir"],
+            slurm_logs_folder=f"{env_config["log_dir"]}/slurm",
             mem_per_cpu_gb=env_config["mem_per_cpu_gb"],
             sbatch_args=env_config["sbatch_args"],
             partition=env_config["partition"],
@@ -85,31 +74,29 @@ def get_executor(
     return LocalPipelineExecutor(
         pipeline=pipeline,
         workers=env_config["workers"],
-        logging_dir=log_path,
+        logging_dir=env_config["log_dir"],
         # skip_completed=False,
     )
 
 
-def run(config: Dict[str, Any], output_dir: str, manifest: FilterManifest):
-    # Detect environment
-    env = detect_environment()
-    print(f" Detected environment: {env.upper()}")
-
+def run(args):
+    config = load_config(args.config)
     # Get environment configuration for executor
-    env_config = get_env_config(config, env)
+
+    env_config = get_env_config(config, args.executor)
 
     # Build pipeline and set output
-    pipeline, output_path, log_path = build_pipline(config, env_config, output_dir)
+    pipeline = build_pipline(env_config)
 
-    manifest.set_output_files(
-        "filter", {"output_data": output_path, "log_data": log_path}
-    )
-
-    # Get executor
-    executor = get_executor(env, config, env_config, pipeline, log_path)
+    # Get executor and run
+    executor = get_executor(args.executor, config, env_config, pipeline)
     executor.run()
-    return output_path, log_path
+
 
 if __name__ == "__main__":
-    # TODO: this script will be run directly from login node
-    pass
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--executor", default="slurm")
+    parser.add_argument("--config", default="config/filter/pipeline.json")
+    
+    args = parser.parse_args()
+    run(args)

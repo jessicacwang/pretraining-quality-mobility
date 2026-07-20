@@ -7,7 +7,7 @@ from pathlib import Path
 class DocumentIdLogger(PipelineStep):
     type = "🪵 LOGGER"
     name = "Local English Usage IDs"
-    
+
     def __init__(self, stage_name: str, output_path: str):
         super().__init__()
         self.stage_name = stage_name
