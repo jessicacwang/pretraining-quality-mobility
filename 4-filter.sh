@@ -54,7 +54,7 @@ echo "Using executor: $EXECUTOR"
 # ============ Local path ============
 if [ "$EXECUTOR" == "local" ]; then
     echo "Running locally (LocalPipelineExecutor)..."
-    "$CONDA_PYTHON" -m filter.trove.pipeline --executor local
+    "$CONDA_PYTHON" -m filter.pipeline --executor local
 
     if [ ! -f "${LOG_PATH}/stats.json" ]; then
         echo "Error: stats.json not found after local run."
@@ -65,7 +65,7 @@ fi
 
 # ============ Slurm path ============
 echo "Submitting datatrove pipeline..."
-"$CONDA_PYTHON" -m filter.trove.pipeline --executor slurm
+"$CONDA_PYTHON" -m filter.pipeline --executor slurm
 
 echo "Waiting for Slurm jobs named '$JOB_NAME' to finish..."
 while squeue -u "$USER" -n "$JOB_NAME" -h | grep -q .; do

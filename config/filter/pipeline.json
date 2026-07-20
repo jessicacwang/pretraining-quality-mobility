@@ -26,5 +26,12 @@
     "enriched_metadata": "output/preprocess/metadata_enriched.jsonl.gz", 
     "source_metadata": "output/preprocess/metadata_source.jsonl.gz",
     "leu_data": "output/preprocess/leu_data.jsonl.gz",
-    "toy_data": "output/preprocess/toy_leu_data.jsonl.gz"
+    "toy_data": "output/preprocess/toy_leu_data.jsonl.gz",
+    "algorithms": {
+        "1": "1_langid",
+        "2": "2_gopher_repetition",
+        "3": "3_gopher_quality",
+        "4": "4_c4_quality",
+        "5": "5_fineweb_quality"
+    }
 }

@@ -1,6 +1,6 @@
 import argparse
 from utils import load_config
-from filter.trove.id_logger import DocumentIdLogger
+from filter.pipeline.id_logger import DocumentIdLogger
 from datatrove.executor.slurm import SlurmPipelineExecutor
 from datatrove.executor.local import LocalPipelineExecutor
 from datatrove.pipeline.filters import (
@@ -21,7 +21,7 @@ def get_env_config(config, executor):
 
 
 def build_pipline(env_config: Dict[str, Any]) -> List[PipelineStep]:
-    
+
     excluded_path = f"{env_config["output_dir"]}/excluded"
     output_path = env_config["output_dir"]
     pipeline = [
@@ -96,8 +96,8 @@ def run(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--executor", default="slurm")
+    parser.add_argument("--executor", choices=["slurm", "local"], default="slurm")
     parser.add_argument("--config", default="config/filter/pipeline.json")
-    
+
     args = parser.parse_args()
     run(args)
