@@ -75,7 +75,8 @@ def get_executor(
         pipeline=pipeline,
         workers=env_config["workers"],
         logging_dir=env_config["log_dir"],
-        # skip_completed=False,
+        tasks=4,
+        skip_completed=False,
     )
 
 

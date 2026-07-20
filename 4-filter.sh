@@ -24,14 +24,15 @@ while [[ $# -gt 0 ]]; do
 done
 
 # ========== Split leu_data into shard if not already done ===========
-INPUT_FILE="output/preprocess/leu_data.jsonl.gz"
 SHARD_DIR="output/preprocess/shards"
 if [ ! -d "$SHARD_DIR" ] || [ -z "$(ls -A "$SHARD_DIR" 2>/dev/null)" ]; then
     echo "No shards found — splitting $INPUT_FILE..."
     mkdir -p "$SHARD_DIR"
     if [ "$EXECUTOR_OVERRIDE" == "local" ]; then
-        gunzip -c "$INPUT_FILE" | split -l 50000 - "${SHARD_DIR}/shard_"
+        INPUT_FILE=$("$CONDA_PYTHON" -c "import json; print(json.load(open('$CONFIG'))['toy_data'])")
+        gunzip -c "$INPUT_FILE" | split -l 2500 - "${SHARD_DIR}/shard_"
     else
+        INPUT_FILE=$("$CONDA_PYTHON" -c "import json; print(json.load(open('$CONFIG'))['leu_data'])")
         zcat "$INPUT_FILE" | split -l 50000 - "${SHARD_DIR}/shard_"
     fi
     for f in "${SHARD_DIR}"/shard_*; do gzip "$f"; done

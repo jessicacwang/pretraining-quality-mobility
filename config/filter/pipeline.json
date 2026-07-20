@@ -20,10 +20,11 @@
         "glob_pattern": "shard_*.gz",
         "env_command": "conda activate thesis-env",
         "workers": 4,
-        "mem_per_cpu_gb": 3,
         "output_dir": "/Users/jessicawang/Desktop/thesis/output/filter",
         "log_dir": "/Users/jessicawang/Desktop/thesis/log/filter"
     },
     "enriched_metadata": "output/preprocess/metadata_enriched.jsonl.gz", 
-    "source_metadata": "output/preprocess/metadata_source.jsonl.gz"
+    "source_metadata": "output/preprocess/metadata_source.jsonl.gz",
+    "leu_data": "output/preprocess/leu_data.jsonl.gz",
+    "toy_data": "output/preprocess/toy_leu_data.jsonl.gz"
 }
