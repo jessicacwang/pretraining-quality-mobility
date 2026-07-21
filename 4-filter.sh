@@ -33,16 +33,22 @@ if [ ! -d "$SHARD_DIR" ] || [ -z "$(ls -A "$SHARD_DIR" 2>/dev/null)" ]; then
     sbatch 4-shard.slurm
     echo "Waiting for '$SHARD_JOB_NAME' to finish..."
 
-    while squeue -u "$USER" -n "$SHARD_JOB_NAME" -h | grep -q .; do
-        sleep "$POLL_INTERVAL"
-    done
+    while true; do
+        # Capture output safely without triggering set -e failures
+        SHARD_JOB_COUNT=$(squeue -u "$USER" -n "$SHARD_JOB_NAME" -h -o "%i" 2>/dev/null | wc -l)
+        
+        # Trim whitespace from wc output
+        SHARD_JOB_COUNT=$(echo "$SHARD_JOB_NAME" | tr -d '[:space:]')
+        
+        if [ "$SHARD_JOB_COUNT" -eq 0 ]; then
+            break
+        fi
+    FAILED_SHARD_JOBS=$(sacct -u "$USER" -n --format=JobName,State,ExitCode 2>/dev/null | \
+        grep -w "$SHARD_JOB_NAME" | grep -v "COMPLETED" || true)
 
-    SHARD_FAILED=$(sacct -u "$USER" -n --format=JobName,State,ExitCode | \
-    grep -w "$SHARD_JOB_NAME" | grep -v "COMPLETED")
-
-    if [ -n "$SHARD_FAILED" ]; then 
-        echo "Error: shard_leu job did not complete successfully"
-        echo "$SHARD_FAILED"
+    if [ -n "$FAILED_SHARD_JOBS" ]; then
+        echo "Error: one or more jobs named '$SHARD_JOB_NAME' did not complete successfully:"
+        echo "$FAILED_SHARD_JOBS"
         exit 1
     fi
 
@@ -83,12 +89,22 @@ echo "Submitting datatrove pipeline..."
 "$CONDA_PYTHON" -m filter.pipeline --executor slurm
 
 echo "Waiting for Slurm jobs named '$JOB_NAME' to finish..."
-while squeue -u "$USER" -n "$JOB_NAME" -h | grep -q .; do
+while true; do
+    # Capture output safely without triggering set -e failures
+    JOB_COUNT=$(squeue -u "$USER" -n "$JOB_NAME" -h -o "%i" 2>/dev/null | wc -l)
+    
+    # Trim whitespace from wc output
+    JOB_COUNT=$(echo "$JOB_COUNT" | tr -d '[:space:]')
+    
+    if [ "$JOB_COUNT" -eq 0 ]; then
+        break
+    fi
     sleep "$POLL_INTERVAL"
 done
 
-FAILED_JOBS=$(sacct -u "$USER" -n --format=JobName,State,ExitCode | \
-    grep -w "$JOB_NAME" | grep -v "COMPLETED")
+FAILED_JOBS=$(sacct -u "$USER" -n --format=JobName,State,ExitCode 2>/dev/null | \
+    grep -w "$JOB_NAME" | grep -v "COMPLETED" || true)
+
 if [ -n "$FAILED_JOBS" ]; then
     echo "Error: one or more jobs named '$JOB_NAME' did not complete successfully:"
     echo "$FAILED_JOBS"
