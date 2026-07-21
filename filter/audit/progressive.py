@@ -25,9 +25,11 @@ def update_stats(
     prog_stats[algo_key] |= target_algo_stats
 
     # Update the progressive stats with subtotals by bucket (cluster, source, component, genre)
+    print(" -------- counting metadata instances")
     included_stats, excluded_stats = get_counts_from_excluded(
         id_to_metadata, excluded_dir
     )
+    print(" -------- finished counting metadata")
     prog_stats[algo_key]["excluded"] = excluded_stats
     prog_stats[algo_key]["included"] = included_stats
     return

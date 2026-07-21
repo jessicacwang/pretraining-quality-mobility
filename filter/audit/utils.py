@@ -53,7 +53,7 @@ def get_counts_from_excluded(id_to_metadata: Dict[str, Tuple], working_dir: Path
     excluded_ids = list()
     excluded = list()
 
-    for f in tqdm(working_dir.glob("*.jsonl.gz"), desc="working dir glob", position=0):
+    for f in tqdm(working_dir.glob("*.jsonl.gz"), total=40, desc="excluded dir glob", position=0):
         with gzip.open(f, "rt") as f_data:
             for f_line in tqdm(f_data, desc=" JSONL excluded lines", position=1, leave=False):
                 doc = json.loads(f_line)
@@ -72,7 +72,7 @@ def get_counts_from_included(id_to_metadata: Dict[str, Tuple], working_dir: Path
     included_ids = list()
     included = list()
 
-    for f in tqdm(working_dir.glob("*.jsonl.gz"), desc="working dir glob", position=0):
+    for f in tqdm(working_dir.glob("*.jsonl.gz"), total=40, desc="included dir glob", position=0):
         with gzip.open(f, "rt") as f_data:
             for f_line in tqdm(f_data, desc="JSONL included lines", position=1, leave=False):
                 doc = json.loads(f_line)
