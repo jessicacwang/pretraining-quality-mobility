@@ -11,7 +11,7 @@
         "workers": -1,
         "nodes_per_task": 40,
         "tasks": 40,
-        "cpus_per_task": 1,
+        "tasks_per_job": 1,
         "time": "1:00:00",
         "mem_per_cpu_gb": 4,
         "partition": "compute",
