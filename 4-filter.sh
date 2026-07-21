@@ -37,9 +37,9 @@ if [ ! -d "$SHARD_DIR" ] || [ -z "$(ls -A "$SHARD_DIR" 2>/dev/null)" ]; then
         sleep "$POLL_INTERVAL"
     done
 
-    SHARD_FAILED=$(sacct -u "$USER" -n --format=JobID,JobName%30,State,Exitcode \
-        | awk -n job="$SHARD_JOB_NAME" '$2 == job && $3 !~ /COMPLETED/ {print}')
-    
+    SHARD_FAILED=$(sacct -u "$USER" -n --format=JobName,State,ExitCode | \
+    grep -w "$SHARD_JOB_NAME" | grep -v "COMPLETED")
+
     if [ -n "$SHARD_FAILED" ]; then 
         echo "Error: shard_leu job did not complete successfully"
         echo "$SHARD_FAILED"
@@ -87,8 +87,8 @@ while squeue -u "$USER" -n "$JOB_NAME" -h | grep -q .; do
     sleep "$POLL_INTERVAL"
 done
 
-FAILED_JOBS=$(sacct -u "$USER" -n --format=JobID,JobName%30,State,ExitCode \
-    | awk -v job="$JOB_NAME" '$2 == job && $3 !~ /COMPLETED/ {print}')
+FAILED_JOBS=$(sacct -u "$USER" -n --format=JobName,State,ExitCode | \
+    grep -w "$JOB_NAME" | grep -v "COMPLETED")
 if [ -n "$FAILED_JOBS" ]; then
     echo "Error: one or more jobs named '$JOB_NAME' did not complete successfully:"
     echo "$FAILED_JOBS"
