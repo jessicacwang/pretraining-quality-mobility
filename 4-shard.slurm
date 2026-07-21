@@ -5,6 +5,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=4G
 #SBATCH --time=1:00:00
+#SBATCH --chdir=/gscratch/stf/jcmw614/thesis
 #SBATCH -o log/%x_%j.out
 
 mkdir -p output/preprocess/shards
