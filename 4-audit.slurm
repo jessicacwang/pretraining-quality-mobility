@@ -2,11 +2,11 @@
 
 #SBATCH --job-name=filter_audit
 #SBATCH --account=stf
-#SBATCH --partition=compute-hugemem
+#SBATCH --partition=ckpt
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --mem=8G
-#SBATCH --time=2:00:00
+#SBATCH --mem=16G
+#SBATCH --time=4:00:00
 #SBATCH -o log/%x_%j.out
 
 # command:
