@@ -43,12 +43,15 @@ if [ ! -d "$SHARD_DIR" ] || [ -z "$(ls -A "$SHARD_DIR" 2>/dev/null)" ]; then
         if [ "$SHARD_JOB_COUNT" -eq 0 ]; then
             break
         fi
-    FAILED_SHARD_JOBS=$(sacct -u "$USER" -n --format=JobName,State,ExitCode 2>/dev/null | \
+        sleep "$POLL_INTERVAL"
+    done 
+    
+    SHARD_FAILED=$(sacct -u "$USER" -n --format=JobName,State,ExitCode 2>/dev/null | \
         grep -w "$SHARD_JOB_NAME" | grep -v "COMPLETED" || true)
 
-    if [ -n "$FAILED_SHARD_JOBS" ]; then
+    if [ -n "$SHARD_FAILED" ]; then
         echo "Error: one or more jobs named '$SHARD_JOB_NAME' did not complete successfully:"
-        echo "$FAILED_SHARD_JOBS"
+        echo "$SHARD_FAILED"
         exit 1
     fi
 
