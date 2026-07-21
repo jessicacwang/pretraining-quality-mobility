@@ -61,7 +61,7 @@ def get_counts_from_excluded(id_to_metadata: Dict[str, Tuple], working_dir: Path
                 excluded_ids.append(doc_id)
                 excluded.append(id_to_metadata[doc_id])
 
-    included = [id_to_metadata[i] for i in id_to_metadata if i not in excluded_ids]
+    included = [id_to_metadata[i] for i in tqdm(id_to_metadata, desc="included check") if i not in excluded_ids]
 
     included_counts = Counter(included)
     excluded_counts = Counter(excluded)
@@ -80,7 +80,7 @@ def get_counts_from_included(id_to_metadata: Dict[str, Tuple], working_dir: Path
                 included_ids.append(doc_id)
                 included.append(id_to_metadata[doc_id])
 
-    excluded = [id_to_metadata[i] for i in id_to_metadata if i not in included_ids]
+    excluded = [id_to_metadata[i] for i in tqdm(id_to_metadata, desc="excluded check") if i not in included_ids]
 
     included_counts = Counter(included)
     excluded_counts = Counter(excluded)
