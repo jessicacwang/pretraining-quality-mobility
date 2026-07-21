@@ -7,7 +7,7 @@
 #SBATCH --mem=16G
 #SBATCH --time=4:00:00
 #SBATCH -o log/%x_%j.out
-#SBATCH --mail-user=jcmw614@uw.edu
+#SBATCH --mail-user=%u@uw.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
 
 # command:

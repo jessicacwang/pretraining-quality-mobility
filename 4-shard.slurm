@@ -7,6 +7,8 @@
 #SBATCH --time=1:00:00
 #SBATCH --chdir=/gscratch/stf/jcmw614/thesis
 #SBATCH -o log/%x_%j.out
+#SBATCH --mail-user=%u@uw.edu
+#SBATCH --mail-type=BEGIN,END,FAIL
 
 set -e
 mkdir -p output/preprocess/shards
