@@ -1,6 +1,5 @@
 import argparse
 from utils import load_config
-from filter.pipeline.id_logger import DocumentIdLogger
 from datatrove.executor.slurm import SlurmPipelineExecutor
 from datatrove.executor.local import LocalPipelineExecutor
 from datatrove.pipeline.filters import (
@@ -30,21 +29,16 @@ def build_pipline(env_config: Dict[str, Any]) -> List[PipelineStep]:
             glob_pattern=env_config["glob_pattern"],
         ),
         LanguageFilter(exclusion_writer=JsonlWriter(f"{excluded_path}/1_langid")),
-        DocumentIdLogger("1_langid", output_path),
         GopherRepetitionFilter(
             exclusion_writer=JsonlWriter(f"{excluded_path}/2_gopher_repetition")
         ),
-        DocumentIdLogger("2_gopher_repetition", output_path),
         GopherQualityFilter(
             exclusion_writer=JsonlWriter(f"{excluded_path}/3_gopher_quality")
         ),
-        DocumentIdLogger("3_gopher_quality", output_path),
         C4QualityFilter(exclusion_writer=JsonlWriter(f"{excluded_path}/4_c4_quality")),
-        DocumentIdLogger("4_c4_quality", output_path),
         FineWebQualityFilter(
             exclusion_writer=JsonlWriter(f"{excluded_path}/5_fineweb_quality")
         ),
-        DocumentIdLogger("5_fineweb_quality", output_path),
         JsonlWriter(output_path),
     ]
     return pipeline

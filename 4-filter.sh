@@ -84,3 +84,6 @@ if [ ! -f "${LOG_PATH}/stats.json" ]; then
     echo "Error: stats.json not found even though jobs reported COMPLETED."
     exit 1
 fi
+
+echo "Collecting stats..."
+sbatch 5-audit.slurm
