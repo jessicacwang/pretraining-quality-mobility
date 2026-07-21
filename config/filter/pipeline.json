@@ -8,8 +8,11 @@
             "account": "stf",
             "chdir": "/gscratch/stf/jcmw614/thesis/"
         },
-        "workers": 40,
-        "time": "10:00:00",
+        "workers": -1,
+        "nodes_per_task": 40,
+        "tasks": 40,
+        "cpus_per_task": 1,
+        "time": "1:00:00",
         "mem_per_cpu_gb": 4,
         "partition": "compute",
         "output_dir": "/gscratch/stf/jcmw614/thesis/output/filter",

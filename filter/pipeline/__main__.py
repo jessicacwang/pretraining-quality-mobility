@@ -63,7 +63,9 @@ def get_executor(
             mem_per_cpu_gb=env_config["mem_per_cpu_gb"],
             sbatch_args=env_config["sbatch_args"],
             partition=env_config["partition"],
-            tasks=1,
+            tasks=env_config["tasks"],
+            cpus_per_task=env_config["cpus_per_task"],
+            tasks_per_job=env_config["tasks_per_job"],
         )
 
     return LocalPipelineExecutor(
