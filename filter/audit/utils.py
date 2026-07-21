@@ -3,7 +3,7 @@ import json
 from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, Tuple
-
+from tqdm import tqdm
 
 def metadata_lookup(config: Dict[str, Any]) -> Tuple[Dict, Dict]:
     id_to_enriched_metadata = dict()
@@ -11,7 +11,7 @@ def metadata_lookup(config: Dict[str, Any]) -> Tuple[Dict, Dict]:
 
     # Stream metadata_enriched to store id -> (cluster, source, component) details
     with gzip.open(config["enriched_metadata"], "rt") as e_metadata:
-        for e_meta_line in e_metadata:
+        for e_meta_line in tqdm(e_metadata, desc="enriched metadata"):
             doc = json.loads(e_meta_line)
             doc_id = doc.get("id")
             doc_cluster = doc.get("cluster_id")
@@ -25,7 +25,7 @@ def metadata_lookup(config: Dict[str, Any]) -> Tuple[Dict, Dict]:
 
     # Stream metadata_source to store id -> genre if it exists
     with gzip.open(config["source_metadata"], "rt") as s_metadata:
-        for s_meta_line in s_metadata:
+        for s_meta_line in tqdm(s_metadata, desc="source metadata"):
             doc = json.loads(s_meta_line)
             doc_id = doc.get("id")
             doc_genre = doc.get("genre", None)
@@ -38,10 +38,10 @@ def metadata_lookup(config: Dict[str, Any]) -> Tuple[Dict, Dict]:
     }
 
 
-def counter_to_stats(meta_counter: Counter):
+def counter_to_stats(meta_counter: Counter, stat_type: str):
     result = {"total": sum(meta_counter.values()), "records": {}}
 
-    for (cluster, source, component, genre), count in meta_counter.items():
+    for (cluster, source, component, genre), count in tqdm(meta_counter.items(), desc=f"{stat_type} counter to stats"):
         genre_val = genre if genre is not None else "null"
         key = "|".join(str(x) for x in (cluster, source, component, genre_val))
         result["records"][key] = result["records"].get(key, 0) + count
@@ -53,9 +53,9 @@ def get_counts_from_excluded(id_to_metadata: Dict[str, Tuple], working_dir: Path
     excluded_ids = list()
     excluded = list()
 
-    for f in working_dir.glob("*.jsonl.gz"):
+    for f in tqdm(working_dir.glob("*.jsonl.gz"), desc="working dir glob", position=0):
         with gzip.open(f, "rt") as f_data:
-            for f_line in f_data:
+            for f_line in tqdm(f_data, desc=" JSONL excluded lines", position=1, leave=False):
                 doc = json.loads(f_line)
                 doc_id = doc.get("id")
                 excluded_ids.append(doc_id)
@@ -65,16 +65,16 @@ def get_counts_from_excluded(id_to_metadata: Dict[str, Tuple], working_dir: Path
 
     included_counts = Counter(included)
     excluded_counts = Counter(excluded)
-    return counter_to_stats(included_counts), counter_to_stats(excluded_counts)
+    return counter_to_stats(included_counts, "included"), counter_to_stats(excluded_counts, "excluded")
 
 
 def get_counts_from_included(id_to_metadata: Dict[str, Tuple], working_dir: Path):
     included_ids = list()
     included = list()
 
-    for f in working_dir.glob("*.jsonl.gz"):
+    for f in tqdm(working_dir.glob("*.jsonl.gz"), desc="working dir glob", position=0):
         with gzip.open(f, "rt") as f_data:
-            for f_line in f_data:
+            for f_line in tqdm(f_data, desc="JSONL included lines", position=1, leave=False):
                 doc = json.loads(f_line)
                 doc_id = doc.get("id")
                 included_ids.append(doc_id)
@@ -84,4 +84,4 @@ def get_counts_from_included(id_to_metadata: Dict[str, Tuple], working_dir: Path
 
     included_counts = Counter(included)
     excluded_counts = Counter(excluded)
-    return counter_to_stats(included_counts), counter_to_stats(excluded_counts)
+    return counter_to_stats(included_counts, "included"), counter_to_stats(excluded_counts, "excluded")

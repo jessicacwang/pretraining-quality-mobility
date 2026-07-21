@@ -30,6 +30,8 @@ def main(args):
 
         for n, algo_stats in enumerate(datatrove_stats[1:-1], start=1):
             algo_key = config["algorithms"][str(n)]
+
+            print(f"Collecting stats for {algo_key}...")
             excluded_dir = Path(
                 f"{config[args.executor]["output_dir"]}/excluded/{algo_key}/"
             )
@@ -43,6 +45,7 @@ def main(args):
             )
 
         # ==================== ACCUMULATE CUMULATIVE STATS =====================
+        print(f"Collecting cumulative stats...")
         cumulative.update_stats(
             stats["cumulative"], id_to_metadata, Path(args.output_dir)
         )
