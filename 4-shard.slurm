@@ -11,4 +11,4 @@
 set -e
 mkdir -p output/preprocess/shards
 zcat output/preprocess/leu_data.jsonl.gz | split -l 50000 - shards/shard_
-ls shards/shard_* | xargs -P 8 -n 1 gzip
+ls output/preprocess/shards/shard_* | xargs -P 8 -n 1 gzip
