@@ -4,8 +4,8 @@
 #SBATCH --partition=ckpt
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --mem=5G
-#SBATCH --time=10:00
+#SBATCH --mem=16G
+#SBATCH --time=4:00:00
 #SBATCH -o log/%x_%j.out
 
 
