@@ -5,7 +5,7 @@
 #SBATCH --partition=compute-hugemem
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --mem=12G
+#SBATCH --mem=8G
 #SBATCH --time=2:00:00
 #SBATCH -o log/%x_%j.out
 

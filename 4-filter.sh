@@ -7,6 +7,8 @@ CONDA_PYTHON="${CONDA_PYTHON:-python}" # CONDA_PYTHON should only be set on Hyak
 CONFIG="config/filter/pipeline.json"
 JOB_NAME="fineweb_filter" # must match job name passed to datatrove pipeline
 POLL_INTERVAL=30 # Seconds between checks
+SHARD_DIR="output/preprocess/shards"
+SHARD_JOB_NAME="shard_leu"
 
 # ============ Parse args ============
 EXECUTOR_OVERRIDE=""
@@ -24,18 +26,31 @@ while [[ $# -gt 0 ]]; do
 done
 
 # ========== Split leu_data into shard if not already done ===========
-SHARD_DIR="output/preprocess/shards"
+
 if [ ! -d "$SHARD_DIR" ] || [ -z "$(ls -A "$SHARD_DIR" 2>/dev/null)" ]; then
     echo "No shards found — splitting $INPUT_FILE..."
-    mkdir -p "$SHARD_DIR"
-    if [ "$EXECUTOR_OVERRIDE" == "local" ]; then
-        INPUT_FILE=$("$CONDA_PYTHON" -c "import json; print(json.load(open('$CONFIG'))['toy_data'])")
-        gunzip -c "$INPUT_FILE" | split -l 2500 - "${SHARD_DIR}/shard_"
-    else
-        INPUT_FILE=$("$CONDA_PYTHON" -c "import json; print(json.load(open('$CONFIG'))['leu_data'])")
-        zcat "$INPUT_FILE" | split -l 50000 - "${SHARD_DIR}/shard_"
+
+    sbatch 4-shard.slurm
+    echo "Waiting for '$SHARD_JOB_NAME' to finish..."
+
+    while squeue -u "$USER" -n "$SHARD_JOB_NAME" -h | grep -q .; do
+        sleep "$POLL_INTERVAL"
+    done
+
+    SHARD_FAILED=$(sacct -u "$USER" -n --format=JobID,JobName%30,State,Exitcode \
+        | awk -n job="$SHARD_JOB_NAME" '$2 == job && $3 !~ /COMPLETED/ {print}')
+    
+    if [ -n "$SHARD_FAILED" ]; then 
+        echo "Error: shard_leu job did not complete successfully"
+        echo "$SHARD_FAILED"
+        exit 1
     fi
-    for f in "${SHARD_DIR}"/shard_*; do gzip "$f"; done
+
+    if [ -z "$(ls -A "$SHARD_DIR" 2>/dev/null)" ]; then
+        echo "Error: shard_input reported success but $SHARD_DIR is still empty."
+        exit 1
+    fi
+    echo "Sharding complete."
 else
     echo "Shards already exist in $SHARD_DIR — skipping split."
 fi
@@ -86,4 +101,4 @@ if [ ! -f "${LOG_PATH}/stats.json" ]; then
 fi
 
 echo "Collecting stats..."
-sbatch 5-audit.slurm
+sbatch 4-audit.slurm
