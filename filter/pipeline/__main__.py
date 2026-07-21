@@ -13,6 +13,7 @@ from datatrove.pipeline.readers import JsonlReader
 from datatrove.pipeline.writers.jsonl import JsonlWriter
 from typing import Dict, Union, Any, List
 from datatrove.pipeline.base import PipelineStep
+from filter.manifest import FilterManifest
 
 
 def get_env_config(config, executor):
@@ -79,6 +80,10 @@ def run(args):
     # Get environment configuration for executor
 
     env_config = get_env_config(config, args.executor)
+
+    # Load manifest
+    manifest = FilterManifest(f"{env_config["output_dir"]}/manifest.json")
+    manifest.start_step("filter")
 
     # Build pipeline and set output
     pipeline = build_pipline(env_config)
