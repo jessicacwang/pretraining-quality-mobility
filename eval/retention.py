@@ -1,5 +1,6 @@
 import argparse
 import json
+import math
 from typing import Dict, List
 from filter.manifest import FilterManifest
 
@@ -27,8 +28,9 @@ def print_retention_report(stages: List[Dict], feature_names=None, min_count=1):
         stage_total = stage["total"]
         stage_included = stage["included"]["total"]
         stage_retention = stage_included / stage_total if stage_total else float("nan")
+        stage_lrp = -1 * math.log(stage_retention)
 
-        print(f"\n=== {stage_name} - overall retention: {stage_retention:.1%} "
+        print(f"\n=== {stage_name} - overall retention: {stage_retention:.1%}; LRP: {stage_lrp:.1%} "
               f"({stage_included}/{stage_total}) ==="
               )
         
@@ -47,15 +49,16 @@ def print_retention_report(stages: List[Dict], feature_names=None, min_count=1):
                     continue 
 
                 retention = inc / total if total else float("nan")
-                rows.append((value, retention, inc, total))
+                lrp = -1 * math.log(retention)
+                rows.append((value, retention, lrp, inc, total))
             
             rows.sort(key=lambda r: r[1])
 
             print(f" -- {feature_name} --")
-            for value, retention, inc, total in rows:
+            for value, retention, lrp, inc, total in rows:
                 # Check if nothing or everything was retained
                 flag = "  <-- check this" if retention in (0.0, 1.0) and total >= 10 else ""
-                print(f"    {value:>15}: {retention:6.1%} ({inc}/{total}){flag}")
+                print(f"    {value:>15}: {retention:6.1%} {lrp:6.1%} ({inc}/{total}){flag}")
 def main(args):
     # Load manifest as nested dictionary
     manifest = FilterManifest(f"{args.output_dir}/manifest.json")
