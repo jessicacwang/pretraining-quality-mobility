@@ -1,0 +1,37 @@
+{
+    "job_name": "fineweb_filter",
+    "slurm": {
+        "data_folder": "/gscratch/stf/jcmw614/thesis/output/preprocess/shards",
+        "glob_pattern": "shard_*.gz",
+        "env_command": "module load conda && conda activate /gscratch/stf/jcmw614/conda/envs/thesis-env/ && export PYTHONPATH=/gscratch/stf/jcmw614/thesis:$PYTHONPATH",
+        "sbatch_args": {
+            "account": "stf",
+            "chdir": "/gscratch/stf/jcmw614/thesis/"
+        },
+        "workers": 40,
+        "time": "10:00:00",
+        "mem_per_cpu_gb": 4,
+        "partition": "compute",
+        "output_dir": "/gscratch/stf/jcmw614/thesis/output/filter",
+        "log_dir": "/gscratch/stf/jcmw614/thesis/log/filter"
+    },
+    "local": {
+        "data_folder": "output/preprocess/shards",
+        "glob_pattern": "shard_*.gz",
+        "env_command": "conda activate thesis-env",
+        "workers": 4,
+        "output_dir": "/Users/jessicawang/Desktop/thesis/output/filter",
+        "log_dir": "/Users/jessicawang/Desktop/thesis/log/filter"
+    },
+    "enriched_metadata": "output/preprocess/metadata_enriched.jsonl.gz", 
+    "source_metadata": "output/preprocess/metadata_source.jsonl.gz",
+    "leu_data": "output/preprocess/leu_data.jsonl.gz",
+    "toy_data": "output/preprocess/toy_leu_data.jsonl.gz",
+    "algorithms": {
+        "1": "1_langid",
+        "2": "2_gopher_repetition",
+        "3": "3_gopher_quality",
+        "4": "4_c4_quality",
+        "5": "5_fineweb_quality"
+    }
+}
