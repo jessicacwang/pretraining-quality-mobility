@@ -50,7 +50,7 @@ def counter_to_stats(meta_counter: Counter, stat_type: str):
 
 
 def get_counts_from_excluded(id_to_metadata: Dict[str, Tuple], working_dir: Path):
-    excluded_ids = list()
+    excluded_ids = set()
     excluded = list()
 
     for f in tqdm(working_dir.glob("*.jsonl.gz"), total=40, desc="excluded dir glob", position=0):
@@ -58,7 +58,7 @@ def get_counts_from_excluded(id_to_metadata: Dict[str, Tuple], working_dir: Path
             for f_line in tqdm(f_data, desc=" JSONL excluded lines", position=1, leave=False):
                 doc = json.loads(f_line)
                 doc_id = doc.get("id")
-                excluded_ids.append(doc_id)
+                excluded_ids.add(doc_id)
                 excluded.append(id_to_metadata[doc_id])
 
     included = [id_to_metadata[i] for i in tqdm(id_to_metadata, desc="included check") if i not in excluded_ids]
@@ -69,7 +69,7 @@ def get_counts_from_excluded(id_to_metadata: Dict[str, Tuple], working_dir: Path
 
 
 def get_counts_from_included(id_to_metadata: Dict[str, Tuple], working_dir: Path):
-    included_ids = list()
+    included_ids = set()
     included = list()
 
     for f in tqdm(working_dir.glob("*.jsonl.gz"), total=40, desc="included dir glob", position=0):
@@ -77,7 +77,7 @@ def get_counts_from_included(id_to_metadata: Dict[str, Tuple], working_dir: Path
             for f_line in tqdm(f_data, desc="JSONL included lines", position=1, leave=False):
                 doc = json.loads(f_line)
                 doc_id = doc.get("id")
-                included_ids.append(doc_id)
+                included_ids.add(doc_id)
                 included.append(id_to_metadata[doc_id])
 
     excluded = [id_to_metadata[i] for i in tqdm(id_to_metadata, desc="excluded check") if i not in included_ids]
