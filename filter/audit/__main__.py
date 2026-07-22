@@ -13,7 +13,7 @@ def main(args):
     config = load_config(args.config_path)
 
     # Load manifest
-    manifest = FilterManifest(f"{args.output_dir}/manifest.json")
+    manifest = FilterManifest(f"{args.output_dir}/audit/manifest.json")
     manifest.set_args("filter", vars(args))
 
     # Initialize stats
@@ -33,7 +33,7 @@ def main(args):
 
             print(f" ==== Collecting stats for {algo_key}...")
             excluded_dir = Path(
-                f"{config[args.executor]["output_dir"]}/excluded/{algo_key}/"
+                f"{args.output_dir}/excluded/{algo_key}/"
             )
             # Update progressive stats
             progressive.update_stats(
