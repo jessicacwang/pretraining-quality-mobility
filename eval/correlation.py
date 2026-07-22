@@ -5,37 +5,41 @@ import numpy as np
 from scipy.stats import pearsonr
 from pathlib import Path
 from typing import Dict
+from tqdm import tqdm
 
 def cmi_lookup(metdata_source: str) -> Dict[str, int]:
     id_to_cmi = dict()
+    cluster_5_ids = set()
 
     # Stream metadata_source to store id -> cmi if it exists
     with gzip.open(metdata_source, "rt") as s_metadata:
-        for s_meta_line in s_metadata:
+        for s_meta_line in tqdm(s_metadata, desc="source metadata", unit="doc"):
             doc = json.loads(s_meta_line)
             doc_cmi = doc.get("cmi", None)
             if doc_cmi is None:
                 continue
             doc_id = doc.get("id")
             id_to_cmi[doc_id] = float(doc_cmi)
+            cluster_5_ids.add(doc_id)
 
-    return id_to_cmi
+    return id_to_cmi, cluster_5_ids
 
-def exclusion_lookup(output_dir: str, id_to_cmi: Dict[str, int]) -> Dict[str, int]:
+def exclusion_lookup(output_dir: str, cluster_5_ids: set) -> Dict[str, int]:
     id_to_result = dict()
-
+    included_ids = set()
     # Stream filter results and store if there is a CMI value
     out_dir_path = Path(output_dir)
-    for result_file in out_dir_path.glob("*.jsonl.gz"):
+    for result_file in tqdm(out_dir_path.glob("*.jsonl.gz"), desc="datatrove output", unit="shard"):
         with gzip(open(result_file, "rt")) as f_data:
-            for f_line in f_data:
+            for f_line in tqdm(f_data, desc="output shard", unit="doc"):
                 doc = json.loads(f_line)
                 doc_id = doc.get("id")
-                if doc_id in id_to_cmi:
+                if doc_id in cluster_5_ids:
                     id_to_result[doc_id] = 1
+                    included_ids.add(doc_id)
     
     # Update id_to_result with remaining id_to_cmi keys
-    for k in id_to_cmi:
+    for k in cluster_5_ids:
         if k not in id_to_result:
             id_to_result[k] = 0
     
@@ -43,12 +47,15 @@ def exclusion_lookup(output_dir: str, id_to_cmi: Dict[str, int]) -> Dict[str, in
 
 def main(args):
     # Load CMI lookup
-    cmi_results = cmi_lookup(args.metadata_source)
+    print("Loading metadata for lookup")
+    cmi_results, cluster_5_ids = cmi_lookup(args.metadata_source)
 
     # Load result lookup
-    filter_results = exclusion_lookup(args.output_dir)
+    print("Loading 'survived' doc IDs for exclusion lookup")
+    filter_results = exclusion_lookup(args.output_dir, cluster_5_ids)
 
     # Cast as numpy arrays
+    print("Casting results as arrays")
     x = np.array([cmi_results[i] for i in cmi_results])
     y = np.array(filter_results[i] for i in filter_results)
 
