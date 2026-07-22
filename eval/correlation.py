@@ -30,7 +30,7 @@ def exclusion_lookup(output_dir: str, cluster_5_ids: set) -> Dict[str, int]:
     # Stream filter results and store if there is a CMI value
     out_dir_path = Path(output_dir)
     for result_file in tqdm(out_dir_path.glob("*.jsonl.gz"), desc="datatrove output", unit="shard"):
-        with gzip(open(result_file, "rt")) as f_data:
+        with gzip.open(result_file, "rt") as f_data:
             for f_line in tqdm(f_data, desc="output shard", unit="doc"):
                 doc = json.loads(f_line)
                 doc_id = doc.get("id")
