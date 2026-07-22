@@ -40,7 +40,7 @@ def exclusion_lookup(output_dir: str, cluster_5_ids: set) -> Dict[str, int]:
     
     # Update id_to_result with remaining id_to_cmi keys
     for k in cluster_5_ids:
-        if k not in id_to_result:
+        if k not in included_ids:
             id_to_result[k] = 0
     
     return id_to_result
@@ -54,10 +54,15 @@ def main(args):
     print("Loading 'survived' doc IDs for exclusion lookup")
     filter_results = exclusion_lookup(args.output_dir, cluster_5_ids)
 
+    # Check that lookups are the same length
+    assert len(cmi_results) == len(filter_results), f"Lookup sizes differ: {len(cmi_results)}, {len(filter_results)}"
+
     # Cast as numpy arrays
     print("Casting results as arrays")
-    x = np.array([cmi_results[i] for i in cmi_results])
-    y = np.array(filter_results[i] for i in filter_results)
+    x = np.array([cmi_results[i] for i in cluster_5_ids])
+    y = np.array(filter_results[i] for i in cluster_5_ids)
+
+    assert x.size == y.size, f"Array sizes differ: {x.size} vs {y.size}"
 
     corr, p_value = pearsonr(x, y)
     print(f"Correlation: {corr:3.f}")
