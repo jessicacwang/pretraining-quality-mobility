@@ -29,9 +29,9 @@ def exclusion_lookup(output_dir: str, cluster_5_ids: set) -> Dict[str, int]:
     included_ids = set()
     # Stream filter results and store if there is a CMI value
     out_dir_path = Path(output_dir)
-    for result_file in tqdm(out_dir_path.glob("*.jsonl.gz"), desc="datatrove output", unit="shard"):
+    for result_file in tqdm(out_dir_path.glob("*.jsonl.gz"), desc="datatrove output", unit="shard", position=0):
         with gzip.open(result_file, "rt") as f_data:
-            for f_line in tqdm(f_data, desc="output shard", unit="doc"):
+            for f_line in tqdm(f_data, desc="output shard", unit="doc", position=1,leave=False):
                 doc = json.loads(f_line)
                 doc_id = doc.get("id")
                 if doc_id in cluster_5_ids:
@@ -39,7 +39,7 @@ def exclusion_lookup(output_dir: str, cluster_5_ids: set) -> Dict[str, int]:
                     included_ids.add(doc_id)
     
     # Update id_to_result with remaining id_to_cmi keys
-    for k in cluster_5_ids:
+    for k in tqdm(cluster_5_ids, desc="excluded id fill"):
         if k not in included_ids:
             id_to_result[k] = 0
     
@@ -60,7 +60,7 @@ def main(args):
     # Cast as numpy arrays
     print("Casting results as arrays")
     x = np.array([cmi_results[i] for i in cluster_5_ids])
-    y = np.array(filter_results[i] for i in cluster_5_ids)
+    y = np.array([filter_results[i] for i in cluster_5_ids])
 
     assert x.size == y.size, f"Array sizes differ: {x.size} vs {y.size}"
 
