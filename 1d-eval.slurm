@@ -22,10 +22,10 @@ echo "Correlating CMI with filter exclusion..."
     --metadata_source "$LOCAL_DATA"/metadata_source.jsonl.gz \
     --output_dir "$LOCAL_DATA"/
 
-echo "Computing PMI between cluster, source, component, genre and exclusion..."
-/gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m eval.pmi \
-    --output_dir "$LOCAL_DATA"/
+# echo "Computing PMI between cluster, source, component, genre and exclusion..."
+# /gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m eval.pmi \
+#     --output_dir "$LOCAL_DATA"/
 
-echo "Retention sanity check below:"
-/gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m eval.retention \
-    --output_dir "$LOCAL_DATA"/
+# echo "Retention sanity check below:"
+# /gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m eval.retention \
+#     --output_dir "$LOCAL_DATA"/
