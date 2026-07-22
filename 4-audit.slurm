@@ -17,11 +17,11 @@ LOCAL_DATA="/tmp/$USER_$SLURM_JOB_ID/data"
 
 mkdir -p "$LOCAL_DATA" "$LOCAL_CONFIG"
 cp -r /gscratch/stf/$USER/thesis/output/filter/* "$LOCAL_DATA"/
-cp /gscratch/stf/$USER/thesis/config/* "$LOCAL_CONFIG"/
+cp /gscratch/stf/$USER/thesis/config/filter/pipeline.json "$LOCAL_CONFIG"/
 
 # Execute package
 /gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m filter.audit \
-    --output_dir "$LOCAL_DATA" --config_path "$LOCAL_CONFIG"/filter/pipeline.json
+    --output_dir "$LOCAL_DATA" --config_path "$LOCAL_CONFIG"/pipeline.json
 
 # Stage out new manifest
 mkdir -p /gscratch/stf/$USER/thesis/output/filter/audit
