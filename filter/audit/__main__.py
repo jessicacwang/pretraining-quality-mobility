@@ -14,6 +14,7 @@ def main(args):
 
     # Load manifest
     manifest = FilterManifest(f"{args.output_dir}/audit/manifest.json")
+    manifest.start_step("filter")
     manifest.set_args("filter", vars(args))
 
     # Initialize stats

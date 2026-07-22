@@ -84,10 +84,6 @@ def run(args):
 
     env_config = get_env_config(config, args.executor)
 
-    # Load manifest
-    manifest = FilterManifest(f"{env_config["output_dir"]}/manifest.json")
-    manifest.start_step("filter")
-
     # Build pipeline and set output
     pipeline = build_pipline(env_config)
 
