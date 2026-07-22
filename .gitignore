@@ -8,6 +8,8 @@ log/
 .DS_Store
 
 # Experimental outputs
+*.gz
+*.npy
 *.jsonl.gz
 
 # Byte-compiled / optimized / DLL files

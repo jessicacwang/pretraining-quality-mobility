@@ -36,8 +36,10 @@ def build_pipline(env_config: Dict[str, Any]) -> List[PipelineStep]:
         GopherQualityFilter(
             exclusion_writer=JsonlWriter(f"{excluded_path}/3_gopher_quality")
         ),
-        C4QualityFilter(filter_no_terminal_punct=False, 
-                        exclusion_writer=JsonlWriter(f"{excluded_path}/4_c4_quality")),
+        C4QualityFilter(
+            filter_no_terminal_punct=False,
+            exclusion_writer=JsonlWriter(f"{excluded_path}/4_c4_quality"),
+        ),
         FineWebQualityFilter(
             exclusion_writer=JsonlWriter(f"{excluded_path}/5_fineweb_quality")
         ),

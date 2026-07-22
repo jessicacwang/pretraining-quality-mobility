@@ -1,4 +1,4 @@
-from typing import Dict, Any, Tuple
+from typing import Dict, Any, Tuple, Optional
 from pathlib import Path
 from filter.audit.utils import get_counts_from_excluded
 
@@ -9,6 +9,7 @@ def update_stats(
     id_to_metadata: Dict[str, Tuple],
     excluded_dir: Path,
     algo_key: str,
+    now_excluded: set = set(),
 ):
 
     # Filter datatrove stats for desired items
@@ -26,10 +27,8 @@ def update_stats(
 
     # Update the progressive stats with subtotals by bucket (cluster, source, component, genre)
     print(" -------- counting metadata instances")
-    included_stats, excluded_stats = get_counts_from_excluded(
-        id_to_metadata, excluded_dir
-    )
+    result = get_counts_from_excluded(id_to_metadata, excluded_dir, now_excluded)
     print(" -------- finished counting metadata")
-    prog_stats[algo_key]["excluded"] = excluded_stats
-    prog_stats[algo_key]["included"] = included_stats
-    return
+    prog_stats[algo_key]["excluded"] = result["excluded_counts"]
+    prog_stats[algo_key]["included"] = result["included_counts"]
+    return result["now_excluded"]

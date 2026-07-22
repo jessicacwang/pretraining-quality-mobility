@@ -27,21 +27,20 @@ def main(args):
         # ==================== ACCUMULATE PROGRESSIVE STATS ====================
         # Load datatrove stats
         datatrove_stats = json.load(open(f"{args.output_dir}/stats.json", "r"))
-
+        now_excluded = set()
         for n, algo_stats in enumerate(datatrove_stats[1:-1], start=1):
             algo_key = config["algorithms"][str(n)]
 
             print(f" ==== Collecting stats for {algo_key}...")
-            excluded_dir = Path(
-                f"{args.output_dir}/excluded/{algo_key}/"
-            )
+            excluded_dir = Path(f"{args.output_dir}/excluded/{algo_key}/")
             # Update progressive stats
-            progressive.update_stats(
+            now_excluded |= progressive.update_stats(
                 stats["progressive"],
                 algo_stats,
                 id_to_metadata,
                 excluded_dir,
                 algo_key,
+                now_excluded,
             )
 
         # ==================== ACCUMULATE CUMULATIVE STATS =====================
