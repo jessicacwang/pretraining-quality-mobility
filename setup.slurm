@@ -16,7 +16,7 @@ echo "Loading module..."
 module load conda
 
 echo "Activating env..."
-conda activate thesis-env
+conda activate /gscratch/stf/$USER/conda/envs/thesis-env/
 
 echo "Installing OpenMP..."
 conda install -c conda-forge llvm-openmp
