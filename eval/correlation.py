@@ -65,8 +65,8 @@ def main(args):
     assert x.size == y.size, f"Array sizes differ: {x.size} vs {y.size}"
 
     corr, p_value = pearsonr(x, y)
-    print(f"Correlation: {corr:3.f}")
-    print(f"P-value: {p_value:.3f}")
+    print(f"Correlation: {corr:.4f}")
+    print(f"P-value: {p_value:.4f}")
     return
 
 if __name__ == "__main__":
