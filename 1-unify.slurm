@@ -11,5 +11,5 @@
 #SBATCH --mail-user=%u@uw.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
 
-# command:
-/gscratch/stf/jcmw614/conda/envs/thesis-env/bin/python -m preprocess.unify
+# TODO: stage input files on node scratch
+/gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m preprocess.unify
