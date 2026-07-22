@@ -5,8 +5,8 @@
 #SBATCH --partition=ckpt
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --mem=16G
-#SBATCH --time=8:00:00
+#SBATCH --mem=6G
+#SBATCH --time=1:00:00
 #SBATCH -o log/%x_%j.out
 #SBATCH --mail-user=%u@uw.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
