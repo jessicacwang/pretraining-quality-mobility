@@ -24,9 +24,8 @@ def main(args):
 
     try:
         # ==================== ACCUMULATE PROGRESSIVE STATS ====================
-        log_path = config[args.executor]["log_dir"]
         # Load datatrove stats
-        datatrove_stats = json.load(open(f"{log_path}/stats.json", "r"))
+        datatrove_stats = json.load(open(f"{args.output_dir}/stats.json", "r"))
 
         for n, algo_stats in enumerate(datatrove_stats[1:-1], start=1):
             algo_key = config["algorithms"][str(n)]
