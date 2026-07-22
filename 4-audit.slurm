@@ -12,12 +12,12 @@
 #SBATCH --mail-type=BEGIN,END,FAIL
 
 # Stage in data files to node scratch
-LOCAL_CONFIG = "$SLURM_TMPDIR"/config
-LOCAL_DATA = "$SLURM_TMPDIR/data"
+LOCAL_CONFIG="$SLURM_TMPDIR"/config
+LOCAL_DATA="$SLURM_TMPDIR/data"
 
 mkdir -p "$LOCAL_DATA" "$LOCAL_CONFIG"
-cp /gscratch/stf/$USER/thesis/output/filter/* "$LOCAL_DATA"
-cp /gscratch/stf/$USER/thesis/config/* "$LOCAL_CONFIG"
+cp -r /gscratch/stf/$USER/thesis/output/filter/* "$LOCAL_DATA"/
+cp /gscratch/stf/$USER/thesis/config/* "$LOCAL_CONFIG"/
 
 # Execute package
 /gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m filter.audit \
