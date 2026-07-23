@@ -54,7 +54,7 @@ def main(args):
 
     # Also generate RR + LRP CSV data for line + waterfall graphs
     plot_data = build_all_series(stages, strata)
-    write_csvs(plot_data, )
+    write_csvs(plot_data, out_dir_path)
 
     return
 
