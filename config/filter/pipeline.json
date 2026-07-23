@@ -1,12 +1,12 @@
 {
     "job_name": "fineweb_filter",
     "slurm": {
-        "data_folder": "/gscratch/stf/$USER/thesis/output/preprocess/shards",
+        "data_folder": "/gscratch/stf/jcmw614/thesis/output/preprocess/shards",
         "glob_pattern": "shard_*.gz",
-        "env_command": "module load conda && conda activate /gscratch/stf/$USER/conda/envs/thesis-env/ && export PYTHONPATH=/gscratch/stf/$USER/thesis:$PYTHONPATH",
+        "env_command": "module load conda && conda activate /gscratch/stf/jcmw614/conda/envs/thesis-env/ && export PYTHONPATH=/gscratch/stf/jcmw614/thesis:$PYTHONPATH",
         "sbatch_args": {
             "account": "stf",
-            "chdir": "/gscratch/stf/$USER/thesis/"
+            "chdir": "/gscratch/stf/jcmw614/thesis/"
         },
         "workers": -1,
         "nodes_per_task": 1,
@@ -16,8 +16,8 @@
         "time": "1:00:00",
         "mem_per_cpu_gb": 4,
         "partition": "compute",
-        "output_dir": "/gscratch/stf/$USER/thesis/output/filter",
-        "log_dir": "/gscratch/stf/$USER/thesis/log/filter"
+        "output_dir": "/gscratch/stf/jcmw614/thesis/output/filter",
+        "log_dir": "/gscratch/stf/jcmw614/thesis/log/filter"
     },
     "local": {
         "data_folder": "output/preprocess/shards",

@@ -91,8 +91,9 @@ fi
 echo "Submitting datatrove pipeline..."
 "$CONDA_PYTHON" -m filter.pipeline --executor slurm
 
-echo "Waiting for Slurm jobs named '$JOB_NAME' to finish..."
 PIPELINE_JOB_ID=$(cat job_ids.txt)
+echo "Waiting for the'$PIPELINE_JOB_ID' batch to finish..."
+
 while squeue -j "$PIPELINE_JOB_ID" -h | grep -q .; do
     sleep "$POLL_INTERVAL"
 done
