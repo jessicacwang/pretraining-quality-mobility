@@ -26,7 +26,7 @@ def cmi_lookup(metdata_source: str) -> Dict[str, int]:
     return id_to_cmi, cluster_5_ids
 
 
-def exclusion_lookup(audit_dir: str, cluster_5_ids: set) -> Dict[str, int]:
+def audit_lookup(audit_dir: str, cluster_5_ids: set, found_value: int) -> Dict[str, int]:
     id_to_result = dict()
     included_ids = set()
     # Stream filter results and store if there is a CMI value
@@ -44,13 +44,13 @@ def exclusion_lookup(audit_dir: str, cluster_5_ids: set) -> Dict[str, int]:
                 doc = json.loads(f_line)
                 doc_id = doc.get("id")
                 if doc_id in cluster_5_ids:
-                    id_to_result[doc_id] = 0
+                    id_to_result[doc_id] = found_value
                     included_ids.add(doc_id)
 
     # Update id_to_result with remaining id_to_cmi keys
     for k in tqdm(cluster_5_ids, desc="excluded id fill"):
         if k not in included_ids:
-            id_to_result[k] = 1
+            id_to_result[k] = int(not found_value)
 
     return id_to_result
 
@@ -61,8 +61,8 @@ def main(args):
 
     # Load result lookup
     print("Loading doc IDs' survival for lookup")
-    pipeline_results = exclusion_lookup(args.output_dir, cluster_5_ids)
-    lang_id_results = exclusion_lookup(f"{args.output_dir}/excluded/1_langid", cluster_5_ids)
+    pipeline_results = audit_lookup(args.output_dir, cluster_5_ids, 0)
+    lang_id_results = audit_lookup(f"{args.output_dir}/excluded/1_langid", cluster_5_ids, 1)
     # Cast as numpy arrays, in the same order
     print("Casting results as arrays")
     keys = list(cluster_5_ids)
@@ -93,6 +93,6 @@ if __name__ == "__main__":
     parser.add_argument(
         "--metadata_source", default="output/preprocess/metadata_source.jsonl.gz"
     )
-    parser.add_argument("--output_dir", default="output/filter")
+    parser.add_argument("--audit_dir", default="output/filter")
     args = parser.parse_args()
     main(args)
