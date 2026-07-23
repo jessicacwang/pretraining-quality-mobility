@@ -2,10 +2,10 @@
 
 #SBATCH --job-name=filter_eval
 #SBATCH --account=stf
-#SBATCH --partition=ckpt
+#SBATCH --partition=compute
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --mem=6G
+#SBATCH --mem=4G
 #SBATCH --time=20:00
 #SBATCH -o log/%x_%j.out
 #SBATCH --mail-user=%u@uw.edu
@@ -13,6 +13,8 @@
 
 # Stage in data
 LOCAL_DATA="/tmp/${USER}_${SLURM_JOB_ID}/data"
+mkdir -p "$LOCAL_DATA"
+
 cp /gscratch/stf/$USER/thesis/output/filter/*.jsonl.gz "$LOCAL_DATA"/
 cp /gscratch/stf/$USER/thesis/output/filter/audit/manifest.json "$LOCAL_DATA"/
 cp /gscratch/stf/$USER/thesis/output/preprocess/metadata_source.jsonl.gz "$LOCAL_DATA"/
