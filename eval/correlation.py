@@ -61,21 +61,29 @@ def main(args):
 
     # Load result lookup
     print("Loading doc IDs' survival for lookup")
-    filter_results = exclusion_lookup(args.audit_dir, cluster_5_ids)
-
+    pipeline_results = exclusion_lookup(args.output_dir, cluster_5_ids)
+    lang_id_results = exclusion_lookup(f"{args.output_dir}/excluded/1_langid", cluster_5_ids)
     # Cast as numpy arrays, in the same order
     print("Casting results as arrays")
     keys = list(cluster_5_ids)
     x = np.array([cmi_results[k] for k in keys])
-    y = np.array([filter_results[k] for k in keys])
+    y = np.array([pipeline_results[k] for k in keys])
+    z = np.array([lang_id_results[k] for k in keys])
 
-    assert x.size == y.size, f"Array sizes differ: {x.size} vs {y.size}"
+    assert x.size == z.size, f"Array sizes differ: {x.size} vs {y.size}"
 
-    corr, p_value = pearsonr(x, y)
+    y_corr, y_p_value = pearsonr(x, y)
+    print("=" * 30, "Cumulative correlation", "=" * 30)
+    print(f"Correlation: {y_corr:.4f}")
+    print(f"P-value: {y_p_value:.4f}")
+    print(f"R2 score: {y_corr**2:.4f}")
     print("=" * 70)
-    print(f"Correlation: {corr:.4f}")
-    print(f"P-value: {p_value:.4f}")
-    print(f"R2 score: {corr**2:.4f}")
+
+    z_corr, z_p_value = pearsonr(x, z)
+    print("=" * 30, "LangID correlation", "=" * 30)
+    print(f"Correlation: {z_corr:.4f}")
+    print(f"P-value: {z_p_value:.4f}")
+    print(f"R2 score: {z_corr**2:.4f}")
     print("=" * 70)
     return
 
@@ -85,6 +93,6 @@ if __name__ == "__main__":
     parser.add_argument(
         "--metadata_source", default="output/preprocess/metadata_source.jsonl.gz"
     )
-    parser.add_argument("--audit_dir", default="output/filter")
+    parser.add_argument("--output_dir", default="output/filter")
     args = parser.parse_args()
     main(args)
