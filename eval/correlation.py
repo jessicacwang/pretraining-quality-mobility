@@ -1,4 +1,4 @@
-import argparse 
+import argparse
 import json
 import gzip
 import numpy as np
@@ -6,6 +6,7 @@ from scipy.stats import pearsonr
 from pathlib import Path
 from typing import Dict
 from tqdm import tqdm
+
 
 def cmi_lookup(metdata_source: str) -> Dict[str, int]:
     id_to_cmi = dict()
@@ -24,26 +25,35 @@ def cmi_lookup(metdata_source: str) -> Dict[str, int]:
 
     return id_to_cmi, cluster_5_ids
 
+
 def exclusion_lookup(output_dir: str, cluster_5_ids: set) -> Dict[str, int]:
     id_to_result = dict()
     included_ids = set()
     # Stream filter results and store if there is a CMI value
     out_dir_path = Path(output_dir)
-    for result_file in tqdm(out_dir_path.glob("*.jsonl.gz"), desc="datatrove output", unit="shard", position=0):
+    for result_file in tqdm(
+        out_dir_path.glob("*.jsonl.gz"),
+        desc="datatrove output",
+        unit="shard",
+        position=0,
+    ):
         with gzip.open(result_file, "rt") as f_data:
-            for f_line in tqdm(f_data, desc="output shard", unit="doc", position=1,leave=False):
+            for f_line in tqdm(
+                f_data, desc="output shard", unit="doc", position=1, leave=False
+            ):
                 doc = json.loads(f_line)
                 doc_id = doc.get("id")
                 if doc_id in cluster_5_ids:
                     id_to_result[doc_id] = 1
                     included_ids.add(doc_id)
-    
+
     # Update id_to_result with remaining id_to_cmi keys
     for k in tqdm(cluster_5_ids, desc="excluded id fill"):
         if k not in included_ids:
             id_to_result[k] = 0
-    
+
     return id_to_result
+
 
 def main(args):
     # Load CMI lookup
@@ -51,16 +61,14 @@ def main(args):
     cmi_results, cluster_5_ids = cmi_lookup(args.metadata_source)
 
     # Load result lookup
-    print("Loading 'survived' doc IDs for exclusion lookup")
+    print("Loading doc IDs' survival for lookup")
     filter_results = exclusion_lookup(args.output_dir, cluster_5_ids)
 
-    # Check that lookups are the same length
-    assert len(cmi_results) == len(filter_results), f"Lookup sizes differ: {len(cmi_results)}, {len(filter_results)}"
-
-    # Cast as numpy arrays
+    # Cast as numpy arrays, in the same order
     print("Casting results as arrays")
-    x = np.array([cmi_results[i] for i in cluster_5_ids])
-    y = np.array([filter_results[i] for i in cluster_5_ids])
+    keys = list(cluster_5_ids)
+    x = np.array([cmi_results[k] for k in keys])
+    y = np.array([filter_results[k] for k in keys])
 
     assert x.size == y.size, f"Array sizes differ: {x.size} vs {y.size}"
 
@@ -69,9 +77,12 @@ def main(args):
     print(f"P-value: {p_value:.4f}")
     return
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--metadata_source", default="output/preprocess/metadata_source.jsonl.gz")
+    parser.add_argument(
+        "--metadata_source", default="output/preprocess/metadata_source.jsonl.gz"
+    )
     parser.add_argument("--output_dir", default="output/filter")
     args = parser.parse_args()
     main(args)

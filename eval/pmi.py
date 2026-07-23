@@ -3,7 +3,7 @@ import csv
 import math
 from filter.manifest import FilterManifest
 from typing import Dict, List
-from pathlib import Path 
+from pathlib import Path
 
 FEATURE_POSITIONS = {"cluster": 0, "source": 1, "component": 2, "genre": 3}
 
@@ -11,7 +11,7 @@ FEATURE_POSITIONS = {"cluster": 0, "source": 1, "component": 2, "genre": 3}
 def compute_pmi_table(
     excluded_records: Dict, included_records: Dict, feature_name: str
 ) -> list[dict]:
-    
+
     position = FEATURE_POSITIONS[feature_name]
     excluded_total = sum(excluded_records.values())
     included_total = sum(included_records.values())
@@ -25,13 +25,13 @@ def compute_pmi_table(
     # Add excluded volumes to both marginal and joint counts
     for key, count in excluded_records.items():
         value = key.split("|")[position]
-        marginal_counts[value] = marginal_counts.get(value, 0) + count 
-        joint_counts[value] = joint_counts.get(value, 0) + count 
+        marginal_counts[value] = marginal_counts.get(value, 0) + count
+        joint_counts[value] = joint_counts.get(value, 0) + count
 
     # Add included volumes to marginal counts, not joint
     for key, count in included_records.items():
         value = key.split("|")[position]
-        marginal_counts[value] = marginal_counts.get(value, 0) + count 
+        marginal_counts[value] = marginal_counts.get(value, 0) + count
         joint_counts.setdefault(value, 0)
 
     rows = []
@@ -46,15 +46,18 @@ def compute_pmi_table(
             p_joint = joint_count / grand_total
             pmi = math.log2(p_joint / (p_value * p_excluded))
 
-        rows.append({
-            "feature_value": value,
-            "pmi": pmi,
-            "joint_count": joint_count,
-            "marginal_count": marginal_count
-        })
+        rows.append(
+            {
+                "feature_value": value,
+                "pmi": pmi,
+                "joint_count": joint_count,
+                "marginal_count": marginal_count,
+            }
+        )
 
     rows.sort(key=lambda r: (r["pmi"] is not None, r["pmi"]), reverse=True)
     return rows
+
 
 def write_pmi_csv(rows: List[Dict], out_path: Path):
     fieldnames = ["feature_value", "pmi", "joint_count", "marginal_count"]
@@ -67,6 +70,7 @@ def write_pmi_csv(rows: List[Dict], out_path: Path):
             if out_row["pmi"] is None:
                 out_row["pmi"] = ""
             writer.writerow(out_row)
+
 
 def main(args):
     # Load manifest as nested dictionary
