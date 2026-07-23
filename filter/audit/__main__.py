@@ -34,7 +34,7 @@ def main(args):
             print(f" ==== Collecting stats for {algo_key}...")
             excluded_dir = Path(f"{args.output_dir}/excluded/{algo_key}/")
             # Update progressive stats
-            now_excluded |= progressive.update_stats(
+            progressive.update_stats(
                 stats["progressive"],
                 algo_stats,
                 id_to_metadata,

@@ -1,4 +1,4 @@
-from typing import Dict, Any, Tuple, Optional
+from typing import Dict, Any, Tuple
 from pathlib import Path
 from filter.audit.utils import get_counts_from_excluded
 
@@ -31,4 +31,4 @@ def update_stats(
     print(" -------- finished counting metadata")
     prog_stats[algo_key]["excluded"] = result["excluded_counts"]
     prog_stats[algo_key]["included"] = result["included_counts"]
-    return result["now_excluded"]
+    return 

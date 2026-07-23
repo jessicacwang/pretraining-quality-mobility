@@ -53,9 +53,8 @@ def counter_to_stats(meta_counter: Counter, stat_type: str):
 
 
 def get_counts_from_excluded(
-    id_to_metadata: Dict[str, Tuple], working_dir: Path, prev_excluded_ids: set = set()
+    id_to_metadata: Dict[str, Tuple], working_dir: Path, cumulative_excluded_ids: set = set()
 ):
-    excluded_ids = set()
     excluded = list()
 
     for f in tqdm(
@@ -67,19 +66,18 @@ def get_counts_from_excluded(
             ):
                 doc = json.loads(f_line)
                 doc_id = doc.get("id")
-                excluded_ids.add(doc_id)
+                cumulative_excluded_ids.add(doc_id)
                 excluded.append(id_to_metadata[doc_id])
 
     included = [
         id_to_metadata[i]
         for i in tqdm(id_to_metadata, desc="included check")
-        if (i not in excluded_ids) and (i not in prev_excluded_ids)
+        if i not in cumulative_excluded_ids
     ]
 
     included_counts = Counter(included)
     excluded_counts = Counter(excluded)
     return {
-        "now_excluded": excluded_ids,
         "excluded_counts": counter_to_stats(excluded_counts, "excluded"),
         "included_counts": counter_to_stats(included_counts, "included"),
     }
