@@ -14,7 +14,7 @@ def build_stratum_sankey(stages: Dict, spec: StratumSpec) -> Dict:
         stage_name = stage["full_name"]
 
         included_by_val = aggregate_by_features(
-            stage["included"]["records"], spec.features_names, spec.record_filter
+            stage["included"]["records"], spec.feature_names, spec.record_filter
         )
         excluded_by_val = aggregate_by_features(
             stage["excluded"]["records"], spec.feature_names, spec.record_filter

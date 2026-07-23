@@ -13,7 +13,8 @@ from filter.manifest import FilterManifest
 
 CSV_FIELDNAMES = ["value", "stage", "stage_name", "included", "total", "retention", "lrp", "cumulative_lrp"]
 
-def write_csvs(all_series: Dict, csv_dir: Path):
+def write_csvs(all_series: Dict, output_dir: Path):
+    csv_dir = output_dir / Path("plot_data/")
     csv_dir.mkdir(parents=True, exist_ok=True)
 
     for key, rows in all_series.items():
@@ -49,11 +50,11 @@ def main(args):
 
     # Format these as Sankey JSONs
     sankeys = build_all_sankeys(stages, strata)
-    write_jsons(sankeys, args.output_dir)
+    write_jsons(sankeys, out_dir_path)
 
     # Also generate RR + LRP CSV data for line + waterfall graphs
     plot_data = build_all_series(stages, strata)
-    write_csvs(plot_data)
+    write_csvs(plot_data, )
 
     return
 
