@@ -1,26 +1,8 @@
-import argparse
-import json
 import math
+from eval.features import FEATURE_POSITIONS, aggregate_by_feature
 from typing import Dict
-from filter.manifest import FilterManifest
 
-FEATURE_POSITIONS = {"cluster": 0, "source": 1, "component": 2, "genre": 3}
-
-
-def aggregate_by_feature(records: Dict, feature_name: str) -> Dict:
-    position = FEATURE_POSITIONS[feature_name]
-
-    out = {}
-
-    for key, count in records.items():
-        parts = key.split("|")
-        value = parts[position]
-        out[value] = out.get(value, 0) + count
-
-    return out
-
-
-def print_retention_report(stages: Dict, feature_names=None, min_count=1):
+def run(stages: Dict, feature_names=None, min_count=1):
     feature_names = feature_names or list(FEATURE_POSITIONS)
 
     for _, stage in stages.items():
@@ -65,22 +47,3 @@ def print_retention_report(stages: Dict, feature_names=None, min_count=1):
             print(f" -- {feature_name} --")
             for value, retention, lrp, inc, total in rows:
                 print(f"    {value:>15}: {retention:6.1%} {lrp:.4f} ({inc}/{total})")
-
-
-def main(args):
-    # Load manifest as nested dictionary
-    manifest = FilterManifest(f"{args.output_dir}/manifest.json")
-
-    # Retention is reported...
-    stages = manifest["steps"]["filter"]["progressive"]
-
-    print_retention_report(stages)
-
-    return
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--output_dir", default="output/filter/audit")
-    args = parser.parse_args()
-    main(args)
