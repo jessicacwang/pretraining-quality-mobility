@@ -92,7 +92,9 @@ def run(args):
     # Get executor and run
     executor = get_executor(args.executor, config, env_config, pipeline)
     executor.run()
-
+    # Save job ID to file so we can access it
+    with open("job_ids.txt", "w") as f:
+        f.write(f"{executor.job_id}\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

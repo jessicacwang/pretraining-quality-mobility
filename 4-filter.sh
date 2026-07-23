@@ -92,22 +92,12 @@ echo "Submitting datatrove pipeline..."
 "$CONDA_PYTHON" -m filter.pipeline --executor slurm
 
 echo "Waiting for Slurm jobs named '$JOB_NAME' to finish..."
-while true; do
-    # Capture output safely without triggering set -e failures
-    JOB_COUNT=$(squeue -u "$USER" -n "$JOB_NAME" -h -o "%i" 2>/dev/null | wc -l)
-    
-    # Trim whitespace from wc output
-    JOB_COUNT=$(echo "$JOB_COUNT" | tr -d '[:space:]')
-    
-    if [ "$JOB_COUNT" -eq 0 ]; then
-        break
-    fi
+PIPELINE_JOB_ID=$(cat job_ids.txt)
+while squeue -j "$PIPELINE_JOB_ID" -h | grep -q .; do
     sleep "$POLL_INTERVAL"
 done
 
-FAILED_JOBS=$(sacct -u "$USER" -n --format=JobName,State,ExitCode 2>/dev/null | \
-    grep -w "$JOB_NAME" | grep -v "COMPLETED" || true)
-
+FAILED_JOBS=$(sacct -j "$PIPELINE_JOB_ID" -n --format=State,ExitCode | grep -v "COMPLETED")
 if [ -n "$FAILED_JOBS" ]; then
     echo "Error: one or more jobs named '$JOB_NAME' did not complete successfully:"
     echo "$FAILED_JOBS"
