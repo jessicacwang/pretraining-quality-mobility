@@ -50,14 +50,14 @@ def main(args):
     # Also generate RR + LRP CSV data for line + waterfall graphs
     plot_data = build_all_series(stages, strata)
     write_csvs(plot_data)
-    
+
     return
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--audit_dir", default="output/filter/audit")
-    parser.add_argument("--output_dir", default="output/eval")
+    parser.add_argument("--output_dir", default="output/eval/retention")
     parser.add_argument("--top_n", type=int, default=None)
     parser.add_argument("--min_count", type=int, default=1)
     parser.add_argument("--quiet", action="store_true")
