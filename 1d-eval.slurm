@@ -22,7 +22,7 @@ cp /gscratch/stf/$USER/thesis/output/preprocess/metadata_source.jsonl.gz "$LOCAL
 
 echo "Correlating CMI with filter exclusion..."
 /gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m eval.correlation \
-    --metadata_source "$LOCAL_METADATA/metadata_source.jsonl.gz \
+    --metadata_source "$LOCAL_METADATA"/metadata_source.jsonl.gz \
     --audit_dir "$LOCAL_DATA"/
 
 echo "Computing PMI between cluster, source, component, genre and exclusion..."
