@@ -44,13 +44,13 @@ def exclusion_lookup(audit_dir: str, cluster_5_ids: set) -> Dict[str, int]:
                 doc = json.loads(f_line)
                 doc_id = doc.get("id")
                 if doc_id in cluster_5_ids:
-                    id_to_result[doc_id] = 1
+                    id_to_result[doc_id] = 0
                     included_ids.add(doc_id)
 
     # Update id_to_result with remaining id_to_cmi keys
     for k in tqdm(cluster_5_ids, desc="excluded id fill"):
         if k not in included_ids:
-            id_to_result[k] = 0
+            id_to_result[k] = 1
 
     return id_to_result
 
