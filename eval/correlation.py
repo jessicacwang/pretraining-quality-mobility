@@ -26,11 +26,11 @@ def cmi_lookup(metdata_source: str) -> Dict[str, int]:
     return id_to_cmi, cluster_5_ids
 
 
-def exclusion_lookup(output_dir: str, cluster_5_ids: set) -> Dict[str, int]:
+def exclusion_lookup(audit_dir: str, cluster_5_ids: set) -> Dict[str, int]:
     id_to_result = dict()
     included_ids = set()
     # Stream filter results and store if there is a CMI value
-    out_dir_path = Path(output_dir)
+    out_dir_path = Path(audit_dir)
     for result_file in tqdm(
         out_dir_path.glob("*.jsonl.gz"),
         desc="datatrove output",
@@ -61,7 +61,7 @@ def main(args):
 
     # Load result lookup
     print("Loading doc IDs' survival for lookup")
-    filter_results = exclusion_lookup(args.output_dir, cluster_5_ids)
+    filter_results = exclusion_lookup(args.audit_dir, cluster_5_ids)
 
     # Cast as numpy arrays, in the same order
     print("Casting results as arrays")
@@ -72,9 +72,11 @@ def main(args):
     assert x.size == y.size, f"Array sizes differ: {x.size} vs {y.size}"
 
     corr, p_value = pearsonr(x, y)
+    print("=" * 70)
     print(f"Correlation: {corr:.4f}")
     print(f"P-value: {p_value:.4f}")
     print(f"R2 score: {corr**2:.4f}")
+    print("=" * 70)
     return
 
 
@@ -83,6 +85,6 @@ if __name__ == "__main__":
     parser.add_argument(
         "--metadata_source", default="output/preprocess/metadata_source.jsonl.gz"
     )
-    parser.add_argument("--output_dir", default="output/filter")
+    parser.add_argument("--audit_dir", default="output/filter")
     args = parser.parse_args()
     main(args)
