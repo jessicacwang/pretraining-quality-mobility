@@ -13,10 +13,12 @@
 
 # Stage in data
 LOCAL_DATA="/tmp/${USER}_${SLURM_JOB_ID}/data"
+LOCAL_EXCLUDED_LANGID="$LOCAL_DATA/excluded/1_langid"
 LOCAL_METADATA="$LOCAL_DATA/metadata"
-mkdir -p "$LOCAL_DATA" "$LOCAL_METADATA"
+mkdir -p "$LOCAL_DATA" "$LOCAL_METADATA" $LOCAL_EXCLUDED_LANGID
 
 cp /gscratch/stf/$USER/thesis/output/filter/*.jsonl.gz "$LOCAL_DATA"/
+cp /gscratch/stf/$USER/thesis/output/filter/excluded/1_langid/*.jsonl.gz "$LOCAL_EXCLUDED_LANGID"/
 cp /gscratch/stf/$USER/thesis/output/filter/audit/manifest.json "$LOCAL_DATA"/
 cp /gscratch/stf/$USER/thesis/output/preprocess/metadata_source.jsonl.gz "$LOCAL_METADATA"
 
