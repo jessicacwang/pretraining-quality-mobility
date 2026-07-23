@@ -54,7 +54,6 @@ def exclusion_lookup(output_dir: str, cluster_5_ids: set) -> Dict[str, int]:
 
     return id_to_result
 
-
 def main(args):
     # Load CMI lookup
     print("Loading metadata for lookup")
@@ -75,6 +74,7 @@ def main(args):
     corr, p_value = pearsonr(x, y)
     print(f"Correlation: {corr:.4f}")
     print(f"P-value: {p_value:.4f}")
+    print(f"R2 score: {corr**2:.4f}")
     return
 
 
