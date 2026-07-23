@@ -13,15 +13,16 @@
 
 # Stage in data
 LOCAL_DATA="/tmp/${USER}_${SLURM_JOB_ID}/data"
-mkdir -p "$LOCAL_DATA"
+LOCAL_METADATA="$LOCAL_DATA/metadata"
+mkdir -p "$LOCAL_DATA" "$LOCAL_METADATA"
 
 cp /gscratch/stf/$USER/thesis/output/filter/*.jsonl.gz "$LOCAL_DATA"/
 cp /gscratch/stf/$USER/thesis/output/filter/audit/manifest.json "$LOCAL_DATA"/
-cp /gscratch/stf/$USER/thesis/output/preprocess/metadata_source.jsonl.gz "$LOCAL_DATA"/metadata/
+cp /gscratch/stf/$USER/thesis/output/preprocess/metadata_source.jsonl.gz "$LOCAL_METADATA"
 
 echo "Correlating CMI with filter exclusion..."
 /gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m eval.correlation \
-    --metadata_source "$LOCAL_DATA"/metadata/metadata_source.jsonl.gz \
+    --metadata_source "$LOCAL_METADATA/metadata_source.jsonl.gz \
     --audit_dir "$LOCAL_DATA"/
 
 echo "Computing PMI between cluster, source, component, genre and exclusion..."
