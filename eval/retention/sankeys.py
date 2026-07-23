@@ -8,7 +8,7 @@ def build_stratum_sankey(stages: Dict, spec: StratumSpec) -> Dict:
     b = SankeyBuilder()
     stage_items = list(stages.items())
 
-    prev_node_key = Dict[str, str] = {}
+    prev_node_key: Dict[str, str] = {}
 
     for i, (_, stage) in enumerate(stage_items):
         stage_name = stage["full_name"]

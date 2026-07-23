@@ -36,6 +36,10 @@ def main(args):
 
     stages = manifest["steps"]["filter"]["progressive"]
 
+    # Load output dir as a Path
+    out_dir_path = Path(args.output_dir)
+    out_dir_path.mkdir(parents=True, exist_ok=True)
+
     # Log report for sanity check/skim results
     if not args.quiet:
         report.run(stages, min_count=args.min_count)

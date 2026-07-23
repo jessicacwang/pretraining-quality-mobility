@@ -29,7 +29,7 @@ echo "Computing PMI between cluster, source, component, genre and exclusion..."
 /gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m eval.pmi \
     --output_dir "$LOCAL_DATA"/pmi --audit_dir "$LOCAL_DATA"/
 
-echo "Retention sanity check below:"
+echo "Computing RR and LRP..."
 /gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m eval.retention \
     --output_dir "$LOCAL_DATA"/retention --audit_dir "$LOCAL_DATA"/
 
