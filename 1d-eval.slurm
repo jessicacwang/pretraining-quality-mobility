@@ -34,6 +34,8 @@ echo "Computing RR and LRP..."
     --output_dir "$LOCAL_DATA"/retention --audit_dir "$LOCAL_DATA"/
 
 # Stage out data
-mkdir -p /gscratch/stf/$USER/thesis/output/eval/pmi /gscratch/stf/$USER/thesis/output/eval/retention
+PMI_DIR=/gscratch/stf/$USER/thesis/output/eval/pmi
+RETENTION_DIR=/gscratch/stf/$USER/thesis/output/eval/retention
+mkdir -p $PMI_DIR $RETENTION_DIR
 cp "$LOCAL_DATA"/pmi/*.csv /gscratch/stf/$USER/thesis/output/eval/pmi/
-cp "$LOCAL_DATA"/retention/* /gscratch/stf/$USER/thesis/output/eval/retention/
+cp -r "$LOCAL_DATA"/retention/* /gscratch/stf/$USER/thesis/output/eval/retention/
