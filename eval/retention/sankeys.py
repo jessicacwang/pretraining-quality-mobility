@@ -2,7 +2,7 @@ from typing import Dict
 
 from eval.features import aggregate_by_features
 from eval.retention.strata import StratumSpec
-from sankey_style import SankeyBuilder
+from eval.retention.sankey_style import SankeyBuilder
 
 def build_stratum_sankey(stages: Dict, spec: StratumSpec) -> Dict:
     b = SankeyBuilder()
