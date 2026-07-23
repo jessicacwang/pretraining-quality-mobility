@@ -61,8 +61,8 @@ def main(args):
 
     # Load result lookup
     print("Loading doc IDs' survival for lookup")
-    pipeline_results = audit_lookup(args.output_dir, cluster_5_ids, 0)
-    lang_id_results = audit_lookup(f"{args.output_dir}/excluded/1_langid", cluster_5_ids, 1)
+    pipeline_results = audit_lookup(args.audit_dir, cluster_5_ids, 0)
+    lang_id_results = audit_lookup(f"{args.audit_dir}/excluded/1_langid", cluster_5_ids, 1)
     # Cast as numpy arrays, in the same order
     print("Casting results as arrays")
     keys = list(cluster_5_ids)
