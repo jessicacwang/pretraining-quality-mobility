@@ -39,12 +39,12 @@ def build_stratum_sankey(stages: Dict, spec: StratumSpec) -> Dict:
                 if exc > 0:
                     excl_key = f"excl::{i}::{v}"
                     b.node(excl_key, label="", value=v or "total")
-                    b.link(src_key, excl_key, label=f"{v or spec.title} excluded @ {stage_name}")
+                    b.link(src_key, excl_key, exc, label=f"{v or spec.title} excluded @ {stage_name}")
 
                 if inc > 0:
                     next_key = f"s{i + 1}::{v}"
                     label = f"{v or spec.title} ({stage_name} out)"
-                    b.node(next_key, label, label, value=v or "total")
+                    b.node(next_key, label, value=v or "total")
                     b.link(src_key, next_key, inc, label=f"{v or spec.title} @ {stage_name}")
                     next_node_key[v] = next_key 
 
