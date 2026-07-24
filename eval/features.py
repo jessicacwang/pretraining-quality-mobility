@@ -2,11 +2,15 @@ from typing import Callable, Dict, Iterable, Optional, Sequence
 
 FEATURE_POSITIONS = {"cluster": 0, "source": 1, "component": 2, "genre": 3}
 
-NORMALIZE_FEATURES = {"component", "genre"}
+# NORMALIZE_FEATURES = {"component", "genre"}
 
 def normalize_value(feature_name: str, value: str) -> str:
-    if feature_name in NORMALIZE_FEATURES and "-" in value:
+    if feature_name == "component" and "-" in value:
         return value.split("-")[0]
+    if feature_name == "genre" and value.startswith("W"):
+        return "written"
+    elif feature_name == "genre" and value.startswith("S"):
+        return "spoken"
     return value
 
 RecordFilter = Callable[[Sequence[str]], bool]

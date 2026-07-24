@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Dict
 
 import eval.retention.report as report 
-from eval.retention.strata import build_strata
+from eval.subsets import build_subsets
 from eval.retention.sankeys import build_all_sankeys
 from eval.retention.plot_data import build_all_series 
 
@@ -46,14 +46,14 @@ def main(args):
         report.run(stages, min_count=args.min_count)
 
     # Build all stratifications of interest
-    strata = build_strata()
+    subset = build_subsets()
 
     # Format these as Sankey JSONs
-    sankeys = build_all_sankeys(stages, strata)
+    sankeys = build_all_sankeys(stages, subset)
     write_jsons(sankeys, out_dir_path)
 
     # Also generate RR + LRP CSV data for line + waterfall graphs
-    plot_data = build_all_series(stages, strata)
+    plot_data = build_all_series(stages, subset)
     write_csvs(plot_data, out_dir_path)
 
     return

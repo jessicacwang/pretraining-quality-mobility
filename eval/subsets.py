@@ -12,22 +12,38 @@ SOURCES_WITH_GENRE = ["glowbe", "ice"]
 SOURCES_WITH_MULTIPLE_CLUSTERS = ["glowbe", "ice"]
 
 @dataclass
-class StratumSpec:
+class SubsetSpec:
     key: str # stable identifier, used in filenames and JSON keys
     title: str # human readable
     feature_names: Sequence[str] # which feature(s) to aggregate by
     record_filter: Optional[RecordFilter] = field(default=None)
 
-def build_strata() -> List[StratumSpec]:
-    strata: List[StratumSpec] = [
-        StratumSpec("overall", "Overall volume", feature_names=[]),
-        StratumSpec("by_cluster", "By cluster", feature_names=["cluster"]),
-        StratumSpec("by_source", "By source", feature_names=["source"])
+def build_subsets() -> List[SubsetSpec]:
+    subset: List[SubsetSpec] = [
+        SubsetSpec("overall", "Overall volume", feature_names=[]),
+        SubsetSpec("by_cluster", "By cluster", feature_names=["cluster"]),
+        SubsetSpec("by_source", "By source", feature_names=["source"]),
+        SubsetSpec(
+            "by_cluster_source", "By cluster and source", 
+            feature_names=["cluster", "source"]
+        ),
+        SubsetSpec(
+            "by_cluster_component", "By cluster and component", 
+            feature_names=["cluster", "component"]
+        ),
+        SubsetSpec(
+            "by_cluster_genre", "By cluster and genre", 
+            feature_names=["cluster", "genre"]
+        ),
+        SubsetSpec(
+            "by_component_genre", "By component and genre", 
+            feature_names=["component", "genre"]
+        ),
     ]
 
     for cluster in CLUSTERS_WITH_MULTIPLE_SOURCES:
-        strata.append(
-            StratumSpec(
+        subset.append(
+            SubsetSpec(
                 key=f"by_source_in_cluster_{cluster}",
                 title=f"By source, within cluster {cluster}",
                 feature_names=["source"],
@@ -36,9 +52,9 @@ def build_strata() -> List[StratumSpec]:
         )
 
     for source in SOURCES:
-        strata.append(
-            StratumSpec(
-                key="by_component_in_{source}",
+        subset.append(
+            SubsetSpec(
+                key=f"by_component_in_{source}",
                 title=f"By component, within source {source}",
                 feature_names=["component"],
                 record_filter=restrict_to("source", [source])
@@ -46,9 +62,9 @@ def build_strata() -> List[StratumSpec]:
         )
 
     for source in SOURCES_WITH_GENRE:
-        strata.append(
-            StratumSpec(
-                key="by_genre_in_{source}",
+        subset.append(
+            SubsetSpec(
+                key=f"by_genre_in_{source}",
                 title=f"By genre, within source {source}",
                 feature_names=["genre"],
                 record_filter=combine_filters(
@@ -58,8 +74,8 @@ def build_strata() -> List[StratumSpec]:
         )
 
     for source in SOURCES_WITH_MULTIPLE_CLUSTERS:
-        strata.append(
-            StratumSpec(
+        subset.append(
+            SubsetSpec(
                 key=f"by_cluster_in_{source}",
                 title=f"By cluster, within source {source}",
                 feature_names=["cluster"],
@@ -67,4 +83,4 @@ def build_strata() -> List[StratumSpec]:
             )
         )
 
-    return strata
+    return subset

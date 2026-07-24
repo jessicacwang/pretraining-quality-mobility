@@ -4,13 +4,22 @@ import math
 from filter.manifest import FilterManifest
 from typing import Dict, List
 from pathlib import Path
-from eval.features import FEATURE_POSITIONS, aggregate_by_features
+from eval.features import aggregate_by_features, RecordFilter
+from eval.subsets import build_subsets
 
 def compute_pmi_table(
-    excluded_records: Dict, included_records: Dict, feature_names: List[str]
+    excluded_records: Dict, 
+    included_records: Dict, 
+    feature_names: List[str],
+    record_filter: RecordFilter=None
 ) -> List[Dict]:
-    excluded_by_val = aggregate_by_features(excluded_records, feature_names)
-    included_by_val = aggregate_by_features(included_records, feature_names)
+    
+    excluded_by_val = aggregate_by_features(
+        excluded_records, feature_names, record_filter
+        )
+    included_by_val = aggregate_by_features(
+        included_records, feature_names, record_filter
+        )
 
     excluded_total = sum(excluded_by_val.values())
     included_total = sum(included_by_val.values())
@@ -77,15 +86,20 @@ def main(args):
     excluded_records = cumulative_stats["excluded"]["records"]
     included_records = cumulative_stats["included"]["records"]
 
-    # Compute PMI table for each feature
-    for feature_name in FEATURE_POSITIONS:
-        rows = compute_pmi_table(excluded_records, included_records, [feature_name])
-        out_path = out_dir_path / f"{feature_name}.csv"
+    subset = build_subsets()
+    for subset in subset:
+        if not subset.feature_names:
+            continue
+        rows = compute_pmi_table(
+            excluded_records,
+            included_records,
+            subset.feature_names,
+            subset.record_filter
+        )
+
+        out_path = out_dir_path / f"{subset.key}.csv"
         write_pmi_csv(rows, out_path)
 
-    # Since GloWbe and ICE data share component labels, we can separate this out
-    rows = compute_pmi_table(excluded_records, included_records, ["source", "component"])
-    write_pmi_csv(rows, out_dir_path / "source_component.csv")
     return
 
 

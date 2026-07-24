@@ -1,10 +1,10 @@
 from typing import Dict 
 
 from eval.features import aggregate_by_features
-from eval.retention.strata import StratumSpec
+from eval.subsets import SubsetSpec
 from eval.retention.sankey_style import SankeyBuilder
 
-def build_stratum_sankey(stages: Dict, spec: StratumSpec) -> Dict:
+def build_subset_sankey(stages: Dict, spec: SubsetSpec) -> Dict:
     b = SankeyBuilder()
     stage_items = list(stages.items())
 
@@ -31,29 +31,29 @@ def build_stratum_sankey(stages: Dict, spec: StratumSpec) -> Dict:
                 b.node(key, label, value=v or "total")
                 prev_node_key[v] = key
 
-            next_node_key: Dict[str, str] = {}
-            for v, src_key in list(prev_node_key.items()):
-                inc = included_by_val.get(v, 0)
-                exc = excluded_by_val.get(v, 0)
+        next_node_key: Dict[str, str] = {}
+        for v, src_key in list(prev_node_key.items()):
+            inc = included_by_val.get(v, 0)
+            exc = excluded_by_val.get(v, 0)
 
-                if exc > 0:
-                    excl_key = f"excl::{i}::{v}"
-                    b.node(excl_key, label="", value=v or "total")
-                    b.link(src_key, excl_key, exc, label=f"{v or spec.title} excluded @ {stage_name}")
+            if exc > 0:
+                excl_key = f"excl::{i}::{v}"
+                b.node(excl_key, label="", value=v or "total")
+                b.link(src_key, excl_key, exc, label=f"{v or spec.title} excluded @ {stage_name}")
 
-                if inc > 0:
-                    next_key = f"s{i + 1}::{v}"
-                    label = f"{v or spec.title} ({stage_name} out)"
-                    b.node(next_key, label, value=v or "total")
-                    b.link(src_key, next_key, inc, label=f"{v or spec.title} @ {stage_name}")
-                    next_node_key[v] = next_key 
+            if inc > 0:
+                next_key = f"s{i + 1}::{v}"
+                label = f"{v or spec.title} ({stage_name} out)"
+                b.node(next_key, label, value=v or "total")
+                b.link(src_key, next_key, inc, label=f"{v or spec.title} @ {stage_name}")
+                next_node_key[v] = next_key 
 
-            # Link the next stage
-            prev_node_key = next_node_key
+        # Link the next stage
+        prev_node_key = next_node_key
     return b.to_dict()
 
-def build_all_sankeys(stages: Dict, strata) -> Dict[str, Dict]:
+def build_all_sankeys(stages: Dict, subset) -> Dict[str, Dict]:
     return {
-        spec.key: build_stratum_sankey(stages, spec)
-        for spec in strata
+        spec.key: build_subset_sankey(stages, spec)
+        for spec in subset
     }

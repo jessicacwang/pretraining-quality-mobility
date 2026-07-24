@@ -2,9 +2,9 @@ import math
 from typing import Dict, List 
 
 from eval.features import aggregate_by_features
-from eval.retention.strata import StratumSpec
+from eval.subsets import SubsetSpec
 
-def build_stratum_series(stages: Dict, spec: StratumSpec) -> List[Dict]:
+def build_subset_series(stages: Dict, spec: SubsetSpec) -> List[Dict]:
     stage_items = list(stages.items())
 
     all_values = set()
@@ -65,8 +65,8 @@ def build_stratum_series(stages: Dict, spec: StratumSpec) -> List[Dict]:
             )
     return rows 
 
-def build_all_series(stages: Dict, strata) -> Dict[str, List[Dict]]:
+def build_all_series(stages: Dict, subset) -> Dict[str, List[Dict]]:
     return {
-        spec.key: build_stratum_series(stages, spec)
-        for spec in strata
+        spec.key: build_subset_series(stages, spec)
+        for spec in subset
     }
