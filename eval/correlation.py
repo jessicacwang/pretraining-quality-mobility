@@ -75,7 +75,7 @@ def load_audit_results(
     return results 
 
 def values(mapping, keys):
-    return np.fromiter((mapping[k] for k in keys), dtype=float)
+    return np.fromiter([mapping[k] for k in keys], dtype=float)
 
 def report_correlation(title: str, x, y):
     corr, p = pearsonr(x, y)
@@ -123,8 +123,8 @@ def main(args):
     exclusion_arr = values(percentile_results, percentile_keys)
 
     # Report correlation
-    # report_correlation("Cumulative", cmi_arr, cumulative_cluster_5_arr)
-    # report_correlation("LangID", cmi_arr, langid_cluster_5_arr)
+    report_correlation("Cumulative", cmi_arr, cumulative_cluster_5_arr)
+    report_correlation("LangID", cmi_arr, langid_cluster_5_arr)
     report_correlation("Token percentile", percentile_arr, exclusion_arr)
 
     return
