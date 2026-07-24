@@ -11,12 +11,12 @@ from tqdm import tqdm
 @dataclass
 class Metadata:
     cmi: dict[str, float]
-    token_percentile: dict[str, float]
+    token_count: dict[str, float]
     cluster_5_ids: set[str]
     all_ids: set[str]
 
-def load_metadata(metdata_source: str) -> Metadata:
-    """All documents have token percentile values; only a subset have CMI scores."""
+def load_metadata(metdata_source: str, metadata_enriched: str) -> Metadata:
+    """All documents have token count values; only a subset have CMI scores."""
     id_to_cmi = dict()
     id_to_percentile = dict()
     cluster_5_ids = set()
@@ -27,8 +27,6 @@ def load_metadata(metdata_source: str) -> Metadata:
         for s_meta_line in tqdm(s_metadata, desc="source metadata", unit="doc"):
             doc = json.loads(s_meta_line)
             doc_id = doc.get("id")
-            doc_percentile = doc.get("token_percentile", 0)
-            id_to_percentile[doc_id] = float(doc_percentile)
 
             doc_cmi = doc.get("cmi", None)
             if doc_cmi is None:
@@ -36,9 +34,18 @@ def load_metadata(metdata_source: str) -> Metadata:
             id_to_cmi[doc_id] = float(doc_cmi)
             cluster_5_ids.add(doc_id)
 
+    with gzip.open(metadata_enriched, "rt") as e_metadata:
+        for e_meta_line in tqdm(e_metadata, desc="enriched metadata", unit="doc"):
+            doc = json.loads(e_meta_line)
+            doc_id = doc.get("id")
+            # if doc_id in cluster_5_ids:
+            doc_percentile = doc.get("token_count", 0)
+            id_to_percentile[doc_id] = float(doc_percentile)
+            all_ids.add(doc_id)
+
     return Metadata(
         cmi=id_to_cmi,
-        token_percentile=id_to_percentile,
+        token_count=id_to_percentile,
         cluster_5_ids=cluster_5_ids,
         all_ids=all_ids
     )
@@ -75,7 +82,7 @@ def load_audit_results(
     return results 
 
 def values(mapping, keys):
-    return np.fromiter([mapping[k] for k in keys], dtype=float)
+    return np.fromiter((mapping[k] for k in keys), dtype=float)
 
 def report_correlation(title: str, x, y):
     corr, p = pearsonr(x, y)
@@ -89,7 +96,7 @@ def report_correlation(title: str, x, y):
 def main(args):
     # Load metadata
     print("Loading metadata for lookup")
-    leu_metadata = load_metadata(args.metadata_source)
+    leu_metadata = load_metadata(args.metadata_source, args.metadata_enriched)
 
     # Load audit results
     print("Loading doc IDs' survival for lookup")
@@ -97,7 +104,6 @@ def main(args):
         audit_dir=args.audit_dir,
         all_ids=leu_metadata.cluster_5_ids,
         found_value=0,
-        target_ids=leu_metadata.cluster_5_ids
     )
     langid_results = load_audit_results(
         audit_dir=f"{args.audit_dir}/excluded/1_langid",
@@ -108,25 +114,27 @@ def main(args):
     percentile_results = load_audit_results(
         audit_dir=args.audit_dir,
         all_ids=leu_metadata.all_ids,
-        found_value=0
+        found_value=0,
     )
+
     # Cast keys as lists
     cmi_keys = list(leu_metadata.cluster_5_ids)
-    percentile_keys = list(leu_metadata.all_ids)
+    all_keys = list(leu_metadata.all_ids)
 
     # Cast lookups as arrays
     cmi_arr = values(leu_metadata.cmi, cmi_keys)
     cumulative_cluster_5_arr = values(pipeline_results, cmi_keys)
     langid_cluster_5_arr = values(langid_results, cmi_keys)
 
-    percentile_arr = values(leu_metadata.token_percentile, percentile_keys)
-    exclusion_arr = values(percentile_results, percentile_keys)
-
+    cluster_5_percentile_arr = values(leu_metadata.token_count, cmi_keys)
+    all_percentile_arr = values(leu_metadata.token_count, all_keys)
+    exclusion_arr = values(percentile_results, all_keys)
+    
     # Report correlation
     report_correlation("Cumulative", cmi_arr, cumulative_cluster_5_arr)
     report_correlation("LangID", cmi_arr, langid_cluster_5_arr)
-    report_correlation("Token percentile", percentile_arr, exclusion_arr)
-
+    report_correlation("token count (Cluster 5)", cluster_5_percentile_arr, cumulative_cluster_5_arr)
+    report_correlation("token count (all records)", all_percentile_arr, exclusion_arr)
     return
 
 
@@ -134,6 +142,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--metadata_source", default="output/preprocess/metadata_source.jsonl.gz"
+    )
+    parser.add_argument(
+        "--metadata_enriched", default="output/preprocess/metadata_enriched.jsonl.gz"
     )
     parser.add_argument("--audit_dir", default="output/filter")
     args = parser.parse_args()
