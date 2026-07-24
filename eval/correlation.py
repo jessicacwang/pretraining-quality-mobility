@@ -94,20 +94,20 @@ def main(args):
     # Load audit results
     print("Loading doc IDs' survival for lookup")
     pipeline_results = load_audit_results(
-        args.audit_dir,
-        leu_metadata.cluster_5_ids,
+        audit_dir=args.audit_dir,
+        all_ids=leu_metadata.cluster_5_ids,
         found_value=0,
         target_ids=leu_metadata.cluster_5_ids
     )
     langid_results = load_audit_results(
-        f"{args.audit_dir}/excluded/1_langid",
-        leu_metadata.cluster_5_ids,
+        audit_dir=f"{args.audit_dir}/excluded/1_langid",
+        all_ids=leu_metadata.cluster_5_ids,
         found_value=1,
         target_ids=leu_metadata.cluster_5_ids
     )
     percentile_results = load_audit_results(
-        args.audit_dir,
-        leu_metadata.all_ids,
+        audit_dir=args.audit_dir,
+        all_ids=leu_metadata.all_ids,
         found_value=0
     )
     # Cast keys as lists
@@ -123,10 +123,10 @@ def main(args):
     exclusion_arr = values(percentile_results, percentile_keys)
 
     # Report correlation
-    report_correlation("Cumulative", cmi_arr, cumulative_cluster_5_arr)
-    report_correlation("LangID", cmi_arr, langid_cluster_5_arr)
+    # report_correlation("Cumulative", cmi_arr, cumulative_cluster_5_arr)
+    # report_correlation("LangID", cmi_arr, langid_cluster_5_arr)
     report_correlation("Token percentile", percentile_arr, exclusion_arr)
-    
+
     return
 
 
