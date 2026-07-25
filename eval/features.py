@@ -7,6 +7,8 @@ FEATURE_POSITIONS = {"cluster": 0, "source": 1, "component": 2, "genre": 3}
 def normalize_value(feature_name: str, value: str) -> str:
     if feature_name == "component" and "-" in value:
         return value.split("-")[0]
+    elif feature_name == "component" and "_" in value:
+        return value.split("_")[1].replace("eng", "")
     if feature_name == "genre" and value.startswith("W"):
         return "written"
     elif feature_name == "genre" and value.startswith("S"):
