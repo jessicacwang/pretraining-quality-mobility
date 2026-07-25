@@ -4,7 +4,11 @@
         "ice": 0.05
     },
     "validation_pct": 0.02,
-    "strategy": "balanced",
     "leu_data": "output/preprocess/leu_data.jsonl.gz",
-    "enriched_metadata": "output/preprocess/metadata_enriched.jsonl.gz"
+    "enriched_metadata": "output/preprocess/metadata_enriched.jsonl.gz",
+    "tokenizer": {
+        "name": "allenai/dolma2-tokenizer",
+        "eos_token_id": 100257,
+        "pad_token_id": 100277
+    }
 }
