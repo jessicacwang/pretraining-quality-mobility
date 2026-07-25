@@ -3,12 +3,17 @@ import json
 from collections import defaultdict
 from tqdm import tqdm
 
+
 def build(enriched_metadata_file: str, strategy: str) -> tuple[dict, defaultdict]:
     id_to_tokens = dict()
-    all_cluster_ids = defaultdict(lambda: {"glowbe": list(), "ice": list(), "lince": list()})
+    all_cluster_ids = defaultdict(
+        lambda: {"glowbe": list(), "ice": list(), "lince": list()}
+    )
     # Load metadata enriched
     with gzip.open(enriched_metadata_file, "rt") as meta_enriched:
-        for line_num, meta_line in enumerate(tqdm(meta_enriched, desc="metadata index"), 1):
+        for line_num, meta_line in enumerate(
+            tqdm(meta_enriched, desc="metadata index"), 1
+        ):
             try:
                 doc_metadata = json.loads(meta_line)
             except json.JSONDecodeError as e:

@@ -1,15 +1,16 @@
 import argparse
 import random
-from pathlib import Path 
+from pathlib import Path
 import gzip
 
 from preprocess.manifest import PreprocessManifest
-import preprocess.balance.index as index 
+import preprocess.balance.index as index
 import preprocess.balance.budget as budget
 import preprocess.balance.partition as partition
 import preprocess.balance.materialize as materialize
 import preprocess.balance.pretokenize as pretokenize
 from utils import load_config
+
 
 def main(args):
     # Set random seed
@@ -44,11 +45,13 @@ def main(args):
 
     # Assign an output path for Cluster 5 if using full data for data mixing
     if args.strategy == "full":
-        output_files["5"] = f"{args.output_dir}/{args.strategy}/cluster_5_{args.strategy}.jsonl.gz"
+        output_files["5"] = (
+            f"{args.output_dir}/{args.strategy}/cluster_5_{args.strategy}.jsonl.gz"
+        )
 
     manifest.set_output_files("balance", output_files)
 
-     # Create all output file handles
+    # Create all output file handles
     writers = {}
     for key, path in output_files.items():
         writers[key] = gzip.open(path, "wt")
@@ -56,20 +59,24 @@ def main(args):
     try:
         print("Building metadata index, cluster/source catalog...")
         # Build id -> tokens index, cluster -> source -> id catalog
-        id_to_tokens, all_cluster_ids = index.build(args.metadata_enriched, args.strategy)
+        id_to_tokens, all_cluster_ids = index.build(
+            args.metadata_enriched, args.strategy
+        )
 
         # Compute budget
         print("Computing budget, setting targets...")
         token_budget = budget.compute(
-            manifest["steps"]["enrich"], 
-            validation_pct=validation_pct, 
+            manifest["steps"]["enrich"],
+            validation_pct=validation_pct,
             source_allocation_pct=source_allocation,
-            )
+        )
         manifest.set_balance_targets(token_budget, source_allocation, validation_pct)
 
         print("Assigning doc IDs to output paths")
         # Map doc IDs to output paths, building stats
-        id_to_output_key, stats = partition.run(id_to_tokens, all_cluster_ids, token_budget)
+        id_to_output_key, stats = partition.run(
+            id_to_tokens, all_cluster_ids, token_budget
+        )
 
         print("Writing outputs...")
         # Materialize sampled JSONL data
@@ -91,6 +98,7 @@ def main(args):
             writer.close()
         manifest.save()
     return
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

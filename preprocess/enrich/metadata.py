@@ -1,11 +1,12 @@
 import gzip
-import json 
+import json
 from collections import defaultdict
 from tqdm import tqdm
 
 import preprocess.enrich.features.clustering as clustering
 import preprocess.enrich.features.buckets as buckets
 import preprocess.enrich.features.tokens as tokens
+
 
 def build(args, config: dict):
     # initialize token counts for percentiles

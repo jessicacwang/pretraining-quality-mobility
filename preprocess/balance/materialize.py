@@ -2,6 +2,7 @@ import gzip
 import json
 from tqdm import tqdm
 
+
 def write(leu_data_file: str, id_to_output_key: dict, writers: dict):
     # Load LEU data and use map to write records
     with gzip.open(leu_data_file, "rt") as leu_data:
@@ -14,7 +15,9 @@ def write(leu_data_file: str, id_to_output_key: dict, writers: dict):
 
             doc_id = doc.get("id")
 
-            output_key = id_to_output_key.get(doc_id, None) # default value catches LinCE handling
+            output_key = id_to_output_key.get(
+                doc_id, None
+            )  # default value catches LinCE handling
 
             if output_key is None:
                 continue

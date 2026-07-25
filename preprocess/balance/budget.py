@@ -13,7 +13,7 @@ def compute(
     # Limiting factor determines validation target
     validation_target = (validation_pct) * limiting_factor
 
-    if source_allocation_pct: # Only assigned to value if strategy is balanced
+    if source_allocation_pct:  # Only assigned to value if strategy is balanced
         # Validation target determines ICE target
         ice_target = (1 - validation_pct) * limiting_factor
         # Compute total cluster sample size and GloWbe target
@@ -22,7 +22,7 @@ def compute(
     else:
         cluster_target = None
         glowbe_target = None
-        ice_target = None 
+        ice_target = None
 
     return {
         "total": 4 * cluster_target,
@@ -45,7 +45,7 @@ def accumulate(
     budget = float("inf") if token_budget is None else token_budget
 
     while records:
-        doc_id = records[-1] # Peek at the next record
+        doc_id = records[-1]  # Peek at the next record
         token_count = id_to_tokens[doc_id]
 
         # If budget is not infinite, check whether it's been exceeded

@@ -1,9 +1,10 @@
 """Loads extracted and adapted LEU documents, activate Manifest tracking and writes to output/preprocess"""
+
 import argparse
 import gzip
 import json
 from pathlib import Path
-from tqdm import tqdm 
+from tqdm import tqdm
 
 from preprocess.unify.adapters.glowbe import GloWbeAdapter
 from preprocess.unify.adapters.ice import ICEAdapter
@@ -63,7 +64,12 @@ def main(args):
                 try:
                     doc_count = 0
                     # loop over documents
-                    for d in tqdm(corpus_adapter.iter_documents(), desc="source docs", position=1, leave=False):
+                    for d in tqdm(
+                        corpus_adapter.iter_documents(),
+                        desc="source docs",
+                        position=1,
+                        leave=False,
+                    ):
                         # write text record
                         leu_gz.write(json.dumps({"id": d.id, "text": d.text}) + "\n")
 
