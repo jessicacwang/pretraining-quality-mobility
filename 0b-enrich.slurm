@@ -19,6 +19,9 @@ mkdir -p "$LOCAL_DATA" "$LOCAL_CONFIG"
 # config/enrich.json
 cp /gscratch/stf/$USER/thesis/config/preprocess/enrich.json "$LOCAL_CONFIG"/
 
+# output/preprocess/manifest
+cp /gscratch/stf/$USER/thesis/output/preprocess/manifest.json "$LOCAL_DATA"/
+
 # leu_data and metadata_source
 cp /gscratch/stf/$USER/thesis/output/preprocess/leu_data.jsonl.gz "$LOCAL_DATA"
 cp /gscratch/stf/$USER/thesis/output/preprocess/metadata_source.jsonl.gz "$LOCAL_DATA"
@@ -31,4 +34,5 @@ cp /gscratch/stf/$USER/thesis/output/preprocess/metadata_source.jsonl.gz "$LOCAL
     --metadata_source "$LOCAL_DATA"/metadata_source.jsonl.gz
 
 # Stage out
+cp "$LOCAL_DATA"/manifest.json /gscratch/stf/$USER/thesis/output/preprocess/
 cp "$LOCAL_DATA"/metadata_enriched.jsonl.gz /gscratch/stf/$USER/thesis/output/preprocess/
