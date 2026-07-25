@@ -3,7 +3,7 @@ from typing import List, Optional, Sequence
 
 from eval.features import RecordFilter, combine_filters, exclude_nulls, restrict_to
 
-CLUSTERS_WITH_MULTIPLE_SOURCES = ["1", "2", "3", "4"]
+CLUSTERS_WITH_SOURCES_AND_GENRES = ["1", "2", "3", "4"]
 
 SOURCES = ["glowbe", "ice", "lince"]
 
@@ -41,12 +41,20 @@ def build_subsets() -> List[SubsetSpec]:
         ),
     ]
 
-    for cluster in CLUSTERS_WITH_MULTIPLE_SOURCES:
+    for cluster in CLUSTERS_WITH_SOURCES_AND_GENRES:
         subset.append(
             SubsetSpec(
                 key=f"by_source_in_cluster_{cluster}",
                 title=f"By source, within cluster {cluster}",
                 feature_names=["source"],
+                record_filter=restrict_to("cluster", [cluster])
+            )
+        )
+        subset.append(
+            SubsetSpec(
+                key=f"by_genre_in_cluster_{cluster}",
+                title=f"By genre, within cluster {cluster}",
+                feature_names=["genre"],
                 record_filter=restrict_to("cluster", [cluster])
             )
         )
