@@ -12,13 +12,15 @@ from tqdm import tqdm
 class Metadata:
     cmi: dict[str, float]
     token_count: dict[str, float]
+    token_percentile: dict[str, float]
     cluster_5_ids: set[str]
     all_ids: set[str]
 
 def load_metadata(metdata_source: str, metadata_enriched: str) -> Metadata:
     """All documents have token count values; only a subset have CMI scores."""
     id_to_cmi = dict()
-    id_to_percentile = dict()
+    id_to_token_percentile = dict()
+    id_to_token_count = dict()
     cluster_5_ids = set()
     all_ids = set()
 
@@ -38,14 +40,16 @@ def load_metadata(metdata_source: str, metadata_enriched: str) -> Metadata:
         for e_meta_line in tqdm(e_metadata, desc="enriched metadata", unit="doc"):
             doc = json.loads(e_meta_line)
             doc_id = doc.get("id")
-            # if doc_id in cluster_5_ids:
-            doc_percentile = doc.get("token_count", 0)
-            id_to_percentile[doc_id] = float(doc_percentile)
+            doc_token_count = doc.get("token_count", 0)
+            id_to_token_count[doc_id] = int(doc_token_count)
+            doc_percentile = doc.get("token_percentile", 0)
+            id_to_token_percentile[doc_id] = float(doc_percentile)
             all_ids.add(doc_id)
 
     return Metadata(
         cmi=id_to_cmi,
-        token_count=id_to_percentile,
+        token_count=id_to_token_count,
+        token_percentile=id_to_token_percentile,
         cluster_5_ids=cluster_5_ids,
         all_ids=all_ids
     )
@@ -69,7 +73,7 @@ def load_audit_results(
                 if target_ids is not None and doc_id not in target_ids:
                     continue
                 # If target_ids exists + doc match (CMI case)
-                # or if target_ids does not exist (percentile case)
+                # or if target_ids does not exist (token_count case)
                 # ...store the doc ID
                 results[doc_id] = found_value
                 found.add(doc_id)
@@ -102,19 +106,13 @@ def main(args):
     print("Loading doc IDs' survival for lookup")
     pipeline_results = load_audit_results(
         audit_dir=args.audit_dir,
-        all_ids=leu_metadata.cluster_5_ids,
+        all_ids=leu_metadata.all_ids,
         found_value=0,
     )
     langid_results = load_audit_results(
         audit_dir=f"{args.audit_dir}/excluded/1_langid",
-        all_ids=leu_metadata.cluster_5_ids,
-        found_value=1,
-        target_ids=leu_metadata.cluster_5_ids
-    )
-    percentile_results = load_audit_results(
-        audit_dir=args.audit_dir,
         all_ids=leu_metadata.all_ids,
-        found_value=0,
+        found_value=1,
     )
 
     # Cast keys as lists
@@ -123,18 +121,47 @@ def main(args):
 
     # Cast lookups as arrays
     cmi_arr = values(leu_metadata.cmi, cmi_keys)
-    cumulative_cluster_5_arr = values(pipeline_results, cmi_keys)
+    pipeline_cluster_5_arr = values(pipeline_results, cmi_keys)
     langid_cluster_5_arr = values(langid_results, cmi_keys)
+    cluster_5_token_count_arr = values(leu_metadata.token_count, cmi_keys)
+    cluster_5_token_percentile_arr = values(leu_metadata.token_percentile, cmi_keys)
 
-    cluster_5_percentile_arr = values(leu_metadata.token_count, cmi_keys)
-    all_percentile_arr = values(leu_metadata.token_count, all_keys)
-    exclusion_arr = values(percentile_results, all_keys)
-    
+    all_token_count_arr = values(leu_metadata.token_count, all_keys)
+    all_token_count_percentile_arr = values(leu_metadata.token_percentile, all_keys)
+    exclusion_arr = values(pipeline_results, all_keys)
+    all_langid_arr = values(langid_results, all_keys)
+
     # Report correlation
-    report_correlation("Cumulative", cmi_arr, cumulative_cluster_5_arr)
-    report_correlation("LangID", cmi_arr, langid_cluster_5_arr)
-    report_correlation("token count (Cluster 5)", cluster_5_percentile_arr, cumulative_cluster_5_arr)
-    report_correlation("token count (all records)", all_percentile_arr, exclusion_arr)
+    report_correlation(
+        "CMI; pipeline result", cmi_arr, pipeline_cluster_5_arr
+        )
+    report_correlation(
+        "CMI; LangID result", cmi_arr, langid_cluster_5_arr
+        )
+    report_correlation(
+        "token count (Cluster 5); pipeline result", 
+        cluster_5_token_count_arr, pipeline_cluster_5_arr
+        )
+    report_correlation(
+        "token percentile (Cluster 5); pipeline result", 
+        cluster_5_token_percentile_arr, pipeline_cluster_5_arr
+        )
+    report_correlation(
+        "token count (Cluster 5); langID result", 
+        cluster_5_token_count_arr, langid_cluster_5_arr
+        )
+    report_correlation(
+        "token percentile (Cluster 5); langID result", 
+        cluster_5_token_percentile_arr, langid_cluster_5_arr
+        )
+    report_correlation(
+        "token count (all records); pipeline result", 
+        all_token_count_arr, exclusion_arr
+        )
+    report_correlation(
+        "token percentile (all records); pipeline result", 
+        all_token_count_percentile_arr, exclusion_arr
+        )
     return
 
 
