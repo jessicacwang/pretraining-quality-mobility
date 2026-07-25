@@ -18,8 +18,9 @@ module load conda
 echo "Activating env..."
 conda activate /gscratch/stf/$USER/conda/envs/thesis-env/
 
-echo "Installing OpenMP..."
+echo "Installing Conda dependencies..."
 conda install -c conda-forge llvm-openmp
+conda install -c conda-forge python-kaleido
 
 echo "Installing requirements..."
 pip install -r requirements.txt
