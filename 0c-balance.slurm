@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem=12G
-#SBATCH --time=2:00:00
+#SBATCH --time=8:00:00
 #SBATCH -o log/%x_%j.out
 #SBATCH --mail-user=%u@uw.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
