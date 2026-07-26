@@ -43,8 +43,8 @@ cp /gscratch/stf/$USER/thesis/output/preprocess/metadata_enriched.jsonl.gz "$LOC
     --strategy full
 
 # Stage data out
-BALANCED_DIR = /gscratch/stf/$USER/thesis/output/preprocess/balanced
-FULL_DIR = /gscratch/stf/$USER/thesis/output/preprocess/full
+BALANCED_DIR="/gscratch/stf/$USER/thesis/output/preprocess/balanced"
+FULL_DIR="/gscratch/stf/$USER/thesis/output/preprocess/full"
 
 mkdir -p "$BALANCED_DIR" "$FULL_DIR"
 cp "$LOCAL_DATA"/manifest.json /gscratch/stf/$USER/thesis/output/preprocess/

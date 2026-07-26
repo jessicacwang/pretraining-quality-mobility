@@ -105,7 +105,7 @@ def select_ids_per_cluster_sample(
             "lince": lince_pct,
         }
 
-    return
+    return per_cluster_ids
 
 
 def build_id_to_output_cluster(
