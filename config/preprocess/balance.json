@@ -5,7 +5,6 @@
     },
     "validation_pct": 0.02,
     "pretokenize":{
-        "dolma_cli": "/mmfs1/home/jcmw614/.local/share/pipx/venvs/dolma",
         "tokenizer": {
             "name": "allenai/dolma2-tokenizer",
             "eos_token_id": "100257",

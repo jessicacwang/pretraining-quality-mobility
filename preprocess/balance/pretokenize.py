@@ -6,10 +6,8 @@ def tokenize_source(documents_glob: str, destination: Path, config: dict):
     dest_dir = Path(destination)
     dest_dir.mkdir(parents=True, exist_ok=True)
 
-    dolma_cmd = config["pretokenize"]["dolma_cli"]
-
     cmd = [
-        dolma_cmd,
+        "dolma",
         "tokens",
         "--documents",
         documents_glob,

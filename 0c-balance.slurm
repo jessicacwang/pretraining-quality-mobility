@@ -12,6 +12,19 @@
 #SBATCH --mail-user=%u@uw.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
 
+# Point pipx directories to node local storage
+export PIPX_HOME="/tmp/${USER}_${SLURM_JOB_ID}/pipx"
+export PIPX_BIN_DIR="/tmp/${USER}_${SLURM_JOB_ID}/bin"
+
+# Add local bin to PATH
+export PATH="$PIPX_BIN_DIR:$PATH"
+
+# Install dolma on the fly
+pipx install dolma
+
+# Verify it's ready
+which dolma
+
 # Stage data in 
 LOCAL_DATA="/tmp/${USER}_${SLURM_JOB_ID}/data"
 LOCAL_CONFIG="/tmp/${USER}_${SLURM_JOB_ID}/config"
