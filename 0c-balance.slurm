@@ -30,7 +30,7 @@ cp /gscratch/stf/$USER/thesis/output/preprocess/metadata_enriched.jsonl.gz "$LOC
 /gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m preprocess.balance \
     --config_path "$LOCAL_CONFIG"/balance.json \
     --leu_data "$LOCAL_DATA"/leu_data.jsonl.gz \
-    --metdata_enriched "$LOCAL_DATA"/metadata_enriched.jsonl.gz \
+    --metadata_enriched "$LOCAL_DATA"/metadata_enriched.jsonl.gz \
     --output_dir "$LOCAL_DATA" \
     --strategy balanced
 
