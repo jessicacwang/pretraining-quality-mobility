@@ -25,67 +25,86 @@
         "clusters": {
           "1": {
             "actual_token_count": {
-              "glowbe": 38038895,
-              "ice": 2002361,
-              "total": 40041256
+              "glowbe": 668319628,
+              "ice": 2001718,
+              "lince": 0,
+              "total": 670321346
             },
             "actual_token_pct": {
-              "glowbe": 0.9499925526811647,
-              "ice": 0.05000744731883535
+              "glowbe": 0.9970137934410939,
+              "ice": 0.0029862065589061518,
+              "lince": 0.0
             },
-            "documents_written": 37999
+            "documents_written": 655197
           },
           "2": {
             "actual_token_count": {
-              "glowbe": 38043794,
-              "ice": 2001630,
-              "total": 40045424
+              "glowbe": 420587758,
+              "ice": 5448838,
+              "lince": 0,
+              "total": 426036596
             },
             "actual_token_pct": {
-              "glowbe": 0.9500160118169806,
-              "ice": 0.049983988183019364
+              "glowbe": 0.9872103991742531,
+              "ice": 0.012789600825746903,
+              "lince": 0.0
             },
-            "documents_written": 40974
+            "documents_written": 450534
           },
           "3": {
             "actual_token_count": {
-              "glowbe": 38042321,
-              "ice": 2003377,
-              "total": 40045698
+              "glowbe": 417357848,
+              "ice": 6486957,
+              "lince": 0,
+              "total": 423844805
             },
             "actual_token_pct": {
-              "glowbe": 0.9499727286561468,
-              "ice": 0.050027271343853215
+              "glowbe": 0.9846949710755568,
+              "ice": 0.015305028924443229,
+              "lince": 0.0
             },
-            "documents_written": 42926
+            "documents_written": 466246
           },
           "4": {
             "actual_token_count": {
-              "glowbe": 38042681,
-              "ice": 2002656,
-              "total": 40045337
+              "glowbe": 185466567,
+              "ice": 6447802,
+              "lince": 0,
+              "total": 191914369
             },
             "actual_token_pct": {
-              "glowbe": 0.9499902822643246,
-              "ice": 0.05000971773567544
+              "glowbe": 0.9664027137019636,
+              "ice": 0.03359728629803639,
+              "lince": 0.0
             },
-            "documents_written": 45239
+            "documents_written": 221479
+          },
+          "5": {
+            "actual_token_count": {
+              "glowbe": 0,
+              "ice": 0,
+              "lince": 3562838,
+              "total": 3562838
+            },
+            "actual_token_pct": {
+              "glowbe": 0.0,
+              "ice": 0.0,
+              "lince": 1.0
+            },
+            "documents_written": 171166
           }
         }
       },
-      "source_allocation_pct": {
-        "glowbe": 0.95,
-        "ice": 0.05
-      },
+      "source_allocation_pct": null,
       "started_at": "2026-07-12T23:41:33.825660+00:00",
       "status": "success",
       "token_budget": {
         "per_cluster": {
-          "glowbe": 38042559.04,
-          "ice": 2002239.96,
-          "total": 40044799.0
+          "glowbe": null,
+          "ice": null,
+          "total": null
         },
-        "total": 160179196.0,
+        "total": null,
         "validation_size_per_source": 40862.04
       },
       "total_seconds": 149.377859,
@@ -93,41 +112,80 @@
         "clusters": {
           "1": {
             "actual_token_count": {
-              "glowbe": 41014,
-              "ice": 40741,
-              "total": 81755
+              "glowbe": 39693,
+              "ice": 41384,
+              "lince": 0,
+              "total": 81077
             },
-            "documents_written": 43
+            "documents_written": 47
           },
           "2": {
             "actual_token_count": {
-              "glowbe": 41169,
-              "ice": 41305,
-              "total": 82474
+              "glowbe": 40704,
+              "ice": 41721,
+              "lince": 0,
+              "total": 82425
             },
-            "documents_written": 56
+            "documents_written": 65
           },
           "3": {
             "actual_token_count": {
-              "glowbe": 42268,
-              "ice": 40016,
-              "total": 82284
+              "glowbe": 40894,
+              "ice": 41861,
+              "lince": 0,
+              "total": 82755
             },
-            "documents_written": 57
+            "documents_written": 60
           },
           "4": {
             "actual_token_count": {
-              "glowbe": 41073,
-              "ice": 40130,
-              "total": 81203
+              "glowbe": 41872,
+              "ice": 40985,
+              "lince": 0,
+              "total": 82857
             },
-            "documents_written": 68
+            "documents_written": 63
+          },
+          "5": {
+            "actual_token_count": {
+              "glowbe": 0,
+              "ice": 0,
+              "lince": 40862,
+              "total": 40862
+            },
+            "documents_written": 1037
           }
         }
       },
       "validation_pct": [
         0.02
       ]
+    },
+    "balanced": {
+      "_notes": "",
+      "args": {
+        "config_path": "/tmp/jcmw614_37720459/config/balance.json",
+        "leu_data": "/tmp/jcmw614_37720459/data/leu_data.jsonl.gz",
+        "metadata_enriched": "/tmp/jcmw614_37720459/data/metadata_enriched.jsonl.gz",
+        "notes": "",
+        "output_dir": "/tmp/jcmw614_37720459/data",
+        "random_seed": 42,
+        "strategy": "balanced"
+      },
+      "completed_at": "2026-07-26T07:08:32.446509+00:00",
+      "execution": {
+        "slurm_job_id": "37720459"
+      },
+      "output_files": {
+        "1": "/tmp/jcmw614_37720459/data/balanced/cluster_1_balanced.jsonl.gz",
+        "2": "/tmp/jcmw614_37720459/data/balanced/cluster_2_balanced.jsonl.gz",
+        "3": "/tmp/jcmw614_37720459/data/balanced/cluster_3_balanced.jsonl.gz",
+        "4": "/tmp/jcmw614_37720459/data/balanced/cluster_4_balanced.jsonl.gz",
+        "validation": "/tmp/jcmw614_37720459/data/balanced/validation_balanced.jsonl.gz"
+      },
+      "started_at": "2026-07-26T06:52:39.000715+00:00",
+      "status": "success",
+      "total_seconds": 953.445794
     },
     "enrich": {
       "_notes": "",
@@ -449,6 +507,33 @@
       "started_at": "2026-07-26T01:41:09.537093+00:00",
       "status": "success",
       "total_seconds": 6720.296027
+    },
+    "full": {
+      "_notes": "",
+      "args": {
+        "config_path": "/tmp/jcmw614_37720459/config/balance.json",
+        "leu_data": "/tmp/jcmw614_37720459/data/leu_data.jsonl.gz",
+        "metadata_enriched": "/tmp/jcmw614_37720459/data/metadata_enriched.jsonl.gz",
+        "notes": "",
+        "output_dir": "/tmp/jcmw614_37720459/data",
+        "random_seed": 42,
+        "strategy": "full"
+      },
+      "completed_at": "2026-07-26T09:36:27.471853+00:00",
+      "execution": {
+        "slurm_job_id": "37720459"
+      },
+      "output_files": {
+        "1": "/tmp/jcmw614_37720459/data/full/cluster_1_full.jsonl.gz",
+        "2": "/tmp/jcmw614_37720459/data/full/cluster_2_full.jsonl.gz",
+        "3": "/tmp/jcmw614_37720459/data/full/cluster_3_full.jsonl.gz",
+        "4": "/tmp/jcmw614_37720459/data/full/cluster_4_full.jsonl.gz",
+        "5": "/tmp/jcmw614_37720459/data/full/cluster_5_full.jsonl.gz",
+        "validation": "/tmp/jcmw614_37720459/data/full/validation_full.jsonl.gz"
+      },
+      "started_at": "2026-07-26T07:08:32.772077+00:00",
+      "status": "success",
+      "total_seconds": 8874.699776
     },
     "unify": {
       "_notes": "",
