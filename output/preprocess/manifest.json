@@ -132,11 +132,11 @@
     "enrich": {
       "_notes": "",
       "args": {
-        "config_path": "preprocess/config/enrich.json",
-        "leu_data": "output/preprocess/leu_data.jsonl.gz",
-        "metadata_source": "output/preprocess/metadata_source.jsonl.gz",
+        "config_path": "/tmp/jcmw614_37711941/config/enrich.json",
+        "leu_data": "/tmp/jcmw614_37711941/data/leu_data.jsonl.gz",
+        "metadata_source": "/tmp/jcmw614_37711941/data/metadata_source.jsonl.gz",
         "notes": "",
-        "output_dir": "output/preprocess"
+        "output_dir": "/tmp/jcmw614_37711941/data"
       },
       "clusters": {
         "1": {
@@ -227,7 +227,7 @@
         },
         "3": {
           "description": "Indigenized L2 varieties",
-          "documents_written": 421823,
+          "documents_written": 466306,
           "sources": {
             "glowbe": {
               "components": {
@@ -262,13 +262,21 @@
                 "sg": {
                   "documents_written": 45303,
                   "tokens": 41444339
+                },
+                "za": {
+                  "documents_written": 44106,
+                  "tokens": 40547279
                 }
               },
-              "documents_written": 419823,
-              "tokens": 376851463
+              "documents_written": 463929,
+              "tokens": 417398742
             },
             "ice": {
               "components": {
+                "gr": {
+                  "documents_written": 377,
+                  "tokens": 464177
+                },
                 "hk": {
                   "documents_written": 500,
                   "tokens": 1724303
@@ -286,15 +294,15 @@
                   "tokens": 1340716
                 }
               },
-              "documents_written": 2000,
-              "tokens": 6064641
+              "documents_written": 2377,
+              "tokens": 6528818
             }
           },
-          "tokens": 382916104
+          "tokens": 423927560
         },
         "4": {
           "description": "English-based Pidgins and Creoles",
-          "documents_written": 266025,
+          "documents_written": 221542,
           "sources": {
             "glowbe": {
               "components": {
@@ -317,21 +325,13 @@
                 "tz": {
                   "documents_written": 41316,
                   "tokens": 33444319
-                },
-                "za": {
-                  "documents_written": 44106,
-                  "tokens": 40547279
                 }
               },
-              "documents_written": 262635,
-              "tokens": 226055718
+              "documents_written": 218529,
+              "tokens": 185508439
             },
             "ice": {
               "components": {
-                "gr": {
-                  "documents_written": 377,
-                  "tokens": 464177
-                },
                 "jm": {
                   "documents_written": 499,
                   "tokens": 1340701
@@ -385,11 +385,11 @@
                   "tokens": 1184034
                 }
               },
-              "documents_written": 3390,
-              "tokens": 6952964
+              "documents_written": 3013,
+              "tokens": 6488787
             }
           },
-          "tokens": 233008682
+          "tokens": 191997226
         },
         "5": {
           "description": "English code-switching",
@@ -437,18 +437,18 @@
           "tokens": 3603700
         }
       },
-      "completed_at": "2026-07-10T08:38:40.737763+00:00",
+      "completed_at": "2026-07-26T03:33:09.833120+00:00",
       "documents_truncated": 19200,
       "enrich_errors": {},
       "execution": {
-        "slurm_job_id": "36982413"
+        "slurm_job_id": "37711941"
       },
       "output_files": {
-        "metadata": "output/preprocess/metadata_enriched.jsonl.gz"
+        "metadata": "/tmp/jcmw614_37711941/data/metadata_enriched.jsonl.gz"
       },
-      "started_at": "2026-07-10T06:54:22.682569+00:00",
+      "started_at": "2026-07-26T01:41:09.537093+00:00",
       "status": "success",
-      "total_seconds": 6258.055194
+      "total_seconds": 6720.296027
     },
     "unify": {
       "_notes": "",
