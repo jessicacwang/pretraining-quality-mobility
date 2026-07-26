@@ -23,3 +23,6 @@ def write(leu_data_file: str, id_to_output_key: dict, writers: dict):
                 continue
 
             writers[output_key].write(json.dumps(doc) + "\n")
+    for writer in writers.values():
+        writer.close()
+        
