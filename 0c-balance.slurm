@@ -12,6 +12,10 @@
 #SBATCH --mail-user=%u@uw.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
 
+# Load conda module and activate env
+module load conda
+conda activate /gscratch/stf/$USER/conda/envs/thesis-env/
+
 # Point pipx directories to node local storage
 export PIPX_HOME="/tmp/${USER}_${SLURM_JOB_ID}/pipx"
 export PIPX_BIN_DIR="/tmp/${USER}_${SLURM_JOB_ID}/bin"
@@ -41,7 +45,7 @@ cp /gscratch/stf/$USER/thesis/output/preprocess/leu_data.jsonl.gz "$LOCAL_DATA"/
 cp /gscratch/stf/$USER/thesis/output/preprocess/metadata_enriched.jsonl.gz "$LOCAL_DATA"/
 
 # Run balanced strat
-/gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m preprocess.balance \
+python -m preprocess.balance \
     --config_path "$LOCAL_CONFIG"/balance.json \
     --leu_data "$LOCAL_DATA"/leu_data.jsonl.gz \
     --metadata_enriched "$LOCAL_DATA"/metadata_enriched.jsonl.gz \
@@ -49,12 +53,14 @@ cp /gscratch/stf/$USER/thesis/output/preprocess/metadata_enriched.jsonl.gz "$LOC
     --strategy balanced
 
 # Run full strat
-/gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m preprocess.balance \
+python -m preprocess.balance \
     --config_path "$LOCAL_CONFIG"/balance.json \
     --leu_data "$LOCAL_DATA"/leu_data.jsonl.gz \
     --metdata_enriched "$LOCAL_DATA"/metadata_enriched.jsonl.gz \
     --output_dir "$LOCAL_DATA" \
     --strategy full
+
+conda deactivate
 
 # Stage data out
 BALANCED_DIR="/gscratch/stf/$USER/thesis/output/preprocess/balanced"
