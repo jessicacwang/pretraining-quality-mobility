@@ -32,8 +32,8 @@ def main(args):
     # load Manifest and start step
     manifest = PreprocessManifest(f"{args.output_dir}/manifest.json")
 
-    manifest.start_step("balance", args.notes)
-    manifest.set_args("balance", vars(args))
+    manifest.start_step(args.strategy, args.notes)
+    manifest.set_args(args.strategy, vars(args))
 
     output_files = {
         "1": f"{args.output_dir}/{args.strategy}/cluster_1_{args.strategy}.jsonl.gz",
@@ -49,7 +49,7 @@ def main(args):
             f"{args.output_dir}/{args.strategy}/cluster_5_{args.strategy}.jsonl.gz"
         )
 
-    manifest.set_output_files("balance", output_files)
+    manifest.set_output_files(args.strategy, output_files)
 
     # Create all output file handles
     writers = {}
@@ -87,10 +87,10 @@ def main(args):
         pretokenize.run(output_files, output_dir, config)
 
         # Register completed step in manifest
-        manifest.end_step("balance")
+        manifest.end_step(args.strategy)
         manifest.set_balance_stats(stats=stats)
     except Exception as e:
-        manifest.fail_step("balance", str(e))
+        manifest.fail_step(args.strategy, str(e))
         raise
     finally:
         # Close output writers

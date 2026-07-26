@@ -56,7 +56,7 @@ python -m preprocess.balance \
 python -m preprocess.balance \
     --config_path "$LOCAL_CONFIG"/balance.json \
     --leu_data "$LOCAL_DATA"/leu_data.jsonl.gz \
-    --metdata_enriched "$LOCAL_DATA"/metadata_enriched.jsonl.gz \
+    --metadata_enriched "$LOCAL_DATA"/metadata_enriched.jsonl.gz \
     --output_dir "$LOCAL_DATA" \
     --strategy full
 
