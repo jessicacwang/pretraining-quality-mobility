@@ -21,8 +21,8 @@ def tokenize_source(documents_glob: str, destination: Path, config: dict):
         config["tokenizer"]["pad_token_id"],
         "--dtype",
         "uint32",
-        "--process",
-        8,
+        "--processes",
+        "8",
     ]
     subprocess.run(cmd, check=True)
     return

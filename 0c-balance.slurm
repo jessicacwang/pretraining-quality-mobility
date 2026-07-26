@@ -4,6 +4,7 @@
 #SBATCH --account=stf
 #SBATCH --partition=compute-hugemem
 #SBATCH --nodes=1
+#SBATCH --cpus-per-task=8
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem=12G
 #SBATCH --time=2:00:00
