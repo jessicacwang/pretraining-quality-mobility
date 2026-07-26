@@ -1,14 +1,19 @@
-from collections import defaultdict
 import gzip
 import json
+from collections import defaultdict
+from tqdm import tqdm
 
-def build(config: dict) -> tuple[dict, defaultdict]:
+
+def build(enriched_metadata_file: str, strategy: str) -> tuple[dict, defaultdict]:
     id_to_tokens = dict()
-    all_cluster_ids = defaultdict(lambda: {"glowbe": list(), "ice": list()})
-
+    all_cluster_ids = defaultdict(
+        lambda: {"glowbe": list(), "ice": list(), "lince": list()}
+    )
     # Load metadata enriched
-    with gzip.open(config["enriched_metadata"], "rt") as meta_enriched:
-        for line_num, meta_line in enumerate(meta_enriched, 1):
+    with gzip.open(enriched_metadata_file, "rt") as meta_enriched:
+        for line_num, meta_line in enumerate(
+            tqdm(meta_enriched, desc="metadata index"), 1
+        ):
             try:
                 doc_metadata = json.loads(meta_line)
             except json.JSONDecodeError as e:
@@ -24,8 +29,8 @@ def build(config: dict) -> tuple[dict, defaultdict]:
             doc_tokens = int(doc_metadata.get("token_count"))
             doc_cluster = str(doc_metadata.get("cluster_id"))
 
-            # Skip all LinCE documents
-            if doc_id.startswith("lince"):
+            # Skip LinCE documents iff strategy is balanced, leaving empty list
+            if strategy == "balanced" and doc_source == "lince":
                 continue
 
             id_to_tokens[doc_id] = doc_tokens

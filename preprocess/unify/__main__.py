@@ -1,13 +1,15 @@
 """Loads extracted and adapted LEU documents, activate Manifest tracking and writes to output/preprocess"""
 
+import argparse
+import gzip
+import json
+from pathlib import Path
+from tqdm import tqdm
+
 from preprocess.unify.adapters.glowbe import GloWbeAdapter
 from preprocess.unify.adapters.ice import ICEAdapter
 from preprocess.unify.adapters.lince import LinCEAdapter
 from preprocess.manifest import PreprocessManifest
-import gzip
-import json
-import argparse
-from pathlib import Path
 from utils import load_config
 
 
@@ -54,7 +56,7 @@ def main(args):
             output_files["metadata"], "wt"
         ) as meta_gz:
 
-            for corpus_adapter in adapters:
+            for corpus_adapter in tqdm(adapters, desc="source adapters", position=0):
                 # Prepare adapter
                 print(f"\nProcessing {corpus_adapter.name}")
                 corpus_adapter.prepare()
@@ -62,7 +64,12 @@ def main(args):
                 try:
                     doc_count = 0
                     # loop over documents
-                    for d in corpus_adapter.iter_documents():
+                    for d in tqdm(
+                        corpus_adapter.iter_documents(),
+                        desc="source docs",
+                        position=1,
+                        leave=False,
+                    ):
                         # write text record
                         leu_gz.write(json.dumps({"id": d.id, "text": d.text}) + "\n")
 

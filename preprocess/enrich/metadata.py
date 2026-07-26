@@ -1,9 +1,12 @@
 import gzip
-import json 
+import json
 from collections import defaultdict
+from tqdm import tqdm
+
 import preprocess.enrich.features.clustering as clustering
 import preprocess.enrich.features.buckets as buckets
 import preprocess.enrich.features.tokens as tokens
+
 
 def build(args, config: dict):
     # initialize token counts for percentiles
@@ -22,7 +25,7 @@ def build(args, config: dict):
     ) as metadata_source, gzip.open("metadata_enriched_tmp", "wt") as tmp_gz:
 
         for line_num, (leu_line, meta_line) in enumerate(
-            zip(leu_data, metadata_source), 1
+            tqdm(zip(leu_data, metadata_source), desc="unified data"), 1
         ):
             try:
                 leu_doc = json.loads(leu_line)

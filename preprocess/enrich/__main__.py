@@ -1,14 +1,15 @@
 """Derive metadata fields not inherent to source datasets (token_count, token_percentile, etc.) and update output/preprocess/metadata.jsonl.gz"""
 
+import argparse
+from pathlib import Path
+import gzip
+import json
+from tqdm import tqdm
+
 from preprocess.manifest import PreprocessManifest
 import preprocess.enrich.metadata as metadata
 import preprocess.enrich.features.percentiles as percentiles
-import argparse
-from pathlib import Path
 from utils import load_config
-
-import gzip
-import json
 
 
 def main(args):
@@ -43,7 +44,7 @@ def main(args):
         ) as meta_gz:
 
             # for document in metata_enriched_tmp
-            for line_num, tmp_line in enumerate(tmp_gz, 1):
+            for line_num, tmp_line in enumerate(tqdm(tmp_gz, desc="tmp metadata"), 1):
                 try:
                     tmp_doc = json.loads(tmp_line)
                 except json.JSONDecodeError as e:

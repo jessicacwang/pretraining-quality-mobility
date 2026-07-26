@@ -42,7 +42,7 @@ def main(args):
 
     manifest.set_output_files("balance", output_files)
 
-     # Create all output file handles
+    # Create all output file handles
     writers = {}
     for key, path in output_files.items():
         writers[key] = gzip.open(path, "wt")
@@ -62,7 +62,6 @@ def main(args):
     try:
 
         # =========================== ACCUMULATE IDs ===========================
-        
 
         # Set aside validation set using budget["validation_size_per_source"] and each key in cluster_source_id_tokens
         for cluster_id, records in all_cluster_ids.items():
@@ -88,7 +87,7 @@ def main(args):
                 "ice": ice_subtotal,
             }
         # Accumulate doc IDs for each key in per_cluster_ids, for each source in budget["per_cluster"]
-        # TODO: when strategy == 'full', just update the stored IDs directly 
+        # TODO: when strategy == 'full', just update the stored IDs directly
         for cluster_id, records in all_cluster_ids.items():
             sampled_glowbe, glowbe_subtotal = accumulate_until_budget(
                 records["glowbe"], id_to_tokens, budget["per_cluster"]["glowbe"]
@@ -121,9 +120,6 @@ def main(args):
             curr_stats["actual_token_pct"] |= {"glowbe": glowbe_pct, "ice": ice_pct}
 
         # ========== PASS 2: Write LEU samples from accumulated IDs ============
-        
-
-        
 
         # Register completed step in manifest
         manifest.end_step("balance")
