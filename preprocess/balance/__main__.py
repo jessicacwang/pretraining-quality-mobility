@@ -84,7 +84,7 @@ def main(args):
 
         print("Pre-tokenizing JSONL data...")
         # Pretokenize data for olmix
-        pretokenize.run(output_files, output_dir)
+        pretokenize.run(output_files, output_dir, config)
 
         # Register completed step in manifest
         manifest.end_step("balance")
