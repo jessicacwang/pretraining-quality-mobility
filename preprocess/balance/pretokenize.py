@@ -6,19 +6,21 @@ def tokenize_source(documents_glob: str, destination: Path, config: dict):
     dest_dir = Path(destination)
     dest_dir.mkdir(parents=True, exist_ok=True)
 
+    dolma_cmd = config["pretokenize"]["dolma_cli"]
+
     cmd = [
-        "dolma",
+        dolma_cmd,
         "tokens",
         "--documents",
         documents_glob,
         "--destination",
         destination,
         "--tokenizer.name_or_path",
-        config["tokenizer"]["name"],
+        config["pretokenize"]["tokenizer"]["name"],
         "--tokenizer.eos_token_id",
-        config["tokenizer"]["eos_token_id"],
+        config["pretokenize"]["tokenizer"]["eos_token_id"],
         "--tokenizer.pad_token_id",
-        config["tokenizer"]["pad_token_id"],
+        config["pretokenize"]["tokenizer"]["pad_token_id"],
         "--dtype",
         "uint32",
         "--processes",
