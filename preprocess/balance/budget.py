@@ -19,13 +19,15 @@ def compute(
         # Compute total cluster sample size and GloWbe target
         cluster_target = ice_target // source_allocation_pct["ice"]
         glowbe_target = cluster_target - ice_target
+        total_target = 4 * cluster_target
     else:
         cluster_target = None
         glowbe_target = None
         ice_target = None
+        total_target = None
 
     return {
-        "total": 4 * cluster_target,
+        "total": total_target,
         "per_cluster": {
             "total": cluster_target,
             "glowbe": glowbe_target,
