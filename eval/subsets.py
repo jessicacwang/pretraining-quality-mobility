@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field 
-from typing import List, Optional, Sequence 
+from typing import Dict, List, Optional, Sequence, Set
 
-from eval.features import RecordFilter, combine_filters, exclude_nulls, restrict_to
+from eval.features import RecordFilter, aggregate_by_features, combine_filters, exclude_nulls, restrict_to
 
 CLUSTERS_WITH_SOURCES_AND_GENRES = ["1", "2", "3", "4"]
 
@@ -38,6 +38,16 @@ def build_subsets() -> List[SubsetSpec]:
         SubsetSpec(
             "by_component_genre", "By component and genre", 
             feature_names=["component", "genre"]
+        ),
+        SubsetSpec(
+            "by_genre", "By genre", 
+            feature_names=["genre"],
+            record_filter=exclude_nulls("genre")
+        ),
+        SubsetSpec(
+            "by_component", "By component", 
+            feature_names=["component"],
+            record_filter=restrict_to("source", SOURCES_WITH_GENRE)
         ),
     ]
 
@@ -92,3 +102,19 @@ def build_subsets() -> List[SubsetSpec]:
         )
 
     return subset
+
+def subset_value_universe(stages: Dict, spec: SubsetSpec) -> Set[str]:
+    """
+    Returns the set of distinct (and normalized) values that define a subset.
+    Shared by eval.retention.plot_data and eval.colors
+    """
+    values: Set[str] = set()
+
+    for _, stage in stages.items():
+        values |= set(
+            aggregate_by_features(stage["excluded"]["records"], spec.feature_names, spec.record_filter)
+        )
+        values |= set(
+            aggregate_by_features(stage["included"]["records"], spec.feature_names, spec.record_filter)
+        )
+    return values

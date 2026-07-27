@@ -97,6 +97,17 @@ def report_correlation(title: str, x, y):
     print("=" * 70)
     return
 
+def report_average(title: str, scores, excluded_one_hot):
+    included_records = excluded_one_hot.astype(bool) # 1 marks 'invalid' entries
+    excluded_records = ~excluded_one_hot.astype(bool)
+
+    excluded_scores = np.ma.array(scores, mask=excluded_records)
+    included_scores = np.ma.array(scores, mask=included_records)
+
+    print(f"Average {title} scores when excluded: {excluded_scores.mean()}; {np.sum(excluded_one_hot)} records")
+    print(f"Average {title} scores when included: {included_scores.mean()}; {np.sum(1 - excluded_one_hot)} records")
+    return
+
 def main(args):
     # Load metadata
     print("Loading metadata for lookup")
@@ -129,7 +140,6 @@ def main(args):
     all_token_count_arr = values(leu_metadata.token_count, all_keys)
     all_token_count_percentile_arr = values(leu_metadata.token_percentile, all_keys)
     exclusion_arr = values(pipeline_results, all_keys)
-    all_langid_arr = values(langid_results, all_keys)
 
     # Report correlation
     report_correlation(
@@ -162,6 +172,8 @@ def main(args):
         "token percentile (all records); pipeline result", 
         all_token_count_percentile_arr, exclusion_arr
         )
+
+    report_average("CMI", cmi_arr, langid_cluster_5_arr)
     return
 
 

@@ -2,21 +2,12 @@ import math
 from typing import Dict, List 
 
 from eval.features import aggregate_by_features
-from eval.subsets import SubsetSpec
+from eval.subsets import SubsetSpec, subset_value_universe
 
 def build_subset_series(stages: Dict, spec: SubsetSpec) -> List[Dict]:
     stage_items = list(stages.items())
 
-    all_values = set()
-
-    for _, stage in stage_items:
-        all_values |= set(
-            aggregate_by_features(stage["included"]["records"], spec.feature_names, spec.record_filter)
-        )
-
-        all_values |= set(
-            aggregate_by_features(stage["excluded"]["records"], spec.feature_names, spec.record_filter)
-        )
+    all_values = subset_value_universe(stages, spec)
 
     if not all_values:
         all_values = {""}
