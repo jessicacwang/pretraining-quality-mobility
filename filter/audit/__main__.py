@@ -28,7 +28,7 @@ def main(args):
         # Load datatrove stats
         datatrove_stats = json.load(open(f"{args.output_dir}/stats.json", "r"))
         now_excluded = set()
-        for n, algo_stats in enumerate(datatrove_stats[1:-1], start=1):
+        for n, algo_stats in enumerate(datatrove_stats[0:-1]):
             algo_key = config["algorithms"][str(n)]
 
             print(f" ==== Collecting stats for {algo_key}...")
