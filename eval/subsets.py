@@ -11,6 +11,8 @@ SOURCES_WITH_GENRE = ["glowbe", "ice"]
 
 SOURCES_WITH_MULTIPLE_CLUSTERS = ["glowbe", "ice"]
 
+TRANSLOCAL_SOURCES = ["glowbe", "lince"]
+
 @dataclass
 class SubsetSpec:
     key: str # stable identifier, used in filenames and JSON keys
@@ -48,6 +50,16 @@ def build_subsets() -> List[SubsetSpec]:
             "by_component", "By component", 
             feature_names=["component"],
             record_filter=restrict_to("source", SOURCES_WITH_GENRE)
+        ),
+        SubsetSpec(
+            "by_mobility_in_translocal", "By degree of mobility in trans-local sources", 
+            feature_names=["source"],
+            record_filter=restrict_to("source", TRANSLOCAL_SOURCES)
+        ),
+        SubsetSpec(
+            "by_mobility_in_local", "By degree of mobility in local sources", 
+            feature_names=["genre"],
+            record_filter=restrict_to("source", ["ice"])
         ),
     ]
 

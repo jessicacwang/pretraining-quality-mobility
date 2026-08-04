@@ -5,10 +5,13 @@ from typing import Dict
 def run(stages: Dict, feature_names=None, min_count=1):
     feature_names = feature_names or list(FEATURE_POSITIONS)
 
-    for _, stage in stages.items():
+    for key, stage in stages.items():
         stage_name = stage["full_name"]
-        stage_total = stage["total"]["total"]
-        stage_included = stage["forwarded"]["total"]
+        if key == "0_source":
+            stage_total = stage["included"]["total"]
+        else:
+            stage_total = stage["total"]["total"]
+        stage_included = stage["included"]["total"]
         stage_retention = stage_included / stage_total if stage_total else float("nan")
         stage_lrp = -1 * math.log(stage_retention) if stage_retention else float("nan")
 

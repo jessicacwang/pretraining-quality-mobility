@@ -13,6 +13,9 @@ class Metadata:
     cmi: dict[str, float]
     token_count: dict[str, float]
     token_percentile: dict[str, float]
+    n_indig: dict[str, int]
+    n_foreign: dict[str, int]
+    ice_ids: set[str]
     cluster_5_ids: set[str]
     all_ids: set[str]
 
@@ -21,20 +24,30 @@ def load_metadata(metdata_source: str, metadata_enriched: str) -> Metadata:
     id_to_cmi = dict()
     id_to_token_percentile = dict()
     id_to_token_count = dict()
+    id_to_indig = dict()
+    id_to_foreign = dict()
     cluster_5_ids = set()
+    ice_ids = set()
     all_ids = set()
 
     # Stream metadata_source to store id -> cmi if it exists
     with gzip.open(metdata_source, "rt") as s_metadata:
         for s_meta_line in tqdm(s_metadata, desc="source metadata", unit="doc"):
             doc = json.loads(s_meta_line)
-            doc_id = doc.get("id")
+            doc_id: str = doc.get("id")
 
-            doc_cmi = doc.get("cmi", None)
-            if doc_cmi is None:
-                continue
-            id_to_cmi[doc_id] = float(doc_cmi)
-            cluster_5_ids.add(doc_id)
+            if doc_id.startswith("lince_"):
+                doc_cmi = doc.get("cmi", None)
+                if doc_cmi is None:
+                    continue
+                id_to_cmi[doc_id] = float(doc_cmi)
+                cluster_5_ids.add(doc_id)
+            elif doc_id.startswith("ice_"):
+                doc_indig = doc.get("indigenous")
+                doc_foreign = doc.get("foreign")
+                id_to_indig[doc_id] = int(doc_indig)
+                id_to_foreign[doc_id] = int(doc_foreign)
+                ice_ids.add(doc_id)
 
     with gzip.open(metadata_enriched, "rt") as e_metadata:
         for e_meta_line in tqdm(e_metadata, desc="enriched metadata", unit="doc"):
@@ -50,6 +63,9 @@ def load_metadata(metdata_source: str, metadata_enriched: str) -> Metadata:
         cmi=id_to_cmi,
         token_count=id_to_token_count,
         token_percentile=id_to_token_percentile,
+        n_foreign=id_to_foreign,
+        n_indig=id_to_indig,
+        ice_ids=ice_ids,
         cluster_5_ids=cluster_5_ids,
         all_ids=all_ids
     )
@@ -129,11 +145,18 @@ def main(args):
     # Cast keys as lists
     cmi_keys = list(leu_metadata.cluster_5_ids)
     all_keys = list(leu_metadata.all_ids)
+    ice_keys = list(leu_metadata.ice_ids)
 
-    # Cast lookups as arrays
+    # Cast metadata lookups as arrays
     cmi_arr = values(leu_metadata.cmi, cmi_keys)
+    indig_arr = values(leu_metadata.n_indig, ice_keys)
+    foreign_arr = values(leu_metadata.n_foreign, ice_keys)
+
+    # Cast exclusion lookups as arrays
+    pipeline_ice_arr = values(pipeline_results, ice_keys)
     pipeline_cluster_5_arr = values(pipeline_results, cmi_keys)
     langid_cluster_5_arr = values(langid_results, cmi_keys)
+    langid_ice_arr = values(langid_results, ice_keys)
     cluster_5_token_count_arr = values(leu_metadata.token_count, cmi_keys)
     cluster_5_token_percentile_arr = values(leu_metadata.token_percentile, cmi_keys)
 
@@ -142,6 +165,18 @@ def main(args):
     exclusion_arr = values(pipeline_results, all_keys)
 
     # Report correlation
+    report_correlation(
+        "# of indigenous words; pipeline result", indig_arr, pipeline_ice_arr
+    )
+    report_correlation(
+        "# of indigenous words; LangID result", indig_arr, langid_ice_arr
+    )
+    report_correlation(
+        "# of foreign words; pipeline result", foreign_arr, pipeline_ice_arr
+    )
+    report_correlation(
+        "# of foreign words; LangID result", foreign_arr, langid_ice_arr
+    )
     report_correlation(
         "CMI; pipeline result", cmi_arr, pipeline_cluster_5_arr
         )
