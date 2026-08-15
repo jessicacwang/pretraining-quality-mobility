@@ -8,6 +8,7 @@ from typing import Dict
 from dataclasses import dataclass
 from tqdm import tqdm
 
+
 @dataclass
 class Metadata:
     cmi: dict[str, float]
@@ -18,6 +19,7 @@ class Metadata:
     ice_ids: set[str]
     cluster_5_ids: set[str]
     all_ids: set[str]
+
 
 def load_metadata(metdata_source: str, metadata_enriched: str) -> Metadata:
     """All documents have token count values; only a subset have CMI scores."""
@@ -67,21 +69,23 @@ def load_metadata(metdata_source: str, metadata_enriched: str) -> Metadata:
         n_indig=id_to_indig,
         ice_ids=ice_ids,
         cluster_5_ids=cluster_5_ids,
-        all_ids=all_ids
+        all_ids=all_ids,
     )
 
+
 def load_audit_results(
-        audit_dir: str,
-        all_ids: set[str],
-        found_value: int,
-        target_ids: set[str] | None = None,
+    audit_dir: str,
+    all_ids: set[str],
+    found_value: int,
+    target_ids: set[str] | None = None,
 ) -> Dict[str, int]:
     """Map doc IDs to found/not-found values"""
     results = {}
     found = set()
     # Stream all JSONL files in the path glob
-    for shard in tqdm(Path(audit_dir).glob("*.jsonl.gz"),
-                      desc="audit shards", unit="shard"):
+    for shard in tqdm(
+        Path(audit_dir).glob("*.jsonl.gz"), desc="audit shards", unit="shard"
+    ):
         with gzip.open(shard, "rt") as f:
             for line in f:
                 doc_id = json.loads(line)["id"]
@@ -99,10 +103,12 @@ def load_audit_results(
     # Abstracted away the set of IDs to backfill (either cluster_5_ids or all ids)
     for doc_id in all_ids:
         results.setdefault(doc_id, missing_value)
-    return results 
+    return results
+
 
 def values(mapping, keys):
     return np.fromiter((mapping[k] for k in keys), dtype=float)
+
 
 def report_correlation(title: str, x, y):
     corr, p = pearsonr(x, y)
@@ -113,16 +119,22 @@ def report_correlation(title: str, x, y):
     print("=" * 70)
     return
 
+
 def report_average(title: str, scores, excluded_one_hot):
-    included_records = excluded_one_hot.astype(bool) # 1 marks 'invalid' entries
+    included_records = excluded_one_hot.astype(bool)  # 1 marks 'invalid' entries
     excluded_records = ~excluded_one_hot.astype(bool)
 
     excluded_scores = np.ma.array(scores, mask=excluded_records)
     included_scores = np.ma.array(scores, mask=included_records)
 
-    print(f"Average {title} scores when excluded: {excluded_scores.mean()}; {np.sum(excluded_one_hot)} records")
-    print(f"Average {title} scores when included: {included_scores.mean()}; {np.sum(1 - excluded_one_hot)} records")
+    print(
+        f"Average {title} scores when excluded: {excluded_scores.mean()}; {np.sum(excluded_one_hot)} records"
+    )
+    print(
+        f"Average {title} scores when included: {included_scores.mean()}; {np.sum(1 - excluded_one_hot)} records"
+    )
     return
+
 
 def main(args):
     # Load metadata
@@ -174,39 +186,37 @@ def main(args):
     report_correlation(
         "# of foreign words; pipeline result", foreign_arr, pipeline_ice_arr
     )
+    report_correlation("# of foreign words; LangID result", foreign_arr, langid_ice_arr)
+    report_correlation("CMI; pipeline result", cmi_arr, pipeline_cluster_5_arr)
+    report_correlation("CMI; LangID result", cmi_arr, langid_cluster_5_arr)
     report_correlation(
-        "# of foreign words; LangID result", foreign_arr, langid_ice_arr
+        "token count (Cluster 5); pipeline result",
+        cluster_5_token_count_arr,
+        pipeline_cluster_5_arr,
     )
     report_correlation(
-        "CMI; pipeline result", cmi_arr, pipeline_cluster_5_arr
-        )
+        "token percentile (Cluster 5); pipeline result",
+        cluster_5_token_percentile_arr,
+        pipeline_cluster_5_arr,
+    )
     report_correlation(
-        "CMI; LangID result", cmi_arr, langid_cluster_5_arr
-        )
+        "token count (Cluster 5); langID result",
+        cluster_5_token_count_arr,
+        langid_cluster_5_arr,
+    )
     report_correlation(
-        "token count (Cluster 5); pipeline result", 
-        cluster_5_token_count_arr, pipeline_cluster_5_arr
-        )
+        "token percentile (Cluster 5); langID result",
+        cluster_5_token_percentile_arr,
+        langid_cluster_5_arr,
+    )
     report_correlation(
-        "token percentile (Cluster 5); pipeline result", 
-        cluster_5_token_percentile_arr, pipeline_cluster_5_arr
-        )
+        "token count (all records); pipeline result", all_token_count_arr, exclusion_arr
+    )
     report_correlation(
-        "token count (Cluster 5); langID result", 
-        cluster_5_token_count_arr, langid_cluster_5_arr
-        )
-    report_correlation(
-        "token percentile (Cluster 5); langID result", 
-        cluster_5_token_percentile_arr, langid_cluster_5_arr
-        )
-    report_correlation(
-        "token count (all records); pipeline result", 
-        all_token_count_arr, exclusion_arr
-        )
-    report_correlation(
-        "token percentile (all records); pipeline result", 
-        all_token_count_percentile_arr, exclusion_arr
-        )
+        "token percentile (all records); pipeline result",
+        all_token_count_percentile_arr,
+        exclusion_arr,
+    )
 
     report_average("CMI", cmi_arr, langid_cluster_5_arr)
     return
