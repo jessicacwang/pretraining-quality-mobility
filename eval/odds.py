@@ -1,41 +1,35 @@
 import pandas as pd
 import numpy as np
 from scipy.stats import chi2_contingency
+from statsmodels.stats.proportion import proportion_confint
 
 # Load data
-df = pd.read_csv("output/eval/pmi/by_source_genre_cluster_english.csv")
+df = pd.read_csv("output/eval/pmi/by_source_genre_component_english.csv")
 df["features"] = df.feature_value.str.split(" / ")
 
 
-def map_nested_features(row):
-    row["cluster"] = row["features"][-1]
-    if row["features"][0] != "ice":
-        row["scale"] = "high"
-        if row["features"][0] == "lince":
-            row["mobility"] = "low"
-        else:
-            row["mobility"] = "high"
+def map_shared_features(row):
+    row["component"] = row["features"][-1]
+    if row["features"][0] == "glowbe":
+        row["mobility"] = "high"
     else:
-        row["scale"] = "low"
         if row["features"][1] == "spoken":
             row["mobility"] = "low"
         else:
-            row["mobility"] = "high"
+            row["mobility"] = "medium"
 
     return row
 
 
-df = df.apply(map_nested_features, axis=1)[
+df = df.apply(map_shared_features, axis=1)[
     [
-        "scale",
         "mobility",
-        "cluster",
+        "component",
         "joint_count",
         "marginal_count",
         "cumulative_retention",
     ]
 ]
-# df = df.loc[df.cluster != 5]
 
 
 # Compute filtered and not-filtered values
@@ -72,37 +66,44 @@ def cramers_v(table):
     v = np.sqrt(chi2 / (n * (min(r, k) - 1)))
     return v, chi2, p, dof
 
+def retention_ci(filtered, not_filtered, method="wilson", alpha=0.05):
+    n = filtered + not_filtered
+    p_hat = not_filtered / n 
+    ci_low, ci_high = proportion_confint(count=filtered, nobs=n, alpha=alpha, method=method)
+    return p_hat, ci_low, ci_high 
 
-def cluster_vs_rest(df, val):
-    cluster_1_rows = df[df["cluster"] == val]
-    rest_rows = df[df["cluster"] != val]
+def component_vs_rest(df, val):
+    component_rows = df[df["component"] == val]
+    rest_rows = df[df["component"] != val]
 
-    a = cluster_1_rows["filtered"].sum()
-    b = cluster_1_rows["not_filtered"].sum()
+    a = component_rows["filtered"].sum()
+    b = component_rows["not_filtered"].sum()
     c = rest_rows["filtered"].sum()
     d = rest_rows["not_filtered"].sum()
 
     or_val = (a * d) / (b * c)
     return {
-        f"cluster_{val}_filtered": a,
-        f"cluster_{val}_not_filtered": b,
+        f"component_{val}_filtered": a,
+        f"component_{val}_not_filtered": b,
         "rest_filtered": c,
         "rest_not_filtered": d,
         "odds_ratio": or_val,
     }
 
 
-for comp in df.cluster.unique():
-    result = cluster_vs_rest(df, comp)
+for comp in df.component.unique():
+    result = component_vs_rest(df, comp)
     print(f"=== Framework A: {comp} vs rest of world ===")
     for k, v in result.items():
         print(f"{k}: {v}")
+    p, lo, hi = retention_ci(result[f"component_{comp}_filtered"], result[f"component_{comp}_not_filtered"])
+    print(f"retention={p:.4f}  95% CI=[{lo:.4f}, {hi:.4f}]")
     print()
 
-cluster_agg = df.groupby("cluster")[["filtered", "not_filtered"]].sum()
-table_dt = cluster_agg.values.tolist()
+component_agg = df.groupby("component")[["filtered", "not_filtered"]].sum()
+table_dt = component_agg.values.tolist()
 print("Framework A contingency table:")
-print(cluster_agg)
+print(component_agg)
 v_dt, chi2_dt, p_dt, dof_dt = cramers_v(table_dt)
 print(
     f"Cramér's V (A): {v_dt:.4f}, chi2: {chi2_dt:.2f}, dof: {dof_dt}, p: {p_dt:.2e}\n"
@@ -118,6 +119,8 @@ def or_table(
 
     for _, row in df.iterrows():
         a, b = row["filtered"], row["not_filtered"]
+        p, lo, hi = retention_ci(a, b)
+
         c = total_filtered - a
         d = total_not_filtered - b
 
@@ -129,45 +132,36 @@ def or_table(
                 "level": level,
                 "n": a + b,
                 "odds_ratio": odds_ratio(a, b, c, d),
+                "retention_p_hat": p
             }
         )
     return results
 
-
-local_agg = df.groupby("scale")[["filtered", "not_filtered"]].sum().reset_index()
-
-results_b = or_table(local_agg, ["scale"])
-
 mobility_agg = df.groupby("mobility")[["filtered", "not_filtered"]].sum()
 
-results_b.extend(or_table(mobility_agg.reset_index(), ["mobility"]))
+results_b = (or_table(mobility_agg.reset_index(), ["mobility"]))
 
-# also the four scale x mobility cells directly, since that's where your interaction lives
-combo_agg = df.groupby(["scale", "mobility"])[["filtered", "not_filtered"]].sum()
-results_b.extend(or_table(combo_agg.reset_index(), ["scale", "mobility"]))
-
-
-framework_b_ors = pd.DataFrame(results_b)
-print("=== Framework B: scale, mobility, and scale x mobility vs rest ===")
+framework_b_ors = pd.DataFrame(results_b).sort_values(by="retention_p_hat")
+print("=== Framework B: mobility vs rest ===")
 print(framework_b_ors.to_string(index=False))
-table_lm = combo_agg.values.tolist()
+table_lm = mobility_agg.values.tolist()
 v_lm, chi2_lm, p_lm, dof_lm = cramers_v(table_lm)
 
 print("Framework B contingency table:")
-print(combo_agg)
+print(mobility_agg)
 print(
     f"Cramér's V (B): {v_lm:.4f}, chi2: {chi2_lm:.2f}, dof: {dof_lm}, p: {p_lm:.2e}\n"
 )
 print()
 
 # ---------- Combined odds ratios ----------
-joint_agg = df.groupby(["scale", "mobility", "cluster"])[
+joint_agg = df.groupby(["mobility", "component"])[
     ["filtered", "not_filtered"]
 ].sum()
 
-results_joint = or_table(joint_agg.reset_index(), ["scale", "mobility", "cluster"])
-joint_ors = pd.DataFrame(results_joint)
-print("=== Joint: scale, mobility, and scale x mobility vs rest ===")
+results_joint = or_table(joint_agg.reset_index(), ["mobility", "component"])
+joint_ors = pd.DataFrame(results_joint).sort_values(by="retention_p_hat")
+print("=== Joint: component x mobility vs rest ===")
 print(joint_ors.to_string(index=False))
 
 table_lm = joint_agg.values.tolist()
@@ -180,3 +174,4 @@ print()
 print("=== Cells with 0 or near-0 in either filtered/not_filtered (unreliable OR) ===")
 flagged = df[(df["filtered"] == 0) | (df["not_filtered"] == 0)]
 print(flagged.to_string(index=False))
+
