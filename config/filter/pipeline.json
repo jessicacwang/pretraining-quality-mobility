@@ -32,6 +32,7 @@
     "leu_data": "output/preprocess/leu_data.jsonl.gz",
     "toy_data": "output/preprocess/toy_leu_data.jsonl.gz",
     "algorithms": {
+        "0": "0_source",
         "1": "1_langid",
         "2": "2_gopher_repetition",
         "3": "3_gopher_quality",

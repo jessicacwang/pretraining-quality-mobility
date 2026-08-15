@@ -7,34 +7,41 @@ from pathlib import Path
 from eval.features import aggregate_by_features, RecordFilter
 from eval.subsets import build_subsets
 
+
 def compute_pmi_table(
-    excluded_records: Dict, 
-    included_records: Dict, 
+    excluded_records: Dict,
+    included_records: Dict,
     feature_names: List[str],
-    record_filter: RecordFilter=None
+    record_filter: RecordFilter = None,
 ) -> List[Dict]:
-    
+
     excluded_by_val = aggregate_by_features(
         excluded_records, feature_names, record_filter
-        )
+    )
     included_by_val = aggregate_by_features(
         included_records, feature_names, record_filter
-        )
+    )
 
     excluded_total = sum(excluded_by_val.values())
     included_total = sum(included_by_val.values())
     grand_total = excluded_total + included_total
 
+    if grand_total == 0:
+        return []
+
     p_excluded = excluded_total / grand_total
 
     all_values = set(excluded_by_val) | set(included_by_val)
-    
+
     rows = []
 
     for value in all_values:
         marginal_count = excluded_by_val.get(value, 0) + included_by_val.get(value, 0)
         joint_count = excluded_by_val.get(value, 0)
         p_value = marginal_count / grand_total
+
+        removal = joint_count / marginal_count
+        retention = 1 - removal
 
         if joint_count == 0:
             pmi = None
@@ -50,6 +57,8 @@ def compute_pmi_table(
                 "npmi": npmi,
                 "joint_count": joint_count,
                 "marginal_count": marginal_count,
+                "cumulative_removal": removal,
+                "cumulative_retention": retention,
             }
         )
 
@@ -58,7 +67,15 @@ def compute_pmi_table(
 
 
 def write_pmi_csv(rows: List[Dict], out_path: Path):
-    fieldnames = ["feature_value", "pmi", "npmi", "joint_count", "marginal_count"]
+    fieldnames = [
+        "feature_value",
+        "pmi",
+        "npmi",
+        "joint_count",
+        "marginal_count",
+        "cumulative_removal",
+        "cumulative_retention",
+    ]
     with out_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
@@ -94,7 +111,7 @@ def main(args):
             excluded_records,
             included_records,
             subset.feature_names,
-            subset.record_filter
+            subset.record_filter,
         )
 
         out_path = out_dir_path / f"{subset.key}.csv"
