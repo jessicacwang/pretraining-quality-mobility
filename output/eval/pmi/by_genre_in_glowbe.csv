@@ -1,3 +1,2 @@
-feature_value,pmi,npmi,joint_count,marginal_count
-general,0.005532280065771872,0.007056026938729694,1036960,1135817
-blog,-0.009721610667022413,-0.0060570773174816635,586991,649785
+feature_value,pmi,npmi,joint_count,marginal_count,cumulative_removal,cumulative_retention
+web,0.0,0.0,1623951,1785602,0.9094697474577201,0.09053025254227987
