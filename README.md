@@ -210,7 +210,7 @@ This script consists of 5 main steps:
             ├── after_4_c4_quality.txt
             └── after_5_fineweb_quality.txt
 ```
-## Audit 2: Data Mixing Algorithms
+<!-- ## \[WIP\] Audit 2: Data Mixing Algorithms
 This experiment is to audit the sensitivity of data mixing algorithms to localized English usage by measuring the change in cluster/domain token volumes when optimizing data mixtures for HellaSwag.
 
 To do so, the `mix` package is designed based on data mixing laws and other recommendations published for Olmix. It is responsible for the following:
@@ -231,15 +231,15 @@ There are 4 data mixing target "tasks" to be pursued jointly and independently:
 1. LEU validation set (next token prediction)
 2. HellaSwag
 3. Trans-EnV HellaSwag (New Zealand English as proxy for Cluster 2)
-4. Trans-EnV HellaSwag (Bahamian English as proxy for Cluster 4)
+4. Trans-EnV HellaSwag (Bahamian English as proxy for Cluster 4) -->
 
 <!-- TODO: compute BPB: https://medium.com/@dip.patel.ict/bits-per-byte-bpb-a-tokenizer-agnostic-way-to-measure-llms-25dfed3f41af -->
 
 ### \[WIP\] Outputs
-
-# Evaluation
+<!-- 
+# Evaluation -->
 <!-- Separate responsibilities: eval modules should compute metric results, jupyter notebooks will visualize only  -->
-Python modules within `eval` package will transform `manifest.json` results into `plotly` friendly shapes. Finally, `eval/filter_audit.ipynb` and `eval/mix_audit.ipynb` will visualize graphs and transform data into LaTeX tables as needed.
+<!-- Python modules within `eval` package will transform `manifest.json` results into `plotly` friendly shapes. Finally, `eval/filter_audit.ipynb` and `eval/mix_audit.ipynb` will visualize graphs and transform data into LaTeX tables as needed.
 
 | Audit | Metric | Visualization | Description |
 | --- | --- | --- | --- |
@@ -250,9 +250,9 @@ Python modules within `eval` package will transform `manifest.json` results into
 | 2 | KSD | table | Kolmogorov-Smirnov Distance |
 | 2 | SE | table | Shannon entropy 
 ## Audit 1
-### Pointwise Mutual Information
+### Pointwise Mutual Information -->
 <!-- TODO: specify relevant section of FilterManifest object -->
-PMI values can be computed from the relevant fields of 
+<!-- PMI values can be computed from the relevant fields of 
 `output/preprocess/manifest.json` and `output/filter/manifest.json`. 
 
 ```
@@ -260,10 +260,9 @@ PMI(x, y) = log_2 P(x, y) / (P(x) * P(y))
 ```
 where `y` is always the probability that a document is dropped, and `x` is the probability of a document feature (dialect cluster, source, or genre).
 
-They will be visualized with horizontal bar graphs with `plotly`. 
+They will be visualized with horizontal bar graphs with `plotly`.  -->
 
-### Retention Rates
-<!-- TODO: specify relevant section of FilterManifest object -->
+<!-- ### Retention Rates
 Retention rates can be computed from the relevant fields of 
 `output/preprocess/manifest.json` and `output/filter/manifest.json`. 
 ```
@@ -278,14 +277,14 @@ Analysis will be performed by calculating Pearson's coefficient `r` and the
 coefficient of determination `R_2` using `scipy`. The the rows of 
 `metadata.jsonl.gz` that correspond to Cluster 5 will be compared to the final 
 results of `output/filter/5-fineweb_quality_filter/5-data.jsonl.gz` (tentatively) 
-to produce pairs of (CMI, exclude/include) values. 
+to produce pairs of (CMI, exclude/include) values.  -->
 ## Audit 2
 <!-- TODO: leave hook for KS distance and Shannon entropy calculation -->
-### Kolgomorov-Smirnov Distance
-This measure will be computed by using the `scipy` KS test metric against the initial domain weights and the 4 resultant optimized domain weights. 
+<!-- ### Kolgomorov-Smirnov Distance
+This measure will be computed by using the `scipy` KS test metric against the initial domain weights and the 4 resultant optimized domain weights.  -->
 
-### Shannon entropy
-This measure will be computed using `scipy` against all 5 domain weights as a qualitative metric for the amount of change caused by data mixing. 
+<!-- ### Shannon entropy
+This measure will be computed using `scipy` against all 5 domain weights as a qualitative metric for the amount of change caused by data mixing.  -->
 
 <!-- TODO: leave hooks for non-essential eval metrics -->
-### Corpus Statistics (TBD)
+<!-- ### Corpus Statistics (TBD) -->
