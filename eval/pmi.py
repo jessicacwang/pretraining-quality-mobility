@@ -13,6 +13,7 @@ def compute_pmi_table(
     included_records: Dict,
     feature_names: List[str],
     record_filter: RecordFilter = None,
+    laplace_k: float = 0.5
 ) -> List[Dict]:
 
     excluded_by_val = aggregate_by_features(
@@ -22,8 +23,8 @@ def compute_pmi_table(
         included_records, feature_names, record_filter
     )
 
-    excluded_total = sum(excluded_by_val.values())
-    included_total = sum(included_by_val.values())
+    excluded_total = sum(excluded_by_val.values()) 
+    included_total = sum(included_by_val.values()) 
     grand_total = excluded_total + included_total
 
     if grand_total == 0:
@@ -31,31 +32,38 @@ def compute_pmi_table(
 
     p_excluded = excluded_total / grand_total
 
+    # Smooth the grand total: for each feature value in excluded, included, add laplace_k
     all_values = set(excluded_by_val) | set(included_by_val)
+    n_values = len(all_values)
+    smoothed_grand_total = grand_total + 2 * laplace_k * n_values
 
     rows = []
 
     for value in all_values:
-        marginal_count = excluded_by_val.get(value, 0) + included_by_val.get(value, 0)
-        joint_count = excluded_by_val.get(value, 0)
-        p_value = marginal_count / grand_total
+        raw_joint = excluded_by_val.get(value, 0)
+        raw_complement = included_by_val.get(value, 0)
+        marginal_count = raw_joint + raw_complement
 
-        removal = joint_count / marginal_count
+        # Smoothed cell counts
+        joint_smoothed = raw_joint + laplace_k
+        complement_smoothed = raw_complement + laplace_k 
+        marginal_smoothed = joint_smoothed + complement_smoothed
+
+        # Removal, retention, PMI all computed over smooth values
+        p_value = marginal_smoothed / smoothed_grand_total
+        p_joint = joint_smoothed / smoothed_grand_total
+
+        removal = joint_smoothed / marginal_smoothed
         retention = 1 - removal
 
-        if joint_count == 0:
-            pmi = None
-            npmi = None
-        else:
-            p_joint = joint_count / grand_total
-            pmi = math.log2(p_joint / (p_value * p_excluded))
-            npmi = pmi / math.log2(p_joint) * -1
+        pmi = math.log2(p_joint / (p_value * p_excluded))
+        npmi = pmi / (-math.log2(p_joint))
         rows.append(
             {
                 "feature_value": value,
                 "pmi": pmi,
                 "npmi": npmi,
-                "joint_count": joint_count,
+                "joint_count": raw_joint,
                 "marginal_count": marginal_count,
                 "cumulative_removal": removal,
                 "cumulative_retention": retention,
