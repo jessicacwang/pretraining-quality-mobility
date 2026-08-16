@@ -21,15 +21,7 @@ def map_shared_features(row):
     return row
 
 
-df = df.apply(map_shared_features, axis=1)[
-    [
-        "mobility",
-        "cluster",
-        "joint_count",
-        "marginal_count",
-        "cumulative_retention",
-    ]
-]
+df = df.apply(map_shared_features, axis=1)
 
 
 # Compute filtered and not-filtered values
@@ -132,20 +124,21 @@ def or_table(
                 "level": level,
                 "n": a + b,
                 "odds_ratio": odds_ratio(a, b, c, d),
-                "retention_p_hat": p
+                "retention_p_hat": p,
+                "pmi": row["pmi"]
             }
         )
     return results
 
-mobility_agg = df.groupby("mobility")[["filtered", "not_filtered"]].sum()
+mobility_agg = df.groupby("mobility")[["filtered", "not_filtered", "pmi"]].sum()
 
 results_b = (or_table(mobility_agg.reset_index(), ["mobility"]))
 
 framework_b_ors = pd.DataFrame(results_b).sort_values(by="retention_p_hat")
-print("=== Framework B: mobility vs rest ===")
+print("=== Framework B: mobility vs rest (IGNORE PMI) ===")
 print(framework_b_ors.to_string(index=False))
 table_lm = mobility_agg.values.tolist()
-v_lm, chi2_lm, p_lm, dof_lm = cramers_v(table_lm)
+# v_lm, chi2_lm, p_lm, dof_lm = cramers_v(table_lm)
 
 print("Framework B contingency table:")
 print(mobility_agg)
@@ -156,7 +149,7 @@ print()
 
 # ---------- Combined odds ratios ----------
 joint_agg = df.groupby(["mobility", "cluster"])[
-    ["filtered", "not_filtered"]
+    ["filtered", "not_filtered", "pmi"]
 ].sum()
 
 results_joint = or_table(joint_agg.reset_index(), ["mobility", "cluster"])
@@ -165,7 +158,7 @@ print("=== Joint: cluster x mobility vs rest ===")
 print(joint_ors.to_string(index=False))
 
 table_lm = joint_agg.values.tolist()
-v_lm, chi2_lm, p_lm, dof_lm = cramers_v(table_lm)
+# v_lm, chi2_lm, p_lm, dof_lm = cramers_v(table_lm)
 # print(
 #     f"Cramér's V (Joint): {v_lm:.4f}, chi2: {chi2_lm:.2f}, dof: {dof_lm}, p: {p_lm:.2e}\n"
 # )
