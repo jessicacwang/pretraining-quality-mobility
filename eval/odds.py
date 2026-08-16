@@ -4,12 +4,12 @@ from scipy.stats import chi2_contingency
 from statsmodels.stats.proportion import proportion_confint
 
 # Load data
-df = pd.read_csv("output/eval/pmi/by_source_genre_component_english.csv")
+df = pd.read_csv("output/eval/pmi/by_source_genre_cluster_english.csv")
 df["features"] = df.feature_value.str.split(" / ")
 
 
 def map_shared_features(row):
-    row["component"] = row["features"][-1]
+    row["cluster"] = row["features"][-1]
     if row["features"][0] == "glowbe":
         row["mobility"] = "high"
     else:
@@ -24,7 +24,7 @@ def map_shared_features(row):
 df = df.apply(map_shared_features, axis=1)[
     [
         "mobility",
-        "component",
+        "cluster",
         "joint_count",
         "marginal_count",
         "cumulative_retention",
@@ -69,45 +69,45 @@ def cramers_v(table):
 def retention_ci(filtered, not_filtered, method="wilson", alpha=0.05):
     n = filtered + not_filtered
     p_hat = not_filtered / n 
-    ci_low, ci_high = proportion_confint(count=filtered, nobs=n, alpha=alpha, method=method)
+    ci_low, ci_high = proportion_confint(count=not_filtered, nobs=n, alpha=alpha, method=method)
     return p_hat, ci_low, ci_high 
 
-def component_vs_rest(df, val):
-    component_rows = df[df["component"] == val]
-    rest_rows = df[df["component"] != val]
+def cluster_vs_rest(df, val):
+    cluster_rows = df[df["cluster"] == val]
+    rest_rows = df[df["cluster"] != val]
 
-    a = component_rows["filtered"].sum()
-    b = component_rows["not_filtered"].sum()
+    a = cluster_rows["filtered"].sum()
+    b = cluster_rows["not_filtered"].sum()
     c = rest_rows["filtered"].sum()
     d = rest_rows["not_filtered"].sum()
 
     or_val = (a * d) / (b * c)
     return {
-        f"component_{val}_filtered": a,
-        f"component_{val}_not_filtered": b,
+        f"cluster_{val}_filtered": a,
+        f"cluster_{val}_not_filtered": b,
         "rest_filtered": c,
         "rest_not_filtered": d,
         "odds_ratio": or_val,
     }
 
 
-for comp in df.component.unique():
-    result = component_vs_rest(df, comp)
+for comp in df.cluster.unique():
+    result = cluster_vs_rest(df, comp)
     print(f"=== Framework A: {comp} vs rest of world ===")
     for k, v in result.items():
         print(f"{k}: {v}")
-    p, lo, hi = retention_ci(result[f"component_{comp}_filtered"], result[f"component_{comp}_not_filtered"])
+    p, lo, hi = retention_ci(result[f"cluster_{comp}_filtered"], result[f"cluster_{comp}_not_filtered"])
     print(f"retention={p:.4f}  95% CI=[{lo:.4f}, {hi:.4f}]")
     print()
 
-component_agg = df.groupby("component")[["filtered", "not_filtered"]].sum()
-table_dt = component_agg.values.tolist()
+cluster_agg = df.groupby("cluster")[["filtered", "not_filtered"]].sum()
+table_dt = cluster_agg.values.tolist()
 print("Framework A contingency table:")
-print(component_agg)
+print(cluster_agg)
 v_dt, chi2_dt, p_dt, dof_dt = cramers_v(table_dt)
-print(
-    f"Cramér's V (A): {v_dt:.4f}, chi2: {chi2_dt:.2f}, dof: {dof_dt}, p: {p_dt:.2e}\n"
-)
+# print(
+#     f"Cramér's V (A): {v_dt:.4f}, chi2: {chi2_dt:.2f}, dof: {dof_dt}, p: {p_dt:.2e}\n"
+# )
 
 
 # ---------- FRAMEWORK B: source vs rest, mobility vs rest ----------
@@ -149,26 +149,26 @@ v_lm, chi2_lm, p_lm, dof_lm = cramers_v(table_lm)
 
 print("Framework B contingency table:")
 print(mobility_agg)
-print(
-    f"Cramér's V (B): {v_lm:.4f}, chi2: {chi2_lm:.2f}, dof: {dof_lm}, p: {p_lm:.2e}\n"
-)
+# print(
+#     f"Cramér's V (B): {v_lm:.4f}, chi2: {chi2_lm:.2f}, dof: {dof_lm}, p: {p_lm:.2e}\n"
+# )
 print()
 
 # ---------- Combined odds ratios ----------
-joint_agg = df.groupby(["mobility", "component"])[
+joint_agg = df.groupby(["mobility", "cluster"])[
     ["filtered", "not_filtered"]
 ].sum()
 
-results_joint = or_table(joint_agg.reset_index(), ["mobility", "component"])
+results_joint = or_table(joint_agg.reset_index(), ["mobility", "cluster"])
 joint_ors = pd.DataFrame(results_joint).sort_values(by="retention_p_hat")
-print("=== Joint: component x mobility vs rest ===")
+print("=== Joint: cluster x mobility vs rest ===")
 print(joint_ors.to_string(index=False))
 
 table_lm = joint_agg.values.tolist()
 v_lm, chi2_lm, p_lm, dof_lm = cramers_v(table_lm)
-print(
-    f"Cramér's V (Joint): {v_lm:.4f}, chi2: {chi2_lm:.2f}, dof: {dof_lm}, p: {p_lm:.2e}\n"
-)
+# print(
+#     f"Cramér's V (Joint): {v_lm:.4f}, chi2: {chi2_lm:.2f}, dof: {dof_lm}, p: {p_lm:.2e}\n"
+# )
 print()
 # ---------- Flag separation / near-zero-cell issues ----------
 print("=== Cells with 0 or near-0 in either filtered/not_filtered (unreliable OR) ===")

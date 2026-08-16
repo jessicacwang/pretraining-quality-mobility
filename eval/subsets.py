@@ -94,6 +94,12 @@ def build_subsets() -> List[SubsetSpec]:
             feature_names=["source", "genre"],
         ),
         SubsetSpec(
+            "by_source_genre_english",
+            "By source and genre",
+            feature_names=["source", "genre"],
+            record_filter=restrict_to("source", SOURCES_WITH_GENRE),
+        ),
+        SubsetSpec(
             "by_cluster_component",
             "By cluster and component",
             feature_names=["cluster", "component"],
