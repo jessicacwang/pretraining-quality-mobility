@@ -46,7 +46,7 @@ class SubsetSpec:
 def build_subsets() -> List[SubsetSpec]:
     subset: List[SubsetSpec] = [
         SubsetSpec("overall", "Overall volume", feature_names=[]),
-        SubsetSpec("by_cluster", "By cluster", feature_names=["cluster"]),
+        SubsetSpec("by_cluster", "By cluster", feature_names=["cluster"], record_filter=restrict_to("source", SOURCES_WITH_GENRE)),
         SubsetSpec("by_source", "By source", feature_names=["source"]),
         SubsetSpec(
             "by_cluster_source",
