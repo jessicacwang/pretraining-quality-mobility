@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=enrich_job
 #SBATCH --account=stf
-#SBATCH --partition=compute-hugemem
+#SBATCH --partition=ckpt-all
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem=12G
