@@ -1,5 +1,6 @@
-import numpy as np 
+import numpy as np
 from typing import List
+
 
 def compute_lookups(all_token_counts: List[int]):
     # sort all_token_counts
@@ -9,7 +10,7 @@ def compute_lookups(all_token_counts: List[int]):
 
     # compute percentile lookups
     # Rightmost insertion position
-    ranks = np.searchsorted(sorted_token_counts, unique_token_counts, side='right')
+    ranks = np.searchsorted(sorted_token_counts, unique_token_counts, side="right")
 
     # Compute percentiles
     percentiles = (ranks / n) * 100

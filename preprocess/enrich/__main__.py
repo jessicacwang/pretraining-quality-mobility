@@ -59,10 +59,7 @@ def main(args):
 
         # === Update manifest
         manifest.set_enrich_stats(
-            stats=stats,
-            errors=dict(error_counts),
-            truncated=truncated,
-            config=config
+            stats=stats, errors=dict(error_counts), truncated=truncated, config=config
         )
         manifest.end_step("enrich")
     except Exception as e:

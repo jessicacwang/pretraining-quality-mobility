@@ -104,7 +104,7 @@ def build(args, config: dict):
                 "token_count": token_count,
                 "token_bucket": token_bucket,
                 "word_count": whitespace_count,
-                "char_count": char_count
+                "char_count": char_count,
             }
             tmp_gz.write(json.dumps(enriched_record) + "\n")
 
@@ -113,30 +113,33 @@ def build(args, config: dict):
             all_token_counts.append(token_count)
 
             # === Distribution stats
-            build_stats(stats=stats, 
-                        token_count=token_count,
-                        doc_corpus=doc_corpus,
-                        doc_cluster_id=doc_cluster_id,
-                        doc_mobility_v1=doc_mobility_v1,
-                        doc_mobility_v2=doc_mobility_v2,
-                        doc_component=doc_component,
-                        doc_genre=doc_genre
-                        )
+            build_stats(
+                stats=stats,
+                token_count=token_count,
+                doc_corpus=doc_corpus,
+                doc_cluster_id=doc_cluster_id,
+                doc_mobility_v1=doc_mobility_v1,
+                doc_mobility_v2=doc_mobility_v2,
+                doc_component=doc_component,
+                doc_genre=doc_genre,
+            )
     return all_token_counts, stats, error_counts, truncated
+
 
 def increment(stat_dict: dict, k: str, count: int = 1):
     stat_dict[k] += count
     return
 
+
 def build_stats(
-        stats:dict,
-        token_count: int,
-        doc_corpus: str,
-        doc_cluster_id: str, 
-        doc_mobility_v1: str,
-        doc_mobility_v2: str,
-        doc_component: str,
-        doc_genre: str
+    stats: dict,
+    token_count: int,
+    doc_corpus: str,
+    doc_cluster_id: str,
+    doc_mobility_v1: str,
+    doc_mobility_v2: str,
+    doc_component: str,
+    doc_genre: str,
 ):
     # Initialize nested dict key pointers
     # === Distribution
