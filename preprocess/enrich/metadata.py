@@ -4,6 +4,7 @@ from collections import defaultdict
 from tqdm import tqdm
 
 import preprocess.enrich.features.clustering as clustering
+import preprocess.enrich.features.mobility as mobility
 import preprocess.enrich.features.buckets as buckets
 import preprocess.enrich.features.tokens as tokens
 
@@ -13,7 +14,7 @@ def build(args, config: dict):
     all_token_counts = []
 
     # initialize stats
-    stats = {}
+    stats = {"distribution": {}, "mobility_v1": {}, "mobility_v2": {}}
 
     # intialize global stats separately
     error_counts = defaultdict(int)
@@ -49,25 +50,44 @@ def build(args, config: dict):
             try:
                 # Assign cluster ID using config/preprocess/enrich.json
                 doc_cluster_id, doc_corpus, doc_component = clustering.get_id(
-                    cluster_config=config,
+                    cluster_config=config["distribution"],
                     leu_doc=leu_doc,
-                    metadata_source=source_metadata,
+                    source_metadata=source_metadata,
                 )
             except Exception as e:
                 error_counts["clustering_failed"] += 1
+                continue
+
+            # ==== Level assignment
+            try:
+                # Assign mobility level using config/preprocess/enrich.json
+                doc_mobility_v1, doc_mobility_v2, doc_genre = mobility.get_level(
+                    level_config=config["mobility"],
+                    leu_doc=leu_doc,
+                    source_metadata=source_metadata,
+                )
+            except Exception as e:
+                error_counts["mobility_failed"] += 1
                 continue
 
             # ==== Tokens
             # tokenize
             try:
                 # Get token count
-                token_count, doc_truncated = tokens.get_count(leu_doc.get("text"))
+                token_count, doc_truncated = tokens.get_dolma_count(leu_doc.get("text"))
                 if doc_truncated:
                     truncated += 1
             except Exception as e:
-                error_counts["tokenization_failed"] += 1
+                error_counts["dolma_tokenization_failed"] += 1
                 continue
 
+            try:
+                # Get whitespace and char count
+                whitespace_count = tokens.get_whitespace_count(leu_doc.get("text"))
+                char_count = tokens.get_char_count(leu_doc.get("text"))
+            except Exception as e:
+                error_counts["text_tokenization_failed"] += 1
+                continue
             # assign length bucket
             try:
                 token_bucket = buckets.get_bucket(token_count)
@@ -79,8 +99,12 @@ def build(args, config: dict):
             enriched_record = {
                 "id": leu_doc.get("id"),
                 "cluster_id": doc_cluster_id,
+                "mobility_level_1": doc_mobility_v1,
+                "mobility_level_2": doc_mobility_v2,
                 "token_count": token_count,
                 "token_bucket": token_bucket,
+                "word_count": whitespace_count,
+                "char_count": char_count
             }
             tmp_gz.write(json.dumps(enriched_record) + "\n")
 
@@ -88,27 +112,90 @@ def build(args, config: dict):
             # record token count and accumulate
             all_token_counts.append(token_count)
 
-            cluster_stats = stats.setdefault(
-                doc_cluster_id, {"documents_written": 0, "tokens": 0, "sources": {}}
-            )
-
-            cluster_stats["documents_written"] += 1
-            cluster_stats["tokens"] += token_count
-
-            source_stats = cluster_stats["sources"].setdefault(
-                doc_corpus, {"documents_written": 0, "tokens": 0, "components": {}}
-            )
-
-            source_stats["documents_written"] += 1
-            source_stats["tokens"] += token_count
-
-            component_stats = source_stats["components"].setdefault(
-                doc_component, {"documents_written": 0, "tokens": 0}
-            )
-            component_stats["documents_written"] += 1
-            component_stats["tokens"] += token_count
-
-            # Log to console
-            if line_num % 10000 == 0:
-                print(f"Processed {line_num} documents")
+            # === Distribution stats
+            build_stats(stats=stats, 
+                        token_count=token_count,
+                        doc_corpus=doc_corpus,
+                        doc_cluster_id=doc_cluster_id,
+                        doc_mobility_v1=doc_mobility_v1,
+                        doc_mobility_v2=doc_mobility_v2,
+                        doc_component=doc_component,
+                        doc_genre=doc_genre
+                        )
     return all_token_counts, stats, error_counts, truncated
+
+def increment(stat_dict: dict, k: str, count: int = 1):
+    stat_dict[k] += count
+    return
+
+def build_stats(
+        stats:dict,
+        token_count: int,
+        doc_corpus: str,
+        doc_cluster_id: str, 
+        doc_mobility_v1: str,
+        doc_mobility_v2: str,
+        doc_component: str,
+        doc_genre: str
+):
+    # Initialize nested dict key pointers
+    # === Distribution
+    cluster_stats = stats["distribution"].setdefault(
+        doc_cluster_id, {"documents_written": 0, "tokens": 0, "sources": {}}
+    )
+    cluster_source_stats = cluster_stats["sources"].setdefault(
+        doc_corpus, {"documents_written": 0, "tokens": 0, "components": {}}
+    )
+    component_stats = cluster_source_stats["components"].setdefault(
+        doc_component, {"documents_written": 0, "tokens": 0}
+    )
+
+    # === Mobility v1
+    level_v1_stats = stats["mobility_v1"].setdefault(
+        doc_mobility_v1, {"documents_written": 0, "tokens": 0, "sources": {}}
+    )
+    level_v1_source_stats = level_v1_stats["sources"].setdefault(
+        doc_corpus, {"documents_written": 0, "tokens": 0, "genres": {}}
+    )
+    genre_v1_stats = level_v1_source_stats["genres"].setdefault(
+        doc_genre, {"documents_written": 0, "tokens": 0}
+    )
+
+    # === Mobility v2
+    level_v2_stats = stats["mobility_v2"].setdefault(
+        doc_mobility_v2, {"documents_written": 0, "tokens": 0, "sources": {}}
+    )
+    level_v2_source_stats = level_v2_stats["sources"].setdefault(
+        doc_corpus, {"documents_written": 0, "tokens": 0, "genres": {}}
+    )
+    genre_v2_stats = level_v2_source_stats["genres"].setdefault(
+        doc_genre, {"documents_written": 0, "tokens": 0}
+    )
+
+    # Increment document pointers
+    increment(cluster_stats, "documents_written")
+    increment(cluster_source_stats, "documents_written")
+    increment(component_stats, "documents_written")
+
+    increment(level_v1_stats, "documents_written")
+    increment(level_v1_source_stats, "documents_written")
+    increment(genre_v1_stats, "documents_written")
+
+    increment(level_v2_stats, "documents_written")
+    increment(level_v2_source_stats, "documents_written")
+    increment(genre_v2_stats, "documents_written")
+
+    # Increment token pointers
+    increment(cluster_stats, "tokens", token_count)
+    increment(cluster_source_stats, "tokens", token_count)
+    increment(component_stats, "tokens", token_count)
+
+    increment(level_v1_stats, "tokens", token_count)
+    increment(level_v1_source_stats, "tokens", token_count)
+    increment(genre_v1_stats, "tokens", token_count)
+
+    increment(level_v2_stats, "tokens", token_count)
+    increment(level_v2_source_stats, "tokens", token_count)
+    increment(genre_v2_stats, "tokens", token_count)
+
+    return
