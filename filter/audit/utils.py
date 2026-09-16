@@ -45,11 +45,11 @@ def metadata_lookup(config: Dict[str, Any]) -> Tuple[Dict, Dict]:
 def counter_to_stats(meta_counter: Counter, stat_type: str):
     result = {"total": sum(meta_counter.values()), "records": {}}
 
-    for (cluster, source, component, genre), count in tqdm(
+    for (cluster, source, component, genre, level1, level2), count in tqdm(
         meta_counter.items(), desc=f"{stat_type} counter to stats"
     ):
         genre_val = genre if genre is not None else "null"
-        key = "|".join(str(x) for x in (cluster, source, component, genre_val))
+        key = "|".join(str(x) for x in (cluster, source, component, genre_val, level1, level2))
         result["records"][key] = result["records"].get(key, 0) + count
 
     return result
