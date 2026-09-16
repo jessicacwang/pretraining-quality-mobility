@@ -1,6 +1,13 @@
 from typing import Callable, Dict, Iterable, Optional, Sequence
 
-FEATURE_POSITIONS = {"cluster": 0, "source": 1, "component": 2, "genre": 3}
+FEATURE_POSITIONS = {
+    "cluster": 0, 
+    "source": 1, 
+    "component": 2, 
+    "genre": 3,
+    "level_v1": 4,
+    "level_v2": 5
+    }
 
 # NORMALIZE_FEATURES = {"component", "genre"}
 

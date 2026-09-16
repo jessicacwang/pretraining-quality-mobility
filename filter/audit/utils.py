@@ -17,11 +17,14 @@ def metadata_lookup(config: Dict[str, Any]) -> Tuple[Dict, Dict]:
             doc_id = doc.get("id")
             doc_cluster = doc.get("cluster_id")
             doc_source, doc_component = doc_id.split(":")[0].split("_", maxsplit=1)
-
+            doc_level_1 = doc.get("mobility_level_1")
+            doc_level_2 = doc.get("mobility_level_2")
             id_to_enriched_metadata[doc_id] = (
                 doc_cluster,
                 doc_source,
                 doc_component,
+                doc_level_1,
+                doc_level_2
             )
 
     # Stream metadata_source to store id -> genre if it exists
