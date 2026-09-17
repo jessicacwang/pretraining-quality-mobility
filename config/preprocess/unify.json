@@ -146,8 +146,7 @@
                     "<sic( corr=[\"'].*[\"'])?>",
                     "<slang/>",
                     "<space[s\\^]*>",
-                    "<unintelligible>",
-                    "<o/>"
+                    "<unintelligible>"
                 ]
             }
         }
