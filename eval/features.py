@@ -4,9 +4,9 @@ FEATURE_POSITIONS = {
     "cluster": 0, 
     "source": 1, 
     "component": 2, 
-    "genre": 3,
-    "level_v1": 4,
-    "level_v2": 5
+    "level_v1": 3,
+    "level_v2": 4,
+    "genre": 5
     }
 
 # NORMALIZE_FEATURES = {"component", "genre"}

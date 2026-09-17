@@ -1,0 +1,108 @@
+import pandas as pd
+
+df = pd.read_csv(
+    "fineweb_output.csv", 
+    # doc_id,language,language_score,filter_reason,result,stage_excluded,source,genre,component,cluster_id,mobility_v1,mobility_v2
+
+    dtype={
+        "doc_id": "string",
+        "language": "string",
+        "language_score": "Float64",
+        "filter_reason": "string",
+        "result": "string",
+        "stage_excluded": "Int64",
+        "source": "string",
+        "genre": "string",
+        "component": "string",
+        "cluster_id": "string",
+        "mobility_v1": "string",
+        "mobility_v2": "string"
+    }
+    )
+for m in df.mobility_v2.unique().tolist():
+    print(f"Mobility level: {m}")
+    mdf = df.loc[df.mobility_v2 == m]
+    for c in mdf.cluster_id.unique().tolist():
+        subset = mdf.loc[mdf.cluster_id == c]
+        retained = subset.filter_reason.isna().sum()
+        print(f"{c} RR={retained / len(subset):.2%}, total={len(subset)}")
+
+print("How many documents were excluded at each stage?")
+print(df.stage_excluded.value_counts(dropna=False).sort_index()) 
+print()
+
+print("How many documents were excluded for each possible reason?")
+print(df.filter_reason.value_counts())
+print()
+
+top_n_reasons = df.filter_reason.value_counts().head(5).index.tolist()
+features = [
+    # "source",
+    "cluster_id",
+    # "mobility_v1",
+    "mobility_v2",
+    # "component",
+    # "genre",
+]
+
+def check_filter_reason(reason):
+    df2 = df.loc[df.filter_reason == reason]
+    print(f"For documents excluded due to {reason}, how many came from each corpus?")
+    print(df2.source.value_counts())
+    print("-"*30)
+    print(f"For documents excluded due to {reason}, what genres were involved?")
+    print(df2.genre.value_counts())
+    print("-"*30)
+    print(f"For documents excluded due to {reason}, what components were involved?")
+    print(df2.component.value_counts())
+    return
+
+def check_feature(feature, reason):
+    print(f"Filter results aggregated by {feature} filtered because {reason}:")
+    rdf = df.loc[df.filter_reason == reason]
+    print("-"*30)
+    print(rdf.value_counts([feature, "result"], dropna=False).sort_index())
+
+    fvals = df[feature].unique().tolist()
+    for v in fvals:
+        print("-"*30)
+        vdf = df.loc[df[feature] == v]
+        v_total = len(vdf)
+        if v_total:
+            v_retained = len(vdf.loc[vdf.result == "survive"])
+            print(f"RR={v_retained / v_total:.2%} of rows where {feature}={v}")
+        else:
+            print(f"RR=0 where {feature}={v}")
+
+        v_exclude = vdf.loc[vdf.result == "exclude"]
+        if len(v_exclude):
+            v_reason = v_exclude.loc[v_exclude.filter_reason == reason]
+            print(f"{len(v_reason)/len(v_exclude):.2%} of excluded docs due to {reason}")
+        print()
+    return
+
+def drop_rate(df, feature, reason):
+    fvals = df[feature].unique().tolist()
+    for v in fvals:
+        print("-"*30)
+        vdf = df.loc[df[feature] == v]
+        v_total = len(vdf)
+        rdf = vdf.loc[vdf.filter_reason == reason]
+        r_total = len(rdf)
+        if v_total:
+            print(f"DR={r_total / v_total:.2%} of records where {feature}={v}, total={v_total}")
+        else:
+            print(f"DR=0 where {feature}={v}")
+    print()
+    return
+
+
+d_total = len(df)
+for r in top_n_reasons:
+    print("="*30)
+    print(f"comparing records dropped because {r} vs. all other outcomes".upper())
+    print("-"*30)
+    print(f"Global DR for {r}: {len(df.loc[df.filter_reason == r]) / d_total:.2%}")
+    for f in features:
+        drop_rate(df, f, r)
+    print()

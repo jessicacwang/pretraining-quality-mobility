@@ -48,6 +48,9 @@ def build_subsets() -> List[SubsetSpec]:
         SubsetSpec("overall", "Overall volume", feature_names=[]),
         SubsetSpec("by_cluster", "By cluster", feature_names=["cluster"], record_filter=restrict_to("source", SOURCES_WITH_GENRE)),
         SubsetSpec("by_source", "By source", feature_names=["source"]),
+        SubsetSpec("by_mobility_v1", "By mobility (coarse)", feature_names=["level_v1"]),
+        SubsetSpec("by_mobility_v2", "By mobility (fine)", feature_names=["level_v2"]),
+        SubsetSpec("by_mobility_v2_cluster", "By mobility (fine) and cluster", feature_names=["level_v2", "cluster"]),
         SubsetSpec(
             "by_cluster_source",
             "By cluster and source",

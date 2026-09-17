@@ -4,24 +4,8 @@ from scipy.stats import chi2_contingency
 from statsmodels.stats.proportion import proportion_confint
 
 # Load data
-df = pd.read_csv("output/eval/pmi/by_source_genre_cluster_english.csv")
-df["features"] = df.feature_value.str.split(" / ")
-
-
-def map_shared_features(row):
-    row["cluster"] = row["features"][-1]
-    if row["features"][0] == "glowbe":
-        row["mobility"] = "high"
-    else:
-        if row["features"][1] == "spoken":
-            row["mobility"] = "low"
-        else:
-            row["mobility"] = "medium"
-
-    return row
-
-
-df = df.apply(map_shared_features, axis=1)
+df = pd.read_csv("output/eval/pmi/by_mobility_v2_cluster.csv")
+df[["mobility", "cluster"]] = df.feature_value.str.split(" / ", n=1, expand=True)
 
 
 # Compute filtered and not-filtered values
