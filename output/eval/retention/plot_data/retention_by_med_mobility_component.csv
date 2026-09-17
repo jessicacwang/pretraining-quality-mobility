@@ -1,0 +1,7 @@
+value,stage,stage_name,included,total,retention,lrp,cumulative_lrp
+total,1,📖 - READER: 🐿 Jsonl,0,0,0.0,nan,0.0
+total,2,🔻 - FILTER: 🌍 Language ID,0,0,0.0,nan,0.0
+total,3,🔻 - FILTER: 👯 Gopher Repetition,0,0,0.0,nan,0.0
+total,4,🔻 - FILTER: 🥇 Gopher Quality,0,0,0.0,nan,0.0
+total,5,🔻 - FILTER: ⛰ C4 Quality,0,0,0.0,nan,0.0
+total,6,🔻 - FILTER: 🍷 FineWeb Quality,0,0,0.0,nan,0.0
