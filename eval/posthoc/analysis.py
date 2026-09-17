@@ -26,6 +26,10 @@ for m in df.mobility_v2.unique().tolist():
         subset = mdf.loc[mdf.cluster_id == c]
         retained = subset.filter_reason.isna().sum()
         print(f"{c} RR={retained / len(subset):.2%}, total={len(subset)}")
+    for c in mdf.component.unique().tolist():
+        subset = mdf.loc[mdf.component == c]
+        retained = subset.filter_reason.isna().sum()
+        print(f"{c} RR={retained / len(subset):.2%}, total={len(subset)}")
 
 print("How many documents were excluded at each stage?")
 print(df.stage_excluded.value_counts(dropna=False).sort_index()) 
@@ -81,28 +85,44 @@ def check_feature(feature, reason):
         print()
     return
 
-def drop_rate(df, feature, reason):
+def joint_prob1(df, feature, reason):
+    # GOAL: P(feature value | reason)
+    rdf = df.loc[df.filter_reason == reason]
+    r_total = len(rdf)
+
+    fvals = rdf[feature].unique().tolist()
+    for v in fvals:
+        print("-"*30)
+        vdf = rdf.loc[rdf[feature] == v]
+        v_total = len(vdf)
+        p_v = v_total / r_total
+        print(f"P({feature}:{v} | {reason})={p_v:.2%}, P({feature}:{v})={v_total / d_total:.2%}")
+    print()
+    return
+
+def joint_prob2(df, feature, reason):
+    # GOAL: P(reason | feature value)
+
     fvals = df[feature].unique().tolist()
     for v in fvals:
         print("-"*30)
         vdf = df.loc[df[feature] == v]
         v_total = len(vdf)
+
         rdf = vdf.loc[vdf.filter_reason == reason]
         r_total = len(rdf)
-        if v_total:
-            print(f"DR={r_total / v_total:.2%} of records where {feature}={v}, total={v_total}")
-        else:
-            print(f"DR=0 where {feature}={v}")
+        p_v = r_total / v_total
+        print(f"P({reason} | {feature}:{v})={p_v:.2%}")
     print()
     return
-
 
 d_total = len(df)
 for r in top_n_reasons:
     print("="*30)
     print(f"comparing records dropped because {r} vs. all other outcomes".upper())
     print("-"*30)
-    print(f"Global DR for {r}: {len(df.loc[df.filter_reason == r]) / d_total:.2%}")
+    print(f"P({r}): {len(df.loc[df.filter_reason == r]) / d_total:.2%}")
     for f in features:
-        drop_rate(df, f, r)
+        joint_prob1(df, f, r)
+        joint_prob2(df, f, r)
     print()
