@@ -55,7 +55,7 @@ def build_subsets() -> List[SubsetSpec]:
             "by_med_mobility_component", 
             "Medium mobility and component", 
             feature_names=["level_v2", "component"],
-            record_filter=restrict_to("level_v2", "medium")
+            record_filter=restrict_to("level_v2", ["medium"])
             ),
         SubsetSpec(
             "by_cluster_source",
