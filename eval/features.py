@@ -17,14 +17,17 @@ def normalize_value(feature_name: str, value: str) -> str:
         return value.split("-")[0]
     elif feature_name == "component" and "_" in value:
         return value.split("_")[1].replace("eng", "")
-    if feature_name == "genre" and value.startswith("W"):
-        return "written"
-    elif feature_name == "genre" and value.startswith("S"):
-        return "spoken"
-    elif feature_name == "genre" and (value == "blog" or value == "general"):
-        return "web"
-    return value
 
+    if feature_name == "genre":
+        if value.startswith("W"):
+            return "written"
+        elif value.startswith("S"):
+            return "spoken"
+        elif (value == "blog" or value == "general"):
+            return "web"
+        else:
+            return "codeswitch"
+    return value
 
 RecordFilter = Callable[[Sequence[str]], bool]
 
