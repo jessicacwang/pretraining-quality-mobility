@@ -190,11 +190,11 @@
     "enrich": {
       "_notes": "",
       "args": {
-        "config_path": "/tmp/jcmw614_40203345/config/enrich.json",
-        "leu_data": "/tmp/jcmw614_40203345/data/leu_data.jsonl.gz",
-        "metadata_source": "/tmp/jcmw614_40203345/data/metadata_source.jsonl.gz",
+        "config_path": "/tmp/jcmw614_40249083/config/enrich.json",
+        "leu_data": "/tmp/jcmw614_40249083/data/leu_data.jsonl.gz",
+        "metadata_source": "/tmp/jcmw614_40249083/data/metadata_source.jsonl.gz",
         "notes": "",
-        "output_dir": "/tmp/jcmw614_40203345/data"
+        "output_dir": "/tmp/jcmw614_40249083/data"
       },
       "clusters": {
         "1": {
@@ -495,11 +495,11 @@
           "tokens": 3603700
         }
       },
-      "completed_at": "2026-09-16T05:38:00.687335+00:00",
+      "completed_at": "2026-09-17T09:13:26.915992+00:00",
       "documents_truncated": 19200,
       "enrich_errors": {},
       "execution": {
-        "slurm_job_id": "40203345"
+        "slurm_job_id": "40249083"
       },
       "levels_v1": {
         "high": {
@@ -660,36 +660,36 @@
         },
         "low": {
           "description": "Low degree of sociolinguistic mobility",
-          "documents_written": 2268,
+          "documents_written": 3402,
           "sources": {
             "ice": {
-              "documents_written": 2268,
+              "documents_written": 3402,
               "genres": {
                 "S1A": {
                   "documents_written": 1304,
                   "tokens": 3726472
+                },
+                "S1B": {
+                  "documents_written": 1134,
+                  "tokens": 2979440
                 },
                 "S2A": {
                   "documents_written": 964,
                   "tokens": 2322619
                 }
               },
-              "tokens": 6049091
+              "tokens": 9028531
             }
           },
-          "tokens": 6049091
+          "tokens": 9028531
         },
         "medium": {
           "description": "Medium degree of sociolinguistic mobility",
-          "documents_written": 5091,
+          "documents_written": 3957,
           "sources": {
             "ice": {
-              "documents_written": 5091,
+              "documents_written": 3957,
               "genres": {
-                "S1B": {
-                  "documents_written": 1134,
-                  "tokens": 2979440
-                },
                 "S2B": {
                   "documents_written": 851,
                   "tokens": 1925815
@@ -723,18 +723,18 @@
                   "tokens": 981078
                 }
               },
-              "tokens": 12398634
+              "tokens": 9419194
             }
           },
-          "tokens": 12398634
+          "tokens": 9419194
         }
       },
       "output_files": {
-        "metadata": "/tmp/jcmw614_40203345/data/metadata_enriched.jsonl.gz"
+        "metadata": "/tmp/jcmw614_40249083/data/metadata_enriched.jsonl.gz"
       },
-      "started_at": "2026-09-16T04:21:40.749801+00:00",
+      "started_at": "2026-09-17T07:43:10.666974+00:00",
       "status": "success",
-      "total_seconds": 4579.937534
+      "total_seconds": 5416.249018
     },
     "full": {
       "_notes": "",
