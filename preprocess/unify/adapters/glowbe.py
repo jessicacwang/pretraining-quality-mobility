@@ -129,7 +129,7 @@ class GloWbeAdapter(BaseAdapter):
             else:
                 clean += text[start:end]
         result = self._CRLF.sub("", clean)
-        result = self._ANGLE_BRACKET_RE.sub("", result)
+        result = self._ANGLE_BRACKET_RE.sub("\n", result)
         return result
 
     def validate(self, text, metadata):
