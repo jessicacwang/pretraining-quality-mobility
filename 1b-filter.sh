@@ -30,27 +30,18 @@ done
 if [ ! -d "$SHARD_DIR" ] || [ -z "$(ls -A "$SHARD_DIR" 2>/dev/null)" ]; then
     echo "No shards found — splitting $INPUT_FILE..."
 
-    sbatch 1a-shard.slurm
-    echo "Waiting for '$SHARD_JOB_NAME' to finish..."
+    SHARD_JOB_ID=$(sbatch --parsable 1a-shard.slurm)
+    echo "Waiting for job $SHARD_JOB_ID ('$SHARD_JOB_NAME') to finish..."
 
-    while true; do
-        # Capture output safely without triggering set -e failures
-        SHARD_JOB_COUNT=$(squeue -u "$USER" -n "$SHARD_JOB_NAME" -h -o "%i" 2>/dev/null | wc -l)
-        
-        # Trim whitespace from wc output
-        SHARD_JOB_COUNT=$(echo "$SHARD_JOB_NAME" | tr -d '[:space:]')
-        
-        if [ "$SHARD_JOB_COUNT" -eq 0 ]; then
-            break
-        fi
+    while squeue -j "$SHARD_JOB_ID" -h 2>/dev/null | grep -q .; do
         sleep "$POLL_INTERVAL"
-    done 
-    
-    SHARD_FAILED=$(sacct -u "$USER" -n --format=JobName,State,ExitCode 2>/dev/null | \
-        grep -w "$SHARD_JOB_NAME" | grep -v "COMPLETED" || true)
+    done
+
+    SHARD_FAILED=$(sacct -j "$SHARD_JOB_ID" -n --format=JobName,State,ExitCode 2>/dev/null | \
+        grep -v "COMPLETED" || true)
 
     if [ -n "$SHARD_FAILED" ]; then
-        echo "Error: one or more jobs named '$SHARD_JOB_NAME' did not complete successfully:"
+        echo "Error: job $SHARD_JOB_ID ('$SHARD_JOB_NAME') did not complete successfully:"
         echo "$SHARD_FAILED"
         exit 1
     fi
@@ -63,7 +54,6 @@ if [ ! -d "$SHARD_DIR" ] || [ -z "$(ls -A "$SHARD_DIR" 2>/dev/null)" ]; then
 else
     echo "Shards already exist in $SHARD_DIR — skipping split."
 fi
-
 # ============ Resolve config values ============
 if [ -n "$EXECUTOR_OVERRIDE" ]; then
     EXECUTOR="$EXECUTOR_OVERRIDE"
