@@ -28,8 +28,8 @@ cp /gscratch/stf/$USER/thesis/output/preprocess/manifest.json "$LOCAL_DATA"/
 echo "Manifest staged"
 
 # source courpura
-cp /gscratch/stf/$USER/data/ice/*  "$LOCAL_DATA"/ice
-cp /gscratch/stf/$USER/data/glowbe/glowbe-text/* "$LOCAL_DATA"/glowbe-text
+cp -r /gscratch/stf/$USER/data/ice/*  "$LOCAL_DATA"/ice
+cp -r /gscratch/stf/$USER/data/glowbe/glowbe-text/* "$LOCAL_DATA"/glowbe-text
 
 echo "Source data staged, unifying data sources..."
 
