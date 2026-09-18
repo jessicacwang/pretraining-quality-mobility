@@ -4,25 +4,11 @@ from scipy.stats import chi2_contingency
 from statsmodels.stats.proportion import proportion_confint
 
 # Load data
-df = pd.read_csv("output/eval/pmi/by_source_genre_cluster_english.csv")
-df["features"] = df.feature_value.str.split(" / ")
+df = pd.read_csv("output/eval/pmi/by_mobility_v2_component_ice.csv")
+df[["mobility", "component"]] = df.feature_value.str.split(" / ", n=1, expand=True)
 
-
-def map_shared_features(row):
-    row["cluster"] = row["features"][-1]
-    if row["features"][0] == "glowbe":
-        row["mobility"] = "high"
-    else:
-        if row["features"][1] == "spoken":
-            row["mobility"] = "low"
-        else:
-            row["mobility"] = "medium"
-
-    return row
-
-
-df = df.apply(map_shared_features, axis=1)
-
+# Remove LinCE data 
+df = df.loc[df.component != "5"]
 
 # Compute filtered and not-filtered values
 def generate_response_labels(df):
@@ -32,6 +18,15 @@ def generate_response_labels(df):
 
 
 generate_response_labels(df)
+
+# ---------- Flag separation / near-zero-cell issues ----------
+print("=== Cells with 0 or near-0 in either filtered/not_filtered (unreliable OR) ===")
+flagged = df[(df["filtered"] == 0) | (df["not_filtered"] == 0)]
+print(flagged.to_string(index=False))
+
+df = df.loc[(df["filtered"] != 0) | (df["not_filtered"] != 0)]
+
+
 df.to_csv("temp.csv")
 
 
@@ -64,38 +59,38 @@ def retention_ci(filtered, not_filtered, method="wilson", alpha=0.05):
     ci_low, ci_high = proportion_confint(count=not_filtered, nobs=n, alpha=alpha, method=method)
     return p_hat, ci_low, ci_high 
 
-def cluster_vs_rest(df, val):
-    cluster_rows = df[df["cluster"] == val]
-    rest_rows = df[df["cluster"] != val]
+def component_vs_rest(df, val):
+    component_rows = df[df["component"] == val]
+    rest_rows = df[df["component"] != val]
 
-    a = cluster_rows["filtered"].sum()
-    b = cluster_rows["not_filtered"].sum()
+    a = component_rows["filtered"].sum()
+    b = component_rows["not_filtered"].sum()
     c = rest_rows["filtered"].sum()
     d = rest_rows["not_filtered"].sum()
 
     or_val = (a * d) / (b * c)
     return {
-        f"cluster_{val}_filtered": a,
-        f"cluster_{val}_not_filtered": b,
+        f"component_{val}_filtered": a,
+        f"component_{val}_not_filtered": b,
         "rest_filtered": c,
         "rest_not_filtered": d,
         "odds_ratio": or_val,
     }
 
 
-for comp in df.cluster.unique():
-    result = cluster_vs_rest(df, comp)
+for comp in df.component.unique():
+    result = component_vs_rest(df, comp)
     print(f"=== Framework A: {comp} vs rest of world ===")
     for k, v in result.items():
         print(f"{k}: {v}")
-    p, lo, hi = retention_ci(result[f"cluster_{comp}_filtered"], result[f"cluster_{comp}_not_filtered"])
-    print(f"retention={p:.4f}  95% CI=[{lo:.4f}, {hi:.4f}]")
+    retention_p, lo, hi = retention_ci(result[f"component_{comp}_filtered"], result[f"component_{comp}_not_filtered"])
+    print(f"retention={retention_p:.4f}  95% CI=[{lo:.4f}, {hi:.4f}]")
     print()
 
-cluster_agg = df.groupby("cluster")[["filtered", "not_filtered"]].sum()
-table_dt = cluster_agg.values.tolist()
+component_agg = df.groupby("component")[["filtered", "not_filtered"]].sum()
+table_dt = component_agg.values.tolist()
 print("Framework A contingency table:")
-print(cluster_agg)
+print(component_agg)
 v_dt, chi2_dt, p_dt, dof_dt = cramers_v(table_dt)
 # print(
 #     f"Cramér's V (A): {v_dt:.4f}, chi2: {chi2_dt:.2f}, dof: {dof_dt}, p: {p_dt:.2e}\n"
@@ -125,7 +120,9 @@ def or_table(
                 "n": a + b,
                 "odds_ratio": odds_ratio(a, b, c, d),
                 "retention_p_hat": p,
-                "pmi": row["pmi"]
+                "retention_low": lo,
+                "retention:high": hi
+                # "pmi": row["pmi"]
             }
         )
     return results
@@ -148,13 +145,13 @@ print(mobility_agg)
 print()
 
 # ---------- Combined odds ratios ----------
-joint_agg = df.groupby(["mobility", "cluster"])[
+joint_agg = df.groupby(["mobility", "component"])[
     ["filtered", "not_filtered", "pmi"]
 ].sum()
 
-results_joint = or_table(joint_agg.reset_index(), ["mobility", "cluster"])
-joint_ors = pd.DataFrame(results_joint).sort_values(by="retention_p_hat")
-print("=== Joint: cluster x mobility vs rest ===")
+results_joint = or_table(joint_agg.reset_index(), ["mobility", "component"])
+joint_ors = pd.DataFrame(results_joint).sort_values(by="level")
+print("=== Joint: component x mobility vs rest ===")
 print(joint_ors.to_string(index=False))
 
 table_lm = joint_agg.values.tolist()
@@ -163,8 +160,5 @@ table_lm = joint_agg.values.tolist()
 #     f"Cramér's V (Joint): {v_lm:.4f}, chi2: {chi2_lm:.2f}, dof: {dof_lm}, p: {p_lm:.2e}\n"
 # )
 print()
-# ---------- Flag separation / near-zero-cell issues ----------
-print("=== Cells with 0 or near-0 in either filtered/not_filtered (unreliable OR) ===")
-flagged = df[(df["filtered"] == 0) | (df["not_filtered"] == 0)]
-print(flagged.to_string(index=False))
+
 

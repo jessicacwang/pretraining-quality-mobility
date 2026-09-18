@@ -20,20 +20,34 @@ class PreprocessManifest(BaseManifest):
     # Enrich step methods
     # ==========================================================================
     def set_enrich_stats(
-        self, stats: Dict, errors: Dict, truncated: int, cluster_descriptions: Dict
+        self, stats: Dict, errors: Dict, truncated: int, config: Dict
     ):
         step = self.data["steps"].setdefault("enrich", {})
         step["enrich_errors"] = errors
         step["documents_truncated"] = truncated
 
         clusters = {}
-        for cluster_id, cluster_stats in stats.items():
+        levels_v1 = {}
+        levels_v2 = {}
+        for cluster_id, cluster_stats in stats["distribution"].items():
             clusters[cluster_id] = {
-                "description": cluster_descriptions.get(cluster_id, ""),
+                "description": config["distribution"]["descriptions"].get(cluster_id, ""),
                 **cluster_stats,
             }
 
+        for mobility_level, level_stats in stats["mobility_v1"].items():
+            levels_v1[mobility_level] = {
+                "description": config["mobility"]["descriptions"].get(mobility_level, ""),
+                **level_stats,
+            }
+        for mobility_level, level_stats in stats["mobility_v2"].items():
+            levels_v2[mobility_level] = {
+                "description": config["mobility"]["descriptions"].get(mobility_level, ""),
+                **level_stats,
+            }
         step["clusters"] = clusters
+        step["levels_v1"] = levels_v1
+        step["levels_v2"] = levels_v2
         return
 
     # ==========================================================================

@@ -190,11 +190,11 @@
     "enrich": {
       "_notes": "",
       "args": {
-        "config_path": "/tmp/jcmw614_37711941/config/enrich.json",
-        "leu_data": "/tmp/jcmw614_37711941/data/leu_data.jsonl.gz",
-        "metadata_source": "/tmp/jcmw614_37711941/data/metadata_source.jsonl.gz",
+        "config_path": "/tmp/jcmw614_40249083/config/enrich.json",
+        "leu_data": "/tmp/jcmw614_40249083/data/leu_data.jsonl.gz",
+        "metadata_source": "/tmp/jcmw614_40249083/data/metadata_source.jsonl.gz",
         "notes": "",
-        "output_dir": "/tmp/jcmw614_37711941/data"
+        "output_dir": "/tmp/jcmw614_40249083/data"
       },
       "clusters": {
         "1": {
@@ -359,7 +359,7 @@
           "tokens": 423927560
         },
         "4": {
-          "description": "English-based Pidgins and Creoles",
+          "description": "High-contact L2 varieties",
           "documents_written": 221542,
           "sources": {
             "glowbe": {
@@ -495,18 +495,246 @@
           "tokens": 3603700
         }
       },
-      "completed_at": "2026-07-26T03:33:09.833120+00:00",
+      "completed_at": "2026-09-17T09:13:26.915992+00:00",
       "documents_truncated": 19200,
       "enrich_errors": {},
       "execution": {
-        "slurm_job_id": "37711941"
+        "slurm_job_id": "40249083"
+      },
+      "levels_v1": {
+        "high": {
+          "description": "High degree of sociolinguistic mobility",
+          "documents_written": 1957805,
+          "sources": {
+            "glowbe": {
+              "documents_written": 1785602,
+              "genres": {
+                "blog": {
+                  "documents_written": 649785,
+                  "tokens": 542030172
+                },
+                "general": {
+                  "documents_written": 1135817,
+                  "tokens": 1149864792
+                }
+              },
+              "tokens": 1691894964
+            },
+            "lince": {
+              "documents_written": 172203,
+              "genres": {
+                "default": {
+                  "documents_written": 172203,
+                  "tokens": 3603700
+                }
+              },
+              "tokens": 3603700
+            }
+          },
+          "tokens": 1695498664
+        },
+        "low": {
+          "description": "Low degree of sociolinguistic mobility",
+          "documents_written": 4253,
+          "sources": {
+            "ice": {
+              "documents_written": 4253,
+              "genres": {
+                "S1A": {
+                  "documents_written": 1304,
+                  "tokens": 3726472
+                },
+                "S1B": {
+                  "documents_written": 1134,
+                  "tokens": 2979440
+                },
+                "S2A": {
+                  "documents_written": 964,
+                  "tokens": 2322619
+                },
+                "S2B": {
+                  "documents_written": 851,
+                  "tokens": 1925815
+                }
+              },
+              "tokens": 10954346
+            }
+          },
+          "tokens": 10954346
+        },
+        "medium": {
+          "description": "Medium degree of sociolinguistic mobility",
+          "documents_written": 3836,
+          "sources": {
+            "ice": {
+              "documents_written": 3836,
+              "genres": {
+                "W1A": {
+                  "documents_written": 367,
+                  "tokens": 896136
+                },
+                "W1B": {
+                  "documents_written": 599,
+                  "tokens": 1297834
+                },
+                "W1C": {
+                  "documents_written": 22,
+                  "tokens": 49260
+                },
+                "W2A": {
+                  "documents_written": 708,
+                  "tokens": 2054281
+                },
+                "W2B": {
+                  "documents_written": 769,
+                  "tokens": 1935037
+                },
+                "W2C": {
+                  "documents_written": 420,
+                  "tokens": 959700
+                },
+                "W2D": {
+                  "documents_written": 358,
+                  "tokens": 923016
+                },
+                "W2E": {
+                  "documents_written": 247,
+                  "tokens": 500578
+                },
+                "W2F": {
+                  "documents_written": 346,
+                  "tokens": 981078
+                }
+              },
+              "tokens": 9596920
+            }
+          },
+          "tokens": 9596920
+        }
+      },
+      "levels_v2": {
+        "high": {
+          "description": "High degree of sociolinguistic mobility",
+          "documents_written": 1958535,
+          "sources": {
+            "glowbe": {
+              "documents_written": 1785602,
+              "genres": {
+                "blog": {
+                  "documents_written": 649785,
+                  "tokens": 542030172
+                },
+                "general": {
+                  "documents_written": 1135817,
+                  "tokens": 1149864792
+                }
+              },
+              "tokens": 1691894964
+            },
+            "ice": {
+              "documents_written": 730,
+              "genres": {
+                "W1C": {
+                  "documents_written": 22,
+                  "tokens": 49260
+                },
+                "W2A": {
+                  "documents_written": 708,
+                  "tokens": 2054281
+                }
+              },
+              "tokens": 2103541
+            },
+            "lince": {
+              "documents_written": 172203,
+              "genres": {
+                "default": {
+                  "documents_written": 172203,
+                  "tokens": 3603700
+                }
+              },
+              "tokens": 3603700
+            }
+          },
+          "tokens": 1697602205
+        },
+        "low": {
+          "description": "Low degree of sociolinguistic mobility",
+          "documents_written": 3402,
+          "sources": {
+            "ice": {
+              "documents_written": 3402,
+              "genres": {
+                "S1A": {
+                  "documents_written": 1304,
+                  "tokens": 3726472
+                },
+                "S1B": {
+                  "documents_written": 1134,
+                  "tokens": 2979440
+                },
+                "S2A": {
+                  "documents_written": 964,
+                  "tokens": 2322619
+                }
+              },
+              "tokens": 9028531
+            }
+          },
+          "tokens": 9028531
+        },
+        "medium": {
+          "description": "Medium degree of sociolinguistic mobility",
+          "documents_written": 3957,
+          "sources": {
+            "ice": {
+              "documents_written": 3957,
+              "genres": {
+                "S2B": {
+                  "documents_written": 851,
+                  "tokens": 1925815
+                },
+                "W1A": {
+                  "documents_written": 367,
+                  "tokens": 896136
+                },
+                "W1B": {
+                  "documents_written": 599,
+                  "tokens": 1297834
+                },
+                "W2B": {
+                  "documents_written": 769,
+                  "tokens": 1935037
+                },
+                "W2C": {
+                  "documents_written": 420,
+                  "tokens": 959700
+                },
+                "W2D": {
+                  "documents_written": 358,
+                  "tokens": 923016
+                },
+                "W2E": {
+                  "documents_written": 247,
+                  "tokens": 500578
+                },
+                "W2F": {
+                  "documents_written": 346,
+                  "tokens": 981078
+                }
+              },
+              "tokens": 9419194
+            }
+          },
+          "tokens": 9419194
+        }
       },
       "output_files": {
-        "metadata": "/tmp/jcmw614_37711941/data/metadata_enriched.jsonl.gz"
+        "metadata": "/tmp/jcmw614_40249083/data/metadata_enriched.jsonl.gz"
       },
-      "started_at": "2026-07-26T01:41:09.537093+00:00",
+      "started_at": "2026-09-17T07:43:10.666974+00:00",
       "status": "success",
-      "total_seconds": 6720.296027
+      "total_seconds": 5416.249018
     },
     "full": {
       "_notes": "",

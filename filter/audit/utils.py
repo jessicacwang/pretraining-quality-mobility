@@ -17,11 +17,14 @@ def metadata_lookup(config: Dict[str, Any]) -> Tuple[Dict, Dict]:
             doc_id = doc.get("id")
             doc_cluster = doc.get("cluster_id")
             doc_source, doc_component = doc_id.split(":")[0].split("_", maxsplit=1)
-
+            doc_level_1 = doc.get("mobility_level_1")
+            doc_level_2 = doc.get("mobility_level_2")
             id_to_enriched_metadata[doc_id] = (
                 doc_cluster,
                 doc_source,
                 doc_component,
+                doc_level_1,
+                doc_level_2
             )
 
     # Stream metadata_source to store id -> genre if it exists
@@ -42,11 +45,11 @@ def metadata_lookup(config: Dict[str, Any]) -> Tuple[Dict, Dict]:
 def counter_to_stats(meta_counter: Counter, stat_type: str):
     result = {"total": sum(meta_counter.values()), "records": {}}
 
-    for (cluster, source, component, genre), count in tqdm(
+    for (cluster, source, component, genre, level1, level2), count in tqdm(
         meta_counter.items(), desc=f"{stat_type} counter to stats"
     ):
         genre_val = genre if genre is not None else "null"
-        key = "|".join(str(x) for x in (cluster, source, component, genre_val))
+        key = "|".join(str(x) for x in (cluster, source, component, genre_val, level1, level2))
         result["records"][key] = result["records"].get(key, 0) + count
 
     return result

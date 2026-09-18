@@ -34,6 +34,7 @@ def main(args):
     try:
         # ========================== PASS 1: Local fields ==========================
         all_token_counts, stats, error_counts, truncated = metadata.build(args, config)
+        print(error_counts)
         # ========================== PASS 2: Global fields =========================
         # Pre-compute percentile lookups
         token_percentiles = percentiles.compute_lookups(all_token_counts)
@@ -58,10 +59,7 @@ def main(args):
 
         # === Update manifest
         manifest.set_enrich_stats(
-            stats=stats,
-            errors=dict(error_counts),
-            truncated=truncated,
-            cluster_descriptions=config["descriptions"],
+            stats=stats, errors=dict(error_counts), truncated=truncated, config=config
         )
         manifest.end_step("enrich")
     except Exception as e:
@@ -78,9 +76,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_path", default="config/preprocess/enrich.json")
     parser.add_argument("--output_dir", default="output/preprocess")
-    parser.add_argument("--leu_data", default="output/preprocess/leu_data.jsonl.gz")
+    parser.add_argument("--leu_data", default="output/preprocess/toy_leu_data.jsonl.gz")
     parser.add_argument(
-        "--metadata_source", default="output/preprocess/metadata_source.jsonl.gz"
+        "--metadata_source", default="output/preprocess/toy_metadata_source.jsonl.gz"
     )
     parser.add_argument("--notes", default="")
     args = parser.parse_args()
