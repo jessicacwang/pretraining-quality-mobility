@@ -30,7 +30,7 @@ done
 if [ ! -d "$SHARD_DIR" ] || [ -z "$(ls -A "$SHARD_DIR" 2>/dev/null)" ]; then
     echo "No shards found — splitting $INPUT_FILE..."
 
-    sbatch 4-shard.slurm
+    sbatch 1a-shard.slurm
     echo "Waiting for '$SHARD_JOB_NAME' to finish..."
 
     while true; do
@@ -111,4 +111,4 @@ if [ ! -f "${LOG_PATH}/stats.json" ]; then
 fi
 
 echo "Collecting stats..."
-sbatch 4-audit.slurm
+sbatch 1c-audit.slurm
