@@ -20,9 +20,9 @@ def normalize_value(feature_name: str, value: str) -> str:
 
     if feature_name == "genre":
         if value.startswith("W"):
-            return "written"
+            return value.split("-")[0]
         elif value.startswith("S"):
-            return "spoken"
+            return value.split("-")[0]
         elif (value == "blog" or value == "general"):
             return "web"
         else:

@@ -58,6 +58,24 @@ def build_subsets() -> List[SubsetSpec]:
             record_filter=restrict_to("level_v2", ["medium"])
             ),
         SubsetSpec(
+            "by_mobility_v2_ice", 
+            "By mobility (fine), ICE only", 
+            feature_names=["level_v2"],
+            record_filter=restrict_to("source", ["ice"])
+            ),
+        SubsetSpec(
+            "by_mobility_v2_component_ice", 
+            "By mobility (fine), ICE only", 
+            feature_names=["level_v2", "component"],
+            record_filter=restrict_to("source", ["ice"])
+            ),
+        SubsetSpec(
+            "by_mobility_v2_cluster_ice", 
+            "By mobility (fine), ICE only", 
+            feature_names=["level_v2", "cluster"],
+            record_filter=restrict_to("source", ["ice"])
+            ),
+        SubsetSpec(
             "by_cluster_source",
             "By cluster and source",
             feature_names=["cluster", "source"],
