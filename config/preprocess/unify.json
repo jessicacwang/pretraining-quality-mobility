@@ -1,11 +1,11 @@
 {
     "corpora": {
         "glowbe": {
-            "root_path": "/gscratch/stf/jcmw614/data/glowbe/glowbe-text",
+            "root_path": "glowbe-text",
             "file_pattern": "*.zip"
         },
         "ice": {
-            "root_path": "/gscratch/stf/jcmw614/data/ice",
+            "root_path": "ice",
             "file_pattern": "**/*.txt",
             "tag_registry": {
                 "treat_as_foreign": [
@@ -149,10 +149,6 @@
                     "<unintelligible>"
                 ]
             }
-        },
-        "lince": {
-            "root_path": "/gscratch/stf/jcmw614/data/lince-kaggle",
-            "file_pattern": "*_*eng_*.csv"
         }
     }
 }
