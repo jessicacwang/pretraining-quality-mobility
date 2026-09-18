@@ -11,5 +11,35 @@
 #SBATCH --mail-user=%u@uw.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
 
-# TODO: stage input files on node scratch
-/gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m preprocess.unify
+# Stage input files on node scratch
+LOCAL_DATA="/tmp/${USER}_${SLURM_JOB_ID}/data"
+LOCAL_CONFIG="/tmp/${USER}_${SLURM_JOB_ID}/config"
+LOCAL_OUTPUT="/tmp/${USER}_${SLURM_JOB_ID}/output"
+mkdir -p "$LOCAL_DATA" "$LOCAL_CONFIG" "$LOCAL_OUTPUT"
+
+echo "Staging data in working node..."
+# config/preprocess/unify.json
+cp /gscratch/stf/$USER/thesis/config/preprocess/unify.json "$LOCAL_CONFIG"/
+echo "Config staged"
+
+# output/preprocess/manifest
+cp /gscratch/stf/$USER/thesis/output/preprocess/manifest.json "$LOCAL_DATA"/
+echo "Manifest staged"
+
+# source courpura
+cp /gscratch/stf/$USER/data/ice/*  "$LOCAL_DATA"/ice
+cp /gscratch/stf/$USER/data/glowbe/glowbe-text/* "$LOCAL_DATA"/glowbe-text
+
+echo "Source data staged, unifying data sources..."
+
+/gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m preprocess.unify \
+    --config_path "$LOCAL_CONFIG"/unify.json \
+    --data_path "$LOCAL_DATA" \
+    --output_dir "$LOCAL_OUTPUT" 
+echo "Unification complete, staging data out..."
+
+# Stage out data
+# NOTE: hard coding v2 for Sep 18 changes
+cp "$LOCAL_DATA"/manifest.json /gscratch/stf/$USER/thesis/output/preprocess/
+cp "$LOCAL_DATA"/leu_data.jsonl.gz /gscratch/stf/$USER/thesis/output/preprocess/leu_data_v2.jsonl.gz
+echo "Step 0a complete"
