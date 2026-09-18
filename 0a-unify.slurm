@@ -40,7 +40,6 @@ echo "Source data staged, unifying data sources..."
 echo "Unification complete, staging data out..."
 
 # Stage out data
-# NOTE: hard coding v2 for Sep 18 changes
 cp "$LOCAL_DATA"/manifest.json /gscratch/stf/$USER/thesis/output/preprocess/
-cp "$LOCAL_OUTPUT"/leu_data.jsonl.gz /gscratch/stf/$USER/thesis/output/preprocess/leu_data_v2.jsonl.gz
+cp "$LOCAL_OUTPUT"/leu_data.jsonl.gz /gscratch/stf/$USER/thesis/output/preprocess/leu_data.jsonl.gz
 echo "Step 0a complete"
