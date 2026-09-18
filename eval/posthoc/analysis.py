@@ -25,11 +25,11 @@ for m in df.mobility_v2.unique().tolist():
     for c in mdf.cluster_id.unique().tolist():
         subset = mdf.loc[mdf.cluster_id == c]
         retained = subset.filter_reason.isna().sum()
-        print(f"{c} RR={retained / len(subset):.2%}, total={len(subset)}")
+        print(f"{c} RR={retained / len(subset):.3f}, total={len(subset)}")
     for c in mdf.component.unique().tolist():
         subset = mdf.loc[mdf.component == c]
         retained = subset.filter_reason.isna().sum()
-        print(f"{c} RR={retained / len(subset):.2%}, total={len(subset)}")
+        print(f"{c} RR={retained / len(subset):.3f}, total={len(subset)}")
 
 print("How many documents were excluded at each stage?")
 print(df.stage_excluded.value_counts(dropna=False).sort_index()) 
@@ -74,14 +74,14 @@ def check_feature(feature, reason):
         v_total = len(vdf)
         if v_total:
             v_retained = len(vdf.loc[vdf.result == "survive"])
-            print(f"RR={v_retained / v_total:.2%} of rows where {feature}={v}")
+            print(f"RR={v_retained / v_total:.3f} of rows where {feature}={v}")
         else:
             print(f"RR=0 where {feature}={v}")
 
         v_exclude = vdf.loc[vdf.result == "exclude"]
         if len(v_exclude):
             v_reason = v_exclude.loc[v_exclude.filter_reason == reason]
-            print(f"{len(v_reason)/len(v_exclude):.2%} of excluded docs due to {reason}")
+            print(f"{len(v_reason)/len(v_exclude):.3f} of excluded docs due to {reason}")
         print()
     return
 
@@ -96,7 +96,7 @@ def joint_prob1(df, feature, reason):
         vdf = rdf.loc[rdf[feature] == v]
         v_total = len(vdf)
         p_v = v_total / r_total
-        print(f"P({feature}:{v} | {reason})={p_v:.2%}, P({feature}:{v})={v_total / d_total:.2%}")
+        print(f"P({feature}:{v} | {reason})={p_v:.3f}, P({feature}:{v})={v_total / d_total:.3f}")
     print()
     return
 
@@ -112,7 +112,7 @@ def joint_prob2(df, feature, reason):
         rdf = vdf.loc[vdf.filter_reason == reason]
         r_total = len(rdf)
         p_v = r_total / v_total
-        print(f"P({reason} | {feature}:{v})={p_v:.2%}")
+        print(f"P({reason} | {feature}:{v})={p_v:.3f}")
     print()
     return
 
@@ -121,7 +121,7 @@ for r in top_n_reasons:
     print("="*30)
     print(f"comparing records dropped because {r} vs. all other outcomes".upper())
     print("-"*30)
-    print(f"P({r}): {len(df.loc[df.filter_reason == r]) / d_total:.2%}")
+    print(f"P({r}): {len(df.loc[df.filter_reason == r]) / d_total:.3f}")
     for f in features:
         joint_prob1(df, f, r)
         joint_prob2(df, f, r)
