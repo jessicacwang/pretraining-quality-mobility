@@ -15,7 +15,8 @@
 LOCAL_DATA="/tmp/${USER}_${SLURM_JOB_ID}/data"
 LOCAL_CONFIG="/tmp/${USER}_${SLURM_JOB_ID}/config"
 LOCAL_OUTPUT="/tmp/${USER}_${SLURM_JOB_ID}/output"
-mkdir -p "$LOCAL_DATA" "$LOCAL_CONFIG" "$LOCAL_OUTPUT"
+mkdir -p "$LOCAL_CONFIG" "$LOCAL_OUTPUT" "$LOCAL_DATA" 
+mkdir -p "$LOCAL_DATA"/ice "$LOCAL_DATA"/glowbe-text
 
 echo "Staging data in working node..."
 # config/preprocess/unify.json
