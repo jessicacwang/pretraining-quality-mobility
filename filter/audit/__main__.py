@@ -14,7 +14,7 @@ def main(args):
 
     # Load manifest
     manifest = FilterManifest(f"{args.output_dir}/audit/manifest.json")
-    manifest.start_step("filter")
+    manifest.start_step("filter", args.notes)
     manifest.set_args("filter", vars(args))
 
     # Initialize stats
@@ -65,6 +65,6 @@ if __name__ == "__main__":
     parser.add_argument("--output_dir", default="output/filter/")
     parser.add_argument("--config_path", default="config/filter/pipeline.json")
     parser.add_argument("--executor", choices=["slurm", "local"], default="slurm")
-
+    parser.add_argument("--notes", default="")
     args = parser.parse_args()
     main(args)
