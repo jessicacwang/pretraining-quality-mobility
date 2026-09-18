@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 from preprocess.unify.adapters.glowbe import GloWbeAdapter
 from preprocess.unify.adapters.ice import ICEAdapter
-from preprocess.unify.adapters.lince import LinCEAdapter
+# from preprocess.unify.adapters.lince import LinCEAdapter
 from preprocess.manifest import PreprocessManifest
 from utils import load_config
 
@@ -36,17 +36,17 @@ def main(args):
 
     # initialize adapters
     adapters = [
-        LinCEAdapter(
-            config["corpora"]["lince"]["root_path"],
-            config["corpora"]["lince"]["file_pattern"],
-        ),
+        # LinCEAdapter(
+        #     args.data_path config["corpora"]["lince"]["root_path"],
+        #     config["corpora"]["lince"]["file_pattern"],
+        # ),
         ICEAdapter(
-            config["corpora"]["ice"]["root_path"],
+            f"{args.data_path}/{config["corpora"]["ice"]["root_path"]}",
             config["corpora"]["ice"]["file_pattern"],
             config["corpora"]["ice"]["tag_registry"],
         ),
         GloWbeAdapter(
-            config["corpora"]["glowbe"]["root_path"],
+            f"{args.data_path}/{config["corpora"]["glowbe"]["root_path"]}",
             config["corpora"]["glowbe"]["file_pattern"],
         ),
     ]
@@ -116,6 +116,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_path", default="config/preprocess/unify.json")
+    parser.add_argument("--data_path", default="../data/")
     parser.add_argument("--output_dir", default="output/preprocess")
     parser.add_argument("--notes", default="")
     args = parser.parse_args()
