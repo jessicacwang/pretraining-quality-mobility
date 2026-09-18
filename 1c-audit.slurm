@@ -27,7 +27,9 @@ echo "Filter output complete, executing audit..."
 
 # Execute package
 /gscratch/stf/$USER/conda/envs/thesis-env/bin/python -m filter.audit \
-    --output_dir "$LOCAL_OUTPUT" --config_path "$LOCAL_CONFIG"/pipeline.json
+    --output_dir "$LOCAL_OUTPUT" \
+    --config_path "$LOCAL_CONFIG"/pipeline.json \
+    --notes "Fixed GloWbE"
 
 # Stage out new manifest
 echo "Audit complete, staging data out..."
