@@ -2,13 +2,13 @@
     "distribution": {
             "descriptions": {
             "1":"Traditional L1 varieties",
-            "2": "High-contact L1 varieties",
+            "2": "3-contact L1 varieties",
             "3": "Indigenized L2 varieties",
-            "4": "High-contact L2 varieties",
+            "4": "3-contact L2 varieties",
             "5": "English code-switching"
         },
         "corpora": {
-            "glowbe": {
+            "g1be": {
                 "default": null,
                 "components": {
                     "au": "2",
@@ -69,72 +69,72 @@
     },
     "mobility": {
         "descriptions": {
-            "low": "Low degree of sociolinguistic mobility",
-            "medium": "Medium degree of sociolinguistic mobility",
-            "high": "High degree of sociolinguistic mobility"
+            "1": "low register formality",
+            "2": "medium register formality",
+            "3": "high register formality"
         },
         "corpora": {
-            "glowbe": {
-                "default": "high"
+            "g1be": {
+                "default": "0"
             },
             "ice": {
                 "genre": {
                     "S1A": {
-                        "v1": "low",
-                        "v2": "low"
+                        "v1": "1",
+                        "v2": "1"
                     }, 
                     "S1B": {
-                        "v1": "low",
-                        "v2": "low"
+                        "v1": "1",
+                        "v2": "1"
                     }, 
                     "S2A": {
-                        "v1": "low",
-                        "v2": "low"
+                        "v1": "1",
+                        "v2": "1"
                     },
                     "S2B": {
-                        "v1": "low",
-                        "v2": "medium"
+                        "v1": "1",
+                        "v2": "2"
                     },
                     "W1A": {
-                        "v1": "medium",
-                        "v2": "medium"
+                        "v1": "2",
+                        "v2": "2"
                     },
                     "W1B": {
-                        "v1": "medium",
-                        "v2": "medium"
+                        "v1": "2",
+                        "v2": "2"
                     },
                     "W1C": {
-                        "v1": "medium",
-                        "v2": "high"
+                        "v1": "2",
+                        "v2": "3"
                     },
                     "W2A": {
-                        "v1": "medium",
-                        "v2": "high"
+                        "v1": "2",
+                        "v2": "3"
                     },
                     "W2B": {
-                        "v1": "medium",
-                        "v2": "medium"
+                        "v1": "2",
+                        "v2": "2"
                     },
                     "W2C": {
-                        "v1": "medium",
-                        "v2": "medium"
+                        "v1": "2",
+                        "v2": "2"
                     },
                     "W2D": {
-                        "v1": "medium",
-                        "v2": "medium"
+                        "v1": "2",
+                        "v2": "2"
                     },
                     "W2E": {
-                        "v1": "medium",
-                        "v2": "medium"
+                        "v1": "2",
+                        "v2": "2"
                     },
                     "W2F": {
-                        "v1": "medium",
-                        "v2": "medium"
+                        "v1": "2",
+                        "v2": "2"
                     }
                 }
             },
             "lince": {
-                "default": "high"
+                "default": "0"
             }
         }
     }
