@@ -45,188 +45,232 @@ class SubsetSpec:
 
 def build_subsets() -> List[SubsetSpec]:
     subset: List[SubsetSpec] = [
-        SubsetSpec("overall", "Overall volume", feature_names=[]),
+        # SubsetSpec("overall", "Overall volume", feature_names=[]),
         SubsetSpec("by_cluster", "By cluster", feature_names=["cluster"], record_filter=restrict_to("source", SOURCES_WITH_GENRE)),
         SubsetSpec("by_source", "By source", feature_names=["source"]),
-        SubsetSpec("by_mobility_v1", "By mobility (coarse)", feature_names=["level_v1"]),
-        SubsetSpec("by_mobility_v2", "By mobility (fine)", feature_names=["level_v2"]),
-        SubsetSpec("by_mobility_v2_cluster", "By mobility (fine) and cluster", feature_names=["level_v2", "cluster"]),
+        # SubsetSpec("by_mobility_v1", "By mobility (coarse)", feature_names=["level_v1"]),
+        SubsetSpec("by_mobility_v2", "By mobility (revised)", feature_names=["level_v2"]),
+        SubsetSpec(
+            "by_mobility_v2_cluster", 
+            "By mobility (revised) and cluster", 
+            feature_names=["level_v2", "cluster"],
+            record_filter=restrict_to("source", SOURCES_WITH_MULTIPLE_CLUSTERS)
+            ),
+        SubsetSpec(
+            "by_source_mobility_v2_cluster_shared_component", 
+            "By mobility (revised) and components shared by GloWbE and ICE", 
+            feature_names=["source", "level_v2", "cluster","component"],
+            record_filter=combine_filters(
+                restrict_to("source", SOURCES_WITH_MULTIPLE_CLUSTERS),
+                restrict_to("component", SHARED_COMPONENTS)
+                )
+            ),
+        SubsetSpec(
+            "by_source_mobility_v2_shared_cluster", 
+            "By mobility (revised) and clusters shared by GloWbE and ICE", 
+            feature_names=["source", "level_v2", "cluster"],
+            record_filter=combine_filters(
+                restrict_to("source", SOURCES_WITH_MULTIPLE_CLUSTERS),
+                restrict_to("component", SHARED_COMPONENTS)
+                )
+            ),
+        SubsetSpec(
+            "by_source_mobility_v2_cluster", 
+            "By mobility (revised) and clusters shared by GloWbE and ICE", 
+            feature_names=["source", "level_v2", "cluster"],
+            record_filter=combine_filters(
+                restrict_to("source", SOURCES_WITH_MULTIPLE_CLUSTERS),
+                )
+            ),
+        SubsetSpec(
+            "by_mobility_v2_cluster_glowbe", 
+            "By mobility (revised), GloWbE only", 
+            feature_names=["level_v2", "cluster"],
+            record_filter=restrict_to("source", ["glowbe"])
+            ),
+        SubsetSpec(
+            "by_mobility_v2_ice", 
+            "By mobility (revised), ICE only", 
+            feature_names=["level_v2"],
+            record_filter=restrict_to("source", ["ice"])
+            ),
+    
+        SubsetSpec(
+            "by_mobility_v2_component_in_ice", 
+            "By mobility (revised), ICE only", 
+            feature_names=["level_v2", "component"],
+            record_filter=restrict_to("source", ["ice"])
+            ),
+        SubsetSpec(
+            "by_mobility_v2_component_cluster_in_ice", 
+            "By mobility (revised), ICE only", 
+            feature_names=["level_v2", "component", "cluster"],
+            record_filter=restrict_to("source", ["ice"])
+            ),
+        SubsetSpec(
+            "by_mobility_v2_cluster_ice", 
+            "By mobility (revised), ICE only", 
+            feature_names=["level_v2", "cluster"],
+            record_filter=restrict_to("source", ["ice"])
+            ),
         SubsetSpec(
             "by_med_mobility_component", 
             "Medium mobility and component", 
             feature_names=["level_v2", "component"],
             record_filter=restrict_to("level_v2", ["medium"])
             ),
-        SubsetSpec(
-            "by_mobility_v2_ice", 
-            "By mobility (fine), ICE only", 
-            feature_names=["level_v2"],
-            record_filter=restrict_to("source", ["ice"])
-            ),
-        SubsetSpec(
-            "by_mobility_v2_component_ice", 
-            "By mobility (fine), ICE only", 
-            feature_names=["level_v2", "component"],
-            record_filter=restrict_to("source", ["ice"])
-            ),
-        SubsetSpec(
-            "by_mobility_v2_cluster_ice", 
-            "By mobility (fine), ICE only", 
-            feature_names=["level_v2", "cluster"],
-            record_filter=restrict_to("source", ["ice"])
-            ),
-        SubsetSpec(
-            "by_cluster_source",
-            "By cluster and source",
-            feature_names=["cluster", "source"],
-        ),
-        SubsetSpec(
-            "by_source_genre_cluster",
-            "By source and genre and cluster",
-            feature_names=["source", "genre", "cluster"],
-        ),
-        SubsetSpec(
-            "by_source_genre_cluster_english",
-            "By source and genre and cluster",
-            feature_names=["source", "genre", "cluster"],
-            record_filter=combine_filters(
-                restrict_to("source", SOURCES_WITH_GENRE),
-                restrict_to("component", SHARED_COMPONENTS),
-            ),
-        ),
-        SubsetSpec(
-            "by_source_genre_cluster_in_ice",
-            "By source and genre and cluster",
-            feature_names=["source", "genre", "cluster"],
-            record_filter=restrict_to("source", ["ice"]),
-        ),
-        SubsetSpec(
-            "by_source_genre_component",
-            "By source and genre and component",
-            feature_names=["source", "genre", "component"],
-            record_filter=restrict_to("source", SOURCES_WITH_GENRE),
-        ),
-        SubsetSpec(
-            "by_source_genre_component_english",
-            "By source and genre and component",
-            feature_names=["source", "genre", "component"],
-            record_filter=combine_filters(
-                restrict_to("source", SOURCES_WITH_GENRE),
-                restrict_to("component", SHARED_COMPONENTS),
-            ),
-        ),
-        SubsetSpec(
-            "by_source_genre",
-            "By source and genre",
-            feature_names=["source", "genre"],
-        ),
-        SubsetSpec(
-            "by_source_genre_english",
-            "By source and genre",
-            feature_names=["source", "genre"],
-            record_filter=restrict_to("source", SOURCES_WITH_GENRE),
-        ),
-        SubsetSpec(
-            "by_cluster_component",
-            "By cluster and component",
-            feature_names=["cluster", "component"],
-        ),
-        SubsetSpec(
-            "by_cluster_genre",
-            "By cluster and genre",
-            feature_names=["cluster", "genre"],
-        ),
-        SubsetSpec(
-            "by_component_genre",
-            "By component and genre",
-            feature_names=["component", "genre"],
-        ),
-        SubsetSpec(
-            "by_genre",
-            "By genre",
-            feature_names=["genre"],
-            record_filter=exclude_nulls("genre"),
-        ),
-        SubsetSpec(
-            "by_component",
-            "By component",
-            feature_names=["component"],
-            record_filter=restrict_to("source", SOURCES_WITH_GENRE),
-        ),
-        SubsetSpec(
-            key="by_component_written_in_ice",
-            title="By component (written), within ICE",
-            feature_names=["component"],
-            record_filter=combine_filters(
-                restrict_to("source", ["ice"]), restrict_to("genre", ["written"])
-            ),
-        ),
-        SubsetSpec(
-            key="by_component_spoken_in_ice",
-            title="By component (spoken), within ICE",
-            feature_names=["component"],
-            record_filter=combine_filters(
-                restrict_to("source", ["ice"]), restrict_to("genre", ["spoken"])
-            ),
-        ),
+        # SubsetSpec(
+        #     "by_cluster_source",
+        #     "By cluster and source",
+        #     feature_names=["cluster", "source"],
+        # ),
+        # SubsetSpec(
+        #     "by_source_genre_cluster",
+        #     "By source and genre and cluster",
+        #     feature_names=["source", "genre", "cluster"],
+        # ),
+        # SubsetSpec(
+        #     "by_source_genre_cluster_english",
+        #     "By source and genre and cluster",
+        #     feature_names=["source", "genre", "cluster"],
+        #     record_filter=combine_filters(
+        #         restrict_to("source", SOURCES_WITH_GENRE),
+        #         restrict_to("component", SHARED_COMPONENTS),
+        #     ),
+        # ),
+        # SubsetSpec(
+        #     "by_source_genre_cluster_in_ice",
+        #     "By source and genre and cluster",
+        #     feature_names=["source", "genre", "cluster"],
+        #     record_filter=restrict_to("source", ["ice"]),
+        # ),
+        # SubsetSpec(
+        #     "by_source_genre_component",
+        #     "By source and genre and component",
+        #     feature_names=["source", "genre", "component"],
+        #     record_filter=restrict_to("source", SOURCES_WITH_GENRE),
+        # ),
+        # SubsetSpec(
+        #     "by_source_genre_component_english",
+        #     "By source and genre and component",
+        #     feature_names=["source", "genre", "component"],
+        #     record_filter=combine_filters(
+        #         restrict_to("source", SOURCES_WITH_GENRE),
+        #         restrict_to("component", SHARED_COMPONENTS),
+        #     ),
+        # ),
+        # SubsetSpec(
+        #     "by_source_genre",
+        #     "By source and genre",
+        #     feature_names=["source", "genre"],
+        # ),
+        # SubsetSpec(
+        #     "by_source_genre_english",
+        #     "By source and genre",
+        #     feature_names=["source", "genre"],
+        #     record_filter=restrict_to("source", SOURCES_WITH_GENRE),
+        # ),
+        # SubsetSpec(
+        #     "by_cluster_component",
+        #     "By cluster and component",
+        #     feature_names=["cluster", "component"],
+        # ),
+        # SubsetSpec(
+        #     "by_cluster_genre",
+        #     "By cluster and genre",
+        #     feature_names=["cluster", "genre"],
+        # ),
+        # SubsetSpec(
+        #     "by_component_genre",
+        #     "By component and genre",
+        #     feature_names=["component", "genre"],
+        # ),
+        # SubsetSpec(
+        #     "by_genre",
+        #     "By genre",
+        #     feature_names=["genre"],
+        #     record_filter=exclude_nulls("genre"),
+        # ),
+        # SubsetSpec(
+        #     "by_component",
+        #     "By component",
+        #     feature_names=["component"],
+        #     record_filter=restrict_to("source", SOURCES_WITH_GENRE),
+        # ),
+        # SubsetSpec(
+        #     key="by_component_written_in_ice",
+        #     title="By component (written), within ICE",
+        #     feature_names=["component"],
+        #     record_filter=combine_filters(
+        #         restrict_to("source", ["ice"]), restrict_to("genre", ["written"])
+        #     ),
+        # ),
+        # SubsetSpec(
+        #     key="by_component_spoken_in_ice",
+        #     title="By component (spoken), within ICE",
+        #     feature_names=["component"],
+        #     record_filter=combine_filters(
+        #         restrict_to("source", ["ice"]), restrict_to("genre", ["spoken"])
+        #     ),
+        # ),
     ]
 
-    for cluster in CLUSTERS_WITH_SOURCES_AND_GENRES:
-        subset.append(
-            SubsetSpec(
-                key=f"by_source_in_cluster_{cluster}",
-                title=f"By source, within cluster {cluster}",
-                feature_names=["source"],
-                record_filter=restrict_to("cluster", [cluster]),
-            )
-        )
-        subset.append(
-            SubsetSpec(
-                key=f"by_genre_in_cluster_{cluster}",
-                title=f"By genre, within cluster {cluster}",
-                feature_names=["genre"],
-                record_filter=restrict_to("cluster", [cluster]),
-            )
-        )
+    # for cluster in CLUSTERS_WITH_SOURCES_AND_GENRES:
+    #     subset.append(
+    #         SubsetSpec(
+    #             key=f"by_source_in_cluster_{cluster}",
+    #             title=f"By source, within cluster {cluster}",
+    #             feature_names=["source"],
+    #             record_filter=restrict_to("cluster", [cluster]),
+    #         )
+    #     )
+    #     subset.append(
+    #         SubsetSpec(
+    #             key=f"by_genre_in_cluster_{cluster}",
+    #             title=f"By genre, within cluster {cluster}",
+    #             feature_names=["genre"],
+    #             record_filter=restrict_to("cluster", [cluster]),
+    #         )
+    #     )
 
-    for source in SOURCES:
-        subset.append(
-            SubsetSpec(
-                key=f"by_component_in_{source}",
-                title=f"By component, within source {source}",
-                feature_names=["component"],
-                record_filter=restrict_to("source", [source]),
-            )
-        )
+    # for source in SOURCES:
+    #     subset.append(
+    #         SubsetSpec(
+    #             key=f"by_component_in_{source}",
+    #             title=f"By component, within source {source}",
+    #             feature_names=["component"],
+    #             record_filter=restrict_to("source", [source]),
+    #         )
+    #     )
 
-    for source in SOURCES_WITH_GENRE:
-        subset.append(
-            SubsetSpec(
-                key=f"by_genre_in_{source}",
-                title=f"By genre, within source {source}",
-                feature_names=["genre"],
-                record_filter=combine_filters(
-                    restrict_to("source", [source]), exclude_nulls("genre")
-                ),
-            )
-        )
+    # for source in SOURCES_WITH_GENRE:
+    #     subset.append(
+    #         SubsetSpec(
+    #             key=f"by_genre_in_{source}",
+    #             title=f"By genre, within source {source}",
+    #             feature_names=["genre"],
+    #             record_filter=combine_filters(
+    #                 restrict_to("source", [source]), exclude_nulls("genre")
+    #             ),
+    #         )
+    #     )
 
-    for source in SOURCES_WITH_MULTIPLE_CLUSTERS:
-        subset.append(
-            SubsetSpec(
-                key=f"by_cluster_in_{source}",
-                title=f"By cluster, within source {source}",
-                feature_names=["cluster"],
-                record_filter=restrict_to("source", [source]),
-            )
-        )
+    # for source in SOURCES_WITH_MULTIPLE_CLUSTERS:
+    #     subset.append(
+    #         SubsetSpec(
+    #             key=f"by_cluster_in_{source}",
+    #             title=f"By cluster, within source {source}",
+    #             feature_names=["cluster"],
+    #             record_filter=restrict_to("source", [source]),
+    #         )
+    #     )
 
     return subset
 
 
 def subset_value_universe(stages: Dict, spec: SubsetSpec) -> Set[str]:
     """
-    Returns the set of distinct (and normalized) values that define a subset.
+    Returns the set of distinct (and normalized) values that derevised a subset.
     Shared by eval.retention.plot_data and eval.colors
     """
     values: Set[str] = set()

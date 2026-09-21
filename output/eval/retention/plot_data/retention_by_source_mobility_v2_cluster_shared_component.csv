@@ -1,0 +1,331 @@
+value,stage,stage_name,included,total,retention,lrp,cumulative_lrp
+glowbe / high / 1 / gb,1,📖 - READER: 🐿 Jsonl,381483,381483,1.0,-0.0,0.0
+glowbe / high / 1 / us,1,📖 - READER: 🐿 Jsonl,273061,273061,1.0,-0.0,0.0
+glowbe / high / 2 / au,1,📖 - READER: 🐿 Jsonl,128360,128360,1.0,-0.0,0.0
+glowbe / high / 2 / ca,1,📖 - READER: 🐿 Jsonl,135604,135604,1.0,-0.0,0.0
+glowbe / high / 2 / ie,1,📖 - READER: 🐿 Jsonl,101985,101985,1.0,-0.0,0.0
+glowbe / high / 2 / nz,1,📖 - READER: 🐿 Jsonl,82651,82651,1.0,-0.0,0.0
+glowbe / high / 3 / hk,1,📖 - READER: 🐿 Jsonl,43875,43875,1.0,-0.0,0.0
+glowbe / high / 3 / in,1,📖 - READER: 🐿 Jsonl,113636,113636,1.0,-0.0,0.0
+glowbe / high / 3 / ph,1,📖 - READER: 🐿 Jsonl,45951,45951,1.0,-0.0,0.0
+glowbe / high / 3 / sg,1,📖 - READER: 🐿 Jsonl,45303,45303,1.0,-0.0,0.0
+glowbe / high / 4 / jm,1,📖 - READER: 🐿 Jsonl,46707,46707,1.0,-0.0,0.0
+glowbe / high / 4 / ke,1,📖 - READER: 🐿 Jsonl,45912,45912,1.0,-0.0,0.0
+glowbe / high / 4 / ng,1,📖 - READER: 🐿 Jsonl,37265,37265,1.0,-0.0,0.0
+glowbe / high / 4 / tz,1,📖 - READER: 🐿 Jsonl,41316,41316,1.0,-0.0,0.0
+ice / high / 1 / gb,1,📖 - READER: 🐿 Jsonl,40,40,1.0,-0.0,0.0
+ice / high / 1 / us,1,📖 - READER: 🐿 Jsonl,40,40,1.0,-0.0,0.0
+ice / high / 2 / au,1,📖 - READER: 🐿 Jsonl,40,40,1.0,-0.0,0.0
+ice / high / 2 / ca,1,📖 - READER: 🐿 Jsonl,40,40,1.0,-0.0,0.0
+ice / high / 2 / ie,1,📖 - READER: 🐿 Jsonl,40,40,1.0,-0.0,0.0
+ice / high / 2 / nz,1,📖 - READER: 🐿 Jsonl,40,40,1.0,-0.0,0.0
+ice / high / 3 / hk,1,📖 - READER: 🐿 Jsonl,40,40,1.0,-0.0,0.0
+ice / high / 3 / in,1,📖 - READER: 🐿 Jsonl,40,40,1.0,-0.0,0.0
+ice / high / 3 / ph,1,📖 - READER: 🐿 Jsonl,40,40,1.0,-0.0,0.0
+ice / high / 3 / sg,1,📖 - READER: 🐿 Jsonl,40,40,1.0,-0.0,0.0
+ice / high / 4 / jm,1,📖 - READER: 🐿 Jsonl,40,40,1.0,-0.0,0.0
+ice / high / 4 / ke,1,📖 - READER: 🐿 Jsonl,51,51,1.0,-0.0,0.0
+ice / high / 4 / ng,1,📖 - READER: 🐿 Jsonl,44,44,1.0,-0.0,0.0
+ice / high / 4 / tz,1,📖 - READER: 🐿 Jsonl,46,46,1.0,-0.0,0.0
+ice / low / 1 / gb,1,📖 - READER: 🐿 Jsonl,250,250,1.0,-0.0,0.0
+ice / low / 2 / au,1,📖 - READER: 🐿 Jsonl,250,250,1.0,-0.0,0.0
+ice / low / 2 / ca,1,📖 - READER: 🐿 Jsonl,250,250,1.0,-0.0,0.0
+ice / low / 2 / ie,1,📖 - READER: 🐿 Jsonl,250,250,1.0,-0.0,0.0
+ice / low / 2 / nz,1,📖 - READER: 🐿 Jsonl,250,250,1.0,-0.0,0.0
+ice / low / 3 / hk,1,📖 - READER: 🐿 Jsonl,250,250,1.0,-0.0,0.0
+ice / low / 3 / in,1,📖 - READER: 🐿 Jsonl,250,250,1.0,-0.0,0.0
+ice / low / 3 / ph,1,📖 - READER: 🐿 Jsonl,250,250,1.0,-0.0,0.0
+ice / low / 3 / sg,1,📖 - READER: 🐿 Jsonl,250,250,1.0,-0.0,0.0
+ice / low / 4 / jm,1,📖 - READER: 🐿 Jsonl,249,249,1.0,-0.0,0.0
+ice / low / 4 / ke,1,📖 - READER: 🐿 Jsonl,90,90,1.0,-0.0,0.0
+ice / low / 4 / ng,1,📖 - READER: 🐿 Jsonl,299,299,1.0,-0.0,0.0
+ice / low / 4 / tz,1,📖 - READER: 🐿 Jsonl,34,34,1.0,-0.0,0.0
+ice / medium / 1 / gb,1,📖 - READER: 🐿 Jsonl,210,210,1.0,-0.0,0.0
+ice / medium / 1 / us,1,📖 - READER: 🐿 Jsonl,160,160,1.0,-0.0,0.0
+ice / medium / 2 / au,1,📖 - READER: 🐿 Jsonl,209,209,1.0,-0.0,0.0
+ice / medium / 2 / ca,1,📖 - READER: 🐿 Jsonl,210,210,1.0,-0.0,0.0
+ice / medium / 2 / ie,1,📖 - READER: 🐿 Jsonl,210,210,1.0,-0.0,0.0
+ice / medium / 2 / nz,1,📖 - READER: 🐿 Jsonl,210,210,1.0,-0.0,0.0
+ice / medium / 3 / hk,1,📖 - READER: 🐿 Jsonl,210,210,1.0,-0.0,0.0
+ice / medium / 3 / in,1,📖 - READER: 🐿 Jsonl,210,210,1.0,-0.0,0.0
+ice / medium / 3 / ph,1,📖 - READER: 🐿 Jsonl,210,210,1.0,-0.0,0.0
+ice / medium / 3 / sg,1,📖 - READER: 🐿 Jsonl,210,210,1.0,-0.0,0.0
+ice / medium / 4 / jm,1,📖 - READER: 🐿 Jsonl,210,210,1.0,-0.0,0.0
+ice / medium / 4 / ke,1,📖 - READER: 🐿 Jsonl,207,207,1.0,-0.0,0.0
+ice / medium / 4 / ng,1,📖 - READER: 🐿 Jsonl,553,553,1.0,-0.0,0.0
+ice / medium / 4 / tz,1,📖 - READER: 🐿 Jsonl,210,210,1.0,-0.0,0.0
+glowbe / high / 1 / gb,2,🔻 - FILTER: 🌍 Language ID,381335,381483,0.9996120403792568,0.0003880348965468359,0.0003880348965468359
+glowbe / high / 1 / us,2,🔻 - FILTER: 🌍 Language ID,272594,273061,0.9982897594310429,0.0017117046999412014,0.0017117046999412014
+glowbe / high / 2 / au,2,🔻 - FILTER: 🌍 Language ID,128315,128360,0.9996494234964163,0.00035063796989233626,0.00035063796989233626
+glowbe / high / 2 / ca,2,🔻 - FILTER: 🌍 Language ID,135556,135604,0.9996460281407628,0.000354034522063499,0.000354034522063499
+glowbe / high / 2 / ie,2,🔻 - FILTER: 🌍 Language ID,101927,101985,0.9994312889150365,0.0005688728624519021,0.0005688728624519021
+glowbe / high / 2 / nz,2,🔻 - FILTER: 🌍 Language ID,82621,82651,0.9996370279851423,0.0003630379051441749,0.0003630379051441749
+glowbe / high / 3 / hk,2,🔻 - FILTER: 🌍 Language ID,43849,43875,0.9994074074074074,0.0005927682449799505,0.0005927682449799505
+glowbe / high / 3 / in,2,🔻 - FILTER: 🌍 Language ID,113498,113636,0.9987855961139076,0.0012151418720275037,0.0012151418720275037
+glowbe / high / 3 / ph,2,🔻 - FILTER: 🌍 Language ID,45893,45951,0.9987377859023743,0.0012630113607883296,0.0012630113607883296
+glowbe / high / 3 / sg,2,🔻 - FILTER: 🌍 Language ID,45270,45303,0.9992715714191113,0.0007286940138946097,0.0007286940138946097
+glowbe / high / 4 / jm,2,🔻 - FILTER: 🌍 Language ID,46688,46707,0.9995932087267433,0.0004068740352720495,0.0004068740352720495
+glowbe / high / 4 / ke,2,🔻 - FILTER: 🌍 Language ID,45902,45912,0.9997821920195156,0.00021783170408746743,0.00021783170408746743
+glowbe / high / 4 / ng,2,🔻 - FILTER: 🌍 Language ID,37251,37265,0.99962431235744,0.0003757582308423887,0.0003757582308423887
+glowbe / high / 4 / tz,2,🔻 - FILTER: 🌍 Language ID,41289,41316,0.9993465001452222,0.000653713478881854,0.000653713478881854
+ice / high / 1 / gb,2,🔻 - FILTER: 🌍 Language ID,40,40,1.0,-0.0,0.0
+ice / high / 1 / us,2,🔻 - FILTER: 🌍 Language ID,40,40,1.0,-0.0,0.0
+ice / high / 2 / au,2,🔻 - FILTER: 🌍 Language ID,40,40,1.0,-0.0,0.0
+ice / high / 2 / ca,2,🔻 - FILTER: 🌍 Language ID,40,40,1.0,-0.0,0.0
+ice / high / 2 / ie,2,🔻 - FILTER: 🌍 Language ID,40,40,1.0,-0.0,0.0
+ice / high / 2 / nz,2,🔻 - FILTER: 🌍 Language ID,40,40,1.0,-0.0,0.0
+ice / high / 3 / hk,2,🔻 - FILTER: 🌍 Language ID,40,40,1.0,-0.0,0.0
+ice / high / 3 / in,2,🔻 - FILTER: 🌍 Language ID,40,40,1.0,-0.0,0.0
+ice / high / 3 / ph,2,🔻 - FILTER: 🌍 Language ID,40,40,1.0,-0.0,0.0
+ice / high / 3 / sg,2,🔻 - FILTER: 🌍 Language ID,40,40,1.0,-0.0,0.0
+ice / high / 4 / jm,2,🔻 - FILTER: 🌍 Language ID,40,40,1.0,-0.0,0.0
+ice / high / 4 / ke,2,🔻 - FILTER: 🌍 Language ID,51,51,1.0,-0.0,0.0
+ice / high / 4 / ng,2,🔻 - FILTER: 🌍 Language ID,44,44,1.0,-0.0,0.0
+ice / high / 4 / tz,2,🔻 - FILTER: 🌍 Language ID,46,46,1.0,-0.0,0.0
+ice / low / 1 / gb,2,🔻 - FILTER: 🌍 Language ID,250,250,1.0,-0.0,0.0
+ice / low / 2 / au,2,🔻 - FILTER: 🌍 Language ID,250,250,1.0,-0.0,0.0
+ice / low / 2 / ca,2,🔻 - FILTER: 🌍 Language ID,250,250,1.0,-0.0,0.0
+ice / low / 2 / ie,2,🔻 - FILTER: 🌍 Language ID,250,250,1.0,-0.0,0.0
+ice / low / 2 / nz,2,🔻 - FILTER: 🌍 Language ID,250,250,1.0,-0.0,0.0
+ice / low / 3 / hk,2,🔻 - FILTER: 🌍 Language ID,250,250,1.0,-0.0,0.0
+ice / low / 3 / in,2,🔻 - FILTER: 🌍 Language ID,250,250,1.0,-0.0,0.0
+ice / low / 3 / ph,2,🔻 - FILTER: 🌍 Language ID,250,250,1.0,-0.0,0.0
+ice / low / 3 / sg,2,🔻 - FILTER: 🌍 Language ID,250,250,1.0,-0.0,0.0
+ice / low / 4 / jm,2,🔻 - FILTER: 🌍 Language ID,249,249,1.0,-0.0,0.0
+ice / low / 4 / ke,2,🔻 - FILTER: 🌍 Language ID,90,90,1.0,-0.0,0.0
+ice / low / 4 / ng,2,🔻 - FILTER: 🌍 Language ID,299,299,1.0,-0.0,0.0
+ice / low / 4 / tz,2,🔻 - FILTER: 🌍 Language ID,34,34,1.0,-0.0,0.0
+ice / medium / 1 / gb,2,🔻 - FILTER: 🌍 Language ID,210,210,1.0,-0.0,0.0
+ice / medium / 1 / us,2,🔻 - FILTER: 🌍 Language ID,160,160,1.0,-0.0,0.0
+ice / medium / 2 / au,2,🔻 - FILTER: 🌍 Language ID,209,209,1.0,-0.0,0.0
+ice / medium / 2 / ca,2,🔻 - FILTER: 🌍 Language ID,210,210,1.0,-0.0,0.0
+ice / medium / 2 / ie,2,🔻 - FILTER: 🌍 Language ID,210,210,1.0,-0.0,0.0
+ice / medium / 2 / nz,2,🔻 - FILTER: 🌍 Language ID,210,210,1.0,-0.0,0.0
+ice / medium / 3 / hk,2,🔻 - FILTER: 🌍 Language ID,210,210,1.0,-0.0,0.0
+ice / medium / 3 / in,2,🔻 - FILTER: 🌍 Language ID,210,210,1.0,-0.0,0.0
+ice / medium / 3 / ph,2,🔻 - FILTER: 🌍 Language ID,210,210,1.0,-0.0,0.0
+ice / medium / 3 / sg,2,🔻 - FILTER: 🌍 Language ID,210,210,1.0,-0.0,0.0
+ice / medium / 4 / jm,2,🔻 - FILTER: 🌍 Language ID,210,210,1.0,-0.0,0.0
+ice / medium / 4 / ke,2,🔻 - FILTER: 🌍 Language ID,207,207,1.0,-0.0,0.0
+ice / medium / 4 / ng,2,🔻 - FILTER: 🌍 Language ID,551,553,0.9963833634719711,0.0036231923694202838,0.0036231923694202838
+ice / medium / 4 / tz,2,🔻 - FILTER: 🌍 Language ID,210,210,1.0,-0.0,0.0
+glowbe / high / 1 / gb,3,🔻 - FILTER: 👯 Gopher Repetition,368157,381335,0.9654424587305125,0.03516877626862754,0.03555681116517438
+glowbe / high / 1 / us,3,🔻 - FILTER: 👯 Gopher Repetition,260163,272594,0.954397382187429,0.046675151090468846,0.04838685579041005
+glowbe / high / 2 / au,3,🔻 - FILTER: 👯 Gopher Repetition,124954,128315,0.9738066477029186,0.026542508698079326,0.026893146667971664
+glowbe / high / 2 / ca,3,🔻 - FILTER: 👯 Gopher Repetition,131650,135556,0.9711853403759332,0.029237953131914164,0.029591987653977664
+glowbe / high / 2 / ie,3,🔻 - FILTER: 👯 Gopher Repetition,98627,101927,0.9676238876843231,0.032911812989688205,0.033480685852140105
+glowbe / high / 2 / nz,3,🔻 - FILTER: 👯 Gopher Repetition,80925,82621,0.9794725311966691,0.020741085689937242,0.021104123595081417
+glowbe / high / 3 / hk,3,🔻 - FILTER: 👯 Gopher Repetition,42576,43849,0.9709685511642226,0.029461199305716584,0.030053967550696534
+glowbe / high / 3 / in,3,🔻 - FILTER: 👯 Gopher Repetition,109010,113498,0.9604574529947665,0.04034559448056149,0.041560736352588994
+glowbe / high / 3 / ph,3,🔻 - FILTER: 👯 Gopher Repetition,43807,45893,0.9545464449916109,0.04651897802517214,0.04778198938596047
+glowbe / high / 3 / sg,3,🔻 - FILTER: 👯 Gopher Repetition,43333,45270,0.9572122818643694,0.043730091997672735,0.044458786011567344
+glowbe / high / 4 / jm,3,🔻 - FILTER: 👯 Gopher Repetition,45285,46688,0.9699494516792323,0.030511320513463377,0.030918194548735428
+glowbe / high / 4 / ke,3,🔻 - FILTER: 👯 Gopher Repetition,44704,45902,0.9739009193499194,0.026445706027422678,0.026663537731510145
+glowbe / high / 4 / ng,3,🔻 - FILTER: 👯 Gopher Repetition,35831,37251,0.9618802179807253,0.03886534960243368,0.03924110783327607
+glowbe / high / 4 / tz,3,🔻 - FILTER: 👯 Gopher Repetition,40063,41289,0.9703068613916539,0.030142905563277228,0.030796619042159083
+ice / high / 1 / gb,3,🔻 - FILTER: 👯 Gopher Repetition,39,40,0.975,0.025317807984289897,0.025317807984289897
+ice / high / 1 / us,3,🔻 - FILTER: 👯 Gopher Repetition,39,40,0.975,0.025317807984289897,0.025317807984289897
+ice / high / 2 / au,3,🔻 - FILTER: 👯 Gopher Repetition,24,40,0.6,0.5108256237659907,0.5108256237659907
+ice / high / 2 / ca,3,🔻 - FILTER: 👯 Gopher Repetition,40,40,1.0,-0.0,0.0
+ice / high / 2 / ie,3,🔻 - FILTER: 👯 Gopher Repetition,40,40,1.0,-0.0,0.0
+ice / high / 2 / nz,3,🔻 - FILTER: 👯 Gopher Repetition,40,40,1.0,-0.0,0.0
+ice / high / 3 / hk,3,🔻 - FILTER: 👯 Gopher Repetition,37,40,0.925,0.0779615414697118,0.0779615414697118
+ice / high / 3 / in,3,🔻 - FILTER: 👯 Gopher Repetition,40,40,1.0,-0.0,0.0
+ice / high / 3 / ph,3,🔻 - FILTER: 👯 Gopher Repetition,39,40,0.975,0.025317807984289897,0.025317807984289897
+ice / high / 3 / sg,3,🔻 - FILTER: 👯 Gopher Repetition,40,40,1.0,-0.0,0.0
+ice / high / 4 / jm,3,🔻 - FILTER: 👯 Gopher Repetition,40,40,1.0,-0.0,0.0
+ice / high / 4 / ke,3,🔻 - FILTER: 👯 Gopher Repetition,51,51,1.0,-0.0,0.0
+ice / high / 4 / ng,3,🔻 - FILTER: 👯 Gopher Repetition,44,44,1.0,-0.0,0.0
+ice / high / 4 / tz,3,🔻 - FILTER: 👯 Gopher Repetition,46,46,1.0,-0.0,0.0
+ice / low / 1 / gb,3,🔻 - FILTER: 👯 Gopher Repetition,240,250,0.96,0.040821994520255166,0.040821994520255166
+ice / low / 2 / au,3,🔻 - FILTER: 👯 Gopher Repetition,250,250,1.0,-0.0,0.0
+ice / low / 2 / ca,3,🔻 - FILTER: 👯 Gopher Repetition,249,250,0.996,0.004008021397538822,0.004008021397538822
+ice / low / 2 / ie,3,🔻 - FILTER: 👯 Gopher Repetition,224,250,0.896,0.10981486600720657,0.10981486600720657
+ice / low / 2 / nz,3,🔻 - FILTER: 👯 Gopher Repetition,9,250,0.036,3.3242363405260273,3.3242363405260273
+ice / low / 3 / hk,3,🔻 - FILTER: 👯 Gopher Repetition,118,250,0.472,0.7507762933965817,0.7507762933965817
+ice / low / 3 / in,3,🔻 - FILTER: 👯 Gopher Repetition,117,250,0.468,0.7592869830644903,0.7592869830644903
+ice / low / 3 / ph,3,🔻 - FILTER: 👯 Gopher Repetition,4,250,0.016,4.135166556742356,4.135166556742356
+ice / low / 3 / sg,3,🔻 - FILTER: 👯 Gopher Repetition,127,250,0.508,0.6772738314036552,0.6772738314036552
+ice / low / 4 / jm,3,🔻 - FILTER: 👯 Gopher Repetition,236,249,0.9477911646586346,0.053621091439097525,0.053621091439097525
+ice / low / 4 / ke,3,🔻 - FILTER: 👯 Gopher Repetition,89,90,0.9888888888888889,0.011173300598125189,0.011173300598125189
+ice / low / 4 / ng,3,🔻 - FILTER: 👯 Gopher Repetition,290,299,0.9698996655518395,0.030562650410166696,0.030562650410166696
+ice / low / 4 / tz,3,🔻 - FILTER: 👯 Gopher Repetition,34,34,1.0,-0.0,0.0
+ice / medium / 1 / gb,3,🔻 - FILTER: 👯 Gopher Repetition,208,210,0.9904761904761905,0.009569451016150672,0.009569451016150672
+ice / medium / 1 / us,3,🔻 - FILTER: 👯 Gopher Repetition,158,160,0.9875,0.012578782206860073,0.012578782206860073
+ice / medium / 2 / au,3,🔻 - FILTER: 👯 Gopher Repetition,201,209,0.9617224880382775,0.03902934390573523,0.03902934390573523
+ice / medium / 2 / ca,3,🔻 - FILTER: 👯 Gopher Repetition,210,210,1.0,-0.0,0.0
+ice / medium / 2 / ie,3,🔻 - FILTER: 👯 Gopher Repetition,197,210,0.9380952380952381,0.06390380197948017,0.06390380197948017
+ice / medium / 2 / nz,3,🔻 - FILTER: 👯 Gopher Repetition,162,210,0.7714285714285715,0.25951119548508456,0.25951119548508456
+ice / medium / 3 / hk,3,🔻 - FILTER: 👯 Gopher Repetition,154,210,0.7333333333333333,0.3101549283038396,0.3101549283038396
+ice / medium / 3 / in,3,🔻 - FILTER: 👯 Gopher Repetition,188,210,0.8952380952380953,0.11066556788751943,0.11066556788751943
+ice / medium / 3 / ph,3,🔻 - FILTER: 👯 Gopher Repetition,127,210,0.6047619047619047,0.5029204442588775,0.5029204442588775
+ice / medium / 3 / sg,3,🔻 - FILTER: 👯 Gopher Repetition,208,210,0.9904761904761905,0.009569451016150672,0.009569451016150672
+ice / medium / 4 / jm,3,🔻 - FILTER: 👯 Gopher Repetition,209,210,0.9952380952380953,0.00477327875265766,0.00477327875265766
+ice / medium / 4 / ke,3,🔻 - FILTER: 👯 Gopher Repetition,207,207,1.0,-0.0,0.0
+ice / medium / 4 / ng,3,🔻 - FILTER: 👯 Gopher Repetition,542,551,0.9836660617059891,0.016468807713268252,0.020092000082688535
+ice / medium / 4 / tz,3,🔻 - FILTER: 👯 Gopher Repetition,209,210,0.9952380952380953,0.00477327875265766,0.00477327875265766
+glowbe / high / 1 / gb,4,🔻 - FILTER: 🥇 Gopher Quality,357181,368157,0.9701866323334881,0.030266821524560686,0.06582363268973507
+glowbe / high / 1 / us,4,🔻 - FILTER: 🥇 Gopher Quality,247651,260163,0.9519070736422934,0.04928786067538575,0.0976747164657958
+glowbe / high / 2 / au,4,🔻 - FILTER: 🥇 Gopher Quality,121508,124954,0.9724218512412568,0.02796556533927828,0.05485871200724994
+glowbe / high / 2 / ca,4,🔻 - FILTER: 🥇 Gopher Quality,127488,131650,0.9683858716293202,0.03212464342024001,0.061716631074217675
+glowbe / high / 2 / ie,4,🔻 - FILTER: 🥇 Gopher Quality,96083,98627,0.9742058462692772,0.026132656530106126,0.059613342382246234
+glowbe / high / 2 / nz,4,🔻 - FILTER: 🥇 Gopher Quality,78698,80925,0.9724806919987643,0.027905057672475156,0.04900918126755657
+glowbe / high / 3 / hk,4,🔻 - FILTER: 🥇 Gopher Quality,41180,42576,0.9672115745960166,0.033338012635689925,0.06339198018638646
+glowbe / high / 3 / in,4,🔻 - FILTER: 🥇 Gopher Quality,104886,109010,0.9621686083845519,0.03856557508316534,0.08012631143575433
+glowbe / high / 3 / ph,4,🔻 - FILTER: 🥇 Gopher Quality,41953,43807,0.9576779966671993,0.0432436779015404,0.09102566728750086
+glowbe / high / 3 / sg,4,🔻 - FILTER: 🥇 Gopher Quality,41905,43333,0.9670459003530797,0.03350931789932491,0.07796810391089226
+glowbe / high / 4 / jm,4,🔻 - FILTER: 🥇 Gopher Quality,44157,45285,0.9750910897648228,0.02522438694835245,0.05614258149708788
+glowbe / high / 4 / ke,4,🔻 - FILTER: 🥇 Gopher Quality,43855,44704,0.9810084108804581,0.019174245671206416,0.04583778340271656
+glowbe / high / 4 / ng,4,🔻 - FILTER: 🥇 Gopher Quality,34955,35831,0.9755518964025565,0.024751920536432593,0.06399302836970866
+glowbe / high / 4 / tz,4,🔻 - FILTER: 🥇 Gopher Quality,39122,40063,0.9765119936100641,0.023768246498060343,0.05456486554021943
+ice / high / 1 / gb,4,🔻 - FILTER: 🥇 Gopher Quality,35,39,0.8974358974358975,0.10821358464023272,0.13353139262452263
+ice / high / 1 / us,4,🔻 - FILTER: 🥇 Gopher Quality,36,39,0.9230769230769231,0.08004270767353637,0.10536051565782627
+ice / high / 2 / au,4,🔻 - FILTER: 🥇 Gopher Quality,24,24,1.0,-0.0,0.5108256237659907
+ice / high / 2 / ca,4,🔻 - FILTER: 🥇 Gopher Quality,30,40,0.75,0.2876820724517809,0.2876820724517809
+ice / high / 2 / ie,4,🔻 - FILTER: 🥇 Gopher Quality,38,40,0.95,0.05129329438755058,0.05129329438755058
+ice / high / 2 / nz,4,🔻 - FILTER: 🥇 Gopher Quality,36,40,0.9,0.10536051565782628,0.10536051565782628
+ice / high / 3 / hk,4,🔻 - FILTER: 🥇 Gopher Quality,32,37,0.8648648648648649,0.14518200984449783,0.22314355131420965
+ice / high / 3 / in,4,🔻 - FILTER: 🥇 Gopher Quality,28,40,0.7,0.35667494393873245,0.35667494393873245
+ice / high / 3 / ph,4,🔻 - FILTER: 🥇 Gopher Quality,31,39,0.7948717948717948,0.22957444164450025,0.25489224962879015
+ice / high / 3 / sg,4,🔻 - FILTER: 🥇 Gopher Quality,39,40,0.975,0.025317807984289897,0.025317807984289897
+ice / high / 4 / jm,4,🔻 - FILTER: 🥇 Gopher Quality,29,40,0.725,0.32158362412746233,0.32158362412746233
+ice / high / 4 / ke,4,🔻 - FILTER: 🥇 Gopher Quality,51,51,1.0,-0.0,0.0
+ice / high / 4 / ng,4,🔻 - FILTER: 🥇 Gopher Quality,40,44,0.9090909090909091,0.0953101798043249,0.0953101798043249
+ice / high / 4 / tz,4,🔻 - FILTER: 🥇 Gopher Quality,46,46,1.0,-0.0,0.0
+ice / low / 1 / gb,4,🔻 - FILTER: 🥇 Gopher Quality,240,240,1.0,-0.0,0.040821994520255166
+ice / low / 2 / au,4,🔻 - FILTER: 🥇 Gopher Quality,250,250,1.0,-0.0,0.0
+ice / low / 2 / ca,4,🔻 - FILTER: 🥇 Gopher Quality,249,249,1.0,-0.0,0.004008021397538822
+ice / low / 2 / ie,4,🔻 - FILTER: 🥇 Gopher Quality,224,224,1.0,-0.0,0.10981486600720657
+ice / low / 2 / nz,4,🔻 - FILTER: 🥇 Gopher Quality,9,9,1.0,-0.0,3.3242363405260273
+ice / low / 3 / hk,4,🔻 - FILTER: 🥇 Gopher Quality,118,118,1.0,-0.0,0.7507762933965817
+ice / low / 3 / in,4,🔻 - FILTER: 🥇 Gopher Quality,117,117,1.0,-0.0,0.7592869830644903
+ice / low / 3 / ph,4,🔻 - FILTER: 🥇 Gopher Quality,4,4,1.0,-0.0,4.135166556742356
+ice / low / 3 / sg,4,🔻 - FILTER: 🥇 Gopher Quality,127,127,1.0,-0.0,0.6772738314036552
+ice / low / 4 / jm,4,🔻 - FILTER: 🥇 Gopher Quality,236,236,1.0,-0.0,0.053621091439097525
+ice / low / 4 / ke,4,🔻 - FILTER: 🥇 Gopher Quality,89,89,1.0,-0.0,0.011173300598125189
+ice / low / 4 / ng,4,🔻 - FILTER: 🥇 Gopher Quality,290,290,1.0,-0.0,0.030562650410166696
+ice / low / 4 / tz,4,🔻 - FILTER: 🥇 Gopher Quality,34,34,1.0,-0.0,0.0
+ice / medium / 1 / gb,4,🔻 - FILTER: 🥇 Gopher Quality,202,208,0.9711538461538461,0.029270382300113224,0.038839833316263894
+ice / medium / 1 / us,4,🔻 - FILTER: 🥇 Gopher Quality,152,158,0.9620253164556962,0.03871451218069039,0.05129329438755047
+ice / medium / 2 / au,4,🔻 - FILTER: 🥇 Gopher Quality,197,201,0.9800995024875622,0.020101179321087265,0.059130523226822496
+ice / medium / 2 / ca,4,🔻 - FILTER: 🥇 Gopher Quality,208,210,0.9904761904761905,0.009569451016150672,0.009569451016150672
+ice / medium / 2 / ie,4,🔻 - FILTER: 🥇 Gopher Quality,197,197,1.0,-0.0,0.06390380197948017
+ice / medium / 2 / nz,4,🔻 - FILTER: 🥇 Gopher Quality,155,162,0.9567901234567902,0.044171218313137424,0.303682413798222
+ice / medium / 3 / hk,4,🔻 - FILTER: 🥇 Gopher Quality,142,154,0.922077922077922,0.08112554481236846,0.39128047311620806
+ice / medium / 3 / in,4,🔻 - FILTER: 🥇 Gopher Quality,172,188,0.9148936170212766,0.08894748601649617,0.1996130539040156
+ice / medium / 3 / ph,4,🔻 - FILTER: 🥇 Gopher Quality,120,127,0.9448818897637795,0.056695343676545294,0.5596157879354228
+ice / medium / 3 / sg,4,🔻 - FILTER: 🥇 Gopher Quality,205,208,0.9855769230769231,0.014528100562909744,0.024097551579060416
+ice / medium / 4 / jm,4,🔻 - FILTER: 🥇 Gopher Quality,203,209,0.9712918660287081,0.029128272923023713,0.033901551675681374
+ice / medium / 4 / ke,4,🔻 - FILTER: 🥇 Gopher Quality,205,207,0.9903381642512077,0.009708814126960938,0.009708814126960938
+ice / medium / 4 / ng,4,🔻 - FILTER: 🥇 Gopher Quality,524,542,0.966789667896679,0.03377431711860404,0.05386631720129258
+ice / medium / 4 / tz,4,🔻 - FILTER: 🥇 Gopher Quality,209,209,1.0,-0.0,0.00477327875265766
+glowbe / high / 1 / gb,5,🔻 - FILTER: ⛰ C4 Quality,288101,357181,0.8065966554771951,0.214931542996798,0.2807551756865331
+glowbe / high / 1 / us,5,🔻 - FILTER: ⛰ C4 Quality,195647,247651,0.7900109428187247,0.23570848194773153,0.3333831984135273
+glowbe / high / 2 / au,5,🔻 - FILTER: ⛰ C4 Quality,101367,121508,0.8342413668235836,0.1812325098326274,0.23609122183987735
+glowbe / high / 2 / ca,5,🔻 - FILTER: ⛰ C4 Quality,106674,127488,0.8367375753012049,0.1782447877595887,0.2399614188338064
+glowbe / high / 2 / ie,5,🔻 - FILTER: ⛰ C4 Quality,78670,96083,0.8187712706722313,0.1999505129231353,0.2595638553053815
+glowbe / high / 2 / nz,5,🔻 - FILTER: ⛰ C4 Quality,66308,78698,0.8425627080739028,0.1713071885772133,0.22031636984476988
+glowbe / high / 3 / hk,5,🔻 - FILTER: ⛰ C4 Quality,32194,41180,0.7817872753763964,0.24617260181560563,0.3095645820019921
+glowbe / high / 3 / in,5,🔻 - FILTER: ⛰ C4 Quality,83617,104886,0.7972179318498179,0.22662719735681205,0.30675350879256635
+glowbe / high / 3 / ph,5,🔻 - FILTER: ⛰ C4 Quality,34655,41953,0.8260434295521178,0.19110792869307774,0.28213359598057863
+glowbe / high / 3 / sg,5,🔻 - FILTER: ⛰ C4 Quality,34835,41905,0.8312850495167641,0.1847825230687873,0.26275062697967955
+glowbe / high / 4 / jm,5,🔻 - FILTER: ⛰ C4 Quality,37129,44157,0.8408406368186244,0.17335312945193104,0.22949571094901894
+glowbe / high / 4 / ke,5,🔻 - FILTER: ⛰ C4 Quality,36729,43855,0.8375099760574621,0.17732210364345685,0.2231598870461734
+glowbe / high / 4 / ng,5,🔻 - FILTER: ⛰ C4 Quality,29471,34955,0.8431125733085395,0.17065479097701985,0.23464781934672851
+glowbe / high / 4 / tz,5,🔻 - FILTER: ⛰ C4 Quality,30663,39122,0.7837789479065488,0.24362825258911872,0.29819311812933813
+ice / high / 1 / gb,5,🔻 - FILTER: ⛰ C4 Quality,35,35,1.0,-0.0,0.13353139262452263
+ice / high / 1 / us,5,🔻 - FILTER: ⛰ C4 Quality,35,36,0.9722222222222222,0.028170876966696335,0.1335313926245226
+ice / high / 2 / au,5,🔻 - FILTER: ⛰ C4 Quality,24,24,1.0,-0.0,0.5108256237659907
+ice / high / 2 / ca,5,🔻 - FILTER: ⛰ C4 Quality,30,30,1.0,-0.0,0.2876820724517809
+ice / high / 2 / ie,5,🔻 - FILTER: ⛰ C4 Quality,37,38,0.9736842105263158,0.026668247082161294,0.07796154146971188
+ice / high / 2 / nz,5,🔻 - FILTER: ⛰ C4 Quality,36,36,1.0,-0.0,0.10536051565782628
+ice / high / 3 / hk,5,🔻 - FILTER: ⛰ C4 Quality,32,32,1.0,-0.0,0.22314355131420965
+ice / high / 3 / in,5,🔻 - FILTER: ⛰ C4 Quality,28,28,1.0,-0.0,0.35667494393873245
+ice / high / 3 / ph,5,🔻 - FILTER: ⛰ C4 Quality,31,31,1.0,-0.0,0.25489224962879015
+ice / high / 3 / sg,5,🔻 - FILTER: ⛰ C4 Quality,39,39,1.0,-0.0,0.025317807984289897
+ice / high / 4 / jm,5,🔻 - FILTER: ⛰ C4 Quality,29,29,1.0,-0.0,0.32158362412746233
+ice / high / 4 / ke,5,🔻 - FILTER: ⛰ C4 Quality,51,51,1.0,-0.0,0.0
+ice / high / 4 / ng,5,🔻 - FILTER: ⛰ C4 Quality,40,40,1.0,-0.0,0.0953101798043249
+ice / high / 4 / tz,5,🔻 - FILTER: ⛰ C4 Quality,46,46,1.0,-0.0,0.0
+ice / low / 1 / gb,5,🔻 - FILTER: ⛰ C4 Quality,240,240,1.0,-0.0,0.040821994520255166
+ice / low / 2 / au,5,🔻 - FILTER: ⛰ C4 Quality,247,250,0.988,0.012072581234269249,0.012072581234269249
+ice / low / 2 / ca,5,🔻 - FILTER: ⛰ C4 Quality,245,249,0.9839357429718876,0.016194685919980606,0.020202707317519428
+ice / low / 2 / ie,5,🔻 - FILTER: ⛰ C4 Quality,204,224,0.9107142857142857,0.09352605801082348,0.20334092401803006
+ice / low / 2 / nz,5,🔻 - FILTER: ⛰ C4 Quality,9,9,1.0,-0.0,3.3242363405260273
+ice / low / 3 / hk,5,🔻 - FILTER: ⛰ C4 Quality,118,118,1.0,-0.0,0.7507762933965817
+ice / low / 3 / in,5,🔻 - FILTER: ⛰ C4 Quality,117,117,1.0,-0.0,0.7592869830644903
+ice / low / 3 / ph,5,🔻 - FILTER: ⛰ C4 Quality,4,4,1.0,-0.0,4.135166556742356
+ice / low / 3 / sg,5,🔻 - FILTER: ⛰ C4 Quality,127,127,1.0,-0.0,0.6772738314036552
+ice / low / 4 / jm,5,🔻 - FILTER: ⛰ C4 Quality,225,236,0.9533898305084746,0.04773140282118992,0.10135249426028745
+ice / low / 4 / ke,5,🔻 - FILTER: ⛰ C4 Quality,89,89,1.0,-0.0,0.011173300598125189
+ice / low / 4 / ng,5,🔻 - FILTER: ⛰ C4 Quality,189,290,0.6517241379310345,0.42813390792087735,0.45869655833104406
+ice / low / 4 / tz,5,🔻 - FILTER: ⛰ C4 Quality,33,34,0.9705882352941176,0.02985296314968116,0.02985296314968116
+ice / medium / 1 / gb,5,🔻 - FILTER: ⛰ C4 Quality,202,202,1.0,-0.0,0.038839833316263894
+ice / medium / 1 / us,5,🔻 - FILTER: ⛰ C4 Quality,152,152,1.0,-0.0,0.05129329438755047
+ice / medium / 2 / au,5,🔻 - FILTER: ⛰ C4 Quality,196,197,0.9949238578680203,0.005089069507471293,0.06421959273429378
+ice / medium / 2 / ca,5,🔻 - FILTER: ⛰ C4 Quality,207,208,0.9951923076923077,0.004819286435948883,0.014388737452099554
+ice / medium / 2 / ie,5,🔻 - FILTER: ⛰ C4 Quality,192,197,0.9746192893401016,0.025708356710206923,0.0896121586896871
+ice / medium / 2 / nz,5,🔻 - FILTER: ⛰ C4 Quality,155,155,1.0,-0.0,0.303682413798222
+ice / medium / 3 / hk,5,🔻 - FILTER: ⛰ C4 Quality,142,142,1.0,-0.0,0.39128047311620806
+ice / medium / 3 / in,5,🔻 - FILTER: ⛰ C4 Quality,160,172,0.9302325581395349,0.07232066157962613,0.27193371548364176
+ice / medium / 3 / ph,5,🔻 - FILTER: ⛰ C4 Quality,120,120,1.0,-0.0,0.5596157879354228
+ice / medium / 3 / sg,5,🔻 - FILTER: ⛰ C4 Quality,205,205,1.0,-0.0,0.024097551579060416
+ice / medium / 4 / jm,5,🔻 - FILTER: ⛰ C4 Quality,201,203,0.9901477832512315,0.00990107098271157,0.043802622658392944
+ice / medium / 4 / ke,5,🔻 - FILTER: ⛰ C4 Quality,159,205,0.775609756097561,0.25410577691817665,0.2638145910451376
+ice / medium / 4 / ng,5,🔻 - FILTER: ⛰ C4 Quality,443,524,0.8454198473282443,0.16792191427590653,0.22178823147719912
+ice / medium / 4 / tz,5,🔻 - FILTER: ⛰ C4 Quality,166,209,0.7942583732057417,0.23034646360826772,0.23511974236092537
+glowbe / high / 1 / gb,6,🔻 - FILTER: 🍷 FineWeb Quality,33206,288101,0.11525819070395452,2.160580530615872,2.441335706302405
+glowbe / high / 1 / us,6,🔻 - FILTER: 🍷 FineWeb Quality,21963,195647,0.11225830194176246,2.186952795702541,2.5203359941160683
+glowbe / high / 2 / au,6,🔻 - FILTER: 🍷 FineWeb Quality,16746,101367,0.16520169285862263,1.8005881706195388,2.036679392459416
+glowbe / high / 2 / ca,6,🔻 - FILTER: 🍷 FineWeb Quality,12037,106674,0.1128391173106849,2.181792215364892,2.4217536341986983
+glowbe / high / 2 / ie,6,🔻 - FILTER: 🍷 FineWeb Quality,9031,78670,0.11479598322104996,2.1645987850724895,2.424162640377871
+glowbe / high / 2 / nz,6,🔻 - FILTER: 🍷 FineWeb Quality,7397,66308,0.11155516679736985,2.193236040956889,2.413552410801659
+glowbe / high / 3 / hk,6,🔻 - FILTER: 🍷 FineWeb Quality,3710,32194,0.11523886438466795,2.160748223164694,2.470312805166686
+glowbe / high / 3 / in,6,🔻 - FILTER: 🍷 FineWeb Quality,9343,83617,0.11173565184113278,2.191619448889471,2.4983729576820375
+glowbe / high / 3 / ph,6,🔻 - FILTER: 🍷 FineWeb Quality,4078,34655,0.11767421728466311,2.1398353432176846,2.4219689391982633
+glowbe / high / 3 / sg,6,🔻 - FILTER: 🍷 FineWeb Quality,4116,34835,0.1181570259796182,2.135740810510279,2.398491437489959
+glowbe / high / 4 / jm,6,🔻 - FILTER: 🍷 FineWeb Quality,4324,37129,0.11645883271836031,2.1502174356496666,2.3797131465986854
+glowbe / high / 4 / ke,6,🔻 - FILTER: 🍷 FineWeb Quality,4230,36729,0.11516785101690762,2.1613646407017013,2.3845245277478746
+glowbe / high / 4 / ng,6,🔻 - FILTER: 🍷 FineWeb Quality,3617,29471,0.12273082012826168,2.097761776016968,2.3324095953636963
+glowbe / high / 4 / tz,6,🔻 - FILTER: 🍷 FineWeb Quality,3458,30663,0.11277435345530444,2.1823663287539503,2.4805594468832886
+ice / high / 1 / gb,6,🔻 - FILTER: 🍷 FineWeb Quality,35,35,1.0,-0.0,0.13353139262452263
+ice / high / 1 / us,6,🔻 - FILTER: 🍷 FineWeb Quality,34,35,0.9714285714285714,0.028987536873252298,0.1625189294977749
+ice / high / 2 / au,6,🔻 - FILTER: 🍷 FineWeb Quality,24,24,1.0,-0.0,0.5108256237659907
+ice / high / 2 / ca,6,🔻 - FILTER: 🍷 FineWeb Quality,30,30,1.0,-0.0,0.2876820724517809
+ice / high / 2 / ie,6,🔻 - FILTER: 🍷 FineWeb Quality,37,37,1.0,-0.0,0.07796154146971188
+ice / high / 2 / nz,6,🔻 - FILTER: 🍷 FineWeb Quality,13,36,0.3611111111111111,1.0185695809945732,1.1239300966523995
+ice / high / 3 / hk,6,🔻 - FILTER: 🍷 FineWeb Quality,32,32,1.0,-0.0,0.22314355131420965
+ice / high / 3 / in,6,🔻 - FILTER: 🍷 FineWeb Quality,27,28,0.9642857142857143,0.03636764417087483,0.3930425881096073
+ice / high / 3 / ph,6,🔻 - FILTER: 🍷 FineWeb Quality,30,31,0.967741935483871,0.03278982282299084,0.287682072451781
+ice / high / 3 / sg,6,🔻 - FILTER: 🍷 FineWeb Quality,39,39,1.0,-0.0,0.025317807984289897
+ice / high / 4 / jm,6,🔻 - FILTER: 🍷 FineWeb Quality,29,29,1.0,-0.0,0.32158362412746233
+ice / high / 4 / ke,6,🔻 - FILTER: 🍷 FineWeb Quality,51,51,1.0,-0.0,0.0
+ice / high / 4 / ng,6,🔻 - FILTER: 🍷 FineWeb Quality,3,40,0.075,2.5902671654458267,2.6855773452501515
+ice / high / 4 / tz,6,🔻 - FILTER: 🍷 FineWeb Quality,46,46,1.0,-0.0,0.0
+ice / low / 1 / gb,6,🔻 - FILTER: 🍷 FineWeb Quality,0,240,0.0,nan,0.040821994520255166
+ice / low / 2 / au,6,🔻 - FILTER: 🍷 FineWeb Quality,2,247,0.008097165991902834,4.816241156068032,4.8283137373023015
+ice / low / 2 / ca,6,🔻 - FILTER: 🍷 FineWeb Quality,0,245,0.0,nan,0.020202707317519428
+ice / low / 2 / ie,6,🔻 - FILTER: 🍷 FineWeb Quality,0,204,0.0,nan,0.20334092401803006
+ice / low / 2 / nz,6,🔻 - FILTER: 🍷 FineWeb Quality,0,9,0.0,nan,3.3242363405260273
+ice / low / 3 / hk,6,🔻 - FILTER: 🍷 FineWeb Quality,0,118,0.0,nan,0.7507762933965817
+ice / low / 3 / in,6,🔻 - FILTER: 🍷 FineWeb Quality,1,117,0.008547008547008548,4.762173934797756,5.521460917862247
+ice / low / 3 / ph,6,🔻 - FILTER: 🍷 FineWeb Quality,0,4,0.0,nan,4.135166556742356
+ice / low / 3 / sg,6,🔻 - FILTER: 🍷 FineWeb Quality,0,127,0.0,nan,0.6772738314036552
+ice / low / 4 / jm,6,🔻 - FILTER: 🍷 FineWeb Quality,0,225,0.0,nan,0.10135249426028745
+ice / low / 4 / ke,6,🔻 - FILTER: 🍷 FineWeb Quality,19,89,0.21348314606741572,1.5441973905656994,1.5553706911638245
+ice / low / 4 / ng,6,🔻 - FILTER: 🍷 FineWeb Quality,4,189,0.021164021164021163,3.855452653939752,4.314149212270796
+ice / low / 4 / tz,6,🔻 - FILTER: 🍷 FineWeb Quality,0,33,0.0,nan,0.02985296314968116
+ice / medium / 1 / gb,6,🔻 - FILTER: 🍷 FineWeb Quality,131,202,0.6485148514851485,0.4330703742000532,0.47191020751631707
+ice / medium / 1 / us,6,🔻 - FILTER: 🍷 FineWeb Quality,149,152,0.9802631578947368,0.019934214900817253,0.07122750928836771
+ice / medium / 2 / au,6,🔻 - FILTER: 🍷 FineWeb Quality,143,196,0.7295918367346939,0.31527002897060996,0.37948962170490375
+ice / medium / 2 / ca,6,🔻 - FILTER: 🍷 FineWeb Quality,151,207,0.7294685990338164,0.31543895645044473,0.3298276939025443
+ice / medium / 2 / ie,6,🔻 - FILTER: 🍷 FineWeb Quality,157,192,0.8177083333333334,0.20124956667947344,0.29086172536916055
+ice / medium / 2 / nz,6,🔻 - FILTER: 🍷 FineWeb Quality,109,155,0.7032258064516129,0.3520772346901029,0.6557596484883248
+ice / medium / 3 / hk,6,🔻 - FILTER: 🍷 FineWeb Quality,80,142,0.5633802816901409,0.5738004229273791,0.9650808960435872
+ice / medium / 3 / in,6,🔻 - FILTER: 🍷 FineWeb Quality,101,160,0.63125,0.46005329839256753,0.7319870138762092
+ice / medium / 3 / ph,6,🔻 - FILTER: 🍷 FineWeb Quality,101,120,0.8416666666666667,0.17237122594078652,0.7319870138762092
+ice / medium / 3 / sg,6,🔻 - FILTER: 🍷 FineWeb Quality,143,205,0.697560975609756,0.360165348878501,0.3842629004575614
+ice / medium / 4 / jm,6,🔻 - FILTER: 🍷 FineWeb Quality,138,201,0.6865671641791045,0.3760512229018711,0.41985384556026406
+ice / medium / 4 / ke,6,🔻 - FILTER: 🍷 FineWeb Quality,129,159,0.8113207547169812,0.20909179785855936,0.47290638890369696
+ice / medium / 4 / ng,6,🔻 - FILTER: 🍷 FineWeb Quality,288,443,0.6501128668171557,0.43060928990918973,0.6523975213863888
+ice / medium / 4 / tz,6,🔻 - FILTER: 🍷 FineWeb Quality,127,166,0.7650602409638554,0.267800701897952,0.5029204442588774

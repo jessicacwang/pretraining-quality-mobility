@@ -84,11 +84,12 @@ echo "Submitting datatrove pipeline..."
 PIPELINE_JOB_ID=$(cat job_ids.txt)
 echo "Waiting for the'$PIPELINE_JOB_ID' batch to finish..."
 
-while squeue -j "$PIPELINE_JOB_ID" -h | grep -q .; do
-    sleep "$POLL_INTERVAL"
-done
+while squeue -j "$PIPELINE_JOB_ID" -h 2>/dev/null | grep -q .; do
+        sleep "$POLL_INTERVAL"
+    done
 
-FAILED_JOBS=$(sacct -j "$PIPELINE_JOB_ID" -n --format=State,ExitCode | grep -v "COMPLETED")
+FAILED_JOBS=$(sacct -j "$PIPELINE_JOB_ID" -n --format=JobName,State,ExitCode 2>/dev/null | \
+        grep -v "COMPLETED" || true)
 if [ -n "$FAILED_JOBS" ]; then
     echo "Error: one or more jobs named '$JOB_NAME' did not complete successfully:"
     echo "$FAILED_JOBS"
@@ -100,5 +101,5 @@ if [ ! -f "${LOG_PATH}/stats.json" ]; then
     exit 1
 fi
 
-echo "Collecting stats..."
+echo "Submitting audit job..."
 sbatch 1c-audit.slurm

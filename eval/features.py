@@ -17,7 +17,7 @@ def normalize_value(feature_name: str, value: str) -> str:
         return value.split("-")[0]
     elif feature_name == "component" and "_" in value:
         return value.split("_")[1].replace("eng", "")
-
+    
     if feature_name == "genre":
         if value.startswith("W"):
             return value.split("-")[0]

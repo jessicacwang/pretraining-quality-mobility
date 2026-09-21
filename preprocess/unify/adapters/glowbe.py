@@ -172,7 +172,9 @@ def main():
         docs = list(foo.iter_documents())
         print(f"Successfully processed {len(docs)} documents")
         if docs:
-            print(f"Sample doc: {docs[0]}")
+            sample = docs[5]
+            print(f"Sample doc (clean): {sample.text[0:1000]}")
+            print(f"Sample doc (original): {sample.metadata["original"][0:1000]}")
     except Exception as e:
         print(f"Failed at document {foo.get_stats()["documents_seen"]}: {e}")
         raise  # re-raise so you get the full traceback

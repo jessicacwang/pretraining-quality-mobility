@@ -118,4 +118,4 @@ df = pd.DataFrame.from_dict(doc_to_filter_metadata, orient="index")
 df.index.name = "doc_id"
 df = df.reset_index() # make doc_id a normal column
 
-df.to_csv("fineweb_output.csv", index=False)
+df.to_csv("output/eval/posthoc/fineweb_output.csv", index=False)
