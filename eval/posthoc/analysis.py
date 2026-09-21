@@ -2,8 +2,6 @@ import pandas as pd
 
 df = pd.read_csv(
     "fineweb_output.csv", 
-    # doc_id,language,language_score,filter_reason,result,stage_excluded,source,genre,component,cluster_id,mobility_v1,mobility_v2
-
     dtype={
         "doc_id": "string",
         "language": "string",
@@ -22,12 +20,8 @@ df = pd.read_csv(
 for m in df.mobility_v2.unique().tolist():
     print(f"Mobility level: {m}")
     mdf = df.loc[df.mobility_v2 == m]
-    for c in mdf.cluster_id.unique().tolist():
-        subset = mdf.loc[mdf.cluster_id == c]
-        retained = subset.filter_reason.isna().sum()
-        print(f"{c} RR={retained / len(subset):.3f}, total={len(subset)}")
-    for c in mdf.component.unique().tolist():
-        subset = mdf.loc[mdf.component == c]
+    for c in mdf.genre.unique().tolist():
+        subset = mdf.loc[mdf.genre == c]
         retained = subset.filter_reason.isna().sum()
         print(f"{c} RR={retained / len(subset):.3f}, total={len(subset)}")
 
@@ -42,11 +36,11 @@ print()
 top_n_reasons = df.filter_reason.value_counts().head(5).index.tolist()
 features = [
     # "source",
-    "cluster_id",
+    # "cluster_id",
     # "mobility_v1",
-    "mobility_v2",
+    # "mobility_v2",
     # "component",
-    # "genre",
+    "genre",
 ]
 
 def check_filter_reason(reason):
